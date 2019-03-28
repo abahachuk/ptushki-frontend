@@ -1,5 +1,6 @@
 {
   "name": "ptushki-frontend",
+  "proxy": "http://localhost:3001",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -27,6 +28,7 @@
     "reactstrap": "^7.1.0",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",
+    "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "typesafe-actions": "^3.2.1"
   },
