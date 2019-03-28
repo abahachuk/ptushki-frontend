@@ -44,6 +44,7 @@ module.exports = {
                 'allowNamedFunctions': false
             }
         ],
-        'func-style': ['error', 'expression']
+        'func-style': ['error', 'expression'],
+        'func-names': ['off'],
     }
 };
