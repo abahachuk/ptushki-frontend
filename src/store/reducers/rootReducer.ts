@@ -1,6 +1,6 @@
 import { handleAction } from "redux-actions";
 import { combineReducers } from "redux";
-import { sampleActionIncrement } from "./actions";
+import { sampleActionIncrement } from "../actions";
 
 export const rootReducer = combineReducers({
   birdsCount: handleAction(
