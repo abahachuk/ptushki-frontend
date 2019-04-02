@@ -6,7 +6,7 @@ import { FormControl } from "../../../../components/form/FormControl";
 import { SignUpData } from "./SignUpData";
 
 export const SignUpForm: FC<{
-  onSubmit(d: any): void;
+  onSubmit(d: SignUpData): void;
 }> = ({ onSubmit }) => (
   <Formik<SignUpData>
     initialValues={{ email: "", password: "", firstName: "", lastName: "" }}
