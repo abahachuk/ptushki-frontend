@@ -7,7 +7,8 @@ import { SignUpData } from "./SignUpData";
 
 export const SignUpForm: FC<{
   onSubmit(d: SignUpData): void;
-}> = ({ onSubmit }) => (
+  error?: string;
+}> = ({ onSubmit, error }) => (
   <Formik<SignUpData>
     initialValues={{ email: "", password: "", firstName: "", lastName: "" }}
     validationSchema={object({
@@ -39,21 +40,18 @@ export const SignUpForm: FC<{
             />
           </Col>
         </Row>
-
         <FormControl
           label="Email"
           name="email"
           type="email"
           formikProps={formikProps}
         />
-
         <FormControl
           label="Password"
           name="password"
           type="password"
           formikProps={formikProps}
         />
-
         <Button
           block
           color="primary"
@@ -62,6 +60,7 @@ export const SignUpForm: FC<{
         >
           Sign up
         </Button>
+        {error && <div className="text-danger">{error}</div>}
       </Form>
     )}
   </Formik>

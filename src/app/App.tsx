@@ -4,13 +4,13 @@ import { Container } from "reactstrap";
 import { Provider } from "react-redux";
 import { store } from "../store";
 import { SampleBirdIncrementerConnected } from "./features/sample/SampleBirdIncrementer";
-import { SignUpForm } from "./features/auth/signup/SignUpForm";
+import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
 
 export const App = () => (
   <Provider store={store}>
     <Container>
       <SampleBirdIncrementerConnected />
-      <SignUpForm onSubmit={data => console.log("on sign up submit", data)} />
+      <SignUpFormConnected />
     </Container>
   </Provider>
 );
