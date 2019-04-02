@@ -7,7 +7,7 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { NavLink as Link } from "react-router-dom";
 import { ROUTE_SIGN_UP, ROUTE_TMP_EXAMPLE } from "../routing/routes";
 
 export const RootNav = () => (
@@ -16,14 +16,14 @@ export const RootNav = () => (
     <Collapse isOpen navbar>
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <LinkContainer to={ROUTE_TMP_EXAMPLE}>
-            <NavLink>Temporary example</NavLink>
-          </LinkContainer>
+          <NavLink tag={Link} to={ROUTE_TMP_EXAMPLE}>
+            Temporary example
+          </NavLink>
         </NavItem>
         <NavItem>
-          <LinkContainer to={ROUTE_SIGN_UP}>
-            <NavLink>Sign up</NavLink>
-          </LinkContainer>
+          <NavLink tag={Link} to={ROUTE_SIGN_UP}>
+            Sign up
+          </NavLink>
         </NavItem>
       </Nav>
     </Collapse>
