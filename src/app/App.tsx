@@ -5,9 +5,8 @@ import { Provider } from "react-redux";
 import { Route, Switch } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
 import { store } from "../store";
-import { SampleBirdIncrementerConnected } from "./features/sample/SampleBirdIncrementer";
 import { history } from "./features/routing/history";
-import { ROUTE_SIGN_UP, ROUTE_TMP_EXAMPLE } from "./features/routing/routes";
+import { ROUTE_SIGN_UP } from "./features/routing/routes";
 import { RootNav } from "./features/nav/RootNav";
 
 export const App = () => (
@@ -23,10 +22,6 @@ export const App = () => (
 
           <Route exact path={ROUTE_SIGN_UP}>
             [Sign up page here]
-          </Route>
-
-          <Route exact path={ROUTE_TMP_EXAMPLE}>
-            <SampleBirdIncrementerConnected />
           </Route>
         </Switch>
       </Container>
