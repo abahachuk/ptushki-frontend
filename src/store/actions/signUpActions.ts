@@ -1,7 +1,7 @@
 import { createAsyncAction } from "typesafe-actions";
 import { ThunkAction } from "redux-thunk";
-import { SignUpData } from "./SignUpData";
-import { RootState } from "../../../../store";
+import { SignUpData } from "../../app/features/auth/signup/SignUpData";
+import { RootState } from "../index";
 
 export const signUpAction = createAsyncAction(
   "SIGN_UP_REQUEST",
@@ -15,7 +15,6 @@ export const signUp = (
   dispatch(signUpAction.request(data));
 
   new Promise<number>((resolve, reject) => {
-    console.log("sign up request", data);
     // replace this promise with api call
     reject(new Error("not implemented"));
   })

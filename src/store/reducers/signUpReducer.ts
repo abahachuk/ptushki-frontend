@@ -1,5 +1,5 @@
 import { handleAction } from "redux-actions";
-import { signUpAction } from "./signUpActions";
+import { signUpAction } from "../actions/signUpActions";
 
 export const signUpReducer = handleAction(
   signUpAction.failure,
