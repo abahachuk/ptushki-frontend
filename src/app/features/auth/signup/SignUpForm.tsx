@@ -34,6 +34,7 @@ export const SignUpForm: FC<{
             <FormControl
               label="First name"
               name="firstName"
+              autoComplete="given-name"
               formikProps={formikProps}
             />
           </Col>
@@ -42,6 +43,7 @@ export const SignUpForm: FC<{
             <FormControl
               label="Last name"
               name="lastName"
+              autoComplete="family-name"
               formikProps={formikProps}
             />
           </Col>
@@ -50,12 +52,14 @@ export const SignUpForm: FC<{
           label="Email"
           name="email"
           type="email"
+          autoComplete="username email"
           formikProps={formikProps}
         />
         <FormControl
           label="Password"
           name="password"
           type="password"
+          autoComplete="new-password"
           formikProps={formikProps}
         />
         {/* TODO replace with new checkbox input when available to apply design and bind to formik data */}

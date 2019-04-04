@@ -10,13 +10,15 @@ interface Props<
   name: keyof TFormValues & string;
   label: ReactNode;
   type?: ComponentProps<typeof Input>["type"];
+  autoComplete?: ComponentProps<typeof Input>["autoComplete"];
 }
 
 export const FormControl = <TFormValues extends {}>({
   formikProps,
   name,
   label,
-  type = "text"
+  type = "text",
+  autoComplete
 }: Props<TFormValues>) => (
   <FormGroup>
     <Label for={`formControl_${name}`}>{label}</Label>
@@ -26,6 +28,7 @@ export const FormControl = <TFormValues extends {}>({
       tag={Field}
       id={`formControl_${name}`}
       invalid={!!(formikProps.touched[name] && formikProps.errors[name])}
+      autoComplete={autoComplete}
     />
     <ErrorMessage name={name} component="div" className="invalid-feedback" />
   </FormGroup>
