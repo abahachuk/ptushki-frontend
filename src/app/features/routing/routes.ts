@@ -1,1 +1,5 @@
-export const ROUTE_SIGN_UP = "/sign-up/";
+export const ROUTES = {
+  signUp: "/sign-up/",
+  signIn: "/sign-in/",
+  resetPassword: "/reset-password/"
+};

@@ -8,7 +8,7 @@ import {
   NavLink
 } from "reactstrap";
 import { NavLink as Link } from "react-router-dom";
-import { ROUTE_SIGN_UP } from "../routing/routes";
+import { ROUTES } from "../routing/routes";
 
 export const RootNav = () => (
   <Navbar dark color="dark" expand="sm">
@@ -16,8 +16,11 @@ export const RootNav = () => (
     <Collapse isOpen navbar>
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink tag={Link} to={ROUTE_SIGN_UP}>
+          <NavLink tag={Link} to={ROUTES.signUp}>
             Sign up
+          </NavLink>
+          <NavLink tag={Link} to={ROUTES.signIn}>
+            Sign In
           </NavLink>
         </NavItem>
       </Nav>

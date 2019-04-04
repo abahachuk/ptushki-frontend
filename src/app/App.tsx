@@ -6,8 +6,11 @@ import { Route, Switch } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
 import { store } from "../store";
 import { history } from "./features/routing/history";
-import { ROUTE_SIGN_UP } from "./features/routing/routes";
+import { ROUTES } from "./features/routing/routes";
 import { RootNav } from "./features/nav/RootNav";
+
+import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
+import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 
 export const App = () => (
   <Provider store={store}>
@@ -20,8 +23,16 @@ export const App = () => (
             [Landing here]
           </Route>
 
-          <Route exact path={ROUTE_SIGN_UP}>
+          <Route exact path={ROUTES.signUp}>
             [Sign up page here]
+          </Route>
+
+          <Route exact path={ROUTES.signIn}>
+            <SignInFormConnected />
+          </Route>
+
+          <Route exact path={ROUTES.resetPassword}>
+            <ResetPasswordFormConnected />
           </Route>
         </Switch>
       </Container>
