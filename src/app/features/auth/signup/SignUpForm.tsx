@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Form, Formik } from "formik";
-import { Button, Col, Row } from "reactstrap";
+import { Button, Col, FormGroup, Input, Row, Label } from "reactstrap";
 import { object, string } from "yup";
 import { FormControl } from "../../../../components/form/FormControl";
 import { SignUpData } from "./SignUpData";
@@ -10,7 +10,13 @@ export const SignUpForm: FC<{
   error?: string;
 }> = ({ onSubmit, error }) => (
   <Formik<SignUpData>
-    initialValues={{ email: "", password: "", firstName: "", lastName: "" }}
+    initialValues={{
+      email: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      rememberPassword: false
+    }}
     validationSchema={object({
       email: string()
         .email()
@@ -52,6 +58,17 @@ export const SignUpForm: FC<{
           type="password"
           formikProps={formikProps}
         />
+        {/* TODO replace with new checkbox input when available to apply design and bind to formik data */}
+        <FormGroup check>
+          <Input
+            type="checkbox"
+            name="rememberPassword"
+            id="rememberPassword"
+          />
+          <Label for="rememberPassword" check>
+            Remember password
+          </Label>
+        </FormGroup>
         <Button
           block
           color="primary"

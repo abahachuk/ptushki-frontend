@@ -3,4 +3,5 @@ export interface SignUpData {
   password: string;
   firstName: string;
   lastName: string;
+  rememberPassword: boolean;
 }
