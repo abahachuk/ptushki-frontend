@@ -8,6 +8,7 @@ import { store } from "../store";
 import { history } from "./features/routing/history";
 import { ROUTE_SIGN_UP } from "./features/routing/routes";
 import { RootNav } from "./features/nav/RootNav";
+import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
 
 export const App = () => (
   <Provider store={store}>
@@ -21,7 +22,7 @@ export const App = () => (
           </Route>
 
           <Route exact path={ROUTE_SIGN_UP}>
-            [Sign up page here]
+            <SignUpFormConnected />
           </Route>
         </Switch>
       </Container>
