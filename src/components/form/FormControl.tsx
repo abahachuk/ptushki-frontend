@@ -1,7 +1,8 @@
-import React, { ComponentProps, ReactNode } from "react";
+import React, { ComponentProps, FC, ReactNode } from "react";
 import { FormGroup, Input, Label, Col, Row, NavLink } from "reactstrap";
 import { NavLink as Link } from "react-router-dom";
 import { ErrorMessage, Field, FormikProps } from "formik";
+import { FormControlLabel, FormControlLabelProps } from "./FormControlLabel";
 
 import "./FormControl.scss";
 
@@ -13,11 +14,9 @@ interface Props<
   name: keyof TFormValues & string;
   label: ReactNode;
   type?: ComponentProps<typeof Input>["type"];
-  link?: {
-    label: string;
-    url: string;
-  } | null;
   placeholder?: string;
+  autoComplete?: ComponentProps<typeof Input>["autoComplete"];
+  renderLabel?: FC<FormControlLabelProps>;
 }
 
 export const FormControl = <TFormValues extends {}>({
@@ -25,22 +24,12 @@ export const FormControl = <TFormValues extends {}>({
   name,
   label,
   type = "text",
-  link = null,
-  placeholder
+  placeholder,
+  autoComplete,
+  renderLabel = FormControlLabel
 }: Props<TFormValues>) => (
   <FormGroup>
-    <Row>
-      <Col md={9}>
-        <Label for={`formControl_${name}`}>{label}</Label>
-      </Col>
-      {!!link && (
-        <Col md={3}>
-          <NavLink tag={Link} to={link.url} className="form-control__link">
-            {link.label}
-          </NavLink>
-        </Col>
-      )}
-    </Row>
+    {renderLabel({ name, label })}
     <Input
       type={type}
       name={name}
@@ -48,6 +37,7 @@ export const FormControl = <TFormValues extends {}>({
       id={`formControl_${name}`}
       invalid={!!(formikProps.touched[name] && formikProps.errors[name])}
       placeholder={placeholder}
+      autoComplete={autoComplete}
     />
     <ErrorMessage name={name} component="div" className="invalid-feedback" />
   </FormGroup>
