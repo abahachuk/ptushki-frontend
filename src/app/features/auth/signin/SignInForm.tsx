@@ -1,20 +1,20 @@
 import React, { FC } from "react";
 import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
-import { Button, Label, Input, FormGroup } from "reactstrap";
-import { object, string, boolean } from "yup";
+import { Button } from "reactstrap";
+import { boolean, object, string } from "yup";
 import { FormControl } from "../../../../components/form/FormControl";
 import { Checkbox } from "../../../../components/checkbox/Checkbox";
 import { SignInData } from "./SignInData";
 import { FormControlLabel } from "../../../../components/form/FormControlLabel";
-import { ROUTE_RESET_PASSWORD } from "../../routing/routes";
+import { ROUTE_RESET_PASSWORD, ROUTE_SIGN_UP } from "../../routing/routes";
 
 export const SignInForm: FC<{
   onSubmit(d: SignInData): void;
   error?: string;
 }> = ({ onSubmit, error }) => (
   <Formik<SignInData>
-    initialValues={{ email: "", password: "", rememberPassword: false }}
+    initialValues={{ email: "", password: "", rememberPassword: true }}
     validationSchema={object({
       email: string()
         .email()
@@ -59,9 +59,11 @@ export const SignInForm: FC<{
         >
           Sign in
         </Button>
-        <Button type="button" block outline color="primary">
+
+        <Link className=" btn btn-outline-primary btn-block" to={ROUTE_SIGN_UP}>
           Register
-        </Button>
+        </Link>
+
         {error && <div className="text-danger">{error}</div>}
       </Form>
     )}

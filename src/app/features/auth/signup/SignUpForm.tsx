@@ -1,9 +1,12 @@
 import React, { FC } from "react";
 import { Form, Formik } from "formik";
-import { Button, Col, FormGroup, Input, Row, Label } from "reactstrap";
+import { Button, Col, Row } from "reactstrap";
+import { Link } from "react-router-dom";
 import { object, string } from "yup";
 import { FormControl } from "../../../../components/form/FormControl";
 import { SignUpData } from "./SignUpData";
+import { Checkbox } from "../../../../components/checkbox/Checkbox";
+import { ROUTE_SIGN_IN } from "../../routing/routes";
 
 export const SignUpForm: FC<{
   onSubmit(d: SignUpData): void;
@@ -15,7 +18,7 @@ export const SignUpForm: FC<{
       password: "",
       firstName: "",
       lastName: "",
-      rememberPassword: false
+      rememberPassword: true
     }}
     validationSchema={object({
       email: string()
@@ -62,18 +65,13 @@ export const SignUpForm: FC<{
           autoComplete="new-password"
           formikProps={formikProps}
         />
-        {/* TODO replace with new checkbox input when available to apply design and bind to formik data */}
-        <FormGroup check>
-          <Input
-            type="checkbox"
-            name="rememberPassword"
-            id="rememberPassword"
-          />
-          <Label for="rememberPassword" check>
-            Remember password
-          </Label>
-        </FormGroup>
+        <Checkbox
+          formikProps={formikProps}
+          name="rememberPassword"
+          label="Remember password"
+        />
         <Button
+          className="mt-3"
           block
           color="primary"
           type="submit"
@@ -81,7 +79,12 @@ export const SignUpForm: FC<{
         >
           Sign up
         </Button>
+
         {error && <div className="text-danger">{error}</div>}
+
+        <div className="mt-2">
+          Already have a password? <Link to={ROUTE_SIGN_IN}>Sign in</Link>
+        </div>
       </Form>
     )}
   </Formik>
