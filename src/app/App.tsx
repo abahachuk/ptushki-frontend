@@ -11,16 +11,15 @@ import {
   ROUTE_SIGN_UP,
   ROUTE_RESET_PASSWORD
 } from "./features/routing/routes";
-import { RootNav } from "./features/nav/RootNav";
+import { RootNavConnected } from "./features/nav/RootNavConnected";
 import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
-
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 
 export const App = () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <RootNav />
+      <RootNavConnected />
 
       <Container>
         <Switch>

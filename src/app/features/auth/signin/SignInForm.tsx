@@ -5,14 +5,15 @@ import { Button } from "reactstrap";
 import { boolean, object, string } from "yup";
 import { FormControl } from "../../../../components/form/FormControl";
 import { Checkbox } from "../../../../components/checkbox/Checkbox";
-import { SignInData } from "./SignInData";
+import { SignInData } from "../models";
 import { FormControlLabel } from "../../../../components/form/FormControlLabel";
 import { ROUTE_RESET_PASSWORD, ROUTE_SIGN_UP } from "../../routing/routes";
 
 export const SignInForm: FC<{
   onSubmit(d: SignInData): void;
   error?: string;
-}> = ({ onSubmit, error }) => (
+  isPending: boolean;
+}> = ({ onSubmit, error, isPending }) => (
   <Formik<SignInData>
     initialValues={{ email: "", password: "", rememberPassword: true }}
     validationSchema={object({
@@ -51,19 +52,19 @@ export const SignInForm: FC<{
           name="rememberPassword"
           formikProps={formikProps}
         />
-        <Button
-          block
-          color="primary"
-          type="submit"
-          disabled={formikProps.isSubmitting}
-        >
+        <Button block color="primary" type="submit" disabled={isPending}>
           Sign in
         </Button>
-
-        <Link className=" btn btn-outline-primary btn-block" to={ROUTE_SIGN_UP}>
+        <Button
+          tag={Link}
+          to={ROUTE_SIGN_UP}
+          block
+          outline
+          color="primary"
+          disabled={isPending}
+        >
           Register
-        </Link>
-
+        </Button>
         {error && <div className="text-danger">{error}</div>}
       </Form>
     )}

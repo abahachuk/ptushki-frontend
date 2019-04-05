@@ -1,31 +1,15 @@
-import React from "react";
-import {
-  Collapse,
-  Nav,
-  Navbar,
-  NavbarBrand,
-  NavItem,
-  NavLink
-} from "reactstrap";
-import { NavLink as Link } from "react-router-dom";
-import { ROUTE_SIGN_IN, ROUTE_SIGN_UP } from "../routing/routes";
+import React, { FC } from "react";
+import { Collapse, Navbar, NavbarBrand } from "reactstrap";
+import { NavUnauthorized } from "./NavUnauthorized";
+import { UserInfo } from "../auth/models";
 
-export const RootNav = () => (
+export const RootNav: FC<{
+  user: UserInfo;
+}> = ({ user }) => (
   <Navbar dark color="dark" expand="sm">
     <NavbarBrand href="/">PTUSHKI</NavbarBrand>
     <Collapse isOpen navbar>
-      <Nav className="ml-auto" navbar>
-        <NavItem>
-          <NavLink tag={Link} to={ROUTE_SIGN_UP}>
-            Sign up
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink tag={Link} to={ROUTE_SIGN_IN}>
-            Sign In
-          </NavLink>
-        </NavItem>
-      </Nav>
+      {user ? <div /> : <NavUnauthorized />}
     </Collapse>
   </Navbar>
 );

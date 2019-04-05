@@ -4,14 +4,15 @@ import { Button, Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 import { object, string } from "yup";
 import { FormControl } from "../../../../components/form/FormControl";
-import { SignUpData } from "./SignUpData";
+import { SignUpData } from "../models";
 import { Checkbox } from "../../../../components/checkbox/Checkbox";
 import { ROUTE_SIGN_IN } from "../../routing/routes";
 
 export const SignUpForm: FC<{
   onSubmit(d: SignUpData): void;
   error?: string;
-}> = ({ onSubmit, error }) => (
+  isPending: boolean;
+}> = ({ onSubmit, error, isPending }) => (
   <Formik<SignUpData>
     initialValues={{
       email: "",
@@ -75,7 +76,7 @@ export const SignUpForm: FC<{
           block
           color="primary"
           type="submit"
-          disabled={formikProps.isSubmitting}
+          disabled={isPending}
         >
           Sign up
         </Button>
