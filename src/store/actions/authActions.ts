@@ -14,19 +14,27 @@ const AuthEndpoint = {
 export const authRequest = createAction<AuthData>("AUTH_REQUEST");
 export const authSuccess = createAction<UserInfo>("AUTH_SUCCESS");
 export const authFailure = createAction<string>("AUTH_FAILURE");
+export const authUnmount = createAction<void>("AUTH_UNMOUNT");
+
+export const authExit = (): ThunkAction<
+  void,
+  RootState,
+  undefined,
+  any
+> => dispatch => {
+  dispatch(authUnmount());
+};
 
 const auth = (type: "singIn" | "singUp") => (
   data: AuthData
-): ThunkAction<void, RootState, undefined, any> => dispatch => {
+): ThunkAction<void, RootState, undefined, any> => async dispatch => {
   dispatch(authRequest(data));
-
-  makePostCall(AuthEndpoint[type], data)
-    .then(resData => {
-      dispatch(authSuccess(resData));
-    })
-    .catch((e: Error) => {
-      dispatch(authFailure(e.message));
-    });
+  try {
+    const resData = await makePostCall(AuthEndpoint[type], data);
+    dispatch(authSuccess(resData));
+  } catch (e) {
+    dispatch(authFailure(e.message));
+  }
 };
 
 export const signUp = () => auth("singUp");

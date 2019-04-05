@@ -3,8 +3,10 @@ import reduceReducer from "reduce-reducers";
 import {
   resetPasswordFailure,
   resetPasswordRequest,
-  resetPasswordSuccess
+  resetPasswordSuccess,
+  resetPasswordUnmount
 } from "../actions/resetPasswordActions";
+import { authUnmount } from "../actions/authActions";
 
 const initialState = {
   error: undefined as string | undefined,
@@ -43,10 +45,17 @@ const resetPasswordSuccessReducer = handleAction(
   initialState
 );
 
+const resetPasswordUnmountReducer = handleAction(
+  resetPasswordUnmount,
+  (state, action) => initialState,
+  initialState
+);
+
 // TODO find an alternative to reduceReducer that respects correct action types
 export const resetPasswordReducer = reduceReducer<typeof initialState>(
   initialState,
   resetPasswordRequestReducer as any,
   resetPasswordFailureReducer as any,
-  resetPasswordSuccessReducer as any
+  resetPasswordSuccessReducer as any,
+  resetPasswordUnmountReducer as any
 );

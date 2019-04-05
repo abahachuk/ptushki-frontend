@@ -1,6 +1,11 @@
 import { handleAction } from "redux-actions";
 import reduceReducer from "reduce-reducers";
-import { authFailure, authRequest, authSuccess } from "../actions/authActions";
+import {
+  authFailure,
+  authRequest,
+  authSuccess,
+  authUnmount
+} from "../actions/authActions";
 import { UserInfo } from "../../app/features/auth/models";
 
 const initialState = {
@@ -42,10 +47,21 @@ const authSuccessReducer = handleAction(
   initialState
 );
 
+const authUnmountReducer = handleAction(
+  authUnmount,
+  (state, action) => ({
+    ...state,
+    error: undefined,
+    isPending: false
+  }),
+  initialState
+);
+
 // TODO find an alternative to reduceReducer that respects correct action types
 export const authReducer = reduceReducer<typeof initialState>(
   initialState,
   authFailureReducer as any,
   authRequestReducer as any,
-  authSuccessReducer as any
+  authSuccessReducer as any,
+  authUnmountReducer as any
 );

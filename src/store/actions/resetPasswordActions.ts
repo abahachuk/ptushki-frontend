@@ -14,6 +14,18 @@ export const resetPasswordSuccess = createAction<void>(
 export const resetPasswordFailure = createAction<string>(
   "RESET_PASSWORD_FAILURE"
 );
+export const resetPasswordUnmount = createAction<void>(
+  "RESET_PASSWORD_UNMOUNT"
+);
+
+export const resetPasswordExit = (): ThunkAction<
+  void,
+  RootState,
+  undefined,
+  any
+> => dispatch => {
+  dispatch(resetPasswordUnmount());
+};
 
 export const resetPassword = (
   data: ResetPasswordData

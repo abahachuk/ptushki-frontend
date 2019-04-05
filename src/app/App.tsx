@@ -15,6 +15,7 @@ import { RootNavConnected } from "./features/nav/RootNavConnected";
 import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
+import { ProtectedRouteConnected } from "./features/routing/ProtectedRouteConnected";
 
 export const App = () => (
   <Provider store={store}>
@@ -27,17 +28,21 @@ export const App = () => (
             [Landing here]
           </Route>
 
-          <Route exact path={ROUTE_SIGN_UP}>
-            <SignUpFormConnected />
-          </Route>
-
-          <Route exact path={ROUTE_SIGN_IN}>
-            <SignInFormConnected />
-          </Route>
-
-          <Route exact path={ROUTE_RESET_PASSWORD}>
-            <ResetPasswordFormConnected />
-          </Route>
+          <ProtectedRouteConnected
+            exact
+            {...ROUTE_SIGN_UP}
+            component={SignUpFormConnected}
+          />
+          <ProtectedRouteConnected
+            exact
+            {...ROUTE_SIGN_IN}
+            component={SignInFormConnected}
+          />
+          <ProtectedRouteConnected
+            exact
+            {...ROUTE_RESET_PASSWORD}
+            component={ResetPasswordFormConnected}
+          />
         </Switch>
       </Container>
     </ConnectedRouter>

@@ -6,12 +6,12 @@ import { ROUTE_SIGN_IN, ROUTE_SIGN_UP } from "../routing/routes";
 export const NavUnauthorized = () => (
   <Nav className="ml-auto" navbar>
     <NavItem>
-      <NavLink tag={Link} to={ROUTE_SIGN_UP}>
+      <NavLink tag={Link} to={ROUTE_SIGN_UP.path}>
         Sign up
       </NavLink>
     </NavItem>
     <NavItem>
-      <NavLink tag={Link} to={ROUTE_SIGN_IN}>
+      <NavLink tag={Link} to={ROUTE_SIGN_IN.path}>
         Sign In
       </NavLink>
     </NavItem>

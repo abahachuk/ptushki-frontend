@@ -1,21 +1,22 @@
-export const makePostCall = (url: string, data: any): Promise<any> =>
-  fetch(url, {
+export const makePostCall = async (url: string, data: any): Promise<any> => {
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json"
     },
     body: JSON.stringify(data)
-  }).then(async res => {
-    if (!res.ok) {
-      let message;
-      try {
-        message = await res.json();
-      } catch {
-        throw new Error(res.statusText);
-      }
-
-      throw new Error(message && message.error && message.message);
-    }
-    return res.json();
   });
+
+  if (!response.ok) {
+    let message;
+    try {
+      message = await response.json();
+    } catch {
+      throw new Error(response.statusText);
+    }
+
+    throw new Error(message && (message.error || message.message));
+  }
+  return response.json();
+};
