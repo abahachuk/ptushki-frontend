@@ -7,14 +7,14 @@ $animation-time: 250ms;
   &__label {
     position: relative;
     cursor: pointer;
-    color: $trout;
-    font-size: 15px;
   }
 
   &__input {
     display: none;
 
     & + .label-text:before{
+      font-size: 20px;
+      color: $text-muted;
       content: "\f096";
       font-family: "FontAwesome";
       line-height: 1;
@@ -24,6 +24,7 @@ $animation-time: 250ms;
     }
 
     &:checked + .label-text:before{
+      font-size: 20px;
       content: "\f14a";
       color: $primary;
       animation: effect $animation-time ease-in;
