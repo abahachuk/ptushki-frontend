@@ -1,13 +1,14 @@
 import { connect } from "react-redux";
 import { RootState } from "../../../../store";
-import { signUp } from "../../../../store/actions/signUpActions";
+import { authExit, signUp } from "../../../../store/actions/authActions";
 import { SignUpForm } from "./SignUpForm";
 
 export const SignUpFormConnected = connect(
   (state: RootState) => ({
-    ...state.signUp
+    ...state.auth
   }),
   {
-    onSubmit: signUp
+    onSubmit: signUp(),
+    authExit
   }
 )(SignUpForm);

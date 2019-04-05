@@ -1,6 +1,9 @@
 import { connect } from "react-redux";
 import { RootState } from "../../../../store";
-import { resetPassword } from "../../../../store/actions/resetPasswordActions";
+import {
+  resetPassword,
+  resetPasswordExit
+} from "../../../../store/actions/resetPasswordActions";
 import { ResetPasswordForm } from "./ResetPasswordForm";
 
 export const ResetPasswordFormConnected = connect(
@@ -8,6 +11,7 @@ export const ResetPasswordFormConnected = connect(
     ...state.resetPassword
   }),
   {
-    onSubmit: resetPassword
+    onSubmit: resetPassword,
+    resetPasswordExit
   }
 )(ResetPasswordForm);
