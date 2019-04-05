@@ -1,8 +1,8 @@
 import { handleAction } from "redux-actions";
-import { signInAction } from "../actions/signInActions";
+import { signInFailure } from "../actions/signInActions";
 
 export const signInReducer = handleAction(
-  signInAction.failure,
+  signInFailure,
   (state, action) => ({
     ...state,
     error: action.payload

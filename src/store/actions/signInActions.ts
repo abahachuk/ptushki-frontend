@@ -1,18 +1,16 @@
-import { createAsyncAction } from "typesafe-actions";
+import { createAction } from "redux-actions";
 import { ThunkAction } from "redux-thunk";
 import { SignInData } from "../../app/features/auth/signin/SignInData";
 import { RootState } from "../index";
 
-export const signInAction = createAsyncAction(
-  "SIGN_IN_REQUEST",
-  "SIGN_IN_SUCCESS",
-  "SIGN_IN_FAILURE"
-)<SignInData, any, string>();
+export const signInRequest = createAction<SignInData>("SIGN_IN_REQUEST");
+export const signInSuccess = createAction<void>("SIGN_IN_SUCCESS");
+export const signInFailure = createAction<string>("SIGN_IN_FAILURE");
 
 export const signIn = (
   data: SignInData
 ): ThunkAction<void, RootState, undefined, any> => dispatch => {
-  dispatch(signInAction.request(data));
+  dispatch(signInRequest(data));
 
   new Promise<number>((resolve, reject) => {
     console.log("sign in request", data);
@@ -20,9 +18,9 @@ export const signIn = (
     reject(new Error("not implemented"));
   })
     .then(d => {
-      dispatch(signInAction.success(d));
+      dispatch(signInSuccess());
     })
     .catch((e: Error) => {
-      dispatch(signInAction.failure(e.message));
+      dispatch(signInFailure(e.message));
     });
 };

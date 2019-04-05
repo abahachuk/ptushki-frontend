@@ -1,8 +1,8 @@
 import { handleAction } from "redux-actions";
-import { resetPasswordAction } from "../actions/resetPasswordActions";
+import { resetPasswordFailure } from "../actions/resetPasswordActions";
 
 export const resetPasswordReducer = handleAction(
-  resetPasswordAction.failure,
+  resetPasswordFailure,
   (state, action) => ({
     ...state,
     error: action.payload

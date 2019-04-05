@@ -1,18 +1,22 @@
-import { createAsyncAction } from "typesafe-actions";
+import { createAction } from "redux-actions";
 import { ThunkAction } from "redux-thunk";
 import { ResetPasswordData } from "../../app/features/auth/resetpassword/ResetPasswordData";
 import { RootState } from "../index";
 
-export const resetPasswordAction = createAsyncAction(
-  "RESET_PASSWORD_REQUEST",
-  "RESET_PASSWORD_SUCCESS",
+export const resetPasswordRequest = createAction<ResetPasswordData>(
+  "RESET_PASSWORD_REQUEST"
+);
+export const resetPasswordSuccess = createAction<void>(
+  "RESET_PASSWORD_SUCCESS"
+);
+export const resetPasswordFailure = createAction<string>(
   "RESET_PASSWORD_FAILURE"
-)<ResetPasswordData, any, string>();
+);
 
 export const resetPassword = (
   data: ResetPasswordData
 ): ThunkAction<void, RootState, undefined, any> => dispatch => {
-  dispatch(resetPasswordAction.request(data));
+  dispatch(resetPasswordRequest(data));
 
   new Promise<number>((resolve, reject) => {
     console.log("sign in request", data);
@@ -20,9 +24,9 @@ export const resetPassword = (
     reject(new Error("not implemented"));
   })
     .then(d => {
-      dispatch(resetPasswordAction.success(d));
+      dispatch(resetPasswordSuccess());
     })
     .catch((e: Error) => {
-      dispatch(resetPasswordAction.failure(e.message));
+      dispatch(resetPasswordFailure(e.message));
     });
 };
