@@ -36,12 +36,12 @@ export const ResetPasswordForm: FC<{
       >
         {formikProps => (
           <Form noValidate>
+            <p className={`${blockName}__text`}>
+              {
+                "We'll send a letter to your email with a link that will help you to create a new password."
+              }
+            </p>
             <div hidden={isSuccess}>
-              <p className={`${blockName}__text`}>
-                {
-                  "We'll send a letter to your email with a link that will help you to create a new password."
-                }
-              </p>
               <FormControl
                 label="Email"
                 name="email"
