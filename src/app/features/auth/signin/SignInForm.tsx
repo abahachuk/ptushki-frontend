@@ -3,12 +3,17 @@ import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import { boolean, object, string } from "yup";
+
 import { FormControl } from "../../../../components/form/FormControl";
 import { Checkbox } from "../../../../components/checkbox/Checkbox";
 import { SignInData } from "../models";
 import { FormControlLabel } from "../../../../components/form/FormControlLabel";
 import { ROUTE_RESET_PASSWORD, ROUTE_SIGN_UP } from "../../routing/routes";
 import { Layout } from "../../../../components/layout/Layout";
+
+import "./SignInForm.scss";
+
+const blockName = "signin-form";
 
 export const SignInForm: FC<{
   onSubmit(d: SignInData): void;
@@ -54,7 +59,10 @@ export const SignInForm: FC<{
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <FormControlLabel {...labelProps} />
-                  <Link to={ROUTE_RESET_PASSWORD.path}>
+                  <Link
+                    className={`${blockName}__link`}
+                    to={ROUTE_RESET_PASSWORD.path}
+                  >
                     Forgot your password?
                   </Link>
                 </div>
@@ -79,7 +87,9 @@ export const SignInForm: FC<{
             >
               Register
             </Button>
-            {error && <div className="text-danger">{error}</div>}
+            {error && (
+              <div className={`${blockName}__error text-danger`}>{error}</div>
+            )}
           </Form>
         )}
       </Formik>

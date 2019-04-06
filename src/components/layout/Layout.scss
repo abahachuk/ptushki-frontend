@@ -2,11 +2,12 @@
 
 .layout {
     min-width: 456px;
+    max-width: 456px;
     margin: 10% auto;
+    padding: 24px 22px;
     border-radius: 6px;
     background-color: $white;
     box-shadow: 0 1px 24px 0 rgba($black, 0.04);
-    padding: 24px 22px;
 
     &__image {
         display: block;

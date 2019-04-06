@@ -6,6 +6,10 @@ import { FormControl } from "../../../../components/form/FormControl";
 import { ResetPasswordData } from "../models";
 import { Layout } from "../../../../components/layout/Layout";
 
+import "./ResetPassword.scss";
+
+const blockName = "reset-password";
+
 export const ResetPasswordForm: FC<{
   onSubmit(d: ResetPasswordData): void;
   resetPasswordExit(): void;
@@ -33,6 +37,11 @@ export const ResetPasswordForm: FC<{
         {formikProps => (
           <Form noValidate>
             <div hidden={isSuccess}>
+              <p className={`${blockName}__text`}>
+                {
+                  "We'll send a letter to your email with a link that will help you to create a new password."
+                }
+              </p>
               <FormControl
                 label="Email"
                 name="email"
@@ -44,7 +53,9 @@ export const ResetPasswordForm: FC<{
             <Button block color="primary" type="submit" disabled={isPending}>
               {isSuccess ? "Send link again" : "Send link"}
             </Button>
-            {error && <div className="text-danger">{error}</div>}
+            {error && (
+              <div className={`${blockName}__error text-danger`}>{error}</div>
+            )}
           </Form>
         )}
       </Formik>

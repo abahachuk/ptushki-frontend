@@ -9,6 +9,10 @@ $animation-time: 250ms;
   &__label {
     position: relative;
     cursor: pointer;
+    font-family: Helvetica;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    line-height: 18px;
   }
 
   &__input {

@@ -3,7 +3,7 @@ import { Row, Col } from "reactstrap";
 
 import "./Layout.scss";
 
-const bird = require("./bird.png");
+const bird = require("../../assets/bird.png");
 
 const blockName = "layout";
 

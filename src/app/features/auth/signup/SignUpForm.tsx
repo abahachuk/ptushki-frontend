@@ -6,8 +6,10 @@ import { object, string } from "yup";
 import { FormControl } from "../../../../components/form/FormControl";
 import { SignUpData } from "../models";
 import { Checkbox } from "../../../../components/checkbox/Checkbox";
-import { ROUTE_SIGN_IN, ROUTE_SIGN_UP } from "../../routing/routes";
+import { ROUTE_SIGN_IN } from "../../routing/routes";
 import { Layout } from "../../../../components/layout/Layout";
+
+const blockName = "signup-form";
 
 export const SignUpForm: FC<{
   onSubmit(d: SignUpData): void;
@@ -50,6 +52,7 @@ export const SignUpForm: FC<{
                   name="firstName"
                   autoComplete="given-name"
                   formikProps={formikProps}
+                  placeholder="Enter first name"
                 />
               </Col>
 
@@ -59,6 +62,7 @@ export const SignUpForm: FC<{
                   name="lastName"
                   autoComplete="family-name"
                   formikProps={formikProps}
+                  placeholder="Enter last name"
                 />
               </Col>
             </Row>
@@ -68,6 +72,7 @@ export const SignUpForm: FC<{
               type="email"
               autoComplete="username email"
               formikProps={formikProps}
+              placeholder="user_name@mail.com"
             />
             <FormControl
               label="Password"
@@ -75,6 +80,7 @@ export const SignUpForm: FC<{
               type="password"
               autoComplete="new-password"
               formikProps={formikProps}
+              placeholder="Password"
             />
             <Checkbox
               formikProps={formikProps}
@@ -91,7 +97,9 @@ export const SignUpForm: FC<{
               Sign up
             </Button>
 
-            {error && <div className="text-danger">{error}</div>}
+            {error && (
+              <div className={`${blockName}__error text-danger`}>{error}</div>
+            )}
 
             <div className="mt-2">
               Already have a password?{" "}
