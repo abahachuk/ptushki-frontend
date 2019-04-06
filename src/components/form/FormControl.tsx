@@ -1,9 +1,12 @@
 import React, { ComponentProps, FC, ReactNode } from "react";
 import { FormGroup, Input } from "reactstrap";
 import { ErrorMessage, Field, FormikProps } from "formik";
+
 import { FormControlLabel, FormControlLabelProps } from "./FormControlLabel";
 
 import "./FormControl.scss";
+
+const blockName = "form-control";
 
 interface Props<
   TFormValues extends {},
@@ -27,17 +30,22 @@ export const FormControl = <TFormValues extends {}>({
   autoComplete,
   renderLabel = FormControlLabel
 }: Props<TFormValues>) => (
-  <FormGroup>
-    {renderLabel({ name, label })}
+  <FormGroup className={`${blockName}__group`}>
+    {renderLabel({ blockName, name, label })}
     <Input
       type={type}
       name={name}
       tag={Field}
-      id={`formControl_${name}`}
+      id={`${blockName}__${name}`}
+      className={`${blockName}__input`}
       invalid={!!(formikProps.touched[name] && formikProps.errors[name])}
       placeholder={placeholder}
       autoComplete={autoComplete}
     />
-    <ErrorMessage name={name} component="div" className="invalid-feedback" />
+    <ErrorMessage
+      name={name}
+      component="div"
+      className={`${blockName}__error invalid-feedback`}
+    />
   </FormGroup>
 );

@@ -1,0 +1,26 @@
+@import '../../styles/variables';
+
+.layout {
+    min-width: 456px;
+    max-width: 456px;
+    margin: 10% auto;
+    padding: 24px 22px;
+    border-radius: 6px;
+    background-color: $white;
+    box-shadow: 0 1px 24px 0 rgba($black, 0.04);
+
+    &__image {
+        display: block;
+        width: 210px;
+        height: 175px;
+        margin: auto;
+    }
+
+    &__title {
+        width: max-content;
+        margin: 10px auto 24px;
+        font-family: Helvetica;
+        font-size: 36px;
+        line-height: 48px;
+    }
+}

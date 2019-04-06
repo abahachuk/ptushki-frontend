@@ -1,12 +1,20 @@
 import React, { FC, ReactNode } from "react";
 import { Label } from "reactstrap";
 
+import "./FormControl.scss";
+
 export interface FormControlLabelProps {
+  blockName: string;
   name: string;
   label: ReactNode;
 }
 
 export const FormControlLabel: FC<FormControlLabelProps> = ({
+  blockName,
   name,
   label
-}) => <Label for={`formControl_${name}`}>{label}</Label>;
+}) => (
+  <Label className={`${blockName}__label`} for={`${blockName}__${name}`}>
+    {label}
+  </Label>
+);

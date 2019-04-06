@@ -1,6 +1,26 @@
 .form-control {
-  &__link {
-    padding: 0;
-    float: right;
+  &__group {
+    margin-bottom: 14px;
+  }
+
+  &__label {
+    margin-bottom: 6px;
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.1px;
+    line-height: 18px;
+  }
+
+  &__input {
+    height: 36px;
+    border-radius: 3px;
+  }
+
+  &__error {
+    font-family: Helvetica;
+    font-size: 12px;
+    letter-spacing: 0.09px;
+    line-height: 18px;
   }
 }

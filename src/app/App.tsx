@@ -1,9 +1,9 @@
 import React from "react";
-import "./App.scss";
 import { Container } from "reactstrap";
 import { Provider } from "react-redux";
 import { Route, Switch } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
+
 import { store } from "../store";
 import { history } from "./features/routing/history";
 import {
@@ -16,6 +16,8 @@ import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected"
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 import { ProtectedRouteConnected } from "./features/routing/ProtectedRouteConnected";
+
+import "./App.scss";
 
 export const App = () => (
   <Provider store={store}>

@@ -4,6 +4,7 @@ import { FormikProps, Field } from "formik";
 
 import "./Checkbox.scss";
 
+const blockName = "form-checkbox";
 interface Props<
   TFormValues extends {},
   TFormikProps extends FormikProps<TFormValues> = FormikProps<TFormValues>
@@ -18,9 +19,9 @@ export const Checkbox = <TFormValues extends {}>({
   name,
   label
 }: Props<TFormValues>) => (
-  <Label className="form-checkbox__label" htmlFor={name}>
+  <Label className={`${blockName}__label`} htmlFor={name}>
     <Input
-      className="form-checkbox__input"
+      className={`${blockName}__input`}
       tag={Field}
       type="checkbox"
       name={name}
