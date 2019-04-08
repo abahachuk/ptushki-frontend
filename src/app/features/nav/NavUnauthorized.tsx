@@ -7,12 +7,12 @@ export const NavUnauthorized = () => (
   <Nav className="ml-auto" navbar>
     <NavItem>
       <NavLink tag={Link} to={ROUTE_SIGN_UP.path}>
-        Sign up
+        Регистрация
       </NavLink>
     </NavItem>
     <NavItem>
       <NavLink tag={Link} to={ROUTE_SIGN_IN.path}>
-        Sign In
+        Войти
       </NavLink>
     </NavItem>
   </Nav>

@@ -2,7 +2,6 @@ import React, { FC, useEffect } from "react";
 import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
-import { boolean, object, string } from "yup";
 
 import { FormControl } from "../../../../components/form/FormControl";
 import { Checkbox } from "../../../../components/checkbox/Checkbox";
@@ -12,6 +11,11 @@ import { ROUTE_RESET_PASSWORD, ROUTE_SIGN_UP } from "../../routing/routes";
 import { Layout } from "../../../../components/layout/Layout";
 
 import "./SignInForm.scss";
+import {
+  booleanSchema,
+  objectSchema,
+  stringSchema
+} from "../../../../utils/form/localisedYup";
 
 const blockName = "signin-form";
 
@@ -28,15 +32,15 @@ export const SignInForm: FC<{
   }, [authExit]);
 
   return (
-    <Layout title="Sign In">
+    <Layout title="Войти">
       <Formik<SignInData>
         initialValues={{ email: "", password: "", rememberPassword: true }}
-        validationSchema={object({
-          email: string()
+        validationSchema={objectSchema().shape({
+          email: stringSchema()
             .email()
             .required(),
-          password: string().required(),
-          rememberPassword: boolean()
+          password: stringSchema().required(),
+          rememberPassword: booleanSchema()
         })}
         onSubmit={onSubmit}
       >
@@ -50,7 +54,7 @@ export const SignInForm: FC<{
               placeholder="user_name@mail.com"
             />
             <FormControl
-              label="Password"
+              label="Пароль"
               name="password"
               type="password"
               formikProps={formikProps}
@@ -63,19 +67,19 @@ export const SignInForm: FC<{
                     className={`${blockName}__link`}
                     to={ROUTE_RESET_PASSWORD.path}
                   >
-                    Forgot your password?
+                    Забыли пароль?
                   </Link>
                 </div>
               )}
-              placeholder="Password"
+              placeholder="******"
             />
             <Checkbox
-              label="Remember password"
+              label="Запомнить пароль"
               name="rememberPassword"
               formikProps={formikProps}
             />
             <Button block color="primary" type="submit" disabled={isPending}>
-              Sign in
+              Войти
             </Button>
             <Button
               tag={Link}
@@ -85,7 +89,7 @@ export const SignInForm: FC<{
               color="primary"
               disabled={isPending}
             >
-              Register
+              Регистрация
             </Button>
             {error && (
               <div className={`${blockName}__error text-danger`}>{error}</div>
