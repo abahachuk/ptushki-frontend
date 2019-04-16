@@ -12,6 +12,7 @@ import {
   objectSchema,
   stringSchema
 } from "../../../../utils/form/localisedYup";
+import { labels } from "../../../../config/i18n/labels";
 
 const blockName = "signup-form";
 
@@ -28,7 +29,7 @@ export const SignUpForm: FC<{
   }, [authExit]);
 
   return (
-    <Layout title="Регистрация">
+    <Layout title={labels.signUp.title}>
       <Formik<SignUpData>
         initialValues={{
           email: "",
@@ -53,44 +54,44 @@ export const SignUpForm: FC<{
             <Row>
               <Col md={6}>
                 <FormControl
-                  label="Имя"
+                  label={labels.form.firstName.label}
                   name="firstName"
                   autoComplete="given-name"
                   formikProps={formikProps}
-                  placeholder="Введите имя"
+                  placeholder={labels.form.firstName.placeholder}
                 />
               </Col>
 
               <Col md={6}>
                 <FormControl
-                  label="Фамилия"
+                  label={labels.form.lastName.label}
                   name="lastName"
                   autoComplete="family-name"
                   formikProps={formikProps}
-                  placeholder="Введите фамилию"
+                  placeholder={labels.form.lastName.label}
                 />
               </Col>
             </Row>
             <FormControl
-              label="Email"
+              label={labels.form.email.label}
               name="email"
               type="email"
               autoComplete="username email"
               formikProps={formikProps}
-              placeholder="user_name@mail.com"
+              placeholder={labels.form.email.placeholder}
             />
             <FormControl
-              label="Пароль"
+              label={labels.form.password.label}
               name="password"
               type="password"
               autoComplete="new-password"
               formikProps={formikProps}
-              placeholder="Придумайте пароль"
+              placeholder={labels.form.password.newPasswordPlaceholder}
             />
             <Checkbox
               formikProps={formikProps}
               name="rememberPassword"
-              label="Сохранить пароль"
+              label={labels.signUp.rememberPassword}
             />
             <Button
               className="mt-3"
@@ -99,7 +100,7 @@ export const SignUpForm: FC<{
               type="submit"
               disabled={isPending}
             >
-              Регистрация
+              {labels.signUp.title}
             </Button>
 
             {error && (
@@ -107,7 +108,8 @@ export const SignUpForm: FC<{
             )}
 
             <div className="mt-2">
-              У вас уже есть пароль? <Link to={ROUTE_SIGN_IN.path}>Войти</Link>
+              {labels.signUp.alreadyHavePassword}{" "}
+              <Link to={ROUTE_SIGN_IN.path}>{labels.signIn.title}</Link>
             </div>
           </Form>
         )}

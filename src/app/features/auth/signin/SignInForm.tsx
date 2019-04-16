@@ -16,6 +16,7 @@ import {
   objectSchema,
   stringSchema
 } from "../../../../utils/form/localisedYup";
+import { labels } from "../../../../config/i18n/labels";
 
 const blockName = "signin-form";
 
@@ -32,7 +33,7 @@ export const SignInForm: FC<{
   }, [authExit]);
 
   return (
-    <Layout title="Войти">
+    <Layout title={labels.signIn.title}>
       <Formik<SignInData>
         initialValues={{ email: "", password: "", rememberPassword: true }}
         validationSchema={objectSchema().shape({
@@ -47,14 +48,14 @@ export const SignInForm: FC<{
         {formikProps => (
           <Form noValidate>
             <FormControl
-              label="Email"
+              label={labels.form.email.label}
               name="email"
               type="email"
               formikProps={formikProps}
-              placeholder="user_name@mail.com"
+              placeholder={labels.form.email.placeholder}
             />
             <FormControl
-              label="Пароль"
+              label={labels.form.password.label}
               name="password"
               type="password"
               formikProps={formikProps}
@@ -67,19 +68,19 @@ export const SignInForm: FC<{
                     className={`${blockName}__link`}
                     to={ROUTE_RESET_PASSWORD.path}
                   >
-                    Забыли пароль?
+                    {labels.signIn.forgotPassword}
                   </Link>
                 </div>
               )}
-              placeholder="******"
+              placeholder={labels.form.password.placeholder}
             />
             <Checkbox
-              label="Запомнить пароль"
+              label={labels.signIn.rememberPassword}
               name="rememberPassword"
               formikProps={formikProps}
             />
             <Button block color="primary" type="submit" disabled={isPending}>
-              Войти
+              {labels.signIn.title}
             </Button>
             <Button
               tag={Link}
@@ -89,7 +90,7 @@ export const SignInForm: FC<{
               color="primary"
               disabled={isPending}
             >
-              Регистрация
+              {labels.signUp.title}
             </Button>
             {error && (
               <div className={`${blockName}__error text-danger`}>{error}</div>

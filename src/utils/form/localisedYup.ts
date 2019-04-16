@@ -1,12 +1,15 @@
 import { boolean, object, setLocale, string } from "yup";
+import { labels } from "../../config/i18n/labels";
+
+const { validation } = labels.form;
 
 setLocale({
   mixed: {
-    required: "Обязательное поле"
+    required: validation.required
   },
   string: {
-    required: "Обязательное поле",
-    email: "Некоррректный email"
+    required: validation.required,
+    email: validation.email
   }
 });
 

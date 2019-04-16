@@ -10,6 +10,7 @@ import { ResetPasswordData } from "../models";
 import { Layout } from "../../../../components/layout/Layout";
 
 import "./ResetPassword.scss";
+import { labels } from "../../../../config/i18n/labels";
 
 const blockName = "reset-password";
 
@@ -27,7 +28,7 @@ export const ResetPasswordForm: FC<{
   }, [resetPasswordExit]);
 
   return (
-    <Layout title="Восстановление пароля">
+    <Layout title={labels.resetPassword.title}>
       <Formik<ResetPasswordData>
         initialValues={{ email: "" }}
         validationSchema={objectSchema().shape({
@@ -40,20 +41,21 @@ export const ResetPasswordForm: FC<{
         {formikProps => (
           <Form noValidate>
             <p className={`${blockName}__text`}>
-              Мы вышлем письмо на Вашу почту со ссылкой, которая поможет Вам
-              создать новый пароль
+              {labels.resetPassword.explanation}
             </p>
             <div hidden={isSuccess}>
               <FormControl
-                label="Email"
+                label={labels.form.email.label}
                 name="email"
                 type="email"
                 formikProps={formikProps}
-                placeholder="user_name@mail.com"
+                placeholder={labels.form.email.placeholder}
               />
             </div>
             <Button block color="primary" type="submit" disabled={isPending}>
-              {isSuccess ? "Отправить ссылку еще раз" : "Отправить ссылку"}
+              {isSuccess
+                ? labels.resetPassword.sendLinkAgain
+                : labels.resetPassword.sendLink}
             </Button>
             {error && (
               <div className={`${blockName}__error text-danger`}>{error}</div>
