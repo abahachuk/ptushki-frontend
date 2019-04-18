@@ -2,7 +2,6 @@ import React, { FC, useEffect } from "react";
 import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
-import { boolean, object, string } from "yup";
 
 import { FormControl } from "../../../../components/form/FormControl";
 import { Checkbox } from "../../../../components/checkbox/Checkbox";
@@ -12,6 +11,12 @@ import { ROUTE_RESET_PASSWORD, ROUTE_SIGN_UP } from "../../routing/routes";
 import { Layout } from "../../../../components/layout/Layout";
 
 import "./SignInForm.scss";
+import {
+  booleanSchema,
+  objectSchema,
+  stringSchema
+} from "../../../../utils/form/localisedYup";
+import { labels } from "../../../../config/i18n/labels";
 
 const blockName = "signin-form";
 
@@ -28,29 +33,29 @@ export const SignInForm: FC<{
   }, [authExit]);
 
   return (
-    <Layout title="Sign In">
+    <Layout title={labels.signIn.title}>
       <Formik<SignInData>
         initialValues={{ email: "", password: "", rememberPassword: true }}
-        validationSchema={object({
-          email: string()
+        validationSchema={objectSchema().shape({
+          email: stringSchema()
             .email()
             .required(),
-          password: string().required(),
-          rememberPassword: boolean()
+          password: stringSchema().required(),
+          rememberPassword: booleanSchema()
         })}
         onSubmit={onSubmit}
       >
         {formikProps => (
           <Form noValidate>
             <FormControl
-              label="Email"
+              label={labels.form.email.label}
               name="email"
               type="email"
               formikProps={formikProps}
-              placeholder="user_name@mail.com"
+              placeholder={labels.form.email.placeholder}
             />
             <FormControl
-              label="Password"
+              label={labels.form.password.label}
               name="password"
               type="password"
               formikProps={formikProps}
@@ -63,19 +68,19 @@ export const SignInForm: FC<{
                     className={`${blockName}__link`}
                     to={ROUTE_RESET_PASSWORD.path}
                   >
-                    Forgot your password?
+                    {labels.signIn.forgotPassword}
                   </Link>
                 </div>
               )}
-              placeholder="Password"
+              placeholder={labels.form.password.placeholder}
             />
             <Checkbox
-              label="Remember password"
+              label={labels.signIn.rememberPassword}
               name="rememberPassword"
               formikProps={formikProps}
             />
             <Button block color="primary" type="submit" disabled={isPending}>
-              Sign in
+              {labels.signIn.title}
             </Button>
             <Button
               tag={Link}
@@ -85,7 +90,7 @@ export const SignInForm: FC<{
               color="primary"
               disabled={isPending}
             >
-              Register
+              {labels.signUp.title}
             </Button>
             {error && (
               <div className={`${blockName}__error text-danger`}>{error}</div>

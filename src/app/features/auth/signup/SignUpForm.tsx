@@ -2,12 +2,17 @@ import React, { FC, useEffect } from "react";
 import { Form, Formik } from "formik";
 import { Button, Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
-import { object, string } from "yup";
 import { FormControl } from "../../../../components/form/FormControl";
 import { SignUpData } from "../models";
 import { Checkbox } from "../../../../components/checkbox/Checkbox";
 import { ROUTE_SIGN_IN } from "../../routing/routes";
 import { Layout } from "../../../../components/layout/Layout";
+import {
+  booleanSchema,
+  objectSchema,
+  stringSchema
+} from "../../../../utils/form/localisedYup";
+import { labels } from "../../../../config/i18n/labels";
 
 const blockName = "signup-form";
 
@@ -24,7 +29,7 @@ export const SignUpForm: FC<{
   }, [authExit]);
 
   return (
-    <Layout title="Sign Up">
+    <Layout title={labels.signUp.title}>
       <Formik<SignUpData>
         initialValues={{
           email: "",
@@ -33,13 +38,14 @@ export const SignUpForm: FC<{
           lastName: "",
           rememberPassword: true
         }}
-        validationSchema={object({
-          email: string()
+        validationSchema={objectSchema().shape({
+          email: stringSchema()
             .email()
             .required(),
-          password: string().required(),
-          firstName: string().required(),
-          lastName: string().required()
+          password: stringSchema().required(),
+          firstName: stringSchema().required(),
+          lastName: stringSchema().required(),
+          rememberPassword: booleanSchema()
         })}
         onSubmit={onSubmit}
       >
@@ -48,44 +54,44 @@ export const SignUpForm: FC<{
             <Row>
               <Col md={6}>
                 <FormControl
-                  label="First name"
+                  label={labels.form.firstName.label}
                   name="firstName"
                   autoComplete="given-name"
                   formikProps={formikProps}
-                  placeholder="Enter first name"
+                  placeholder={labels.form.firstName.placeholder}
                 />
               </Col>
 
               <Col md={6}>
                 <FormControl
-                  label="Last name"
+                  label={labels.form.lastName.label}
                   name="lastName"
                   autoComplete="family-name"
                   formikProps={formikProps}
-                  placeholder="Enter last name"
+                  placeholder={labels.form.lastName.label}
                 />
               </Col>
             </Row>
             <FormControl
-              label="Email"
+              label={labels.form.email.label}
               name="email"
               type="email"
               autoComplete="username email"
               formikProps={formikProps}
-              placeholder="user_name@mail.com"
+              placeholder={labels.form.email.placeholder}
             />
             <FormControl
-              label="Password"
+              label={labels.form.password.label}
               name="password"
               type="password"
               autoComplete="new-password"
               formikProps={formikProps}
-              placeholder="Password"
+              placeholder={labels.form.password.newPasswordPlaceholder}
             />
             <Checkbox
               formikProps={formikProps}
               name="rememberPassword"
-              label="Remember password"
+              label={labels.signUp.rememberPassword}
             />
             <Button
               className="mt-3"
@@ -94,7 +100,7 @@ export const SignUpForm: FC<{
               type="submit"
               disabled={isPending}
             >
-              Sign up
+              {labels.signUp.title}
             </Button>
 
             {error && (
@@ -102,8 +108,8 @@ export const SignUpForm: FC<{
             )}
 
             <div className="mt-2">
-              Already have a password?{" "}
-              <Link to={ROUTE_SIGN_IN.path}>Sign in</Link>
+              {labels.signUp.alreadyHavePassword}{" "}
+              <Link to={ROUTE_SIGN_IN.path}>{labels.signIn.title}</Link>
             </div>
           </Form>
         )}

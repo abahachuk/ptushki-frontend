@@ -1,12 +1,16 @@
 import React, { FC, useEffect } from "react";
 import { Form, Formik } from "formik";
 import { Button } from "reactstrap";
-import { object, string } from "yup";
+import {
+  objectSchema,
+  stringSchema
+} from "../../../../utils/form/localisedYup";
 import { FormControl } from "../../../../components/form/FormControl";
 import { ResetPasswordData } from "../models";
 import { Layout } from "../../../../components/layout/Layout";
 
 import "./ResetPassword.scss";
+import { labels } from "../../../../config/i18n/labels";
 
 const blockName = "reset-password";
 
@@ -24,11 +28,11 @@ export const ResetPasswordForm: FC<{
   }, [resetPasswordExit]);
 
   return (
-    <Layout title="Reset Password">
+    <Layout title={labels.resetPassword.title}>
       <Formik<ResetPasswordData>
         initialValues={{ email: "" }}
-        validationSchema={object({
-          email: string()
+        validationSchema={objectSchema().shape({
+          email: stringSchema()
             .email()
             .required()
         })}
@@ -37,21 +41,21 @@ export const ResetPasswordForm: FC<{
         {formikProps => (
           <Form noValidate>
             <p className={`${blockName}__text`}>
-              {
-                "We'll send a letter to your email with a link that will help you to create a new password."
-              }
+              {labels.resetPassword.explanation}
             </p>
             <div hidden={isSuccess}>
               <FormControl
-                label="Email"
+                label={labels.form.email.label}
                 name="email"
                 type="email"
                 formikProps={formikProps}
-                placeholder="user_name@mail.com"
+                placeholder={labels.form.email.placeholder}
               />
             </div>
             <Button block color="primary" type="submit" disabled={isPending}>
-              {isSuccess ? "Send link again" : "Send link"}
+              {isSuccess
+                ? labels.resetPassword.sendLinkAgain
+                : labels.resetPassword.sendLink}
             </Button>
             {error && (
               <div className={`${blockName}__error text-danger`}>{error}</div>
