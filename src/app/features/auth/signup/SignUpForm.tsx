@@ -68,7 +68,7 @@ export const SignUpForm: FC<{
                   name="lastName"
                   autoComplete="family-name"
                   formikProps={formikProps}
-                  placeholder={labels.form.lastName.label}
+                  placeholder={labels.form.lastName.placeholder}
                 />
               </Col>
             </Row>
