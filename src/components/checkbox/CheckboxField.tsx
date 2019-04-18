@@ -14,7 +14,7 @@ interface Props<
   label: string;
 }
 
-export const Checkbox = <TFormValues extends {}>({
+export const CheckboxField = <TFormValues extends {}>({
   formikProps,
   name,
   label
