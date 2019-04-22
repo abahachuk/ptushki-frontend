@@ -1,7 +1,8 @@
 import { createAction } from "redux-actions";
 import { ThunkAction } from "redux-thunk";
-import { ResetPasswordData } from "../../app/features/auth/models";
+
 import { RootState } from "../index";
+import { ResetPasswordData } from "../../app/features/auth/models";
 import { makePostCall } from "../../utils/makeCall";
 import { RESTORE_PASSWORD_ENDPOINT } from "../../config/endpoints";
 

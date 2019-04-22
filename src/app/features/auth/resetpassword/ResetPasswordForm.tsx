@@ -1,18 +1,16 @@
 import React, { FC, useEffect } from "react";
 import { Form, Formik } from "formik";
 import { Button } from "reactstrap";
+
+import { Layout } from "../../../../components/layout/Layout";
+import { FormControl } from "../../../../components/form/FormControl";
 import {
   objectSchema,
   stringSchema
 } from "../../../../utils/form/localisedYup";
-import { FormControl } from "../../../../components/form/FormControl";
 import { ResetPasswordData } from "../models";
-import { Layout } from "../../../../components/layout/Layout";
 
-import "./ResetPassword.scss";
 import { labels } from "../../../../config/i18n/labels";
-
-const blockName = "reset-password";
 
 export const ResetPasswordForm: FC<{
   onSubmit(d: ResetPasswordData): void;
@@ -40,7 +38,7 @@ export const ResetPasswordForm: FC<{
       >
         {formikProps => (
           <Form noValidate>
-            <p className={`${blockName}__text`}>
+            <p className="form-text-content mt-2">
               {labels.resetPassword.explanation}
             </p>
             <div hidden={isSuccess}>
@@ -52,14 +50,17 @@ export const ResetPasswordForm: FC<{
                 placeholder={labels.form.email.placeholder}
               />
             </div>
-            <Button block color="primary" type="submit" disabled={isPending}>
+            <Button
+              block
+              className="mt-3 button primary-button"
+              type="submit"
+              disabled={isPending}
+            >
               {isSuccess
                 ? labels.resetPassword.sendLinkAgain
                 : labels.resetPassword.sendLink}
             </Button>
-            {error && (
-              <div className={`${blockName}__error text-danger`}>{error}</div>
-            )}
+            {error && <div className="error text-danger">{error}</div>}
           </Form>
         )}
       </Formik>

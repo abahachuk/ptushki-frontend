@@ -1,7 +1,8 @@
 import { ThunkAction } from "redux-thunk";
 import { createAction } from "redux-actions";
-import { AuthData, UserInfo } from "../../app/features/auth/models";
+
 import { RootState } from "../index";
+import { AuthData, UserInfo } from "../../app/features/auth/models";
 import { SING_IN_ENDPOINT, SING_UP_ENDPOINT } from "../../config/endpoints";
 import { makePostCall } from "../../utils/makeCall";
 
