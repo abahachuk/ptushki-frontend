@@ -6,6 +6,10 @@ export const labels = {
       required: "Обязательное поле",
       email: "Некоррректный email"
     },
+    phone: {
+      label: "Номер телефона",
+      placeholder: "Введите Ваш номер телефона"
+    },
     email: {
       label: "Email",
       placeholder: "user_name@mail.com"

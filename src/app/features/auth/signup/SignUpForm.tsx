@@ -31,6 +31,7 @@ export const SignUpForm: FC<{
     <Layout title={labels.signUp.title}>
       <Formik<SignUpData>
         initialValues={{
+          phone: "",
           email: "",
           password: "",
           firstName: "",
@@ -38,6 +39,7 @@ export const SignUpForm: FC<{
           rememberPassword: true
         }}
         validationSchema={objectSchema().shape({
+          phone: stringSchema().required(),
           email: stringSchema()
             .email()
             .required(),
@@ -72,10 +74,17 @@ export const SignUpForm: FC<{
               </Col>
             </Row>
             <FormControl
+              label={labels.form.phone.label}
+              name="phone"
+              autoComplete="username-phone"
+              formikProps={formikProps}
+              placeholder={labels.form.phone.placeholder}
+            />
+            <FormControl
               label={labels.form.email.label}
               name="email"
               type="email"
-              autoComplete="username email"
+              autoComplete="username-email"
               formikProps={formikProps}
               placeholder={labels.form.email.placeholder}
             />
