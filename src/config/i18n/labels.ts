@@ -38,5 +38,11 @@ export const labels = {
     title: "Регистрация",
     rememberPassword: "Сохранить пароль",
     alreadyHavePassword: "У вас уже есть пароль?"
-  }
+  },
+  observations: {
+    title: "Наблюдения"
+  },
+  species: "Вид",
+  loading: "Загрузка...",
+  of: "из"
 };

@@ -1,10 +1,10 @@
 import React from "react";
-import { Input, Label } from "reactstrap";
-import { FormikProps, Field } from "formik";
+import { Label } from "reactstrap";
+import { Field, FormikProps } from "formik";
+import { Checkbox } from "formik-material-ui";
+import "./CheckboxField.scss";
+import { baseCheckboxClasses } from "./BaseCheckbox";
 
-import "./Checkbox.scss";
-
-const blockName = "form-checkbox";
 interface Props<
   TFormValues extends {},
   TFormikProps extends FormikProps<TFormValues> = FormikProps<TFormValues>
@@ -19,15 +19,15 @@ export const CheckboxField = <TFormValues extends {}>({
   name,
   label
 }: Props<TFormValues>) => (
-  <Label className={`${blockName}__label`} htmlFor={name}>
-    <Input
-      className={`${blockName}__input`}
-      tag={Field}
-      type="checkbox"
+  <Label className="checkbox-label" htmlFor={name}>
+    <Field
+      className="p-0"
+      component={Checkbox}
       name={name}
       id={name}
       checked={!!formikProps.values[name]}
+      classes={baseCheckboxClasses}
     />
-    <span className="label-text">{label}</span>
+    <span className="checkbox-label-text">{label}</span>
   </Label>
 );

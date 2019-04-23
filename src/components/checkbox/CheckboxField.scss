@@ -1,0 +1,18 @@
+@import "../../styles/variables";
+
+.checkbox-label {
+  display: inline-flex;
+  margin-left: -2px; //correction for material internal padding
+
+  .checkbox-label-text {
+    padding-left: 5px;
+  }
+}
+
+.checkbox-root {
+  color: $border-color !important;
+}
+
+.checkbox-checked {
+  color: $primary !important;
+}

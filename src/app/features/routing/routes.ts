@@ -19,3 +19,9 @@ export const ROUTE_RESET_PASSWORD: RouteDescription = {
   permissions: [],
   fallback: "/"
 };
+
+export const ROUTE_OBSERVATIONS: RouteDescription = {
+  path: "/observations/",
+  permissions: [],
+  fallback: "/"
+};
