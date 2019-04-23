@@ -1,6 +1,7 @@
 import reduceReducer from "reduce-reducers";
 import { handleAction } from "redux-actions";
 import {
+  setFilters,
   setPage,
   setPageSize,
   setSorting
@@ -28,6 +29,11 @@ export interface ColumnWidth {
   columnName: string;
 }
 
+export interface FilteringRule {
+  columnName: string;
+  value?: string;
+}
+
 const initialState = {
   observations: [
     { id: "1234", firstName: "first", lastName: "value" },
@@ -46,6 +52,7 @@ const initialState = {
     pageSize: 15,
     totalCount: 50
   },
+  filtering: [] as FilteringRule[],
   sorting: [
     {
       columnName: "id",
@@ -62,6 +69,15 @@ export const observationListReducer = reduceReducer(
     (state, action) => ({
       ...state,
       sorting: action.payload
+    }),
+    initialState
+  ),
+
+  handleAction(
+    setFilters,
+    (state, action) => ({
+      ...state,
+      filtering: action.payload
     }),
     initialState
   ),

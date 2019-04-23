@@ -4,11 +4,13 @@ import { DataGrid } from "../../../components/table/DataGrid";
 import { RootState } from "../../../store";
 import {
   ColumnWidth,
+  FilteringRule,
   PaginationState,
   Sorting,
   TmpObservation
 } from "../../../store/reducers/observationListReducer";
 import {
+  setFilters,
   setPage,
   setPageSize,
   setSorting
@@ -19,6 +21,7 @@ interface ObservationListProps extends DispatchProp {
   loading: boolean;
   sorting: Sorting[];
   pagination: PaginationState;
+  filtering: FilteringRule[];
   hiddenColumns: string[];
   fixedColumns: string[];
   columnWidths: ColumnWidth[];
@@ -30,6 +33,7 @@ export const ObservationList: FC<ObservationListProps> = ({
   loading,
   sorting,
   pagination,
+  filtering,
   hiddenColumns,
   fixedColumns,
   columnWidths,
@@ -61,6 +65,10 @@ export const ObservationList: FC<ObservationListProps> = ({
       }}
       resizingProps={{ defaultColumnWidths: columnWidths }}
       hiddenColumns={hiddenColumns}
+      filterProps={{
+        filters: filtering,
+        onFiltersChange: filters => dispatch(setFilters(filters))
+      }}
     >
       {loading && <div>TODO loading component</div>}
     </DataGrid>
@@ -73,6 +81,7 @@ export const ObservationListConnected = connect((state: RootState) => {
     observations,
     sorting,
     pagination,
+    filtering,
     hiddenColumns,
     fixedColumns,
     columnWidths,
@@ -83,6 +92,7 @@ export const ObservationListConnected = connect((state: RootState) => {
     observations,
     loading: false,
     sorting,
+    filtering,
     columnWidths,
     pagination,
     hiddenColumns,

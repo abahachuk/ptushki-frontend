@@ -21,7 +21,6 @@ import {
   CustomPagingProps,
   FilteringState,
   FilteringStateProps,
-  IntegratedFiltering,
   IntegratedSelection,
   PagingState,
   PagingStateProps,
@@ -31,6 +30,8 @@ import {
   SortingStateProps,
   TableColumnResizingProps
 } from "@devexpress/dx-react-grid";
+import useToggle from "react-use/esm/useToggle";
+import { Button } from "reactstrap";
 import { BaseCheckbox } from "../checkbox/BaseCheckbox";
 
 export interface DataGridCol<TRow extends {}> extends Column {
@@ -69,6 +70,8 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
     ...gridProps
   } = props;
 
+  const [filterRowVisible, toggleFilterRow] = useToggle(false);
+
   return (
     <Grid {...gridProps}>
       <SortingState {...sortingProps} />
@@ -80,12 +83,27 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
 
       <CustomPaging totalCount={pagingProps.totalCount} />
       <IntegratedSelection />
-      <IntegratedFiltering />
       <Table />
 
       <TableColumnResizing {...resizingProps} />
-      <TableHeaderRow showSortingControls />
-      <TableFilterRow />
+      <TableHeaderRow
+        showSortingControls
+        contentComponent={p => (
+          <TableHeaderRow.Content {...p}>
+            {p.children}
+            <Button
+              type="button"
+              color="link"
+              size="sm"
+              className="p-0"
+              onClick={() => toggleFilterRow()}
+            >
+              filter
+            </Button>
+          </TableHeaderRow.Content>
+        )}
+      />
+      {filterRowVisible && <TableFilterRow />}
 
       <TableSelection
         showSelectAll
@@ -124,13 +142,6 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
       <TableColumnVisibility defaultHiddenColumnNames={hiddenColumns} />
       <Toolbar />
       <ColumnChooser
-        // toggleButtonComponent={p => (
-        //   <BaseCheckbox
-        //     checked={p.active}
-        //     onChange={() => p.onToggle()}
-        //     className="p-0"
-        //   />
-        // )}
         itemComponent={p => (
           <button
             type="button"
