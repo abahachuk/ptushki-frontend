@@ -33,7 +33,7 @@ export const resetPassword = (
   dispatch(resetPasswordRequest(data));
 
   try {
-    await ajaxService.makeCall(RESTORE_PASSWORD_ENDPOINT, data);
+    await ajaxService.makeCall<void>(RESTORE_PASSWORD_ENDPOINT, data);
     dispatch(resetPasswordSuccess());
   } catch (e) {
     dispatch(resetPasswordFailure(e.message));

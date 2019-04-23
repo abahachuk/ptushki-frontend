@@ -5,11 +5,11 @@ const ACCESS_TOKEN = "accessToken";
 const USER_INFO = "userInfo";
 
 export default class SecurityService {
-  private storage: Storage = null as Storage;
+  private storage: Storage | null = null;
 
-  private accessToken: string = null as string;
+  private accessToken: string | null = null;
 
-  private refreshToken: string = null as string;
+  private refreshToken: string | null = null;
 
   getAccessToken(): string {
     return this.accessToken;
@@ -32,8 +32,8 @@ export default class SecurityService {
   }
 
   deleteTokens(): void {
-    this.accessToken = null as string;
-    this.refreshToken = null as string;
+    this.accessToken = null;
+    this.refreshToken = null;
     this.storage.removeItem(REFRESH_TOKEN);
     this.storage.removeItem(ACCESS_TOKEN);
   }
@@ -58,6 +58,6 @@ export default class SecurityService {
     this.storage = sessionStorage;
     this.deleteSensitiveData();
 
-    this.storage = null as Storage;
+    this.storage = null;
   }
 }

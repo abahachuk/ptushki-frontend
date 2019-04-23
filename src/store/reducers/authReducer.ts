@@ -4,7 +4,8 @@ import {
   authFailure,
   authRequest,
   authSuccess,
-  authUnmount
+  authUnmount,
+  logout
 } from "../actions/authActions";
 import { UserInfo } from "../../app/features/auth/models";
 
@@ -58,7 +59,7 @@ const authUnmountReducer = handleAction(
 );
 
 const logoutReducer = handleAction(
-  authUnmount,
+  logout,
   (state, action) => initialState,
   initialState
 );

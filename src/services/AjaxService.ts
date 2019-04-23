@@ -56,7 +56,7 @@ export default class AjaxService {
     return access;
   }
 
-  async makeCall(url: string, data?: Object): Promise<any> {
+  async makeCall<TResponse>(url: string, data?: Object): Promise<TResponse> {
     let token = securityService.getAccessToken();
     let response = await this.makeFetch(url, token, data);
 
