@@ -1,0 +1,46 @@
+@import "~@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css";
+@import "~open-iconic/font/css/open-iconic-bootstrap.css";
+@import "~open-iconic/font/css/open-iconic.css";
+
+$fixed-part-shadow-width: 10px;
+
+.dx-g-bs4-fixed-cell {
+  border-right: none !important;
+
+  // for :after to be visible.
+  // TODO this could cause problems with text elipsis in last fixed column. fix if needed
+  overflow: visible;
+
+  &::after {
+    content: "";
+    display: block;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    width: $fixed-part-shadow-width;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.05), transparent);
+  }
+}
+
+.dx-g-bs4-table-container {
+  box-shadow: rgba(0, 0, 0, 0.08) 0 0 20px;
+
+  .dx-g-bs4-table {
+    thead th {
+      border-bottom: none;
+    }
+
+    thead tr:first-child th {
+      border-top: none;
+    }
+  }
+}
+
+.dx-g-bs4-paging-panel {
+  background: none;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}

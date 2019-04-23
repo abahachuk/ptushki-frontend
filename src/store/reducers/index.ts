@@ -2,9 +2,11 @@ import { combineReducers } from "redux";
 import { routerReducer } from "./routerReducer";
 import { authReducer } from "./authReducer";
 import { resetPasswordReducer } from "./resetPasswordReducer";
+import { observationListReducer } from "./observationListReducer";
 
 export const rootReducer = combineReducers({
   router: routerReducer,
   resetPassword: resetPasswordReducer,
-  auth: authReducer
+  auth: authReducer,
+  observationList: observationListReducer
 });
