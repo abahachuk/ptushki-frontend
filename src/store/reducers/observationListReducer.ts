@@ -34,6 +34,7 @@ const initialState = {
     { id: "12345", firstName: "second", lastName: "value2" }
   ] as TmpObservation[],
   fixedColumns: ["id"],
+  hiddenColumns: [] as string[],
   columnsOrder: ["id", "firstName", "lastName"],
   columnWidths: [
     { columnName: "id", width: 100 },
@@ -63,7 +64,7 @@ export const observationListReducer = reduceReducer(
       sorting: action.payload
     }),
     initialState
-  ) as any,
+  ),
 
   handleAction(
     setPage,
@@ -75,7 +76,7 @@ export const observationListReducer = reduceReducer(
       }
     }),
     initialState
-  ) as any,
+  ),
 
   handleAction(
     setPageSize,
@@ -87,5 +88,5 @@ export const observationListReducer = reduceReducer(
       }
     }),
     initialState
-  ) as any
+  )
 );

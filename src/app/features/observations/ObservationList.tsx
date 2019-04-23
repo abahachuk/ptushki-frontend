@@ -19,6 +19,7 @@ interface ObservationListProps extends DispatchProp {
   loading: boolean;
   sorting: Sorting[];
   pagination: PaginationState;
+  hiddenColumns: string[];
   fixedColumns: string[];
   columnWidths: ColumnWidth[];
   columnsOrder: string[];
@@ -29,6 +30,7 @@ export const ObservationList: FC<ObservationListProps> = ({
   loading,
   sorting,
   pagination,
+  hiddenColumns,
   fixedColumns,
   columnWidths,
   columnsOrder,
@@ -58,6 +60,7 @@ export const ObservationList: FC<ObservationListProps> = ({
         onSortingChange: d => dispatch(setSorting(d))
       }}
       resizingProps={{ defaultColumnWidths: columnWidths }}
+      hiddenColumns={hiddenColumns}
     >
       {loading && <div>TODO loading component</div>}
     </DataGrid>
@@ -66,14 +69,24 @@ export const ObservationList: FC<ObservationListProps> = ({
 
 export const ObservationListConnected = connect((state: RootState) => {
   const observationsState = state.observationList;
+  const {
+    observations,
+    sorting,
+    pagination,
+    hiddenColumns,
+    fixedColumns,
+    columnWidths,
+    columnsOrder
+  } = observationsState;
 
   return {
-    observations: observationsState.observations,
+    observations,
     loading: false,
-    sorting: observationsState.sorting,
-    columnWidths: observationsState.columnWidths,
-    pagination: observationsState.pagination,
-    fixedColumns: observationsState.fixedColumns,
-    columnsOrder: observationsState.columnsOrder
+    sorting,
+    columnWidths,
+    pagination,
+    hiddenColumns,
+    fixedColumns,
+    columnsOrder
   };
 })(ObservationList);

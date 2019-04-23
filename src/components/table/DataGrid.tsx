@@ -1,4 +1,5 @@
 import {
+  ColumnChooser,
   DragDropProvider,
   Grid,
   GridProps,
@@ -10,7 +11,8 @@ import {
   TableFilterRow,
   TableFixedColumns,
   TableHeaderRow,
-  TableSelection
+  TableSelection,
+  Toolbar
 } from "@devexpress/dx-react-grid-bootstrap4";
 import React, { ReactNode } from "react";
 import {
@@ -120,6 +122,26 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
         leftColumns={[TableSelection.COLUMN_TYPE, ...fixedColumns]}
       />
       <TableColumnVisibility defaultHiddenColumnNames={hiddenColumns} />
+      <Toolbar />
+      <ColumnChooser
+        // toggleButtonComponent={p => (
+        //   <BaseCheckbox
+        //     checked={p.active}
+        //     onChange={() => p.onToggle()}
+        //     className="p-0"
+        //   />
+        // )}
+        itemComponent={p => (
+          <button
+            type="button"
+            className="dropdown-item pl-3"
+            onClick={p.onToggle}
+          >
+            <BaseCheckbox checked={!p.item.hidden} className="p-0 pr-2" />
+            {p.item.column.title}
+          </button>
+        )}
+      />
     </Grid>
   );
 };
