@@ -57,11 +57,10 @@ const authUnmountReducer = handleAction(
   initialState
 );
 
-// TODO find an alternative to reduceReducer that respects correct action types
-export const authReducer = reduceReducer<typeof initialState>(
+export const authReducer = reduceReducer(
   initialState,
-  authFailureReducer as any,
-  authRequestReducer as any,
-  authSuccessReducer as any,
-  authUnmountReducer as any
+  authFailureReducer,
+  authRequestReducer,
+  authSuccessReducer,
+  authUnmountReducer
 );
