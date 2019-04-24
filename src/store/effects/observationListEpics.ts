@@ -4,11 +4,8 @@ import { catchError, filter, map, switchMap } from "rxjs/operators";
 import { take } from "ramda";
 import { from, of } from "rxjs";
 import {
+  observationGridActions,
   observationsData,
-  setFilters,
-  setPage,
-  setPageSize,
-  setSorting,
   verifyObservation
 } from "../actions/observationListActions";
 import { RootState } from "../index";
@@ -29,14 +26,14 @@ export const requestObservationEpic: Epic<any, any, RootState> = (
     )
   );
 
-export const requestTriggersEpic: Epic<any, any, RootState> = action$ =>
+export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
   action$.pipe(
     filter(
       isActionOf([
-        setPage,
-        setPageSize,
-        setSorting,
-        setFilters,
+        observationGridActions.setPage,
+        observationGridActions.setPageSize,
+        observationGridActions.setSorting,
+        observationGridActions.setFilters,
         verifyObservation
       ])
     ),
@@ -45,5 +42,5 @@ export const requestTriggersEpic: Epic<any, any, RootState> = action$ =>
 
 export const observationListEpic = combineEpics(
   requestObservationEpic,
-  requestTriggersEpic
+  reRequestOnGridActionsEpic
 );

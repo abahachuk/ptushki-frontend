@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { TableSelection as TableSelectionBase } from "@devexpress/dx-react-grid";
-import { BaseCheckbox } from "../checkbox/BaseCheckbox";
+import { BaseCheckbox } from "../../checkbox/BaseCheckbox";
 
 export const SelectorColumn: FC<TableSelectionBase.CellProps> = ({
   tableColumn,

@@ -1,18 +1,10 @@
 import { createAsyncAction, createStandardAction } from "typesafe-actions";
-import {
-  FilteringRule,
-  Sorting,
-  TmpObservation
-} from "../reducers/observationListReducer";
+import { TmpObservation } from "../reducers/observationListReducer";
+import { dataGridActions } from "../../components/table/dataGridActions";
+import { OBSERVATIONS_LIST_NAMESPACE } from "../../app/features/observations/conf";
 
 // TODO when implementing other tables, reuse table-related actions and reducers
 //  https://redux.js.org/recipes/structuring-reducers/reusing-reducer-logic
-export const setSorting = createStandardAction("SET_SORTING")<Sorting[]>();
-export const setPage = createStandardAction("SET_PAGE")<number>();
-export const setPageSize = createStandardAction("SET_PAGE_SIZE")<number>();
-export const setFilters = createStandardAction("SET_FILTERS")<
-  FilteringRule[]
->();
 
 export const observationsData = createAsyncAction(
   "OBSERVATIONS_REQUEST",
@@ -24,3 +16,7 @@ export const verifyObservation = createStandardAction("VERIFY_OBSERVATION")<{
   id: string;
   approved: boolean;
 }>();
+
+export const observationGridActions = dataGridActions(
+  OBSERVATIONS_LIST_NAMESPACE
+);
