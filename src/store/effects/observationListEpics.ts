@@ -1,7 +1,8 @@
 import { combineEpics, Epic } from "redux-observable";
 import { isActionOf } from "typesafe-actions";
-import { filter, map, switchMap } from "rxjs/operators";
+import { catchError, filter, map, switchMap } from "rxjs/operators";
 import { take } from "ramda";
+import { from, of } from "rxjs";
 import {
   observationsData,
   setFilters,
@@ -20,8 +21,12 @@ export const requestObservationEpic: Epic<any, any, RootState> = (
 ) =>
   action$.pipe(
     filter(isActionOf([observationsData.request])),
-    switchMap(() => ajaxService.makeCall<TmpObservation[]>("/observations")),
-    map(d => observationsData.success(take(10, d)))
+    switchMap(() =>
+      from(ajaxService.makeCall<TmpObservation[]>("/observations")).pipe(
+        map(d => observationsData.success(take(10, d))),
+        catchError(e => of(observationsData.failure(e)))
+      )
+    )
   );
 
 export const requestTriggersEpic: Epic<any, any, RootState> = action$ =>

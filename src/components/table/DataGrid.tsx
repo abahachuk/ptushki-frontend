@@ -35,6 +35,7 @@ import { FillLoader } from "../loader/FillLoader";
 import { SelectorColumn, SelectorColumnHeader } from "./SelectorColumn";
 import { ColumnChooserItem } from "./ColumnChooser";
 import { ColumnFilterToggleButton } from "./ColumnFilterToggleButton";
+import { labels } from "../../config/i18n/labels";
 
 export interface DataGridCol<TRow extends {}> extends Column {
   // make required and override with TRow generic for type safety
@@ -60,6 +61,9 @@ interface DataGridProps<TRow extends {}> extends GridProps {
 }
 
 const DEFAULT_PAGE_SIZES = [10, 15, 30, 50];
+const TABLE_LABELS = {
+  noData: labels.noData
+};
 
 export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
   const {
@@ -89,7 +93,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
 
         <CustomPaging totalCount={pagingProps.totalCount} />
         <IntegratedSelection />
-        <Table />
+        <Table messages={TABLE_LABELS} />
 
         <TableColumnResizing {...resizingProps} />
         <TableHeaderRow

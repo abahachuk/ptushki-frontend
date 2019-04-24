@@ -66,7 +66,7 @@ export const ObservationList: FC<ObservationListProps> = ({
 
   return (
     <DataGrid<TmpObservation>
-      rows={observations.value}
+      rows={observations.error ? [] : observations.value}
       columns={OBSERVATION_LIST_COLUMNS}
       fixedColumns={fixedColumns}
       defaultOrder={columnsOrder}

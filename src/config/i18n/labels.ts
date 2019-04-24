@@ -48,5 +48,6 @@ export const labels = {
   verification: "Модерация",
   idx: "#",
   yes: "Да",
-  no: "Нет"
+  no: "Нет",
+  noData: "Нет данных"
 };
