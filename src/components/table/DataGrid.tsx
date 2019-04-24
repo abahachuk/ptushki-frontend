@@ -30,6 +30,7 @@ import {
   SortingStateProps,
   TableColumnResizingProps
 } from "@devexpress/dx-react-grid";
+import { FilterList } from "@material-ui/icons";
 import useToggle from "react-use/esm/useToggle";
 import { Button } from "reactstrap";
 import { BaseCheckbox } from "../checkbox/BaseCheckbox";
@@ -92,13 +93,14 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           <TableHeaderRow.Content {...p}>
             {p.children}
             <Button
+              outline
               type="button"
-              color="link"
+              color="dark"
               size="sm"
-              className="p-0"
+              className="p-0 border-0"
               onClick={() => toggleFilterRow()}
             >
-              filter
+              <FilterList />
             </Button>
           </TableHeaderRow.Content>
         )}

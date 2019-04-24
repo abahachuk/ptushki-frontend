@@ -1,22 +1,23 @@
 import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { StateType } from "typesafe-actions";
+import { RootAction } from "typesafe-actions/dist/create-reducer";
+import { createEpicMiddleware } from "redux-observable";
 import { rootReducer } from "./reducers";
+import { rootEpic } from "./epics";
+
+const epicMiddleware = createEpicMiddleware<
+  RootAction,
+  RootAction,
+  RootState
+>();
 
 export const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
+  composeWithDevTools(applyMiddleware(thunk, epicMiddleware))
 );
 
-/**
- * @desc Infers State object from reducer map object
- */
-export type StateType<ReducerOrMap> = ReducerOrMap extends (
-  ...args: any[]
-) => any
-  ? ReturnType<ReducerOrMap>
-  : ReducerOrMap extends object
-  ? { [K in keyof ReducerOrMap]: StateType<ReducerOrMap[K]> }
-  : never;
+epicMiddleware.run(rootEpic);
 
 export type RootState = StateType<typeof rootReducer>;

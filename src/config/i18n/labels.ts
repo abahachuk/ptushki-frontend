@@ -44,5 +44,9 @@ export const labels = {
   },
   species: "Вид",
   loading: "Загрузка...",
-  of: "из"
+  of: "из",
+  verification: "Модерация",
+  idx: "#",
+  yes: "Да",
+  no: "Нет"
 };

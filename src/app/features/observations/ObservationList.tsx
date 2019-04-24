@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { connect, DispatchProp } from "react-redux";
+import useMount from "react-use/esm/useMount";
 import { DataGrid } from "../../../components/table/DataGrid";
 import { RootState } from "../../../store";
 import {
@@ -10,15 +11,19 @@ import {
   TmpObservation
 } from "../../../store/reducers/observationListReducer";
 import {
+  observationsData,
   setFilters,
   setPage,
   setPageSize,
   setSorting
 } from "../../../store/actions/observationListActions";
+import { AsyncResource } from "../../../utils/createAsyncStateReducer";
+import { VerificationCell } from "./cells/VerificationCell";
+import { labels } from "../../../config/i18n/labels";
+import { IndexCell } from "./cells/IndexCell";
 
 interface ObservationListProps extends DispatchProp {
-  observations: TmpObservation[];
-  loading: boolean;
+  observations: AsyncResource<TmpObservation[]>;
   sorting: Sorting[];
   pagination: PaginationState;
   filtering: FilteringRule[];
@@ -30,7 +35,6 @@ interface ObservationListProps extends DispatchProp {
 
 export const ObservationList: FC<ObservationListProps> = ({
   observations,
-  loading,
   sorting,
   pagination,
   filtering,
@@ -40,11 +44,20 @@ export const ObservationList: FC<ObservationListProps> = ({
   columnsOrder,
   dispatch
 }) => {
+  useMount(() => {
+    dispatch(observationsData.request());
+  });
+
   return (
     <DataGrid<TmpObservation>
-      rows={observations}
+      rows={observations.value}
       columns={[
-        { name: "id", title: "ID", getCellValue: r => r.id },
+        { name: "id", title: labels.idx, getCellValue: IndexCell },
+        {
+          name: "verified",
+          title: labels.verification,
+          getCellValue: r => <VerificationCell observation={r} />
+        },
         {
           name: "firstName",
           title: "Вид",
@@ -70,7 +83,7 @@ export const ObservationList: FC<ObservationListProps> = ({
         onFiltersChange: filters => dispatch(setFilters(filters))
       }}
     >
-      {loading && <div>TODO loading component</div>}
+      {observations.isLoading && <div>TODO loading component</div>}
     </DataGrid>
   );
 };
@@ -90,7 +103,6 @@ export const ObservationListConnected = connect((state: RootState) => {
 
   return {
     observations,
-    loading: false,
     sorting,
     filtering,
     columnWidths,

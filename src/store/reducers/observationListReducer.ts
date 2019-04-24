@@ -1,14 +1,21 @@
 import reduceReducer from "reduce-reducers";
 import { handleAction } from "redux-actions";
+import combineSectionReducers from "combine-section-reducers";
 import {
+  observationsData,
   setFilters,
   setPage,
   setPageSize,
   setSorting
 } from "../actions/observationListActions";
+import {
+  AsyncResource,
+  createAsyncStateReducer
+} from "../../utils/createAsyncStateReducer";
 
 export interface TmpObservation {
   id: string;
+  verified: boolean;
   firstName: string;
   lastName: string;
 }
@@ -35,15 +42,17 @@ export interface FilteringRule {
 }
 
 const initialState = {
-  observations: [
-    { id: "1234", firstName: "first", lastName: "value" },
-    { id: "12345", firstName: "second", lastName: "value2" }
-  ] as TmpObservation[],
+  observations: {
+    value: [],
+    isLoading: true,
+    error: null as string
+  } as AsyncResource<TmpObservation[]>,
   fixedColumns: ["id"],
   hiddenColumns: [] as string[],
-  columnsOrder: ["id", "firstName", "lastName"],
+  columnsOrder: ["id", "verified", "firstName", "lastName"],
   columnWidths: [
     { columnName: "id", width: 100 },
+    { columnName: "verified", width: 200 },
     { columnName: "firstName", width: 200 },
     { columnName: "lastName", width: 300 }
   ] as ColumnWidth[],
@@ -63,6 +72,13 @@ const initialState = {
 
 export const observationListReducer = reduceReducer(
   initialState,
+
+  combineSectionReducers({
+    observations: createAsyncStateReducer(
+      initialState.observations,
+      observationsData
+    )
+  } as any),
 
   handleAction(
     setSorting,
