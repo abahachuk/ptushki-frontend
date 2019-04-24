@@ -2,8 +2,8 @@ import React from "react";
 import { Label } from "reactstrap";
 import { Field, FormikProps } from "formik";
 import { Checkbox } from "formik-material-ui";
-import "./CheckboxField.scss";
 import { baseCheckboxClasses } from "./BaseCheckbox";
+import "./CheckboxField.scss";
 
 interface Props<
   TFormValues extends {},

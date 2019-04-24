@@ -16,8 +16,8 @@ import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected"
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 import { ProtectedRouteConnected } from "./features/routing/ProtectedRouteConnected";
-import "./App.scss";
 import { ObservationsPage } from "./features/observations/ObservationsPage";
+import "./App.scss";
 
 export const App = () => (
   <Provider store={store}>

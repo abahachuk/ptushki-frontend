@@ -1,5 +1,4 @@
 import * as React from "react";
-// import { Checkbox } from "formik-material-ui";
 import Checkbox from "@material-ui/core/Checkbox";
 import "./CheckboxField.scss";
 
