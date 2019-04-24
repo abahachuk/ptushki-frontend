@@ -5,7 +5,7 @@ import { StateType } from "typesafe-actions";
 import { RootAction } from "typesafe-actions/dist/create-reducer";
 import { createEpicMiddleware } from "redux-observable";
 import { rootReducer } from "./reducers";
-import { rootEpic } from "./epics";
+import { rootEpic } from "./effects";
 
 const epicMiddleware = createEpicMiddleware<
   RootAction,

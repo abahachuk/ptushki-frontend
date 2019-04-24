@@ -21,6 +21,7 @@ import { AsyncResource } from "../../../utils/createAsyncStateReducer";
 import { VerificationCell } from "./cells/VerificationCell";
 import { labels } from "../../../config/i18n/labels";
 import { IndexCell } from "./cells/IndexCell";
+import { GridColumn } from "../../../utils/grid/columnsConfig";
 
 interface ObservationListProps extends DispatchProp {
   observations: AsyncResource<TmpObservation[]>;
@@ -52,9 +53,9 @@ export const ObservationList: FC<ObservationListProps> = ({
     <DataGrid<TmpObservation>
       rows={observations.value}
       columns={[
-        { name: "id", title: labels.idx, getCellValue: IndexCell },
+        { name: GridColumn.id, title: labels.idx, getCellValue: IndexCell },
         {
-          name: "verified",
+          name: GridColumn.verified,
           title: labels.verification,
           getCellValue: r => <VerificationCell observation={r} />
         },
@@ -82,9 +83,8 @@ export const ObservationList: FC<ObservationListProps> = ({
         filters: filtering,
         onFiltersChange: filters => dispatch(setFilters(filters))
       }}
-    >
-      {observations.isLoading && <div>TODO loading component</div>}
-    </DataGrid>
+      isLoading={observations.isLoading}
+    />
   );
 };
 

@@ -12,6 +12,11 @@ import {
   AsyncResource,
   createAsyncStateReducer
 } from "../../utils/createAsyncStateReducer";
+import {
+  getColumnWidths,
+  getFixedColumns,
+  GridColumn
+} from "../../utils/grid/columnsConfig";
 
 export interface TmpObservation {
   id: string;
@@ -41,33 +46,30 @@ export interface FilteringRule {
   value?: string;
 }
 
+const OBSERVATION_GRID_COLUMNS = [
+  GridColumn.id,
+  GridColumn.verified,
+  GridColumn.firstName,
+  GridColumn.lastName
+];
+
 const initialState = {
   observations: {
     value: [],
     isLoading: true,
     error: null as string
   } as AsyncResource<TmpObservation[]>,
-  fixedColumns: ["id"],
+  fixedColumns: getFixedColumns(OBSERVATION_GRID_COLUMNS),
   hiddenColumns: [] as string[],
-  columnsOrder: ["id", "verified", "firstName", "lastName"],
-  columnWidths: [
-    { columnName: "id", width: 100 },
-    { columnName: "verified", width: 200 },
-    { columnName: "firstName", width: 200 },
-    { columnName: "lastName", width: 300 }
-  ] as ColumnWidth[],
+  columnsOrder: OBSERVATION_GRID_COLUMNS,
+  columnWidths: getColumnWidths(OBSERVATION_GRID_COLUMNS),
   pagination: <PaginationState>{
     currentPage: 0,
     pageSize: 15,
     totalCount: 50
   },
   filtering: [] as FilteringRule[],
-  sorting: [
-    {
-      columnName: "id",
-      direction: "asc"
-    }
-  ] as Sorting[]
+  sorting: [] as Sorting[]
 };
 
 export const observationListReducer = reduceReducer(
