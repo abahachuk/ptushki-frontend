@@ -4,7 +4,8 @@ import {
   authFailure,
   authRequest,
   authSuccess,
-  authUnmount
+  authUnmount,
+  logout
 } from "../actions/authActions";
 import { UserInfo } from "../../app/features/auth/models";
 
@@ -57,10 +58,18 @@ const authUnmountReducer = handleAction(
   initialState
 );
 
+const logoutReducer = handleAction(
+  logout,
+  (state, action) => initialState,
+  initialState
+);
+
+// TODO find an alternative to reduceReducer that respects correct action types
 export const authReducer = reduceReducer(
   initialState,
   authFailureReducer,
   authRequestReducer,
   authSuccessReducer,
-  authUnmountReducer
+  authUnmountReducer,
+  logoutReducer
 );
