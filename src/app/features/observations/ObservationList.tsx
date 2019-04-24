@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { connect, DispatchProp } from "react-redux";
 import useMount from "react-use/esm/useMount";
-import { DataGrid } from "../../../components/table/DataGrid";
+import { DataGrid, DataGridCol } from "../../../components/table/DataGrid";
 import { RootState } from "../../../store";
 import {
   ColumnWidth,
@@ -34,6 +34,21 @@ interface ObservationListProps extends DispatchProp {
   columnsOrder: string[];
 }
 
+const OBSERVATION_LIST_COLUMNS: DataGridCol<TmpObservation>[] = [
+  { name: GridColumn.id, title: labels.idx, getCellValue: IndexCell },
+  {
+    name: GridColumn.verified,
+    title: labels.verification,
+    getCellValue: r => <VerificationCell observation={r} />
+  },
+  {
+    name: "firstName",
+    title: "Вид",
+    getCellValue: r => r.firstName
+  },
+  { name: "lastName", title: "Статус", getCellValue: r => r.lastName }
+];
+
 export const ObservationList: FC<ObservationListProps> = ({
   observations,
   sorting,
@@ -52,36 +67,25 @@ export const ObservationList: FC<ObservationListProps> = ({
   return (
     <DataGrid<TmpObservation>
       rows={observations.value}
-      columns={[
-        { name: GridColumn.id, title: labels.idx, getCellValue: IndexCell },
-        {
-          name: GridColumn.verified,
-          title: labels.verification,
-          getCellValue: r => <VerificationCell observation={r} />
-        },
-        {
-          name: "firstName",
-          title: "Вид",
-          getCellValue: r => r.firstName
-        },
-        { name: "lastName", title: "Статус", getCellValue: r => r.lastName }
-      ]}
+      columns={OBSERVATION_LIST_COLUMNS}
       fixedColumns={fixedColumns}
       defaultOrder={columnsOrder}
       pagingProps={{
         ...pagination,
-        onCurrentPageChange: p => dispatch(setPage(p)),
-        onPageSizeChange: p => dispatch(setPageSize(p))
+        onCurrentPageChange: useCallback(p => dispatch(setPage(p)), [dispatch]),
+        onPageSizeChange: useCallback(p => dispatch(setPageSize(p)), [dispatch])
       }}
       sortingProps={{
         sorting,
-        onSortingChange: d => dispatch(setSorting(d))
+        onSortingChange: useCallback(d => dispatch(setSorting(d)), [dispatch])
       }}
       resizingProps={{ defaultColumnWidths: columnWidths }}
       hiddenColumns={hiddenColumns}
       filterProps={{
         filters: filtering,
-        onFiltersChange: filters => dispatch(setFilters(filters))
+        onFiltersChange: useCallback(filters => dispatch(setFilters(filters)), [
+          dispatch
+        ])
       }}
       isLoading={observations.isLoading}
     />

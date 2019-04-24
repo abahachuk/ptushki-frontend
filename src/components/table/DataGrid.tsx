@@ -14,7 +14,7 @@ import {
   TableSelection,
   Toolbar
 } from "@devexpress/dx-react-grid-bootstrap4";
-import React from "react";
+import React, { useMemo } from "react";
 import {
   Column,
   CustomPaging,
@@ -30,11 +30,11 @@ import {
   SortingStateProps,
   TableColumnResizingProps
 } from "@devexpress/dx-react-grid";
-import { FilterList } from "@material-ui/icons";
 import useToggle from "react-use/esm/useToggle";
-import { Button } from "reactstrap";
-import { BaseCheckbox } from "../checkbox/BaseCheckbox";
 import { FillLoader } from "../loader/FillLoader";
+import { SelectorColumn, SelectorColumnHeader } from "./SelectorColumn";
+import { ColumnChooserItem } from "./ColumnChooser";
+import { ColumnFilterToggleButton } from "./ColumnFilterToggleButton";
 
 export interface DataGridCol<TRow extends {}> extends Column {
   // make required and override with TRow generic for type safety
@@ -58,6 +58,8 @@ interface DataGridProps<TRow extends {}> extends GridProps {
 
   isLoading?: boolean;
 }
+
+const DEFAULT_PAGE_SIZES = [10, 15, 30, 50];
 
 export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
   const {
@@ -95,16 +97,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           contentComponent={p => (
             <TableHeaderRow.Content {...p}>
               {p.children}
-              <Button
-                outline
-                type="button"
-                color="dark"
-                size="sm"
-                className="p-0 border-0"
-                onClick={() => toggleFilterRow()}
-              >
-                <FilterList />
-              </Button>
+              <ColumnFilterToggleButton onToggle={toggleFilterRow} />
             </TableHeaderRow.Content>
           )}
         />
@@ -112,52 +105,21 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
 
         <TableSelection
           showSelectAll
-          cellComponent={({ tableColumn, tableRow, ...p }) => (
-            <td {...p}>
-              <BaseCheckbox
-                checked={p.selected}
-                onChange={p.onToggle}
-                className="p-0"
-              />
-            </td>
-          )}
-          headerCellComponent={({
-            tableColumn,
-            tableRow,
-            allSelected,
-            someSelected,
-            ...p
-          }) => (
-            <th {...p}>
-              <BaseCheckbox
-                checked={someSelected || allSelected}
-                indeterminate={someSelected && !allSelected}
-                onChange={() => p.onToggle()}
-                className="p-0"
-              />
-            </th>
-          )}
+          cellComponent={SelectorColumn}
+          headerCellComponent={SelectorColumnHeader}
         />
-        <PagingPanel pageSizes={[15, 30, 50]} />
+        <PagingPanel pageSizes={DEFAULT_PAGE_SIZES} />
 
         <TableColumnReordering defaultOrder={defaultOrder} />
         <TableFixedColumns
-          leftColumns={[TableSelection.COLUMN_TYPE, ...fixedColumns]}
+          leftColumns={useMemo(
+            () => [TableSelection.COLUMN_TYPE, ...fixedColumns],
+            [fixedColumns]
+          )}
         />
         <TableColumnVisibility defaultHiddenColumnNames={hiddenColumns} />
         <Toolbar />
-        <ColumnChooser
-          itemComponent={p => (
-            <button
-              type="button"
-              className="dropdown-item pl-3"
-              onClick={p.onToggle}
-            >
-              <BaseCheckbox checked={!p.item.hidden} className="p-0 pr-2" />
-              {p.item.column.title}
-            </button>
-          )}
-        />
+        <ColumnChooser itemComponent={ColumnChooserItem} />
       </Grid>
       {isLoading && <FillLoader />}
     </div>
