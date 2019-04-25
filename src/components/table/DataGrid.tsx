@@ -4,6 +4,7 @@ import {
   Grid,
   GridProps,
   PagingPanel,
+  SearchPanel,
   Table,
   TableFilterRow,
   TableHeaderRow,
@@ -30,6 +31,7 @@ import {
   CustomPagingConnected,
   FilteringStateConnected,
   PagingStateConnected,
+  SearchStateConnected,
   SelectionStateConnected,
   SortingStateConnected,
   TableColumnReorderingConnected,
@@ -82,6 +84,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           <PagingStateConnected />
           <SelectionStateConnected />
           <FilteringStateConnected />
+          <SearchStateConnected />
 
           <DragDropProvider />
 
@@ -112,6 +115,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           <TableFixedColumnsConnected />
           <TableColumnVisibilityConnected />
           <Toolbar />
+          <SearchPanel />
           <ColumnChooser itemComponent={ColumnChooserItem} />
         </Grid>
         {isLoading && <FillLoader />}

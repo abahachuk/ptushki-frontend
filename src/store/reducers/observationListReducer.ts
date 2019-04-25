@@ -17,8 +17,8 @@ import { DataGridState } from "../../components/table/DataGridModels";
 export interface TmpObservation {
   id: string;
   verified: boolean;
-  firstName: string;
-  lastName: string;
+  colorRing: string;
+  note: string;
 }
 
 const OBSERVATION_GRID_COLUMNS = [

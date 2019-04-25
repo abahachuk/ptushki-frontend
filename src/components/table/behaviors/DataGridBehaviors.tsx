@@ -6,6 +6,8 @@ import {
   FilteringStateProps,
   PagingState,
   PagingStateProps,
+  SearchState,
+  SearchStateProps,
   SelectionState,
   SelectionStateProps,
   SortingState,
@@ -97,3 +99,10 @@ export const TableColumnVisibilityConnected = connect(
     defaultHiddenColumnNames: state.hiddenColumns
   })
 )(TableColumnVisibility);
+
+export const SearchStateConnected = connect(
+  null,
+  (dispatch): SearchStateProps => ({
+    onValueChange: () => null
+  })
+)(SearchState);

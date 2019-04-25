@@ -26,9 +26,9 @@ const OBSERVATION_LIST_COLUMNS: DataGridCol<TmpObservation>[] = [
   {
     name: "firstName",
     title: "Вид",
-    getCellValue: r => r.firstName
+    getCellValue: r => r.colorRing
   },
-  { name: "lastName", title: "Статус", getCellValue: r => r.lastName }
+  { name: "lastName", title: "Статус", getCellValue: r => r.note }
 ];
 
 export const ObservationList: FC<ObservationListProps> = ({
