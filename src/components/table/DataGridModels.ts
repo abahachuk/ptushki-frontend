@@ -24,6 +24,7 @@ export interface FilteringRule {
 export interface DataGridState {
   fixedColumns: GridColumn[];
   hiddenColumns: string[];
+  selection: string[];
   columnsOrder: GridColumn[];
   columnWidths: ColumnWidth[];
   pagination: PaginationState;

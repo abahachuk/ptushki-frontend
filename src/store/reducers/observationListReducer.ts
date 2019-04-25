@@ -36,7 +36,8 @@ const initialState = {
   } as AsyncResource<TmpObservation[]>,
   gridState: {
     fixedColumns: getFixedColumns(OBSERVATION_GRID_COLUMNS),
-    hiddenColumns: [] as string[],
+    hiddenColumns: [],
+    selection: [],
     columnsOrder: OBSERVATION_GRID_COLUMNS,
     columnWidths: getColumnWidths(OBSERVATION_GRID_COLUMNS),
     pagination: {

@@ -5,6 +5,7 @@ import {
   setFilters,
   setPage,
   setPageSize,
+  setSelection,
   setSorting
 } from "./dataGridActions";
 import { DataGridState } from "./DataGridModels";
@@ -22,6 +23,15 @@ export const createDataGridReducer = (
         (state, action) => ({
           ...state,
           sorting: action.payload
+        }),
+        initialState
+      ),
+
+      handleAction(
+        setSelection,
+        (state, action) => ({
+          ...state,
+          selection: action.payload
         }),
         initialState
       ),

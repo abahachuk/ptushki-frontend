@@ -22,11 +22,11 @@ import {
   TableFixedColumnsProps,
   TableSelection
 } from "@devexpress/dx-react-grid-bootstrap4";
-import { F } from "ramda";
 import {
   setFilters,
   setPage,
   setPageSize,
+  setSelection,
   setSorting
 } from "../dataGridActions";
 import { DataGridState } from "../DataGridModels";
@@ -52,10 +52,10 @@ export const PagingStateConnected = connect(
 
 export const SelectionStateConnected = connect(
   (state: DataGridState): SelectionStateProps => ({
-    selection: []
+    selection: state.selection
   }),
   (dispatch): SelectionStateProps => ({
-    onSelectionChange: F
+    onSelectionChange: s => dispatch(setSelection(s as string[]))
   })
 )(SelectionState);
 
