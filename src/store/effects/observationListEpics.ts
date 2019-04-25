@@ -1,6 +1,12 @@
 import { combineEpics, Epic } from "redux-observable";
 import { isActionOf } from "typesafe-actions";
-import { catchError, filter, map, switchMap } from "rxjs/operators";
+import {
+  catchError,
+  filter,
+  map,
+  switchMap,
+  withLatestFrom
+} from "rxjs/operators";
 import { take } from "ramda";
 import { from, of } from "rxjs";
 import {
@@ -18,9 +24,14 @@ export const requestObservationEpic: Epic<any, any, RootState> = (
 ) =>
   action$.pipe(
     filter(isActionOf([observationsData.request])),
-    switchMap(() =>
+    withLatestFrom(state$),
+    switchMap(([, state]) =>
       from(ajaxService.makeCall<TmpObservation[]>("/observations")).pipe(
-        map(d => observationsData.success(take(10, d))),
+        map(d =>
+          observationsData.success(
+            take(state.observationList.gridState.pagination.pageSize, d)
+          )
+        ),
         catchError(e => of(observationsData.failure(e)))
       )
     )
