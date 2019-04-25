@@ -95,7 +95,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
             contentComponent={p => (
               <TableHeaderRow.Content {...p}>
                 {p.children}
-                <ColumnFilterToggleButton onToggle={toggleFilterRow} />
+                <ColumnFilterToggleButton onToggle={() => toggleFilterRow()} />
               </TableHeaderRow.Content>
             )}
           />
