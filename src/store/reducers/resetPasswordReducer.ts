@@ -1,12 +1,12 @@
 import { handleAction } from "redux-actions";
 import reduceReducer from "reduce-reducers";
+
 import {
   resetPasswordFailure,
   resetPasswordRequest,
   resetPasswordSuccess,
   resetPasswordUnmount
 } from "../actions/resetPasswordActions";
-import { authUnmount } from "../actions/authActions";
 
 const initialState = {
   error: undefined as string | undefined,

@@ -2,19 +2,18 @@ import React, { FC, useEffect } from "react";
 import { Form, Formik } from "formik";
 import { Button, Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
+
+import { Layout } from "../../../../components/layout/Layout";
+import { Checkbox } from "../../../../components/checkbox/Checkbox";
 import { FormControl } from "../../../../components/form/FormControl";
 import { SignUpData } from "../models";
-import { Checkbox } from "../../../../components/checkbox/Checkbox";
 import { ROUTE_SIGN_IN } from "../../routing/routes";
-import { Layout } from "../../../../components/layout/Layout";
 import {
   booleanSchema,
   objectSchema,
   stringSchema
 } from "../../../../utils/form/localisedYup";
 import { labels } from "../../../../config/i18n/labels";
-
-const blockName = "signup-form";
 
 export const SignUpForm: FC<{
   onSubmit(d: SignUpData): void;
@@ -32,6 +31,7 @@ export const SignUpForm: FC<{
     <Layout title={labels.signUp.title}>
       <Formik<SignUpData>
         initialValues={{
+          phone: "",
           email: "",
           password: "",
           firstName: "",
@@ -39,6 +39,7 @@ export const SignUpForm: FC<{
           rememberPassword: true
         }}
         validationSchema={objectSchema().shape({
+          phone: stringSchema().required(),
           email: stringSchema()
             .email()
             .required(),
@@ -73,6 +74,13 @@ export const SignUpForm: FC<{
               </Col>
             </Row>
             <FormControl
+              label={labels.form.phone.label}
+              name="phone"
+              autoComplete="username phone"
+              formikProps={formikProps}
+              placeholder={labels.form.phone.placeholder}
+            />
+            <FormControl
               label={labels.form.email.label}
               name="email"
               type="email"
@@ -94,20 +102,18 @@ export const SignUpForm: FC<{
               label={labels.signUp.rememberPassword}
             />
             <Button
-              className="mt-3"
+              className="mt-3 button primary-button"
+              size="sm"
               block
-              color="primary"
               type="submit"
               disabled={isPending}
             >
               {labels.signUp.title}
             </Button>
 
-            {error && (
-              <div className={`${blockName}__error text-danger`}>{error}</div>
-            )}
+            {error && <div className="error text-danger">{error}</div>}
 
-            <div className="mt-2">
+            <div className="form-text-content mt-2">
               {labels.signUp.alreadyHavePassword}{" "}
               <Link to={ROUTE_SIGN_IN.path}>{labels.signIn.title}</Link>
             </div>

@@ -1,8 +1,14 @@
 export const labels = {
   form: {
+    subtitleTop: "Центр Кольцевания Птиц",
+    subtitleBottom: "при Академии наук Республики Беларусь",
     validation: {
       required: "Обязательное поле",
       email: "Некоррректный email"
+    },
+    phone: {
+      label: "Номер телефона",
+      placeholder: "Введите Ваш номер телефона"
     },
     email: {
       label: "Email",
@@ -26,8 +32,8 @@ export const labels = {
     title: "Восстановление пароля",
     explanation:
       "Мы вышлем письмо на Вашу почту со ссылкой, которая поможет Вам создать новый пароль",
-    sendLink: "Отправить ссылку",
-    sendLinkAgain: "Отправить ссылку еще раз"
+    sendLink: "Выслать ссылку",
+    sendLinkAgain: "Выслать ссылку еще раз"
   },
   signIn: {
     title: "Войти",
