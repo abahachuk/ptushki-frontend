@@ -1,8 +1,18 @@
+/* eslint-disable class-methods-use-this */
 import { UserInfo } from "../app/features/auth/models";
 
 const REFRESH_TOKEN = "refreshToken";
 const ACCESS_TOKEN = "accessToken";
 const USER_INFO = "userInfo";
+
+export class SecurityError extends Error {
+  constructor(message: string) {
+    super();
+    this.message = message;
+    this.name = this.constructor.name;
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
 
 export default class SecurityService {
   private storage: Storage | null = null;
@@ -10,6 +20,29 @@ export default class SecurityService {
   private accessToken: string | null = null;
 
   private refreshToken: string | null = null;
+
+  private userInfo: UserInfo | null = null;
+
+  constructor() {
+    this.checkStorage();
+    if (this.storage) {
+      this.getDataFromStorage();
+    }
+  }
+
+  private checkStorage() {
+    if (localStorage.getItem(USER_INFO)) {
+      this.storage = localStorage;
+    } else if (sessionStorage.getItem(USER_INFO)) {
+      this.storage = sessionStorage;
+    }
+  }
+
+  private getDataFromStorage() {
+    this.accessToken = this.storage.getItem(ACCESS_TOKEN);
+    this.refreshToken = this.storage.getItem(REFRESH_TOKEN);
+    this.userInfo = JSON.parse(this.storage.getItem(USER_INFO));
+  }
 
   getAccessToken(): string {
     return this.accessToken;
@@ -42,6 +75,10 @@ export default class SecurityService {
     this.storage.setItem(USER_INFO, JSON.stringify(userInfo));
   }
 
+  getUserInfo(): UserInfo {
+    return this.userInfo;
+  }
+
   deleteUserInfo(): void {
     this.storage.removeItem(USER_INFO);
   }
@@ -59,5 +96,10 @@ export default class SecurityService {
     this.deleteSensitiveData();
 
     this.storage = null;
+  }
+
+  checkPermissions(permissions: Array<string>, user: UserInfo): boolean {
+    const userRole = user && user.role;
+    return permissions.some(role => role === userRole);
   }
 }
