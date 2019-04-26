@@ -45,7 +45,7 @@ export const FormControl = <TFormValues extends {}>({
     <ErrorMessage
       name={name}
       component="div"
-      className={`${blockName}__error invalid-feedback`}
+      className="error invalid-feedback"
     />
   </FormGroup>
 );

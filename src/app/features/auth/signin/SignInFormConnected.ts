@@ -1,7 +1,9 @@
 import { connect } from "react-redux";
+
 import { RootState } from "../../../../store";
-import { SignInForm } from "./SignInForm";
 import { authExit, signIn } from "../../../../store/actions/authActions";
+
+import { SignInForm } from "./SignInForm";
 
 export const SignInFormConnected = connect(
   (state: RootState) => ({

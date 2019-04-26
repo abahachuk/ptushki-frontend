@@ -5,6 +5,7 @@ export interface SignInData {
 }
 
 export interface SignUpData extends SignInData {
+  phone: string;
   firstName: string;
   lastName: string;
 }
@@ -17,6 +18,7 @@ export interface UserInfo {
   email: string;
   firstName: string;
   lastName: string;
+  phone: string;
   role: string;
   id: string;
 }

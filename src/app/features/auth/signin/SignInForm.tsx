@@ -3,22 +3,19 @@ import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 
+import { Layout } from "../../../../components/layout/Layout";
 import { FormControl } from "../../../../components/form/FormControl";
 import { CheckboxField } from "../../../../components/checkbox/CheckboxField";
-import { SignInData } from "../models";
 import { FormControlLabel } from "../../../../components/form/FormControlLabel";
+import { SignInData } from "../models";
 import { ROUTE_RESET_PASSWORD, ROUTE_SIGN_UP } from "../../routing/routes";
-import { Layout } from "../../../../components/layout/Layout";
 
-import "./SignInForm.scss";
 import {
   booleanSchema,
   objectSchema,
   stringSchema
 } from "../../../../utils/form/localisedYup";
 import { labels } from "../../../../config/i18n/labels";
-
-const blockName = "signin-form";
 
 export const SignInForm: FC<{
   onSubmit(d: SignInData): void;
@@ -61,11 +58,15 @@ export const SignInForm: FC<{
               formikProps={formikProps}
               renderLabel={labelProps => (
                 <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: "5px"
+                  }}
                 >
                   <FormControlLabel {...labelProps} />
                   <Link
-                    className={`${blockName}__link`}
+                    className="form-text-content"
                     to={ROUTE_RESET_PASSWORD.path}
                   >
                     {labels.signIn.forgotPassword}
@@ -79,7 +80,12 @@ export const SignInForm: FC<{
               name="rememberPassword"
               formikProps={formikProps}
             />
-            <Button block color="primary" type="submit" disabled={isPending}>
+            <Button
+              block
+              className="mt-3 button primary-button"
+              type="submit"
+              disabled={isPending}
+            >
               {labels.signIn.title}
             </Button>
             <Button
@@ -87,14 +93,13 @@ export const SignInForm: FC<{
               to={ROUTE_SIGN_UP.path}
               block
               outline
-              color="primary"
+              className="mt-3 button"
+              size="sm"
               disabled={isPending}
             >
               {labels.signUp.title}
             </Button>
-            {error && (
-              <div className={`${blockName}__error text-danger`}>{error}</div>
-            )}
+            {error && <div className="error text-danger">{error}</div>}
           </Form>
         )}
       </Formik>

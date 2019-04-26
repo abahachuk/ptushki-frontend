@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Redirect, Route } from "react-router";
+
 import { UserInfo } from "../auth/models";
 
 export const ProtectedRoute: FC<{
