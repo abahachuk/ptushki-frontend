@@ -51,11 +51,10 @@ const resetPasswordUnmountReducer = handleAction(
   initialState
 );
 
-// TODO find an alternative to reduceReducer that respects correct action types
 export const resetPasswordReducer = reduceReducer<typeof initialState>(
   initialState,
-  resetPasswordRequestReducer as any,
-  resetPasswordFailureReducer as any,
-  resetPasswordSuccessReducer as any,
-  resetPasswordUnmountReducer as any
+  resetPasswordRequestReducer,
+  resetPasswordFailureReducer,
+  resetPasswordSuccessReducer,
+  resetPasswordUnmountReducer
 );

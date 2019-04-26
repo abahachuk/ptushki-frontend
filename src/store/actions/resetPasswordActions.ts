@@ -3,7 +3,7 @@ import { ThunkAction } from "redux-thunk";
 
 import { RootState } from "../index";
 import { ResetPasswordData } from "../../app/features/auth/models";
-import { makePostCall } from "../../utils/makeCall";
+import { ajaxService } from "../../services";
 import { RESTORE_PASSWORD_ENDPOINT } from "../../config/endpoints";
 
 export const resetPasswordRequest = createAction<ResetPasswordData>(
@@ -30,14 +30,13 @@ export const resetPasswordExit = (): ThunkAction<
 
 export const resetPassword = (
   data: ResetPasswordData
-): ThunkAction<void, RootState, undefined, any> => dispatch => {
+): ThunkAction<void, RootState, undefined, any> => async dispatch => {
   dispatch(resetPasswordRequest(data));
 
-  makePostCall(RESTORE_PASSWORD_ENDPOINT, data)
-    .then(() => {
-      dispatch(resetPasswordSuccess());
-    })
-    .catch((e: Error) => {
-      dispatch(resetPasswordFailure(e.message));
-    });
+  try {
+    await ajaxService.makeCall<void>(RESTORE_PASSWORD_ENDPOINT, data);
+    dispatch(resetPasswordSuccess());
+  } catch (e) {
+    dispatch(resetPasswordFailure(e.message));
+  }
 };
