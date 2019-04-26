@@ -1,8 +1,18 @@
+/* eslint-disable class-methods-use-this */
 import { UserInfo } from "../app/features/auth/models";
 
 const REFRESH_TOKEN = "refreshToken";
 const ACCESS_TOKEN = "accessToken";
 const USER_INFO = "userInfo";
+
+export class SecurityError extends Error {
+  constructor(message: string) {
+    super();
+    this.message = message;
+    this.name = this.constructor.name;
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
 
 export default class SecurityService {
   private storage: Storage | null = null;
@@ -86,5 +96,10 @@ export default class SecurityService {
     this.deleteSensitiveData();
 
     this.storage = null;
+  }
+
+  checkPermissions(permissions: Array<string>, user: UserInfo): boolean {
+    const userRole = user && user.role;
+    return permissions.some(role => role === userRole);
   }
 }

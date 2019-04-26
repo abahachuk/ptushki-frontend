@@ -1,25 +1,28 @@
-import React from "react";
-import { Provider } from "react-redux";
+import React, { FC } from "react";
 import { Route, Switch } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
 
-import { store } from "../store";
+import useMount from "react-use/esm/useMount";
 import { history } from "./features/routing/history";
 import {
   ROUTE_SIGN_IN,
   ROUTE_SIGN_UP,
   ROUTE_RESET_PASSWORD
 } from "./features/routing/routes";
-import { RootNavConnected } from "./features/nav/RootNavConnected";
+import { RootNav } from "./features/nav/RootNav";
 import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 import { ProtectedRouteConnected } from "./features/routing/ProtectedRouteConnected";
 
-export const App = () => (
-  <Provider store={store}>
+export const App: FC<{
+  getUser: () => void;
+}> = ({ getUser }) => {
+  useMount(getUser);
+
+  return (
     <ConnectedRouter history={history}>
-      <RootNavConnected />
+      <RootNav />
 
       <Switch>
         <Route exact path="/">
@@ -43,5 +46,5 @@ export const App = () => (
         />
       </Switch>
     </ConnectedRouter>
-  </Provider>
-);
+  );
+};

@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import { securityService } from ".";
 import { AuthData, UserInfo } from "../app/features/auth/models";
-import { signOut } from "../store/actions/authActions";
 import { REFRESH_ENDPOINT } from "../config/endpoints";
+import { SecurityError } from "./SecurutyService";
 
 export default class AjaxService {
   private async parseError(response: Response): Promise<string> {
@@ -37,8 +37,7 @@ export default class AjaxService {
     const refreshToken = securityService.getRefreshToken();
 
     if (!refreshToken) {
-      signOut();
-      throw new Error("No refresh token provided");
+      throw new SecurityError("No refresh token provided");
     }
 
     const response = await this.makeFetch(REFRESH_ENDPOINT, null, {
@@ -46,8 +45,7 @@ export default class AjaxService {
     });
 
     if (!response.ok) {
-      signOut();
-      throw new Error("Unable to refresh token");
+      throw new SecurityError("Unable to refresh token");
     }
 
     const { access, refresh } = await response.json();
