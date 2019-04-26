@@ -76,7 +76,7 @@ export const SignUpForm: FC<{
             <FormControl
               label={labels.form.phone.label}
               name="phone"
-              autoComplete="username-phone"
+              autoComplete="username phone"
               formikProps={formikProps}
               placeholder={labels.form.phone.placeholder}
             />
@@ -84,7 +84,7 @@ export const SignUpForm: FC<{
               label={labels.form.email.label}
               name="email"
               type="email"
-              autoComplete="username-email"
+              autoComplete="username email"
               formikProps={formikProps}
               placeholder={labels.form.email.placeholder}
             />
