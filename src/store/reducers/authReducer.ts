@@ -13,7 +13,8 @@ import { UserInfo } from "../../app/features/auth/models";
 const initialState = {
   error: undefined as string | undefined,
   isPending: false,
-  user: null as UserInfo
+  user: null as UserInfo,
+  isLoaded: false
 };
 
 const authRequestReducer = handleAction(
@@ -33,7 +34,8 @@ const authFailureReducer = handleAction(
     ...state,
     error: action.payload,
     isPending: false,
-    user: null
+    user: null,
+    isLoaded: true
   }),
   initialState
 );
@@ -44,7 +46,8 @@ const authSuccessReducer = handleAction(
     ...state,
     user: action.payload,
     error: undefined,
-    isPending: false
+    isPending: false,
+    isLoaded: true
   }),
   initialState
 );

@@ -11,6 +11,29 @@ export default class SecurityService {
 
   private refreshToken: string | null = null;
 
+  private userInfo: UserInfo | null = null;
+
+  constructor() {
+    this.checkStorage();
+    if (this.storage) {
+      this.getDataFromStorage();
+    }
+  }
+
+  private checkStorage() {
+    if (localStorage.getItem(USER_INFO)) {
+      this.storage = localStorage;
+    } else if (sessionStorage.getItem(USER_INFO)) {
+      this.storage = sessionStorage;
+    }
+  }
+
+  private getDataFromStorage() {
+    this.accessToken = this.storage.getItem(ACCESS_TOKEN);
+    this.refreshToken = this.storage.getItem(REFRESH_TOKEN);
+    this.userInfo = JSON.parse(this.storage.getItem(USER_INFO));
+  }
+
   getAccessToken(): string {
     return this.accessToken;
   }
@@ -40,6 +63,10 @@ export default class SecurityService {
 
   saveUserInfo(userInfo: UserInfo): void {
     this.storage.setItem(USER_INFO, JSON.stringify(userInfo));
+  }
+
+  getUserInfo(): UserInfo {
+    return this.userInfo;
   }
 
   deleteUserInfo(): void {

@@ -8,6 +8,7 @@ import {
   NavLink
 } from "reactstrap";
 import { NavLink as Link } from "react-router-dom";
+import useMount from "react-use/esm/useMount";
 
 import { NavUnauthorized } from "./NavUnauthorized";
 import { UserInfo } from "../auth/models";
@@ -20,7 +21,14 @@ const brandLogo = require("../../../assets/brand-logo.svg");
 
 export const RootNav: FC<{
   user: UserInfo;
-}> = ({ user }) => (
+  isLoaded: boolean;
+  getUser: () => void;
+}> = ({ user, getUser, isLoaded }) => {
+  useMount(getUser);
+
+  if (!isLoaded) return null;
+
+  return (
   <Navbar dark expand="sm" className="py-1 px-5 root-nav">
     <NavbarBrand href="/">
       <img src={brandLogo} alt={labels.brandName} />
@@ -43,4 +51,4 @@ export const RootNav: FC<{
       )}
     </Collapse>
   </Navbar>
-);
+)};
