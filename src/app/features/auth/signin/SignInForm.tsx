@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 
 import { Layout } from "../../../../components/layout/Layout";
-import { Checkbox } from "../../../../components/checkbox/Checkbox";
 import { FormControl } from "../../../../components/form/FormControl";
+import { CheckboxField } from "../../../../components/checkbox/CheckboxField";
 import { FormControlLabel } from "../../../../components/form/FormControlLabel";
 import { SignInData } from "../models";
 import { ROUTE_RESET_PASSWORD, ROUTE_SIGN_UP } from "../../routing/routes";
@@ -75,7 +75,7 @@ export const SignInForm: FC<{
               )}
               placeholder={labels.form.password.placeholder}
             />
-            <Checkbox
+            <CheckboxField
               label={labels.signIn.rememberPassword}
               name="rememberPassword"
               formikProps={formikProps}

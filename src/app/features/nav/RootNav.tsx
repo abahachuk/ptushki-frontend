@@ -1,9 +1,17 @@
 import React from "react";
-import { Collapse, Nav, Navbar, NavbarBrand } from "reactstrap";
+import { NavLink as Link } from "react-router-dom";
+import {
+  Collapse,
+  Nav,
+  Navbar,
+  NavbarBrand,
+  NavItem,
+  NavLink
+} from "reactstrap";
 import { labels } from "../../../config/i18n/labels";
-import { ROUTE_USER_INFO } from "../routing/routes";
-import "./RootNav.scss";
+import { ROUTE_OBSERVATIONS, ROUTE_USER_INFO } from "../routing/routes";
 import { ProtectedNavItemConnected } from "./ProtectedNavItemConnected";
+import "./RootNav.scss";
 
 const brandLogo = require("../../../assets/brand-logo.svg");
 
@@ -12,6 +20,13 @@ export const RootNav = () => (
     <NavbarBrand href="/">
       <img src={brandLogo} alt={labels.brandName} />
     </NavbarBrand>
+    <Nav navbar>
+      <NavItem>
+        <NavLink tag={Link} to={ROUTE_OBSERVATIONS.path}>
+          {labels.observations.title}
+        </NavLink>
+      </NavItem>
+    </Nav>
     <Collapse isOpen navbar>
       <Nav className="ml-auto" navbar>
         <ProtectedNavItemConnected {...ROUTE_USER_INFO}>

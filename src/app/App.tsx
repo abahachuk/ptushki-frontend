@@ -5,15 +5,17 @@ import { ConnectedRouter } from "connected-react-router";
 import useMount from "react-use/esm/useMount";
 import { history } from "./features/routing/history";
 import {
+  ROUTE_OBSERVATIONS,
+  ROUTE_RESET_PASSWORD,
   ROUTE_SIGN_IN,
-  ROUTE_SIGN_UP,
-  ROUTE_RESET_PASSWORD
+  ROUTE_SIGN_UP
 } from "./features/routing/routes";
 import { RootNav } from "./features/nav/RootNav";
 import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 import { ProtectedRouteConnected } from "./features/routing/ProtectedRouteConnected";
+import { ObservationsPage } from "./features/observations/ObservationsPage";
 import { UserInfo } from "./features/auth/models";
 
 export const App: FC<{
@@ -48,6 +50,11 @@ export const App: FC<{
           exact
           {...ROUTE_RESET_PASSWORD}
           component={ResetPasswordFormConnected}
+        />
+        <ProtectedRouteConnected
+          exact
+          {...ROUTE_OBSERVATIONS}
+          component={ObservationsPage}
         />
       </Switch>
     </ConnectedRouter>

@@ -26,3 +26,9 @@ export const ROUTE_USER_INFO: RouteDescription = {
   permissions: [OBSERVER],
   fallback: "/"
 };
+
+export const ROUTE_OBSERVATIONS: RouteDescription = {
+  path: "/observations/",
+  permissions: [OBSERVER],
+  fallback: "/"
+};
