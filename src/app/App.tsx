@@ -1,9 +1,8 @@
-import React from "react";
-import { Provider } from "react-redux";
-import { Route, Switch } from "react-router";
+import React, { FC } from "react";
+import { Redirect, Route, Switch } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
 
-import { store } from "../store";
+import useMount from "react-use/esm/useMount";
 import { history } from "./features/routing/history";
 import {
   ROUTE_OBSERVATIONS,
@@ -11,21 +10,30 @@ import {
   ROUTE_SIGN_IN,
   ROUTE_SIGN_UP
 } from "./features/routing/routes";
-import { RootNavConnected } from "./features/nav/RootNavConnected";
+import { RootNav } from "./features/nav/RootNav";
 import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 import { ProtectedRouteConnected } from "./features/routing/ProtectedRouteConnected";
 import { ObservationsPage } from "./features/observations/ObservationsPage";
+import { UserInfo } from "./features/auth/models";
 
-export const App = () => (
-  <Provider store={store}>
+export const App: FC<{
+  getUser: () => void;
+  user: UserInfo;
+  isLoaded: boolean;
+}> = ({ getUser, user, isLoaded }) => {
+  useMount(getUser);
+
+  if (!isLoaded) return null;
+
+  return (
     <ConnectedRouter history={history}>
-      <RootNavConnected />
+      {user && <RootNav />}
 
       <Switch>
         <Route exact path="/">
-          [Landing here]
+          {user ? <div /> : <Redirect to={ROUTE_SIGN_IN.path} />}
         </Route>
 
         <ProtectedRouteConnected
@@ -50,5 +58,5 @@ export const App = () => (
         />
       </Switch>
     </ConnectedRouter>
-  </Provider>
-);
+  );
+};

@@ -1,3 +1,5 @@
+import { OBSERVER, UNAUTHORIZED } from "../../../config/roles";
+
 export interface RouteDescription {
   path: string;
   permissions: Array<string>;
@@ -6,22 +8,27 @@ export interface RouteDescription {
 
 export const ROUTE_SIGN_UP: RouteDescription = {
   path: "/sign-up/",
-  permissions: [],
+  permissions: [UNAUTHORIZED],
   fallback: "/"
 };
 export const ROUTE_SIGN_IN: RouteDescription = {
   path: "/sign-in/",
-  permissions: [],
+  permissions: [UNAUTHORIZED],
   fallback: "/"
 };
 export const ROUTE_RESET_PASSWORD: RouteDescription = {
   path: "/reset-password/",
-  permissions: [],
+  permissions: [UNAUTHORIZED],
+  fallback: "/"
+};
+export const ROUTE_USER_INFO: RouteDescription = {
+  path: "/user-info/",
+  permissions: [OBSERVER],
   fallback: "/"
 };
 
 export const ROUTE_OBSERVATIONS: RouteDescription = {
   path: "/observations/",
-  permissions: [],
+  permissions: [OBSERVER],
   fallback: "/"
 };

@@ -14,7 +14,7 @@ const AuthEndpoint = {
 
 export const authRequest = createAction<AuthData>("AUTH_REQUEST");
 export const authSuccess = createAction<UserInfo>("AUTH_SUCCESS");
-export const authFailure = createAction<string>("AUTH_FAILURE");
+export const authFailure = createAction<string | void>("AUTH_FAILURE");
 export const authUnmount = createAction<void>("AUTH_UNMOUNT");
 export const logout = createAction<void>("LOGOUT");
 
@@ -47,7 +47,21 @@ export const signOut = (): ThunkAction<
   RootState,
   undefined,
   any
-> => async dispatch => {
+> => dispatch => {
   securityService.reset();
   dispatch(logout());
+};
+
+export const getUser = (): ThunkAction<
+  void,
+  RootState,
+  undefined,
+  any
+> => dispatch => {
+  const user = securityService.getUserInfo();
+  if (user) {
+    dispatch(authSuccess(user));
+  } else {
+    dispatch(authFailure());
+  }
 };

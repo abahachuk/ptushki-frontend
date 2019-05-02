@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { NavLink as Link } from "react-router-dom";
 import {
   Collapse,
@@ -8,16 +8,18 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
-import { NavUnauthorized } from "./NavUnauthorized";
-import { UserInfo } from "../auth/models";
-import { ROUTE_OBSERVATIONS } from "../routing/routes";
 import { labels } from "../../../config/i18n/labels";
+import { ROUTE_OBSERVATIONS, ROUTE_USER_INFO } from "../routing/routes";
+import { ProtectedNavItemConnected } from "./ProtectedNavItemConnected";
+import "./RootNav.scss";
 
-export const RootNav: FC<{
-  user: UserInfo;
-}> = ({ user }) => (
-  <Navbar dark color="dark" expand="sm">
-    <NavbarBrand href="/">PTUSHKI</NavbarBrand>
+const brandLogo = require("../../../assets/brand-logo.svg");
+
+export const RootNav = () => (
+  <Navbar dark expand="sm" className="py-1 px-5 root-nav">
+    <NavbarBrand href="/">
+      <img src={brandLogo} alt={labels.brandName} />
+    </NavbarBrand>
     <Nav navbar>
       <NavItem>
         <NavLink tag={Link} to={ROUTE_OBSERVATIONS.path}>
@@ -26,7 +28,15 @@ export const RootNav: FC<{
       </NavItem>
     </Nav>
     <Collapse isOpen navbar>
-      {user ? <div /> : <NavUnauthorized />}
+      <Nav className="ml-auto" navbar>
+        <ProtectedNavItemConnected {...ROUTE_USER_INFO}>
+          <img
+            src="http://i.pravatar.cc/60" // TODO this is a placeholder
+            alt="avatar"
+            className="nav-user-img"
+          />
+        </ProtectedNavItemConnected>
+      </Nav>
     </Collapse>
   </Navbar>
 );
