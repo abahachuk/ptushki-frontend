@@ -7,13 +7,15 @@ import { history } from "./features/routing/history";
 import {
   ROUTE_SIGN_IN,
   ROUTE_SIGN_UP,
-  ROUTE_RESET_PASSWORD
+  ROUTE_RESET_PASSWORD,
+  ROUTE_BIRD_INFO
 } from "./features/routing/routes";
 import { RootNav } from "./features/nav/RootNav";
 import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 import { ProtectedRouteConnected } from "./features/routing/ProtectedRouteConnected";
+import { BirdInfoForm } from "./features/bird-info/BirdInfoConnected";
 
 export const App: FC<{
   getUser: () => void;
@@ -28,6 +30,12 @@ export const App: FC<{
         <Route exact path="/">
           [Landing here]
         </Route>
+
+        <ProtectedRouteConnected
+          exact
+          {...ROUTE_BIRD_INFO}
+          component={BirdInfoForm}
+        />
 
         <ProtectedRouteConnected
           exact

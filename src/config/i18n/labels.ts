@@ -45,5 +45,26 @@ export const labels = {
     title: "Регистрация",
     rememberPassword: "Сохранить пароль",
     alreadyHavePassword: "У вас уже есть пароль?"
+  },
+  birdInfo: {
+    euring: "Euring",
+    addRing: "Добавить кольцо",
+    photos: "Фотографии",
+    export: "Экспорт",
+    edit: "Редактировать",
+    delete: "Удалить",
+    birdTitle: "Птица",
+    ringingTitle: "Кольцевание и отлов",
+    observationTime: "Время наблюдения",
+    bird: {
+      neck: "Шея",
+      leftWing: "Левое крыло",
+      rightWing: "Правое крыло",
+      saddle: "Клюв",
+      leftAboveKnee: "Слева над коленом",
+      rightAboveKnee: "Справа над коленом",
+      leftBelowKnee: "Слева под коленом",
+      rightBelowKnee: "Справа под коленом"
+    }
   }
 };

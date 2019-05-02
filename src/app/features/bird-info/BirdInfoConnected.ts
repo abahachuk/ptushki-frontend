@@ -1,0 +1,1 @@
+export { BirdInfoForm } from "./BirdInfoForm";
