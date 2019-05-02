@@ -1,12 +1,7 @@
 import React from "react";
 import { Collapse, Nav, Navbar, NavbarBrand } from "reactstrap";
 import { labels } from "../../../config/i18n/labels";
-import {
-  ROUTE_SIGN_IN,
-  ROUTE_SIGN_UP,
-  ROUTE_USER_INFO
-} from "../routing/routes";
-
+import { ROUTE_USER_INFO } from "../routing/routes";
 import "./RootNav.scss";
 import { ProtectedNavItemConnected } from "./ProtectedNavItemConnected";
 
@@ -19,12 +14,6 @@ export const RootNav = () => (
     </NavbarBrand>
     <Collapse isOpen navbar>
       <Nav className="ml-auto" navbar>
-        <ProtectedNavItemConnected {...ROUTE_SIGN_UP}>
-          {labels.signUp.title}
-        </ProtectedNavItemConnected>
-        <ProtectedNavItemConnected {...ROUTE_SIGN_IN}>
-          {labels.signIn.title}
-        </ProtectedNavItemConnected>
         <ProtectedNavItemConnected {...ROUTE_USER_INFO}>
           <img
             src="http://i.pravatar.cc/60" // TODO this is a placeholder
