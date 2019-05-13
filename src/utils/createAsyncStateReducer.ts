@@ -1,4 +1,3 @@
-import { AsyncActionBuilderConstructor } from "typesafe-actions/dist/create-async-action";
 import reduceReducer from "reduce-reducers";
 import { handleAction } from "redux-actions";
 import { PayloadAC } from "typesafe-actions";
@@ -14,14 +13,11 @@ export const createAsyncStateReducer = <
   TState extends AsyncResource<TData>
 >(
   initState: TState,
-  asyncAction: AsyncActionBuilderConstructor<
-    string,
-    string,
-    string,
-    void,
-    TData,
-    string
-  >
+  asyncAction: {
+    request: PayloadAC<string, void>;
+    success: PayloadAC<string, TData>;
+    failure: PayloadAC<string, string>;
+  }
 ) =>
   reduceReducer(
     initState,

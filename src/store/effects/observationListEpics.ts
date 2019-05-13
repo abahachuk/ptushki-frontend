@@ -1,5 +1,6 @@
+import qs from "qs";
 import { combineEpics, Epic } from "redux-observable";
-import { isActionOf } from "typesafe-actions";
+import { from, of } from "rxjs";
 import {
   catchError,
   filter,
@@ -7,16 +8,16 @@ import {
   switchMap,
   withLatestFrom
 } from "rxjs/operators";
-import { take } from "ramda";
-import { from, of } from "rxjs";
+import { isActionOf } from "typesafe-actions";
+import { ObservationsResponse } from "../../app/features/observations/models";
+import { ajaxService } from "../../services";
+import { getGridQuery } from "../../utils/grid/getGridQuery";
 import {
   observationGridActions,
   observationsData,
   verifyObservation
 } from "../actions/observationListActions";
 import { RootState } from "../index";
-import { ajaxService } from "../../services";
-import { TmpObservation } from "../reducers/observationListReducer";
 
 export const requestObservationEpic: Epic<any, any, RootState> = (
   action$,
@@ -25,16 +26,16 @@ export const requestObservationEpic: Epic<any, any, RootState> = (
   action$.pipe(
     filter(isActionOf([observationsData.request])),
     withLatestFrom(state$),
-    switchMap(([, state]) =>
-      from(ajaxService.makeCall<TmpObservation[]>("/observations")).pipe(
-        map(d =>
-          observationsData.success(
-            take(state.observationList.gridState.pagination.pageSize, d)
-          )
-        ),
+    switchMap(([, state]) => {
+      const query = qs.stringify(getGridQuery(state.observationList.gridState));
+
+      return from(
+        ajaxService.makeCall<ObservationsResponse>(`/observations?${query}`)
+      ).pipe(
+        map(d => observationsData.success(d.content)),
         catchError(e => of(observationsData.failure(e)))
-      )
-    )
+      );
+    })
   );
 
 export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
@@ -43,6 +44,7 @@ export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
       isActionOf([
         observationGridActions.setPage,
         observationGridActions.setPageSize,
+        observationGridActions.setSearch,
         observationGridActions.setSorting,
         observationGridActions.setFilters,
         verifyObservation

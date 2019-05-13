@@ -1,10 +1,11 @@
-import { namespaced } from "redux-subspace";
 import reduceReducer from "reduce-reducers";
 import { handleAction } from "redux-actions";
+import { namespaced } from "redux-subspace";
 import {
   setFilters,
   setPage,
   setPageSize,
+  setSearch,
   setSelection,
   setSorting
 } from "./dataGridActions";
@@ -23,6 +24,15 @@ export const createDataGridReducer = (
         (state, action) => ({
           ...state,
           sorting: action.payload
+        }),
+        initialState
+      ),
+
+      handleAction(
+        setSearch,
+        (state, action) => ({
+          ...state,
+          search: action.payload
         }),
         initialState
       ),
