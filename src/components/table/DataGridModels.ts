@@ -30,4 +30,5 @@ export interface DataGridState {
   pagination: PaginationState;
   filtering: FilteringRule[];
   sorting: Sorting[];
+  search: string;
 }

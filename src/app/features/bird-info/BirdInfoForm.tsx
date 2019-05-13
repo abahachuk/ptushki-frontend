@@ -1,5 +1,8 @@
-import React, { FC, Fragment } from "react";
+import React, { FC } from "react";
 import { Button } from "reactstrap";
+
+import { InfoBlock, Bird } from "../../../components/bird/Bird";
+
 import { BirdInfo } from "./BirdInfoModel";
 import { InfoContainer } from "../../../components/info-container/InfoContainer";
 import { labels } from "../../../config/i18n/labels";
@@ -9,30 +12,12 @@ import { ringingData, photos, birdData } from "./test-data";
 import "./BirdInfo.scss";
 
 const blockName = "bird-info";
-const bird = require("../../../assets/bird.svg");
 
-// TODO: remove it with integration
-interface InfoBlock {
-  title: string;
-  value: string | number;
-  className?: string;
-}
-
-// TODO: change it with integration
 interface Image {
   src: string;
   altText: string;
   id: number;
 }
-
-const InfoBlock = function({ title, value, className }: InfoBlock) {
-  return (
-    <div className={className}>
-      <p className={`${blockName}__info-title`}>{title}</p>
-      <p className={`${blockName}__info-value`}>{value}</p>
-    </div>
-  );
-};
 
 const renderImage = function({ src, altText, id }: Image) {
   return (
@@ -60,57 +45,7 @@ export const BirdInfoForm: FC<{
       <p className={`${blockName}__subtitle`}>{birdData.code}</p>
       <p className={`${blockName}__euring-title`}>{labels.birdInfo.euring}</p>
       <span className={`${blockName}__euring`}>{birdData.euring}</span>
-      <div className={`${blockName}__bird-container`}>
-        <span className={`${blockName}__dashed-line-neck`} />
-        <InfoBlock
-          title={labels.birdInfo.bird.neck}
-          value={birdData.params.neck}
-          className={`${blockName}__neck-info`}
-        />
-        <span className={`${blockName}__dashed-line-saddle`} />
-        <InfoBlock
-          title={labels.birdInfo.bird.saddle}
-          value={birdData.params.saddle}
-          className={`${blockName}__saddle-info`}
-        />
-        <span className={`${blockName}__dashed-line-right-wing`} />
-        <InfoBlock
-          title={labels.birdInfo.bird.rightWing}
-          value={birdData.params.rightWing}
-          className={`${blockName}__right-wing-info`}
-        />
-        <span className={`${blockName}__dashed-line-left-wing`} />
-        <InfoBlock
-          title={labels.birdInfo.bird.leftWing}
-          value={birdData.params.leftWing}
-          className={`${blockName}__left-wing-info`}
-        />
-        <span className={`${blockName}__dashed-line-left-knee`} />
-        <InfoBlock
-          title={labels.birdInfo.bird.rightAboveKnee}
-          value={birdData.params.rightAboveKnee}
-          className={`${blockName}__left-knee-info`}
-        />
-        <span className={`${blockName}__dashed-line-right-knee`} />
-        <InfoBlock
-          title={labels.birdInfo.bird.leftAboveKnee}
-          value={birdData.params.leftAboveKnee}
-          className={`${blockName}__right-knee-info`}
-        />
-        <span className={`${blockName}__dashed-line-right-below-knee`} />
-        <InfoBlock
-          title={labels.birdInfo.bird.rightBelowKnee}
-          value={birdData.params.rightBelowKnee}
-          className={`${blockName}__right-below-knee-info`}
-        />
-        <span className={`${blockName}__dashed-line-left-below-knee`} />
-        <InfoBlock
-          title={labels.birdInfo.bird.leftBelowKnee}
-          value={birdData.params.leftBelowKnee}
-          className={`${blockName}__left-below-knee-info`}
-        />
-        <img className={`${blockName}__bird-img`} src={bird} alt="bird" />
-      </div>
+      <Bird birdParams={birdData.params} />
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
           title={labels.birdInfo.ringingTitle}

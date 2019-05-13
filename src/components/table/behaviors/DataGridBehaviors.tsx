@@ -1,4 +1,3 @@
-import { connect } from "react-redux";
 import {
   CustomPaging,
   CustomPagingProps,
@@ -24,10 +23,12 @@ import {
   TableFixedColumnsProps,
   TableSelection
 } from "@devexpress/dx-react-grid-bootstrap4";
+import { connect } from "react-redux";
 import {
   setFilters,
   setPage,
   setPageSize,
+  setSearch,
   setSelection,
   setSorting
 } from "../dataGridActions";
@@ -101,8 +102,10 @@ export const TableColumnVisibilityConnected = connect(
 )(TableColumnVisibility);
 
 export const SearchStateConnected = connect(
-  null,
+  (state: DataGridState): SearchStateProps => ({
+    value: state.search
+  }),
   (dispatch): SearchStateProps => ({
-    onValueChange: () => null
+    onValueChange: d => dispatch(setSearch(d))
   })
 )(SearchState);

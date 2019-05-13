@@ -1,5 +1,4 @@
 import React, { FC, ReactNode } from "react";
-import { Button } from "reactstrap";
 import sn from "classnames";
 
 import "./InfoContainer.scss";
@@ -13,7 +12,12 @@ export const InfoContainer: FC<{
   renderButton?: ReactNode;
 }> = ({ title, children, className, renderButton }) => (
   <div className={sn(blockName, className)}>
-    <div className={`${blockName}__header-container`}>
+    <div
+      className={sn(
+        `${blockName}__header-container`,
+        renderButton && `${blockName}__header-container--with-btn`
+      )}
+    >
       <p className={`${blockName}__title`}>{title}</p>
       {renderButton}
     </div>

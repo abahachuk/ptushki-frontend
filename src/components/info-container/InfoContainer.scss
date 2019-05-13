@@ -10,7 +10,6 @@
 
   &__title {
     color: $mineSharf;
-    font-family: "Helvetica Neue";
     font-weight: 500;
     font-size: 16px;
     line-height: 18px;
@@ -23,5 +22,10 @@
     align-items: center;
     justify-content: space-between;
     padding-bottom: 20px;
+    align-items: stretch;
+
+    &--with-btn {
+      padding-bottom: 0;
+    }
   }
 }
