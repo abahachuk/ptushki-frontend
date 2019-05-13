@@ -66,5 +66,16 @@ export const labels = {
       leftBelowKnee: "Слева под коленом",
       rightBelowKnee: "Справа под коленом"
     }
-  }
+  },
+  observations: {
+    title: "Наблюдения"
+  },
+  species: "Вид",
+  loading: "Загрузка...",
+  of: "из",
+  verification: "Модерация",
+  idx: "#",
+  yes: "Да",
+  no: "Нет",
+  noData: "Нет данных"
 };

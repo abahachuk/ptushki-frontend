@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink as Link } from "react-router-dom";
 import {
   Collapse,
   Nav,
@@ -7,17 +8,14 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
-import { NavLink as Link } from "react-router-dom";
 import { labels } from "../../../config/i18n/labels";
 import {
-  ROUTE_SIGN_IN,
-  ROUTE_SIGN_UP,
+  ROUTE_OBSERVATIONS,
   ROUTE_USER_INFO,
   ROUTE_BIRD_INFO
 } from "../routing/routes";
-
-import "./RootNav.scss";
 import { ProtectedNavItemConnected } from "./ProtectedNavItemConnected";
+import "./RootNav.scss";
 
 const brandLogo = require("../../../assets/brand-logo.svg");
 
@@ -26,6 +24,13 @@ export const RootNav = () => (
     <NavbarBrand href="/">
       <img src={brandLogo} alt={labels.brandName} />
     </NavbarBrand>
+    <Nav navbar>
+      <NavItem>
+        <NavLink tag={Link} to={ROUTE_OBSERVATIONS.path}>
+          {labels.observations.title}
+        </NavLink>
+      </NavItem>
+    </Nav>
     <Collapse isOpen navbar>
       <Nav className="ml-auto" navbar>
         {/* TODO: should be moved to observation list item */}
@@ -34,12 +39,6 @@ export const RootNav = () => (
             Информация о птице
           </NavLink>
         </NavItem>
-        <ProtectedNavItemConnected {...ROUTE_SIGN_UP}>
-          {labels.signUp.title}
-        </ProtectedNavItemConnected>
-        <ProtectedNavItemConnected {...ROUTE_SIGN_IN}>
-          {labels.signIn.title}
-        </ProtectedNavItemConnected>
         <ProtectedNavItemConnected {...ROUTE_USER_INFO}>
           <img
             src="http://i.pravatar.cc/60" // TODO this is a placeholder

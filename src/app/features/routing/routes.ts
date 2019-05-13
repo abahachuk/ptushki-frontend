@@ -31,3 +31,9 @@ export const ROUTE_BIRD_INFO: RouteDescription = {
   permissions: [UNAUTHORIZED],
   fallback: "/"
 };
+
+export const ROUTE_OBSERVATIONS: RouteDescription = {
+  path: "/observations/",
+  permissions: [OBSERVER],
+  fallback: "/"
+};

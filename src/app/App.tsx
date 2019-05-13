@@ -1,13 +1,14 @@
 import React, { FC } from "react";
-import { Route, Switch } from "react-router";
+import { Redirect, Route, Switch } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
 
 import useMount from "react-use/esm/useMount";
 import { history } from "./features/routing/history";
 import {
+  ROUTE_OBSERVATIONS,
+  ROUTE_RESET_PASSWORD,
   ROUTE_SIGN_IN,
   ROUTE_SIGN_UP,
-  ROUTE_RESET_PASSWORD,
   ROUTE_BIRD_INFO
 } from "./features/routing/routes";
 import { RootNav } from "./features/nav/RootNav";
@@ -16,19 +17,25 @@ import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected"
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 import { ProtectedRouteConnected } from "./features/routing/ProtectedRouteConnected";
 import { BirdInfoForm } from "./features/bird-info/BirdInfoConnected";
+import { ObservationsPage } from "./features/observations/ObservationsPage";
+import { UserInfo } from "./features/auth/models";
 
 export const App: FC<{
   getUser: () => void;
-}> = ({ getUser }) => {
+  user: UserInfo;
+  isLoaded: boolean;
+}> = ({ getUser, user, isLoaded }) => {
   useMount(getUser);
+
+  if (!isLoaded) return null;
 
   return (
     <ConnectedRouter history={history}>
-      <RootNav />
+      {user && <RootNav />}
 
       <Switch>
         <Route exact path="/">
-          [Landing here]
+          {user ? <div /> : <Redirect to={ROUTE_SIGN_IN.path} />}
         </Route>
 
         <ProtectedRouteConnected
@@ -51,6 +58,11 @@ export const App: FC<{
           exact
           {...ROUTE_RESET_PASSWORD}
           component={ResetPasswordFormConnected}
+        />
+        <ProtectedRouteConnected
+          exact
+          {...ROUTE_OBSERVATIONS}
+          component={ObservationsPage}
         />
       </Switch>
     </ConnectedRouter>
