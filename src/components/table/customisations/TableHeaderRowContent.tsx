@@ -4,7 +4,9 @@ import { ColumnFilterButtonConnected } from "./ColumnFilterToggleButton";
 
 export const TableHeaderRowContent: FC<TableHeaderRow.ContentProps> = p => (
   <TableHeaderRow.Content {...p}>
-    {p.children}
-    <ColumnFilterButtonConnected column={p.column} />
+    <div className="d-flex align-items-center flex-grow-1 justify-content-between">
+      {p.children}
+      <ColumnFilterButtonConnected column={p.column} />
+    </div>
   </TableHeaderRow.Content>
 );

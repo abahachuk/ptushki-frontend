@@ -5,11 +5,14 @@ import React, { FC } from "react";
 export const SortingLabel: FC<TableHeaderRow.SortLabelProps> = p => (
   // there is no nice way to handle sort label clicks and make eslint feel good
   // eslint-disable-next-line
-  <div onClick={() => p.onSort({ keepOther: false })}>
-    <div>
-      <span style={{ lineHeight: 1.8 }}>{p.column.title}</span>
-      {p.direction === "asc" && <ArrowDropDown />}
-      {p.direction === "desc" && <ArrowDropUp />}
-    </div>
+  <div
+    onClick={() => p.onSort({ keepOther: false })}
+    className="d-flex align-items-center"
+  >
+    <span style={{ whiteSpace: "normal", lineHeight: 1 }}>
+      {p.column.title}
+    </span>
+    {p.direction === "asc" && <ArrowDropDown />}
+    {p.direction === "desc" && <ArrowDropUp />}
   </div>
 );

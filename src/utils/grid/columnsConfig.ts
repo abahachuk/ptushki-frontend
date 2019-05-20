@@ -14,9 +14,9 @@ export const defaultColumnWidths: { [key in GridColumn]: number } = {
   id: 100,
   verified: 180,
   sex: 100,
-  ring: 180,
+  ring: 220,
   species: 200,
-  status: 300,
+  status: 170,
   condition: 300
 };
 
