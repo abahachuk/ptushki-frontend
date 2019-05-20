@@ -1,3 +1,4 @@
+import { Column, IntegratedSelection } from "@devexpress/dx-react-grid";
 import {
   ColumnChooser,
   DragDropProvider,
@@ -12,21 +13,13 @@ import {
   Toolbar
 } from "@devexpress/dx-react-grid-bootstrap4";
 import React from "react";
-import { Column, IntegratedSelection } from "@devexpress/dx-react-grid";
 import useToggle from "react-use/esm/useToggle";
-import { FillLoader } from "../loader/FillLoader";
-import {
-  SelectorColumn,
-  SelectorColumnHeader
-} from "./customisations/SelectorColumn";
-import { ColumnChooserItem } from "./customisations/ColumnChooser";
-import { ColumnFilterToggleButton } from "./customisations/ColumnFilterToggleButton";
 import { labels } from "../../config/i18n/labels";
 import {
   BreakOutOfSubspace,
   SubspaceProviderHacked
 } from "../../utils/subspace/SubspaceProviderHacked";
-import { DataGridState } from "./DataGridModels";
+import { FillLoader } from "../loader/FillLoader";
 import {
   CustomPagingConnected,
   FilteringStateConnected,
@@ -39,6 +32,21 @@ import {
   TableColumnVisibilityConnected,
   TableFixedColumnsConnected
 } from "./behaviors/DataGridBehaviors";
+import {
+  ColumnChooserButton,
+  ColumnChooserItem
+} from "./customisations/ColumnChooser";
+import { PagingPanelContentConnected } from "./customisations/PagingPanelContent";
+import { SearchPanelInput } from "./customisations/SearchPanelInput";
+import {
+  SelectorColumn,
+  SelectorColumnHeader
+} from "./customisations/SelectorColumn";
+import { SortingLabel } from "./customisations/SortingLabel";
+import { TableComponent } from "./customisations/TableComponent";
+import { TableHeaderRowContent } from "./customisations/TableHeaderRowContent";
+import { ToolbarComponent } from "./customisations/ToolbarComponent";
+import { DataGridState } from "./DataGridModels";
 
 export interface DataGridCol<TRow extends {}> extends Column {
   // make required and override with TRow generic for type safety
@@ -90,17 +98,13 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
 
           <CustomPagingConnected />
           <IntegratedSelection />
-          <Table messages={TABLE_LABELS} />
+          <Table messages={TABLE_LABELS} tableComponent={TableComponent} />
 
           <TableColumnResizingConnected />
           <TableHeaderRow
             showSortingControls
-            contentComponent={p => (
-              <TableHeaderRow.Content {...p}>
-                {p.children}
-                <ColumnFilterToggleButton onToggle={() => toggleFilterRow()} />
-              </TableHeaderRow.Content>
-            )}
+            sortLabelComponent={SortingLabel}
+            contentComponent={TableHeaderRowContent}
           />
           {filterRowVisible && <TableFilterRow />}
 
@@ -109,14 +113,20 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
             cellComponent={SelectorColumn}
             headerCellComponent={SelectorColumnHeader}
           />
-          <PagingPanel pageSizes={DEFAULT_PAGE_SIZES} />
+          <PagingPanel
+            pageSizes={DEFAULT_PAGE_SIZES}
+            containerComponent={PagingPanelContentConnected}
+          />
 
           <TableColumnReorderingConnected />
           <TableFixedColumnsConnected />
           <TableColumnVisibilityConnected />
-          <Toolbar />
-          <SearchPanel />
-          <ColumnChooser itemComponent={ColumnChooserItem} />
+          <Toolbar rootComponent={ToolbarComponent} />
+          <SearchPanel inputComponent={SearchPanelInput} />
+          <ColumnChooser
+            itemComponent={ColumnChooserItem}
+            toggleButtonComponent={ColumnChooserButton}
+          />
         </Grid>
         {isLoading && <FillLoader />}
       </div>

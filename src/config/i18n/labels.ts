@@ -56,5 +56,10 @@ export const labels = {
   idx: "#",
   yes: "Да",
   no: "Нет",
-  noData: "Нет данных"
+  noData: "Нет данных",
+  filter: "Фильтр",
+  search: "Поиск",
+  show: "Показать",
+  ofBirds: "птиц",
+  columns: "Колонки"
 };
