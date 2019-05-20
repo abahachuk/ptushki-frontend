@@ -58,6 +58,7 @@ export const labels = {
   no: "Нет",
   noData: "Нет данных",
   filter: "Фильтр",
+  clearFilters: "Сбросить фильтры",
   search: "Поиск",
   show: "Показать",
   ofBirds: "птиц",

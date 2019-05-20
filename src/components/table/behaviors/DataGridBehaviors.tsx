@@ -5,8 +5,6 @@ import {
   FilteringStateProps,
   PagingState,
   PagingStateProps,
-  SearchState,
-  SearchStateProps,
   SelectionState,
   SelectionStateProps,
   SortingState,
@@ -28,7 +26,6 @@ import {
   setFilters,
   setPage,
   setPageSize,
-  setSearch,
   setSelection,
   setSorting
 } from "../dataGridActions";
@@ -100,12 +97,3 @@ export const TableColumnVisibilityConnected = connect(
     defaultHiddenColumnNames: state.hiddenColumns
   })
 )(TableColumnVisibility);
-
-export const SearchStateConnected = connect(
-  (state: DataGridState): SearchStateProps => ({
-    value: state.search
-  }),
-  (dispatch): SearchStateProps => ({
-    onValueChange: d => dispatch(setSearch(d))
-  })
-)(SearchState);
