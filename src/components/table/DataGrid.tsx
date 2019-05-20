@@ -42,7 +42,7 @@ import {
 import { SortingLabel } from "./customisations/SortingLabel";
 import { TableComponent } from "./customisations/TableComponent";
 import { TableHeaderRowContent } from "./customisations/TableHeaderRowContent";
-import { ToolbarComponent } from "./customisations/ToolbarComponent";
+import { ToolbarConnected } from "./customisations/ToolbarComponent";
 import { DataGridState } from "./DataGridModels";
 
 export interface DataGridCol<TRow extends {}> extends Column {
@@ -117,7 +117,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           <TableColumnReorderingConnected />
           <TableFixedColumnsConnected />
           <TableColumnVisibilityConnected />
-          <Toolbar rootComponent={ToolbarComponent} />
+          <Toolbar rootComponent={ToolbarConnected} />
           <ColumnChooser
             itemComponent={ColumnChooserItem}
             toggleButtonComponent={ColumnChooserButton}
