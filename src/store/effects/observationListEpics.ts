@@ -13,6 +13,7 @@ import { ObservationsResponse } from "../../app/features/observations/models";
 import { OBSERVATIONS_ENDPOINT } from "../../config/endpoints";
 import { ajaxService } from "../../services";
 import { getGridQuery } from "../../utils/grid/getGridQuery";
+import { selectLocale } from "../actions/userPreferencesActions";
 import {
   observationGridActions,
   observationsData,
@@ -28,7 +29,10 @@ export const requestObservationEpic: Epic<any, any, RootState> = (
     filter(isActionOf([observationsData.request])),
     withLatestFrom(state$),
     switchMap(([, state]) => {
-      const query = qs.stringify(getGridQuery(state.observationList.gridState));
+      const query = qs.stringify({
+        ...getGridQuery(state.observationList.gridState),
+        lang: state.userPreferences.selectedLocale
+      });
 
       return from(
         ajaxService.makeCall<ObservationsResponse>(
@@ -50,6 +54,7 @@ export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
         observationGridActions.setSearch,
         observationGridActions.setSorting,
         observationGridActions.setFilters,
+        selectLocale,
         verifyObservation
       ])
     ),

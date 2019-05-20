@@ -53,7 +53,8 @@ export const labels = {
     euRingAndTitle: "EURing + Название"
   },
   lang: {
-    rus: "Рус"
+    rus: "Рус",
+    eng: "Eng"
   },
   species: "Вид",
   sex: "Пол",
