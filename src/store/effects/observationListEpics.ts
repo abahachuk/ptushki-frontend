@@ -10,6 +10,7 @@ import {
 } from "rxjs/operators";
 import { isActionOf } from "typesafe-actions";
 import { ObservationsResponse } from "../../app/features/observations/models";
+import { OBSERVATIONS_ENDPOINT } from "../../config/endpoints";
 import { ajaxService } from "../../services";
 import { getGridQuery } from "../../utils/grid/getGridQuery";
 import {
@@ -30,7 +31,9 @@ export const requestObservationEpic: Epic<any, any, RootState> = (
       const query = qs.stringify(getGridQuery(state.observationList.gridState));
 
       return from(
-        ajaxService.makeCall<ObservationsResponse>(`/observations?${query}`)
+        ajaxService.makeCall<ObservationsResponse>(
+          `${OBSERVATIONS_ENDPOINT}?${query}`
+        )
       ).pipe(
         map(d => observationsData.success(d.content)),
         catchError(e => of(observationsData.failure(e)))
