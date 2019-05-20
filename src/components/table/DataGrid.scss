@@ -11,7 +11,6 @@ $fixed-part-shadow-width: 10px;
   background-color: inherit !important;
 
   // for :after to be visible.
-  // TODO this could cause problems with text elipsis in last fixed column. fix if needed
   overflow: visible;
 
   &::after {
