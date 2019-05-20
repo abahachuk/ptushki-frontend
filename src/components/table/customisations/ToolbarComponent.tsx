@@ -5,6 +5,8 @@ import { Button } from "reactstrap";
 import { labels } from "../../../config/i18n/labels";
 import { setFilters } from "../dataGridActions";
 import { DataGridState } from "../DataGridModels";
+import { LangSelector } from "./LangSelector";
+import { ViewModeSelector } from "./ViewModeSelector";
 
 interface Props extends Toolbar.RootProps, DispatchProp {
   enabledFilters: any[];
@@ -26,6 +28,8 @@ export const ToolbarComponent: FC<Props> = ({
     )}
     {/* behaviors provided by grid component */}
     {p.children}
+    <ViewModeSelector />
+    <LangSelector />
   </div>
 );
 

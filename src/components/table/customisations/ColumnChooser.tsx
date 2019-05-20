@@ -1,22 +1,15 @@
 import { ColumnChooser as ColumnChooserBase } from "@devexpress/dx-react-grid";
-import { ArrowDropDown } from "@material-ui/icons";
 import React, { FC } from "react";
-import { Button } from "reactstrap";
 import { labels } from "../../../config/i18n/labels";
 import { BaseCheckbox } from "../../checkbox/BaseCheckbox";
+import { GridSettingsDropdownButton } from "../../gridSettingsDropdownButton/GridSettingsDropdownButton";
 
 export const ColumnChooserButton: FC<
   ColumnChooserBase.ToggleButtonProps
 > = p => (
-  <Button
-    outline
-    size="sm"
-    onClick={p.onToggle}
-    className="my-2 btn border-0 d-flex align-items-center text-dark bg-transparent shadow-none"
-  >
-    <span ref={p.buttonRef}>{labels.columns}</span>
-    <ArrowDropDown className="pl-1" />
-  </Button>
+  <GridSettingsDropdownButton onClick={p.onToggle} innerRef={p.buttonRef}>
+    <span>{labels.columns}</span>
+  </GridSettingsDropdownButton>
 );
 
 export const ColumnChooserItem: FC<ColumnChooserBase.ItemProps> = p => (

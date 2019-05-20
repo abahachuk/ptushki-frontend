@@ -49,6 +49,12 @@ export const labels = {
   observations: {
     title: "Наблюдения"
   },
+  viewMode: {
+    euRingAndTitle: "EURing + Название"
+  },
+  lang: {
+    rus: "Рус"
+  },
   species: "Вид",
   sex: "Пол",
   generalIdentificationMethod: "Основной метод идентификации",
