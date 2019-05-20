@@ -28,6 +28,7 @@ export const ToolbarComponent: FC<Props> = ({
     )}
     {/* behaviors provided by grid component */}
     {p.children}
+    {/* custom behaviors provided by us */}
     <ViewModeSelector />
     <LangSelector />
   </div>
