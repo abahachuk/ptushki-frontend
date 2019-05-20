@@ -19,26 +19,26 @@ export const VerificationCell = connect()(
     // TODO update api and wire up
     <>
       {!observation.verified ? (
-        <IconButton className="p-0 mx-1 text-primary" disableRipple>
+        <IconButton className="p-0 mr-2 text-primary" disableRipple>
           <RadioButtonChecked />
         </IconButton>
       ) : (
-        <IconButton className="p-0 mx-1" disableRipple>
+        <IconButton className="p-0 mr-2" disableRipple>
           <RadioButtonUnchecked />
         </IconButton>
       )}
 
-      <IconButton className="p-0 mx-1" disableRipple>
+      <IconButton className="p-0 mr-2" disableRipple>
         <Clear />
       </IconButton>
-      <IconButton className="p-0 mx-1 text-danger" disableRipple>
+      <IconButton className="p-0 mr-2 text-danger" disableRipple>
         <AddCircle style={{ transform: "rotate(45deg)" }} />
       </IconButton>
 
-      <IconButton className="p-0 mx-1 text-success" disableRipple>
+      <IconButton className="p-0 mr-2 text-success" disableRipple>
         <CheckCircle />
       </IconButton>
-      <IconButton className="p-0 mx-1" disableRipple>
+      <IconButton className="p-0 mr-2" disableRipple>
         <Check />
       </IconButton>
     </>
