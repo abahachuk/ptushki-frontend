@@ -27,6 +27,11 @@ $fixed-part-shadow-width: 10px;
   }
 }
 
+.table-cell-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .dx-g-bs4-table-container {
   box-shadow: rgba(0, 0, 0, 0.08) 0 0 20px;
   //font-size: 14px;

@@ -6,13 +6,11 @@ import {
   GridProps,
   PagingPanel,
   Table,
-  TableFilterRow,
   TableHeaderRow,
   TableSelection,
   Toolbar
 } from "@devexpress/dx-react-grid-bootstrap4";
 import React from "react";
-import useToggle from "react-use/esm/useToggle";
 import { labels } from "../../config/i18n/labels";
 import {
   BreakOutOfSubspace,
@@ -69,8 +67,6 @@ const TABLE_LABELS = {
 export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
   const { namespace, gridStateSelector, isLoading, ...gridProps } = props;
 
-  const [filterRowVisible, toggleFilterRow] = useToggle(false);
-
   return (
     <SubspaceProviderHacked namespace={namespace} mapState={gridStateSelector}>
       <div className="position-relative">
@@ -80,7 +76,9 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
             ...col,
             getCellValue: (...args) => (
               <BreakOutOfSubspace>
-                {col.getCellValue(...args)}
+                <div className="table-cell-value">
+                  {col.getCellValue(...args)}
+                </div>
               </BreakOutOfSubspace>
             )
           }))}
@@ -102,7 +100,6 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
             sortLabelComponent={SortingLabel}
             contentComponent={TableHeaderRowContent}
           />
-          {filterRowVisible && <TableFilterRow />}
 
           <TableSelection
             showSelectAll
