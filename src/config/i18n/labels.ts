@@ -50,6 +50,10 @@ export const labels = {
     title: "Наблюдения"
   },
   species: "Вид",
+  sex: "Пол",
+  generalIdentificationMethod: "Основной метод идентификации",
+  status: "Статус",
+  condition: "Состояние",
   loading: "Загрузка...",
   of: "из",
   verification: "Модерация",
