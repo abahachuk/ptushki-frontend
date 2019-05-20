@@ -17,6 +17,7 @@ import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetP
 import { ProtectedRouteConnected } from "./features/routing/ProtectedRouteConnected";
 import { ObservationsPage } from "./features/observations/ObservationsPage";
 import { UserInfo } from "./features/auth/models";
+import { Footer } from "../components/footer/Footer";
 
 export const App: FC<{
   getUser: () => void;
@@ -33,7 +34,7 @@ export const App: FC<{
 
       <Switch>
         <Route exact path="/">
-          {user ? <div /> : <Redirect to={ROUTE_SIGN_IN.path} />}
+          <Redirect to={user ? ROUTE_OBSERVATIONS.path : ROUTE_SIGN_IN.path} />
         </Route>
 
         <ProtectedRouteConnected
@@ -57,6 +58,8 @@ export const App: FC<{
           component={ObservationsPage}
         />
       </Switch>
+
+      {user && <Footer />}
     </ConnectedRouter>
   );
 };

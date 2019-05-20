@@ -5,17 +5,22 @@
 html {
   width: 100%;
   height: 100%;
+  background-color: $dark-blue;
 }
 
 body {
   width: 100%;
   height: 100%;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  max-width: 1280px;
+  background-color: transparent;
+  display: flex;
+  align-items: stretch;
 }
 
 code {
@@ -30,6 +35,8 @@ label {
   display: flex;
   flex-direction: column;
   height: 100%;
+  justify-content: stretch;
+  width: 100%;
 }
 
 .container {
