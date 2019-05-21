@@ -56,5 +56,6 @@ export const labels = {
   idx: "#",
   yes: "Да",
   no: "Нет",
-  noData: "Нет данных"
+  noData: "Нет данных",
+  copyright: "© 2019 Ptushki. Все права защищены."
 };
