@@ -1,6 +1,8 @@
-import reduceReducer from "reduce-reducers";
 import combineSectionReducers from "combine-section-reducers";
-import { observationsData } from "../actions/observationListActions";
+import reduceReducer from "reduce-reducers";
+import { OBSERVATIONS_LIST_NAMESPACE } from "../../app/features/observations/conf";
+import { DataGridState } from "../../components/table/DataGridModels";
+import { createDataGridReducer } from "../../components/table/dataGridReducer";
 import {
   AsyncResource,
   createAsyncStateReducer
@@ -10,9 +12,7 @@ import {
   getFixedColumns,
   GridColumn
 } from "../../utils/grid/columnsConfig";
-import { OBSERVATIONS_LIST_NAMESPACE } from "../../app/features/observations/conf";
-import { createDataGridReducer } from "../../components/table/dataGridReducer";
-import { DataGridState } from "../../components/table/DataGridModels";
+import { observationsData } from "../actions/observationListActions";
 
 export interface TmpObservation {
   id: string;
@@ -23,9 +23,12 @@ export interface TmpObservation {
 
 const OBSERVATION_GRID_COLUMNS = [
   GridColumn.id,
+  GridColumn.species,
   GridColumn.verified,
-  GridColumn.firstName,
-  GridColumn.lastName
+  GridColumn.sex,
+  GridColumn.ring,
+  GridColumn.status,
+  GridColumn.condition
 ];
 
 const initialState = {

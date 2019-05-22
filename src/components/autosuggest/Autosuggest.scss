@@ -1,0 +1,61 @@
+@import '../../styles/variables';
+
+.autosuggest {
+  &__menu-container {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  &__menu {
+    max-height: 200px;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  &__search-container {
+    padding: 6px 10px;
+    box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.2);
+  }
+
+  &__input-field {
+    color: $dustyGray;
+    font-size: 12px;
+    height: 26px;
+  }
+
+  &__dropdown {
+    width: 100%;
+    text-align: left;
+    color: $dustyGray;
+    border: 1px solid $ghost;
+
+    &--value {
+      color: $trout;
+    }
+
+    &:hover {
+      background-color: $white;
+      color: $trout;
+      border-color: $scooter;
+    }
+
+    &:focus {
+      color: $trout;
+      border-color: $scooter;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(49, 176, 213, 0.25);
+    }
+
+    .btn-outline-secondary:active {
+      background-color: $white;
+      color: $trout;
+      border-color: $scooter;
+      box-shadow: 0 0 0 0.2rem rgba(49, 176, 213, 0.25);
+    }
+  }
+
+  &__item {
+    font-size: 12px;
+    color: $mineShaft;
+  }
+}
