@@ -13,12 +13,12 @@ import { ObservationsResponse } from "../../app/features/observations/models";
 import { OBSERVATIONS_ENDPOINT } from "../../config/endpoints";
 import { ajaxService } from "../../services";
 import { getGridQuery } from "../../utils/grid/getGridQuery";
-import { selectLocale } from "../actions/userPreferencesActions";
 import {
   observationGridActions,
   observationsData,
   verifyObservation
 } from "../actions/observationListActions";
+import { selectLocale } from "../actions/userPreferencesActions";
 import { RootState } from "../index";
 
 export const requestObservationEpic: Epic<any, any, RootState> = (
@@ -61,7 +61,35 @@ export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
     map(() => observationsData.request())
   );
 
+export const resetPaginationEpic: Epic<any, any, RootState> = action$ =>
+  action$.pipe(
+    filter(
+      isActionOf([
+        observationGridActions.setSearch,
+        observationGridActions.setSorting,
+        observationGridActions.setFilters
+      ])
+    ),
+    map(() => observationGridActions.setPage(0))
+  );
+
+export const resetSelectionEpic: Epic<any, any, RootState> = action$ =>
+  action$.pipe(
+    filter(
+      isActionOf([
+        observationGridActions.setSearch,
+        observationGridActions.setSorting,
+        observationGridActions.setPage,
+        observationGridActions.setPageSize,
+        observationGridActions.setFilters
+      ])
+    ),
+    map(() => observationGridActions.setSelection([]))
+  );
+
 export const observationListEpic = combineEpics(
   requestObservationEpic,
-  reRequestOnGridActionsEpic
+  reRequestOnGridActionsEpic,
+  resetPaginationEpic,
+  resetSelectionEpic
 );
