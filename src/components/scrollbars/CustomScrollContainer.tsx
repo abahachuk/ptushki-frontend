@@ -5,15 +5,18 @@ import "./CustomScrollContainer.scss";
 
 type ScrollbarsProps = ComponentProps<typeof Scrollbars>;
 
-const ScrollTrack: ScrollbarsProps["renderTrackHorizontal"] = p => (
-  <div {...p} className={classNames(p.className, "custom-scroll-track")} />
-);
+const ScrollTrack: ScrollbarsProps["renderTrackHorizontal"] = props => {
+  const { className } = props;
+  return (
+    <div {...props} className={classNames(className, "custom-scroll-track")} />
+  );
+};
 
-export const CustomScrollContainer: FC<ScrollbarsProps> = p => (
+export const CustomScrollContainer: FC<ScrollbarsProps> = props => (
   <Scrollbars
     autoHeight
     autoHeightMax={Number.MAX_SAFE_INTEGER}
-    {...p}
+    {...props}
     renderThumbHorizontal={ScrollTrack}
     renderThumbVertical={ScrollTrack}
   />

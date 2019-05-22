@@ -2,17 +2,19 @@ import { TableHeaderRow } from "@devexpress/dx-react-grid-bootstrap4";
 import { ArrowDropDown, ArrowDropUp } from "@material-ui/icons";
 import React, { FC } from "react";
 
-export const SortingLabel: FC<TableHeaderRow.SortLabelProps> = p => (
+export const SortingLabel: FC<TableHeaderRow.SortLabelProps> = ({
+  onSort,
+  column,
+  direction
+}) => (
   // there is no nice way to handle sort label clicks and make eslint feel good
   // eslint-disable-next-line
   <div
-    onClick={() => p.onSort({ keepOther: false })}
+    onClick={() => onSort({ keepOther: false })}
     className="d-flex align-items-center"
   >
-    <span style={{ whiteSpace: "normal", lineHeight: 1 }}>
-      {p.column.title}
-    </span>
-    {p.direction === "asc" && <ArrowDropDown />}
-    {p.direction === "desc" && <ArrowDropUp />}
+    <span style={{ whiteSpace: "normal", lineHeight: 1 }}>{column.title}</span>
+    {direction === "asc" && <ArrowDropDown />}
+    {direction === "desc" && <ArrowDropUp />}
   </div>
 );

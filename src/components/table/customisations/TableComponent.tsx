@@ -3,12 +3,12 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { CustomScrollContainer } from "../../scrollbars/CustomScrollContainer";
 
-export const TableComponent: FC<TableProps> = p => (
+export const TableComponent: FC<TableProps> = props => (
   <CustomScrollContainer>
     <Table.Table
-      {...p}
+      {...props}
       className={classNames(
-        (p as any).className,
+        (props as any).className,
         "table-striped table-borderless"
       )}
     />

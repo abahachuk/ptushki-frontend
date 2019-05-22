@@ -18,13 +18,13 @@ export const VerificationCell = connect()(
   }: DispatchProp & { observation: TmpObservation }) => (
     // TODO update api and wire up
     <>
-      {!observation.verified ? (
-        <IconButton className="p-0 mr-2 text-primary" disableRipple>
-          <RadioButtonChecked />
-        </IconButton>
-      ) : (
+      {observation.verified ? (
         <IconButton className="p-0 mr-2" disableRipple>
           <RadioButtonUnchecked />
+        </IconButton>
+      ) : (
+        <IconButton className="p-0 mr-2 text-primary" disableRipple>
+          <RadioButtonChecked />
         </IconButton>
       )}
 
