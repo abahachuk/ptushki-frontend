@@ -6,6 +6,9 @@ import { ObservationListConnected } from "./ObservationList";
 export const ObservationsPage = () => {
   return (
     <div style={{ backgroundColor: "white", flexGrow: 1 }} className="p-5">
+      <div>
+        <h1>{labels.observations.title}</h1>
+      </div>
       <ObservationListConnected />
     </div>
   );
