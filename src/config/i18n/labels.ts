@@ -68,6 +68,7 @@ export const labels = {
   yes: "Да",
   no: "Нет",
   noData: "Нет данных",
+  copyright: "© 2019 Ptushki. Все права защищены.",
   filter: "Фильтр",
   clearFilters: "Сбросить фильтры",
   search: "Поиск",
