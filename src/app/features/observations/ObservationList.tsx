@@ -2,14 +2,14 @@ import React, { FC } from "react";
 import { connect, DispatchProp } from "react-redux";
 import useMount from "react-use/esm/useMount";
 import { DataGrid, DataGridCol } from "../../../components/table/DataGrid";
-import { RootState } from "../../../store";
-import { TmpObservation } from "../../../store/reducers/observationListReducer";
-import { observationsData } from "../../../store/actions/observationListActions";
-import { AsyncResource } from "../../../utils/createAsyncStateReducer";
-import { VerificationCell } from "./cells/VerificationCell";
 import { labels } from "../../../config/i18n/labels";
-import { IndexCell } from "./cells/IndexCell";
+import { RootState } from "../../../store";
+import { observationsData } from "../../../store/actions/observationListActions";
+import { TmpObservation } from "../../../store/reducers/observationListReducer";
+import { AsyncResource } from "../../../utils/createAsyncStateReducer";
 import { GridColumn } from "../../../utils/grid/columnsConfig";
+import { IndexCell } from "./cells/IndexCell";
+import { VerificationCell } from "./cells/VerificationCell";
 import { OBSERVATIONS_LIST_NAMESPACE } from "./conf";
 
 interface ObservationListProps extends DispatchProp {
@@ -19,16 +19,31 @@ interface ObservationListProps extends DispatchProp {
 const OBSERVATION_LIST_COLUMNS: DataGridCol<TmpObservation>[] = [
   { name: GridColumn.id, title: labels.idx, getCellValue: IndexCell },
   {
+    name: GridColumn.species,
+    title: labels.species,
+    getCellValue: r => r.colorRing
+  },
+  {
     name: GridColumn.verified,
     title: labels.verification,
     getCellValue: r => <VerificationCell observation={r} />
   },
   {
-    name: "firstName",
-    title: "Вид",
-    getCellValue: r => r.colorRing
+    name: GridColumn.sex,
+    title: labels.sex,
+    getCellValue: () => null
   },
-  { name: "lastName", title: "Статус", getCellValue: r => r.note }
+  {
+    name: GridColumn.ring,
+    title: labels.generalIdentificationMethod,
+    getCellValue: () => null
+  },
+  { name: GridColumn.status, title: labels.status, getCellValue: r => r.note },
+  {
+    name: GridColumn.condition,
+    title: labels.condition,
+    getCellValue: r => r.note
+  }
 ];
 
 export const ObservationList: FC<ObservationListProps> = ({

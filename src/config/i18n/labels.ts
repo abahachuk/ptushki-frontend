@@ -49,7 +49,18 @@ export const labels = {
   observations: {
     title: "Наблюдения"
   },
+  viewMode: {
+    euRingAndTitle: "EURing + Название"
+  },
+  lang: {
+    rus: "Рус",
+    eng: "Eng"
+  },
   species: "Вид",
+  sex: "Пол",
+  generalIdentificationMethod: "Основной метод идентификации",
+  status: "Статус",
+  condition: "Состояние",
   loading: "Загрузка...",
   of: "из",
   verification: "Модерация",
@@ -57,5 +68,11 @@ export const labels = {
   yes: "Да",
   no: "Нет",
   noData: "Нет данных",
-  copyright: "© 2019 Ptushki. Все права защищены."
+  copyright: "© 2019 Ptushki. Все права защищены.",
+  filter: "Фильтр",
+  clearFilters: "Сбросить фильтры",
+  search: "Поиск",
+  show: "Показать",
+  ofBirds: "птиц",
+  columns: "Колонки"
 };

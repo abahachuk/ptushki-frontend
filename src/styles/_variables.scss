@@ -1,9 +1,23 @@
 $primary: #31b0d5;
-$white: #FFFFFF;
+$white: #ffffff;
 $black: #000000;
-$light-blue: #E1FFFF;
-$dark-blue: #546E7A;
+$lighter-blue: #d7e3e9;
+$light-blue: #e1ffff;
+$dark-blue: #546e7a;
+$darker-blue: #0f303f;
 $trout: #484857;
+$gray-lighter: #f7f7f7;
+$orange: #f9b166;
+
+$table-bg: $white;
+$table-accent-bg: darken($table-bg, 5%);
+$table-cell-padding: 0.15rem 1rem;
+
+$pagination-color: $black;
+$pagination-active-bg: $orange;
+$pagination-active-border-color: $orange;
+$pagination-focus-box-shadow: $orange;
+$pagination-hover-color: $orange;
 
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
