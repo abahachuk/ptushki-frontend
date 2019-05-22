@@ -1,14 +1,16 @@
 @import "~@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css";
 @import "~open-iconic/font/css/open-iconic-bootstrap.css";
 @import "~open-iconic/font/css/open-iconic.css";
+@import "../../styles/variables";
 
 $fixed-part-shadow-width: 10px;
 
 .dx-g-bs4-fixed-cell {
+  // override badly written grid styles
   border-right: none !important;
+  background-color: inherit !important;
 
   // for :after to be visible.
-  // TODO this could cause problems with text elipsis in last fixed column. fix if needed
   overflow: visible;
 
   &::after {
@@ -24,17 +26,32 @@ $fixed-part-shadow-width: 10px;
   }
 }
 
+.table-cell-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .dx-g-bs4-table-container {
   box-shadow: rgba(0, 0, 0, 0.08) 0 0 20px;
+  //font-size: 14px;
 
   .dx-g-bs4-table {
     thead th {
       border-bottom: none;
+      background-color: $lighter-blue !important;
+      color: $darker-blue;
+      height: 48px;
+      vertical-align: middle;
+      //font-size: 13px;
     }
 
     thead tr:first-child th {
       border-top: none;
     }
+  }
+
+  tbody tr {
+    background-color: $table-bg;
   }
 }
 
@@ -44,4 +61,10 @@ $fixed-part-shadow-width: 10px;
   border: none;
   padding-left: 0;
   padding-right: 0;
+}
+
+.dx-g-bs4-paging-panel {
+  .pagination {
+    margin-left: 2em !important; // override m-0 class set by grid
+  }
 }

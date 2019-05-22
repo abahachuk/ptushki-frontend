@@ -1,45 +1,46 @@
+import { IconButton } from "@material-ui/core";
+import {
+  AddCircle,
+  Check,
+  CheckCircle,
+  Clear,
+  RadioButtonChecked,
+  RadioButtonUnchecked
+} from "@material-ui/icons";
 import React from "react";
-import { Clear, Done } from "@material-ui/icons";
-import { Button, ButtonGroup } from "reactstrap";
 import { connect, DispatchProp } from "react-redux";
 import { TmpObservation } from "../../../../store/reducers/observationListReducer";
-import { labels } from "../../../../config/i18n/labels";
-import { verifyObservation } from "../../../../store/actions/observationListActions";
 
 export const VerificationCell = connect()(
-  ({ dispatch, observation }: DispatchProp & { observation: TmpObservation }) =>
-    observation.verified ? (
-      <span>{labels.yes}</span>
-    ) : (
-      <>
-        <span className="pr-3">{labels.no}</span>
-        <ButtonGroup size="sm" className="m-n2">
-          <Button
-            outline
-            color="success"
-            className="border-0 border-light border-right"
-            onClick={() =>
-              dispatch(
-                verifyObservation({ id: observation.id, approved: true })
-              )
-            }
-          >
-            <Done />
-          </Button>
-          <div className="border-right" />
-          <Button
-            outline
-            color="danger"
-            className="border-0"
-            onClick={() =>
-              dispatch(
-                verifyObservation({ id: observation.id, approved: false })
-              )
-            }
-          >
-            <Clear />
-          </Button>
-        </ButtonGroup>
-      </>
-    )
+  ({
+    dispatch,
+    observation
+  }: DispatchProp & { observation: TmpObservation }) => (
+    // TODO update api and wire up
+    <>
+      {observation.verified ? (
+        <IconButton className="p-0 mr-2" disableRipple>
+          <RadioButtonUnchecked />
+        </IconButton>
+      ) : (
+        <IconButton className="p-0 mr-2 text-primary" disableRipple>
+          <RadioButtonChecked />
+        </IconButton>
+      )}
+
+      <IconButton className="p-0 mr-2" disableRipple>
+        <Clear />
+      </IconButton>
+      <IconButton className="p-0 mr-2 text-danger" disableRipple>
+        <AddCircle style={{ transform: "rotate(45deg)" }} />
+      </IconButton>
+
+      <IconButton className="p-0 mr-2 text-success" disableRipple>
+        <CheckCircle />
+      </IconButton>
+      <IconButton className="p-0 mr-2" disableRipple>
+        <Check />
+      </IconButton>
+    </>
+  )
 );
