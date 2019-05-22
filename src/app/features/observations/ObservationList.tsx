@@ -10,7 +10,10 @@ import { AsyncResource } from "../../../utils/createAsyncStateReducer";
 import { GridColumn } from "../../../utils/grid/columnsConfig";
 import { IndexCell } from "./cells/IndexCell";
 import { VerificationCell } from "./cells/VerificationCell";
-import { OBSERVATIONS_LIST_NAMESPACE } from "./conf";
+import {
+  OBSERVATIONS_GRID_STATE_SELECTOR,
+  OBSERVATIONS_LIST_NAMESPACE
+} from "./conf";
 
 interface ObservationListProps extends DispatchProp {
   observations: AsyncResource<TmpObservation[]>;
@@ -57,7 +60,7 @@ export const ObservationList: FC<ObservationListProps> = ({
   return (
     <DataGrid
       namespace={OBSERVATIONS_LIST_NAMESPACE}
-      gridStateSelector={(s: RootState) => s.observationList.gridState}
+      gridStateSelector={OBSERVATIONS_GRID_STATE_SELECTOR}
       rows={observations.error ? [] : observations.value}
       columns={OBSERVATION_LIST_COLUMNS}
       isLoading={observations.isLoading}

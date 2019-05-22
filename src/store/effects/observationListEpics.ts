@@ -9,7 +9,12 @@ import {
   withLatestFrom
 } from "rxjs/operators";
 import { isActionOf } from "typesafe-actions";
+import {
+  OBSERVATIONS_GRID_STATE_SELECTOR,
+  OBSERVATIONS_LIST_NAMESPACE
+} from "../../app/features/observations/conf";
 import { ObservationsResponse } from "../../app/features/observations/models";
+import { getDataGridEpics } from "../../components/table/dataGridEpics";
 import { OBSERVATIONS_ENDPOINT } from "../../config/endpoints";
 import { ajaxService } from "../../services";
 import { getGridQuery } from "../../utils/grid/getGridQuery";
@@ -30,7 +35,7 @@ export const requestObservationEpic: Epic<any, any, RootState> = (
     withLatestFrom(state$),
     switchMap(([, state]) => {
       const query = qs.stringify({
-        ...getGridQuery(state.observationList.gridState),
+        ...getGridQuery(OBSERVATIONS_GRID_STATE_SELECTOR(state)),
         lang: state.userPreferences.selectedLocale
       });
 
@@ -61,35 +66,11 @@ export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
     map(() => observationsData.request())
   );
 
-export const resetPaginationEpic: Epic<any, any, RootState> = action$ =>
-  action$.pipe(
-    filter(
-      isActionOf([
-        observationGridActions.setSearch,
-        observationGridActions.setSorting,
-        observationGridActions.setFilters
-      ])
-    ),
-    map(() => observationGridActions.setPage(0))
-  );
-
-export const resetSelectionEpic: Epic<any, any, RootState> = action$ =>
-  action$.pipe(
-    filter(
-      isActionOf([
-        observationGridActions.setSearch,
-        observationGridActions.setSorting,
-        observationGridActions.setPage,
-        observationGridActions.setPageSize,
-        observationGridActions.setFilters
-      ])
-    ),
-    map(() => observationGridActions.setSelection([]))
-  );
-
 export const observationListEpic = combineEpics(
   requestObservationEpic,
   reRequestOnGridActionsEpic,
-  resetPaginationEpic,
-  resetSelectionEpic
+  getDataGridEpics(
+    OBSERVATIONS_LIST_NAMESPACE,
+    OBSERVATIONS_GRID_STATE_SELECTOR
+  )
 );
