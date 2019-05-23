@@ -67,15 +67,74 @@ export const labels = {
       rightBelowKnee: "Справа под коленом"
     }
   },
+  addObservation: {
+    title: "Добавление наблюдения",
+    subTitle:
+      "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
+    labelType: "Тип метки",
+    number: "Номер",
+    observationsTitle: "Наблюдения",
+    observationsSubtitle:
+      "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определить вид на florafauna.by",
+    circumstancesTitle: "Обстоятельства",
+    circumstancesSubtitle:
+      "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
+    observationsFields: {
+      birdSpecies: "Вид птицы",
+      birdSpeciesPlaceholder: "Выберите вид",
+      sex: "Пол",
+      sexPlaceholder: "Выберите пол",
+      age: "Возраст",
+      agePlaceholder: "Возраст",
+      birdState: "Состояние птицы",
+      birdStatePlaceholder: "Птица была",
+      photos: "Фотографии",
+      comment: "Комментарий",
+      commentPlaceholder: "Ввести комментарий"
+    },
+    circumstancesFields: {
+      country: "Страна",
+      countryPlaceholder: "Выбрать страну",
+      region: "Область",
+      regionPlaceholder: "Выбрать район",
+      coordinates: "Координаты",
+      coordinatesPlaceholder: "Координаты",
+      findOnMap: "Найти место на карте",
+      timeAndDate: "Время/Дата",
+      timeAndDatePlaceholder: "Время/Дата",
+      timeDelta: "Погрешность времени",
+      timeDeltaPlaceholder: "Погрешность времени"
+    },
+    back: "Назад",
+    sendObservation: "Отправить наблюдение"
+  },
   observations: {
     title: "Наблюдения"
   },
+  viewMode: {
+    euRingAndTitle: "EURing + Название"
+  },
+  lang: {
+    rus: "Рус",
+    eng: "Eng"
+  },
   species: "Вид",
+  sex: "Пол",
+  generalIdentificationMethod: "Основной метод идентификации",
+  status: "Статус",
+  condition: "Состояние",
   loading: "Загрузка...",
   of: "из",
   verification: "Модерация",
   idx: "#",
   yes: "Да",
   no: "Нет",
-  noData: "Нет данных"
+  noData: "Нет данных",
+  copyright: "© 2019 Ptushki. Все права защищены.",
+  filter: "Фильтр",
+  clearFilters: "Сбросить фильтры",
+  search: "Поиск",
+  show: "Показать",
+  ofBirds: "птиц",
+  columns: "Колонки"
 };

@@ -1,0 +1,135 @@
+@import '../../../styles/variables';
+
+.add-observation {
+  padding: 15px;
+
+  &__title {
+    color: $mineSharf;
+    font-size: 36px;
+    font-weight: 100;
+  }
+
+  &__subtitle {
+    color: $trout;
+    font-size: 14px;
+    line-height: 18px;
+    width: 450px;
+  }
+
+  &__bird-img {
+    display: block;
+    margin: auto;
+    padding: 30px 0;
+  }
+
+  &__euring-title {
+    font-weight: 100;
+    color: $mineSharf;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  &__euring {
+    color: $mineSharf;
+    font-size: 14px;
+  }  
+
+  &__info-blocks-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__info-block {
+    margin-right: 33px;
+    height: 738px;
+    flex: 1;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__observations-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__block-header-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__block-header-title {
+    color: $charade;
+    font-weight: 100;
+    line-height: 24px;
+    font-size: 24px;
+  }
+
+  &__block-header-subtitle {
+    color: $trout;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &__field-container {
+    padding-bottom: 15px;
+    width: 100%;
+  }
+
+  &__field-label {
+    font-family: "Source Sans Pro";
+    color: $tundora;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    padding-bottom: 6px;
+    margin: 0;
+  }
+
+  &__find-btn {
+    float: right;
+    height: 30px;
+    font-size: 12px;
+    color: $mineSharf;
+  }
+
+  &__separator {
+    border-bottom: 1px dashed $dark-blue;
+    padding-top: 30px;
+    margin: 24px 0;
+    height: 1px;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 36px;
+  }
+
+  &__back-btn,
+  &__send-btn {
+    height: 30px;
+    font-size: 15px;
+    padding: 0 20px;
+    border: none;
+  }
+
+  &__back-btn {
+    background-color: rgba($blueBayox, 0.9);
+
+    &:hover {
+      background-color: rgba($blueBayox, 1);
+    }
+  }
+
+  &__send-btn {
+    background-color: rgba($orange, 0.9);
+
+    &:hover {
+      background-color: rgba($orange, 1);
+    }
+  }
+}

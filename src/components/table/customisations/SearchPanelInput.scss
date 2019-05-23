@@ -1,0 +1,19 @@
+$search-width: 3em;
+
+.has-search {
+  .form-control {
+    padding-left: $search-width;
+  }
+
+  .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: $search-width;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+  }
+}

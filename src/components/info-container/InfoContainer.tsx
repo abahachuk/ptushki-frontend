@@ -6,11 +6,12 @@ import "./InfoContainer.scss";
 const blockName = "info-container";
 
 export const InfoContainer: FC<{
-  title: String;
+  title?: String;
   children: ReactNode;
   className?: string;
   renderButton?: ReactNode;
-}> = ({ title, children, className, renderButton }) => (
+  renderHeader?: ReactNode;
+}> = ({ renderHeader, children, className, renderButton }) => (
   <div className={sn(blockName, className)}>
     <div
       className={sn(
@@ -18,7 +19,7 @@ export const InfoContainer: FC<{
         renderButton && `${blockName}__header-container--with-btn`
       )}
     >
-      <p className={`${blockName}__title`}>{title}</p>
+      {renderHeader}
       {renderButton}
     </div>
     {children}

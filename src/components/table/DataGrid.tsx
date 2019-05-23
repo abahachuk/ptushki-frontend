@@ -1,37 +1,26 @@
+import { Column, IntegratedSelection } from "@devexpress/dx-react-grid";
 import {
   ColumnChooser,
   DragDropProvider,
   Grid,
   GridProps,
   PagingPanel,
-  SearchPanel,
   Table,
-  TableFilterRow,
   TableHeaderRow,
   TableSelection,
   Toolbar
 } from "@devexpress/dx-react-grid-bootstrap4";
 import React from "react";
-import { Column, IntegratedSelection } from "@devexpress/dx-react-grid";
-import useToggle from "react-use/esm/useToggle";
-import { FillLoader } from "../loader/FillLoader";
-import {
-  SelectorColumn,
-  SelectorColumnHeader
-} from "./customisations/SelectorColumn";
-import { ColumnChooserItem } from "./customisations/ColumnChooser";
-import { ColumnFilterToggleButton } from "./customisations/ColumnFilterToggleButton";
 import { labels } from "../../config/i18n/labels";
 import {
   BreakOutOfSubspace,
   SubspaceProviderHacked
 } from "../../utils/subspace/SubspaceProviderHacked";
-import { DataGridState } from "./DataGridModels";
+import { FillLoader } from "../loader/FillLoader";
 import {
   CustomPagingConnected,
   FilteringStateConnected,
   PagingStateConnected,
-  SearchStateConnected,
   SelectionStateConnected,
   SortingStateConnected,
   TableColumnReorderingConnected,
@@ -39,6 +28,20 @@ import {
   TableColumnVisibilityConnected,
   TableFixedColumnsConnected
 } from "./behaviors/DataGridBehaviors";
+import {
+  ColumnChooserButton,
+  ColumnChooserItem
+} from "./customisations/ColumnChooser";
+import { PagingPanelContentConnected } from "./customisations/PagingPanelContent";
+import {
+  SelectorColumn,
+  SelectorColumnHeader
+} from "./customisations/SelectorColumn";
+import { SortingLabel } from "./customisations/SortingLabel";
+import { TableComponent } from "./customisations/TableComponent";
+import { TableHeaderRowContent } from "./customisations/TableHeaderRowContent";
+import { ToolbarConnected } from "./customisations/ToolbarComponent";
+import { DataGridState } from "./DataGridModels";
 
 export interface DataGridCol<TRow extends {}> extends Column {
   // make required and override with TRow generic for type safety
@@ -64,8 +67,6 @@ const TABLE_LABELS = {
 export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
   const { namespace, gridStateSelector, isLoading, ...gridProps } = props;
 
-  const [filterRowVisible, toggleFilterRow] = useToggle(false);
-
   return (
     <SubspaceProviderHacked namespace={namespace} mapState={gridStateSelector}>
       <div className="position-relative">
@@ -75,7 +76,9 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
             ...col,
             getCellValue: (...args) => (
               <BreakOutOfSubspace>
-                {col.getCellValue(...args)}
+                <div className="table-cell-value">
+                  {col.getCellValue(...args)}
+                </div>
               </BreakOutOfSubspace>
             )
           }))}
@@ -84,39 +87,38 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           <PagingStateConnected />
           <SelectionStateConnected />
           <FilteringStateConnected />
-          <SearchStateConnected />
 
           <DragDropProvider />
 
           <CustomPagingConnected />
           <IntegratedSelection />
-          <Table messages={TABLE_LABELS} />
+          <Table messages={TABLE_LABELS} tableComponent={TableComponent} />
 
           <TableColumnResizingConnected />
           <TableHeaderRow
             showSortingControls
-            contentComponent={p => (
-              <TableHeaderRow.Content {...p}>
-                {p.children}
-                <ColumnFilterToggleButton onToggle={() => toggleFilterRow()} />
-              </TableHeaderRow.Content>
-            )}
+            sortLabelComponent={SortingLabel}
+            contentComponent={TableHeaderRowContent}
           />
-          {filterRowVisible && <TableFilterRow />}
 
           <TableSelection
             showSelectAll
             cellComponent={SelectorColumn}
             headerCellComponent={SelectorColumnHeader}
           />
-          <PagingPanel pageSizes={DEFAULT_PAGE_SIZES} />
+          <PagingPanel
+            pageSizes={DEFAULT_PAGE_SIZES}
+            containerComponent={PagingPanelContentConnected}
+          />
 
           <TableColumnReorderingConnected />
           <TableFixedColumnsConnected />
           <TableColumnVisibilityConnected />
-          <Toolbar />
-          <SearchPanel />
-          <ColumnChooser itemComponent={ColumnChooserItem} />
+          <Toolbar rootComponent={ToolbarConnected} />
+          <ColumnChooser
+            itemComponent={ColumnChooserItem}
+            toggleButtonComponent={ColumnChooserButton}
+          />
         </Grid>
         {isLoading && <FillLoader />}
       </div>

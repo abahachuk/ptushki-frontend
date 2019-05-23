@@ -29,7 +29,7 @@ interface BirdParams {
 
 interface Bird {
   isEdit?: boolean;
-  birdParams: BirdParams;
+  birdParams?: BirdParams;
 }
 
 interface PlusButton extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -72,7 +72,7 @@ export const Bird: FC<Bird> = ({ isEdit, birdParams }) => (
       title={labels.birdInfo.bird.neck}
       value={birdParams.neck}
       className={`${blockName}__neck-info`}
-      isEdit
+      isEdit={isEdit}
       btnClassName={`${blockName}__neck-info-btn`}
     />
     <span className={`${blockName}__dashed-line-saddle`} />
@@ -80,7 +80,7 @@ export const Bird: FC<Bird> = ({ isEdit, birdParams }) => (
       title={labels.birdInfo.bird.saddle}
       value={birdParams.saddle}
       className={`${blockName}__saddle-info`}
-      isEdit
+      isEdit={isEdit}
       btnClassName={`${blockName}__saddle-info-btn`}
     />
     <span className={`${blockName}__dashed-line-right-wing`} />
@@ -88,7 +88,7 @@ export const Bird: FC<Bird> = ({ isEdit, birdParams }) => (
       title={labels.birdInfo.bird.rightWing}
       value={birdParams.rightWing}
       className={`${blockName}__right-wing-info`}
-      isEdit
+      isEdit={isEdit}
       btnClassName={`${blockName}__right-wing-info-btn`}
     />
     <span className={`${blockName}__dashed-line-left-wing`} />
@@ -96,7 +96,7 @@ export const Bird: FC<Bird> = ({ isEdit, birdParams }) => (
       title={labels.birdInfo.bird.leftWing}
       value={birdParams.leftWing}
       className={`${blockName}__left-wing-info`}
-      isEdit
+      isEdit={isEdit}
       btnClassName={`${blockName}__left-wing-info-btn`}
     />
     <span className={`${blockName}__dashed-line-left-knee`} />
@@ -104,7 +104,7 @@ export const Bird: FC<Bird> = ({ isEdit, birdParams }) => (
       title={labels.birdInfo.bird.rightAboveKnee}
       value={birdParams.rightAboveKnee}
       className={`${blockName}__left-knee-info`}
-      isEdit
+      isEdit={isEdit}
       btnClassName={`${blockName}__left-knee-info-btn`}
     />
     <span className={`${blockName}__dashed-line-right-knee`} />
@@ -112,7 +112,7 @@ export const Bird: FC<Bird> = ({ isEdit, birdParams }) => (
       title={labels.birdInfo.bird.leftAboveKnee}
       value={birdParams.leftAboveKnee}
       className={`${blockName}__right-knee-info`}
-      isEdit
+      isEdit={isEdit}
       btnClassName={`${blockName}__right-knee-info-btn`}
     />
     <span className={`${blockName}__dashed-line-right-below-knee`} />
@@ -120,7 +120,7 @@ export const Bird: FC<Bird> = ({ isEdit, birdParams }) => (
       title={labels.birdInfo.bird.rightBelowKnee}
       value={birdParams.rightBelowKnee}
       className={`${blockName}__right-below-knee-info`}
-      isEdit
+      isEdit={isEdit}
       btnClassName={`${blockName}__right-below-knee-info-btn`}
     />
     <span className={`${blockName}__dashed-line-left-below-knee`} />
@@ -128,7 +128,7 @@ export const Bird: FC<Bird> = ({ isEdit, birdParams }) => (
       title={labels.birdInfo.bird.leftBelowKnee}
       value={birdParams.leftBelowKnee}
       className={`${blockName}__left-below-knee-info`}
-      isEdit
+      isEdit={isEdit}
       btnClassName={`${blockName}__left-below-knee-info-btn`}
     />
     <img className={`${blockName}__bird-img`} src={birdImg} alt="bird" />

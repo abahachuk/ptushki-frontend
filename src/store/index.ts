@@ -1,12 +1,12 @@
 import { applyMiddleware, createStore } from "redux";
-import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { createEpicMiddleware } from "redux-subspace-observable";
+import thunk from "redux-thunk";
 
 import { StateType } from "typesafe-actions";
 import { RootAction } from "typesafe-actions/dist/create-reducer";
-import { createEpicMiddleware } from "redux-observable";
-import { rootReducer } from "./reducers";
 import { rootEpic } from "./effects";
+import { rootReducer } from "./reducers";
 
 const epicMiddleware = createEpicMiddleware<
   RootAction,
