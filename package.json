@@ -1,6 +1,6 @@
 {
   "name": "ptushki-frontend",
-  "proxy": "http://localhost:3001",
+  "proxy": "http://ptushki.westeurope.cloudapp.azure.com/api ",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -34,6 +34,7 @@
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.8.6",
     "react-dropzone": "^10.1.5",
+    "react-google-maps": "^9.4.5",
     "react-redux": "^7.0.2",
     "react-redux-subspace": "^3.0.1",
     "react-router": "^5.0.0",
