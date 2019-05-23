@@ -12,6 +12,7 @@ import {
 } from "@devexpress/dx-react-grid-bootstrap4";
 import React from "react";
 import { labels } from "../../config/i18n/labels";
+import { GridColumn } from "../../utils/grid/columnsConfig";
 import {
   BreakOutOfSubspace,
   SubspaceProviderHacked
@@ -44,6 +45,7 @@ import { ToolbarConnected } from "./customisations/ToolbarComponent";
 import { DataGridState } from "./DataGridModels";
 
 export interface DataGridCol<TRow extends {}> extends Column {
+  name: GridColumn;
   // make required and override with TRow generic for type safety
   getCellValue: (row: TRow, columnName: string) => any;
 }

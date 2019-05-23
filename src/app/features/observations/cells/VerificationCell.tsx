@@ -9,38 +9,77 @@ import {
 } from "@material-ui/icons";
 import React from "react";
 import { connect, DispatchProp } from "react-redux";
-import { TmpObservation } from "../../../../store/reducers/observationListReducer";
+import { setObservationVerificationStatus } from "../../../../store/actions/observationListActions";
+import { ObservationData, VerificationStatus } from "../models";
 
 export const VerificationCell = connect()(
   ({
     dispatch,
     observation
-  }: DispatchProp & { observation: TmpObservation }) => (
-    // TODO update api and wire up
+  }: DispatchProp & { observation: ObservationData }) => (
     <>
-      {observation.verified ? (
-        <IconButton className="p-0 mr-2" disableRipple>
-          <RadioButtonUnchecked />
-        </IconButton>
-      ) : (
+      {observation.verificationStatus === "Pending" ? (
         <IconButton className="p-0 mr-2 text-primary" disableRipple>
           <RadioButtonChecked />
         </IconButton>
+      ) : (
+        <IconButton
+          className="p-0 mr-2"
+          disableRipple
+          onClick={() =>
+            dispatch(
+              setObservationVerificationStatus.request({
+                id: observation.id,
+                verificationStatus: VerificationStatus.Pending
+              })
+            )
+          }
+        >
+          <RadioButtonUnchecked />
+        </IconButton>
       )}
 
-      <IconButton className="p-0 mr-2" disableRipple>
-        <Clear />
-      </IconButton>
-      <IconButton className="p-0 mr-2 text-danger" disableRipple>
-        <AddCircle style={{ transform: "rotate(45deg)" }} />
-      </IconButton>
+      {observation.verificationStatus === "Rejected" ? (
+        <IconButton className="p-0 mr-2 text-danger" disableRipple>
+          <AddCircle style={{ transform: "rotate(45deg)" }} />
+        </IconButton>
+      ) : (
+        <IconButton
+          className="p-0 mr-2"
+          disableRipple
+          onClick={() =>
+            dispatch(
+              setObservationVerificationStatus.request({
+                id: observation.id,
+                verificationStatus: VerificationStatus.Rejected
+              })
+            )
+          }
+        >
+          <Clear />
+        </IconButton>
+      )}
 
-      <IconButton className="p-0 mr-2 text-success" disableRipple>
-        <CheckCircle />
-      </IconButton>
-      <IconButton className="p-0 mr-2" disableRipple>
-        <Check />
-      </IconButton>
+      {observation.verificationStatus === "Verified" ? (
+        <IconButton className="p-0 mr-2 text-success" disableRipple>
+          <CheckCircle />
+        </IconButton>
+      ) : (
+        <IconButton
+          className="p-0 mr-2"
+          disableRipple
+          onClick={() =>
+            dispatch(
+              setObservationVerificationStatus.request({
+                id: observation.id,
+                verificationStatus: VerificationStatus.Verified
+              })
+            )
+          }
+        >
+          <Check />
+        </IconButton>
+      )}
     </>
   )
 );

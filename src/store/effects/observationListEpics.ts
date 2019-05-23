@@ -1,9 +1,10 @@
 import qs from "qs";
 import { combineEpics, Epic } from "redux-observable";
-import { from, of } from "rxjs";
+import { EMPTY, from, of } from "rxjs";
 import {
   catchError,
   filter,
+  flatMap,
   map,
   switchMap,
   withLatestFrom
@@ -21,7 +22,7 @@ import { getGridQuery } from "../../utils/grid/getGridQuery";
 import {
   observationGridActions,
   observationsData,
-  verifyObservation
+  setObservationVerificationStatus
 } from "../actions/observationListActions";
 import { selectLocale } from "../actions/userPreferencesActions";
 import { RootState } from "../index";
@@ -50,6 +51,18 @@ export const requestObservationEpic: Epic<any, any, RootState> = (
     })
   );
 
+export const verifyObservationEpic: Epic<any, any, RootState> = (
+  action$,
+  state$
+) =>
+  action$.pipe(
+    filter(isActionOf([setObservationVerificationStatus.request])),
+    flatMap(action => {
+      // TODO wire up
+      return EMPTY;
+    })
+  );
+
 export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
   action$.pipe(
     filter(
@@ -60,7 +73,7 @@ export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
         observationGridActions.setSorting,
         observationGridActions.setFilters,
         selectLocale,
-        verifyObservation
+        setObservationVerificationStatus.success
       ])
     ),
     map(() => observationsData.request())
@@ -68,6 +81,7 @@ export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
 
 export const observationListEpic = combineEpics(
   requestObservationEpic,
+  verifyObservationEpic,
   reRequestOnGridActionsEpic,
   getDataGridEpics(
     OBSERVATIONS_LIST_NAMESPACE,
