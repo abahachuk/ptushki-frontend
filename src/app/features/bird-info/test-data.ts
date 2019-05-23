@@ -49,7 +49,7 @@ export const ringingData = [
 export const photos = [
   {
     src:
-      "https://www.picturesboss.com/thumbs/VGnpPvL1itDtBDrQ-aoRdG_jiMm_ZvJgJbAaM_EGobl17Gsw4OWjyjht0mTf5_IiUjK370QVSLf8NyvjbEKnUg.jpg",
+      "https://academy.allaboutbirds.org/wp-content/uploads/2018/10/eBirdthumbnail_AndrewSimon_CeruleanWarbler_57482791-600x400.jpg",
     altText: "Bird",
     id: 1
   },

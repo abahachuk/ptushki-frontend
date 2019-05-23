@@ -60,7 +60,7 @@ const PlusButton = function({ className, ...props }: PlusButton) {
       type="button"
       className={sn(`${blockName}__btn-plus`, className)}
     >
-      +
+      <p>+</p>
     </button>
   );
 };

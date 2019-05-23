@@ -25,6 +25,10 @@ const renderImage = function({ src, altText, id }: Image) {
   );
 };
 
+const HeaderInfoBlock = ({ label }: { label: string }) => {
+  return <p className={`${blockName}__block-info-title`}>{label}</p>;
+};
+
 export const BirdInfoForm: FC<{
   birdInfo: BirdInfo;
 }> = () => {
@@ -48,12 +52,14 @@ export const BirdInfoForm: FC<{
       <Bird birdParams={birdData.params} />
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
-          title={labels.birdInfo.ringingTitle}
           className={`${blockName}__info-block`}
           renderButton={
             <Button outline color="primary">
               {labels.birdInfo.addRing}
             </Button>
+          }
+          renderHeader={
+            <HeaderInfoBlock label={labels.birdInfo.ringingTitle} />
           }
         >
           {ringingData.map(({ title, value, id }) => (
@@ -61,16 +67,18 @@ export const BirdInfoForm: FC<{
           ))}
         </InfoContainer>
         <InfoContainer
-          title={labels.birdInfo.birdTitle}
           className={`${blockName}__info-block`}
+          renderHeader={<HeaderInfoBlock label={labels.birdInfo.birdTitle} />}
         >
           {ringingData.map(({ title, value, id }) => (
             <InfoBlock key={id} title={title} value={value} />
           ))}
         </InfoContainer>
         <InfoContainer
-          title={labels.birdInfo.observationTime}
           className={`${blockName}__info-block`}
+          renderHeader={
+            <HeaderInfoBlock label={labels.birdInfo.observationTime} />
+          }
         >
           {ringingData.map(({ title, value, id }) => (
             <InfoBlock key={id} title={title} value={value} />

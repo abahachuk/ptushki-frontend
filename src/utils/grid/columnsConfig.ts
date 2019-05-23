@@ -7,7 +7,14 @@ export enum GridColumn {
   ring = "ring",
   species = "species",
   status = "status",
-  condition = "condition"
+  condition = "condition",
+  remarks = "remarks",
+  placeName = "placeName",
+  direction = "direction",
+  distance = "distance",
+  finder = "finder",
+  elapsedTime = "elapsedTime",
+  date = "date"
 }
 
 export const defaultColumnWidths: { [key in GridColumn]: number } = {
@@ -17,7 +24,14 @@ export const defaultColumnWidths: { [key in GridColumn]: number } = {
   ring: 220,
   species: 200,
   status: 170,
-  condition: 300
+  condition: 300,
+  remarks: 300,
+  placeName: 300,
+  direction: 300,
+  distance: 300,
+  finder: 300,
+  elapsedTime: 300,
+  date: 300
 };
 
 export const getColumnWidths = (cols: GridColumn[]) =>

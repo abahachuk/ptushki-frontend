@@ -150,7 +150,7 @@
   }
 
   &__right-wing-info {
-    right: -50%;
+    right: -56%;
   }
 
   &__right-wing-info-btn {
@@ -181,7 +181,7 @@
   }
 
   &__left-knee-info {
-    right: -11%;
+    right: -57%;
   }
 
   &__left-knee-info-btn {
@@ -189,7 +189,7 @@
   }
 
   &__right-knee-info {
-    left: -11%;
+    left: -57%;
   }
 
   &__right-knee-info-btn {
@@ -230,9 +230,12 @@
     border: 2px solid $dark-blue;
     color: $dark-blue;
     font-size: 22px;
-    line-height: 20px;
+    line-height: 18px;
     padding: 0;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
       box-shadow: 0 0 10px rgba($dark-blue, 0.5);

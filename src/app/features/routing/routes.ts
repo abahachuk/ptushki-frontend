@@ -29,13 +29,13 @@ export const ROUTE_USER_INFO: RouteDescription = {
 
 export const ROUTE_BIRD_INFO: RouteDescription = {
   path: "/bird-info/",
-  permissions: [UNAUTHORIZED],
+  permissions: [OBSERVER],
   fallback: "/"
 };
 
 export const ROUTE_ADD_OBSERVATION: RouteDescription = {
   path: "/add-observation/",
-  permissions: [UNAUTHORIZED],
+  permissions: [OBSERVER],
   fallback: "/"
 };
 

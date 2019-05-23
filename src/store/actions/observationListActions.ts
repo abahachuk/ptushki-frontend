@@ -1,21 +1,29 @@
-import { createAsyncAction, createStandardAction } from "typesafe-actions";
-import { TmpObservation } from "../reducers/observationListReducer";
-import { dataGridActions } from "../../components/table/dataGridActions";
+import { createAsyncAction } from "typesafe-actions";
 import { OBSERVATIONS_LIST_NAMESPACE } from "../../app/features/observations/conf";
-
-// TODO when implementing other tables, reuse table-related actions and reducers
-//  https://redux.js.org/recipes/structuring-reducers/reusing-reducer-logic
+import {
+  ObservationData,
+  VerificationStatus
+} from "../../app/features/observations/models";
+import { dataGridActions } from "../../components/table/dataGridActions";
 
 export const observationsData = createAsyncAction(
   "OBSERVATIONS_REQUEST",
   "OBSERVATIONS_SUCCESS",
   "OBSERVATIONS_FAILURE"
-)<void, TmpObservation[], string>();
+)<void, ObservationData[], string>();
 
-export const verifyObservation = createStandardAction("VERIFY_OBSERVATION")<{
-  id: string;
-  approved: boolean;
-}>();
+export const setObservationVerificationStatus = createAsyncAction(
+  "SET_VERIFICATION_STATUS_REQUEST",
+  "SET_VERIFICATION_STATUS_SUCCESS",
+  "SET_VERIFICATION_STATUS_FAILURE"
+)<
+  {
+    id: string;
+    verificationStatus: VerificationStatus;
+  },
+  any,
+  string
+>();
 
 export const observationGridActions = dataGridActions(
   OBSERVATIONS_LIST_NAMESPACE
