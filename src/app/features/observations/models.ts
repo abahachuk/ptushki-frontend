@@ -13,6 +13,11 @@ export interface ObservationData {
   note: string;
   placeName: string;
   date: string;
+  direction: string;
+  distance: string;
+  finder: string;
+  elapsedTime: string;
+  remarks: string;
 }
 
 export interface ObservationsResponse

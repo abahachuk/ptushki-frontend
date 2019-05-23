@@ -49,9 +49,29 @@ export const OBSERVATION_LIST_COLUMNS_CONFIG: DataGridCol<ObservationData>[] = [
     getCellValue: r => new Date(r.date).toLocaleString()
   },
   {
+    name: GridColumn.direction,
+    title: labels.direction,
+    getCellValue: r => r.direction
+  },
+  {
+    name: GridColumn.distance,
+    title: labels.distance,
+    getCellValue: r => r.distance
+  },
+  {
+    name: GridColumn.finder,
+    title: labels.finder,
+    getCellValue: r => r.finder
+  },
+  {
+    name: GridColumn.elapsedTime,
+    title: labels.elapsedTime,
+    getCellValue: r => r.elapsedTime
+  },
+  {
     name: GridColumn.remarks,
     title: labels.remark,
-    getCellValue: r => r.placeName
+    getCellValue: r => r.remarks
   }
 ];
 

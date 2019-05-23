@@ -10,6 +10,10 @@ export enum GridColumn {
   condition = "condition",
   remarks = "remarks",
   placeName = "placeName",
+  direction = "direction",
+  distance = "distance",
+  finder = "finder",
+  elapsedTime = "elapsedTime",
   date = "date"
 }
 
@@ -23,6 +27,10 @@ export const defaultColumnWidths: { [key in GridColumn]: number } = {
   condition: 300,
   remarks: 300,
   placeName: 300,
+  direction: 300,
+  distance: 300,
+  finder: 300,
+  elapsedTime: 300,
   date: 300
 };
 
