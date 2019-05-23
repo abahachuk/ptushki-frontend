@@ -64,12 +64,17 @@ export const labels = {
   date: "Время/Дата",
   remark: "Комментарий",
   placeName: "Место",
+  direction: "Направление",
+  distance: "Удаленность от первого наблюдения",
+  finder: "Наблюдатель",
+  elapsedTime: "Время с первого наблюдения",
   loading: "Загрузка...",
   of: "из",
   verification: "Модерация",
   idx: "#",
   yes: "Да",
   no: "Нет",
+  add: "Добавить",
   noData: "Нет данных",
   copyright: "© 2019 Ptushki. Все права защищены.",
   filter: "Фильтр",
@@ -77,5 +82,7 @@ export const labels = {
   search: "Поиск",
   show: "Показать",
   ofBirds: "птиц",
-  columns: "Колонки"
+  columns: "Колонки",
+  import: "Импорт",
+  export: "Экспорт"
 };
