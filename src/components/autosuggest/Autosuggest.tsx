@@ -1,12 +1,7 @@
 import React, { useCallback, useState, FC } from "react";
-import sn from "classnames";
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Input
-} from "reactstrap";
+import { DropdownItem, Input } from "reactstrap";
+
+import { CustomDropdown } from "../dropdown/Dropdown";
 
 import "./Autosuggest.scss";
 
@@ -33,10 +28,7 @@ export const Autosuggest: FC<Autosuggest> = ({
   value,
   onChangeValue
 }) => {
-  const [isOpen, toggleOpen] = useState(false);
   const [list, setCollection] = useState(collection);
-
-  const toggleDropdown = () => toggleOpen(!isOpen);
 
   const onSelect = useCallback(
     (e: any) => {
@@ -73,26 +65,15 @@ export const Autosuggest: FC<Autosuggest> = ({
   );
 
   return (
-    <Dropdown isOpen={isOpen} toggle={toggleDropdown}>
-      <DropdownToggle
-        outline
-        className={sn(
-          `${blockName}__dropdown`,
-          value && `${blockName}__dropdown--value`
-        )}
-      >
-        {value || placeholder}
-      </DropdownToggle>
-      <DropdownMenu className={`${blockName}__menu-container`}>
-        <div className={`${blockName}__search-container`}>
-          <Input
-            placeholder={searchPlaceholder}
-            className={`${blockName}__input-field`}
-            onChange={onChange}
-          />
-        </div>
-        <div className={`${blockName}__menu`}>{list.map(renderItem)}</div>
-      </DropdownMenu>
-    </Dropdown>
+    <CustomDropdown value={value} placeholder={placeholder}>
+      <div className={`${blockName}__search-container`}>
+        <Input
+          placeholder={searchPlaceholder}
+          className={`${blockName}__input-field`}
+          onChange={onChange}
+        />
+      </div>
+      <div className={`${blockName}__menu`}>{list.map(renderItem)}</div>
+    </CustomDropdown>
   );
 };
