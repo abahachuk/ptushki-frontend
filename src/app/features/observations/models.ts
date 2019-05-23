@@ -1,10 +1,18 @@
 import { GridDataResponse, GridQuery } from "../../../utils/grid/models";
 
+export enum VerificationStatus {
+  Pending = "Pending",
+  Verified = "Verified",
+  Rejected = "Rejected"
+}
+
 export interface ObservationData {
   id: string;
-  verified: boolean;
+  verificationStatus: VerificationStatus;
   colorRing: string;
   note: string;
+  placeName: string;
+  date: string;
 }
 
 export interface ObservationsResponse
