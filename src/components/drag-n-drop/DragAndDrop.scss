@@ -1,0 +1,34 @@
+@import '../../styles/variables';
+
+.drag-and-drop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 192px;
+  height: 134px;
+  border: 1px dashed $orange;
+  font-size: 50px;
+  color: $orange;
+  font-weight: lighter;
+  cursor: pointer;
+
+  &__drag-active {
+    border: 0;
+    background-color: $orange;
+    color: $white;
+  }
+
+  &__container {
+    overflow-x: auto;
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__img {
+    object-fit: contain;
+    width: auto;
+    height: 134px;
+    margin-right: 5px;
+  }
+}

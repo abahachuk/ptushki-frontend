@@ -4,7 +4,7 @@ import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
 
 import "./Dropdown.scss";
 
-interface CustomDropdown {
+export interface ICustomDropdown {
   placeholder?: string;
   value?: string;
   className?: string;
@@ -12,7 +12,7 @@ interface CustomDropdown {
 
 const blockName = "dropdown";
 
-export const CustomDropdown: FC<CustomDropdown> = ({
+export const CustomDropdown: FC<ICustomDropdown> = ({
   placeholder,
   value,
   children,

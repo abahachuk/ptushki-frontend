@@ -1,0 +1,254 @@
+@import '../../styles/variables';
+
+.bird {
+  &__info-title {
+    color: $trout;
+    margin-bottom: 5px;
+  }
+
+  &__info-value {
+    color: $mineSharf;
+  }
+
+  &__info-title, &__info-value {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+  }
+
+  &__bird-container {
+    position: relative;
+    padding: 85px 0;
+    width: 400px;
+    margin: 0 auto;
+  }
+
+  &__dashed-line-neck,
+  &__dashed-line-saddle,
+  &__dashed-line-right-wing,
+  &__dashed-line-left-wing,
+  &__dashed-line-left-knee,
+  &__dashed-line-right-knee,
+  &__dashed-line-left-below-knee,
+  &__dashed-line-right-below-knee {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  &__dashed-line-neck {
+    width: 110px;
+    height: 60px;
+    border-top: dashed 1px #546E7A;
+    transform: rotate(-145deg);
+    left: 27%;
+    top: 15%;
+  }
+
+  &__dashed-line-saddle {
+    width: 74px;
+    height: 28px;
+    border-top: dashed 1px #546E7A;
+    transform: rotate(-28deg);
+    left: 50%;
+    top: 16%;
+  }
+
+  &__dashed-line-right-wing,
+  &__dashed-line-left-wing {
+    width: 190px;
+    height: 140px;
+    border-bottom: dashed 1px #546E7A;
+    top: 25%;
+  }
+
+  &__dashed-line-right-wing {
+    left: -37%;
+    transform: rotate(10deg);
+  }
+
+  &__dashed-line-left-wing {
+    transform: rotate(-15deg);
+    right: -34%;
+  }
+
+  &__dashed-line-left-knee,
+  &__dashed-line-right-knee {
+    width: 290px;
+    height: 110px;
+    border-bottom: dashed 1px #546E7A;
+    top: 48%;
+  }
+
+  &__dashed-line-left-knee {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 30%;
+    left: -24%;
+  }
+
+  &__dashed-line-right-knee {
+    border-bottom-left-radius: 30%;
+    border-bottom-right-radius: 0;
+    right: -23%;
+  }
+
+  &__dashed-line-left-below-knee,
+  &__dashed-line-right-below-knee {
+    width: 100px;
+    height: 40px;
+    border-top: dashed 1px #546E7A;
+    top: 77%;
+  }
+
+  &__dashed-line-left-below-knee {
+    transform: rotate(-32deg);
+    left: 24%;
+  }
+
+  &__dashed-line-right-below-knee {
+    transform: rotate(32deg);
+    right: 24%;
+  }
+
+  &__neck-info,
+  &__saddle-info,
+  &__right-wing-info,
+  &__left-wing-info,
+  &__left-knee-info,
+  &__right-knee-info,
+  &__right-below-knee-info,
+  &__left-below-knee-info {
+    position: absolute;
+  }
+
+  &__neck-info {
+    left: 12%;
+    top: 11%;
+  }
+
+  &__neck-info-btn {
+    position: absolute;
+    left: 24%;
+    top: 13%;
+  }
+
+  &__saddle-info {
+    right: 20%;
+    top: 12%;
+  }
+
+  &__saddle-info-btn {
+    position: absolute;
+    right: 27%;
+    top: 11%;
+  }
+
+  &__right-wing-info,
+  &__left-wing-info {
+    top: 38%;
+  }
+
+  &__right-wing-info {
+    right: -56%;
+  }
+
+  &__right-wing-info-btn {
+    position: absolute;
+    right: -36%;
+    top: 41%;
+  }
+
+  &__left-wing-info {
+    left: -50%;
+  }
+
+  &__left-wing-info-btn {
+    position: absolute;
+    left: -39%;
+    top: 42%;
+  }
+
+  &__left-knee-info,
+  &__right-knee-info {
+    top: 68%;
+  }
+
+  &__left-knee-info-btn,
+  &__right-knee-info-btn {
+    position: absolute;
+    bottom: 24%;
+  }
+
+  &__left-knee-info {
+    right: -57%;
+  }
+
+  &__left-knee-info-btn {
+    left: -32%;
+  }
+
+  &__right-knee-info {
+    left: -57%;
+  }
+
+  &__right-knee-info-btn {
+    right: -31%;
+  }
+
+  &__right-below-knee-info,
+  &__left-below-knee-info {
+    top: 85%;
+  }
+
+  &__right-below-knee-info-btn,
+  &__left-below-knee-info-btn {
+    position: absolute;
+    bottom: 8%;
+  }
+
+  &__right-below-knee-info {
+    right: 15%;
+  }
+
+  &__right-below-knee-info-btn {
+    right: 22%;
+  }
+
+  &__left-below-knee-info {
+    left: 15%;
+  }
+
+  &__left-below-knee-info-btn {
+    left: 22%;
+  }
+
+  &__btn-plus {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid $dark-blue;
+    color: $dark-blue;
+    font-size: 22px;
+    line-height: 19px;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $white;
+
+    &:hover {
+      box-shadow: 0 0 10px rgba($dark-blue, 0.5);
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+
+    &:focus {
+      box-shadow: 0 0 10px rgba($dark-blue, 0.5);
+      outline: none;
+    }
+  }
+}

@@ -1,5 +1,4 @@
 @mixin error {
-    font-family: Helvetica;
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.09px;
@@ -13,12 +12,10 @@
 
 @mixin form-text-content {
     @include text;
-
-    font-family: Helvetica;
 }
 
 @mixin input-text {
     @include text;
 
-    font-family: "Source Sans Pro";
+    font-family: 'Source Sans Pro', sans-serif;
 }

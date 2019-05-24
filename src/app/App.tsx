@@ -8,13 +8,17 @@ import {
   ROUTE_OBSERVATIONS,
   ROUTE_RESET_PASSWORD,
   ROUTE_SIGN_IN,
-  ROUTE_SIGN_UP
+  ROUTE_SIGN_UP,
+  ROUTE_BIRD_INFO,
+  ROUTE_ADD_OBSERVATION
 } from "./features/routing/routes";
 import { RootNav } from "./features/nav/RootNav";
 import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 import { ProtectedRouteConnected } from "./features/routing/ProtectedRouteConnected";
+import { BirdInfoForm } from "./features/bird-info/BirdInfoConnected";
+import { AddObservation } from "./features/add-observation/AddObservationConnected";
 import { ObservationsPage } from "./features/observations/ObservationsPage";
 import { UserInfo } from "./features/auth/models";
 import { Footer } from "../components/footer/Footer";
@@ -39,6 +43,12 @@ export const App: FC<{
 
         <ProtectedRouteConnected
           exact
+          {...ROUTE_BIRD_INFO}
+          component={BirdInfoForm}
+        />
+
+        <ProtectedRouteConnected
+          exact
           {...ROUTE_SIGN_UP}
           component={SignUpFormConnected}
         />
@@ -56,6 +66,12 @@ export const App: FC<{
           exact
           {...ROUTE_OBSERVATIONS}
           component={ObservationsPage}
+        />
+
+        <ProtectedRouteConnected
+          exact
+          {...ROUTE_ADD_OBSERVATION}
+          component={AddObservation}
         />
       </Switch>
 

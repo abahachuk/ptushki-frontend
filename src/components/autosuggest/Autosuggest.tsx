@@ -11,31 +11,40 @@ interface Item {
   id: number | string;
 }
 
-interface Autosuggest {
-  collection: Array<Item>;
+export interface IChangeValue {
+  value: string;
+  type: string;
+}
+
+export interface IAutosuggest {
+  collection?: Array<Item>;
   placeholder?: string;
   searchPlaceholder?: string;
-  value: string;
-  onChangeValue: (value: string) => void;
+  value?: string;
+  onChangeValue?: ({ value, type }: IChangeValue) => void;
+  type?: string;
+  withSearch?: boolean;
 }
 
 const blockName = "autosuggest";
 
-export const Autosuggest: FC<Autosuggest> = ({
+export const Autosuggest: FC<IAutosuggest> = ({
   collection,
   placeholder,
   searchPlaceholder,
   value,
-  onChangeValue
+  onChangeValue,
+  type = "",
+  withSearch
 }) => {
   const [list, setCollection] = useState(collection);
 
   const onSelect = useCallback(
     (e: any) => {
-      onChangeValue(e.target.value);
+      onChangeValue({ value: e.target.value, type });
       setCollection(collection);
     },
-    [collection, onChangeValue]
+    [collection, onChangeValue, type]
   );
 
   const onChange = useCallback(
@@ -66,13 +75,15 @@ export const Autosuggest: FC<Autosuggest> = ({
 
   return (
     <CustomDropdown value={value} placeholder={placeholder}>
-      <div className={`${blockName}__search-container`}>
-        <Input
-          placeholder={searchPlaceholder}
-          className={`${blockName}__input-field`}
-          onChange={onChange}
-        />
-      </div>
+      {withSearch && (
+        <div className={`${blockName}__search-container`}>
+          <Input
+            placeholder={searchPlaceholder}
+            className={`${blockName}__input-field`}
+            onChange={onChange}
+          />
+        </div>
+      )}
       <div className={`${blockName}__menu`}>{list.map(renderItem)}</div>
     </CustomDropdown>
   );

@@ -1,0 +1,94 @@
+@import '../../../styles/variables';
+
+.bird-info {
+  padding: 15px;
+  background-color: $white;
+
+  &__header {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    flex: 1;
+    color: $mineSharf;
+    font-size: 42px;
+    font-weight: 100;
+  }
+
+  &__block-info-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 18px;
+    margin: 0;
+    color: $trout;
+  }
+
+  &__btn {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
+
+  &__subtitle {
+    color: $silver;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &__bird-img {
+    display: block;
+    margin: auto;
+    padding: 30px 0;
+  }
+
+  &__euring-title {
+    font-weight: 100;
+    color: $mineSharf;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  &__euring {
+    color: $mineSharf;
+    font-size: 14px;
+  }  
+
+  &__info-blocks-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__info-block {
+    margin-right: 33px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__observations-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__photos-title {
+    font-weight: 100;
+    color: $mineSharf;
+    font-size: 24px;
+    line-height: 42px;
+  }
+
+  &__photo {
+    width: 226px;
+    height: 154px;
+    margin-right: 18px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

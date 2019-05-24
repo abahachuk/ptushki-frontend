@@ -46,6 +46,70 @@ export const labels = {
     rememberPassword: "Сохранить пароль",
     alreadyHavePassword: "У вас уже есть пароль?"
   },
+  birdInfo: {
+    euring: "Euring",
+    addRing: "Добавить кольцо",
+    photos: "Фотографии",
+    export: "Экспорт",
+    edit: "Редактировать",
+    delete: "Удалить",
+    birdTitle: "Птица",
+    ringingTitle: "Кольцевание и отлов",
+    observationTime: "Время наблюдения",
+    bird: {
+      neck: "Шея",
+      leftWing: "Левое крыло",
+      rightWing: "Правое крыло",
+      saddle: "Клюв",
+      leftAboveKnee: "Слева над коленом",
+      rightAboveKnee: "Справа над коленом",
+      leftBelowKnee: "Слева под коленом",
+      rightBelowKnee: "Справа под коленом"
+    }
+  },
+  addObservation: {
+    title: "Добавление наблюдения",
+    subTitle:
+      "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
+    labelType: "Тип метки",
+    number: "Номер",
+    observationsTitle: "Наблюдения",
+    observationsSubtitle:
+      "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определить вид на florafauna.by",
+    circumstancesTitle: "Обстоятельства",
+    circumstancesSubtitle:
+      "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
+    observationsFields: {
+      birdSpecies: "Вид птицы",
+      birdSpeciesPlaceholder: "Выберите вид",
+      sex: "Пол",
+      sexPlaceholder: "Выберите пол",
+      age: "Возраст",
+      agePlaceholder: "Возраст",
+      birdState: "Состояние птицы",
+      birdStatePlaceholder: "Птица была",
+      photos: "Фотографии",
+      comment: "Комментарий",
+      commentPlaceholder: "Ввести комментарий"
+    },
+    circumstancesFields: {
+      country: "Страна",
+      countryPlaceholder: "Выбрать страну",
+      region: "Область",
+      regionPlaceholder: "Выбрать район",
+      coordinates: "Координаты",
+      coordinatesPlaceholder: "Координаты",
+      findOnMap: "Найти место на карте",
+      timeAndDate: "Время/Дата",
+      timeAndDatePlaceholder: "Время/Дата",
+      timeDelta: "Погрешность времени",
+      timeDeltaPlaceholder: "Погрешность времени"
+    },
+    back: "Назад",
+    sendObservation: "Отправить наблюдение",
+    selectOnMap: "Выберите место на карте",
+    setPlace: "Выбрать"
+  },
   observations: {
     title: "Наблюдения"
   },
