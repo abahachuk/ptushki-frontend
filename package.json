@@ -1,6 +1,6 @@
 {
   "name": "ptushki-frontend",
-  "proxy": "http://ptushki.westeurope.cloudapp.azure.com/api ",
+  "proxy": "http://localhost:3001",
   "version": "0.0.1",
   "private": true,
   "scripts": {

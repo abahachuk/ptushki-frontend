@@ -17,5 +17,5 @@
 @mixin input-text {
     @include text;
 
-    font-family: "Source Sans Pro";
+    font-family: 'Source Sans Pro', sans-serif;
 }

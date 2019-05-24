@@ -230,12 +230,13 @@
     border: 2px solid $dark-blue;
     color: $dark-blue;
     font-size: 22px;
-    line-height: 18px;
+    line-height: 19px;
     padding: 0;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: $white;
 
     &:hover {
       box-shadow: 0 0 10px rgba($dark-blue, 0.5);
