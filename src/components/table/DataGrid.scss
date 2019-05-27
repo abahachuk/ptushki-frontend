@@ -27,6 +27,11 @@ $fixed-part-shadow-width: 10px;
   }
 }
 
+th.dx-g-bs4-fixed-cell {
+  // something bigger than z-index of fixed td z-index
+  z-index: 10000000;
+}
+
 .table-cell-value {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -60,7 +65,9 @@ $fixed-part-shadow-width: 10px;
           margin-left: 6px;
           width: auto;
 
-          &:hover, &:active, &:focus {
+          &:hover,
+          &:active,
+          &:focus {
             background-color: transparent !important;
             outline: none !important;
             box-shadow: none !important;
@@ -72,8 +79,11 @@ $fixed-part-shadow-width: 10px;
           top: 100% !important; // to override inline styles
         }
       }
+
       .filter-toggle-button {
-        &:hover, &:active, &:focus {
+        &:hover,
+        &:active,
+        &:focus {
           background-color: transparent !important;
           outline: none !important;
           box-shadow: none !important;
@@ -97,7 +107,11 @@ $fixed-part-shadow-width: 10px;
   height: 12px;
   width: 12px;
 
-  &:hover, &:active, &:focus, &--active, .show & {
+  &:hover,
+  &:active,
+  &:focus,
+  &--active,
+  .show & {
     background-image: url("../../assets/filter-icon-active.svg");
   }
 }
