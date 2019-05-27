@@ -1,4 +1,10 @@
-import React, { useCallback, useState, FC } from "react";
+import React, {
+  useCallback,
+  useState,
+  FC,
+  ReactElement,
+  ReactNode
+} from "react";
 import { DropdownItem, Input } from "reactstrap";
 
 import { CustomDropdown } from "../dropdown/Dropdown";
@@ -24,6 +30,7 @@ export interface IAutosuggest {
   onChangeValue?: ({ value, type }: IChangeValue) => void;
   type?: string;
   withSearch?: boolean;
+  toggleButton?: ReactNode;
 }
 
 const blockName = "autosuggest";
@@ -35,7 +42,8 @@ export const Autosuggest: FC<IAutosuggest> = ({
   value,
   onChangeValue,
   type = "",
-  withSearch
+  withSearch,
+  toggleButton
 }) => {
   const [list, setCollection] = useState(collection);
 
@@ -74,7 +82,11 @@ export const Autosuggest: FC<IAutosuggest> = ({
   );
 
   return (
-    <CustomDropdown value={value} placeholder={placeholder}>
+    <CustomDropdown
+      value={value}
+      placeholder={placeholder}
+      toggleButton={toggleButton}
+    >
       {withSearch && (
         <div className={`${blockName}__search-container`}>
           <Input
