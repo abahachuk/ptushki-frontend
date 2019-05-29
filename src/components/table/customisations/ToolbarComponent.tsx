@@ -6,6 +6,7 @@ import { labels } from "../../../config/i18n/labels";
 import { BreakOutOfSubspace } from "../../../utils/subspace/SubspaceProviderHacked";
 import { setFilters } from "../dataGridActions";
 import { DataGridState } from "../DataGridModels";
+import { GridSelectionInfoConnected } from "./GridSelectionInfo";
 import { LangSelectorConnected } from "./LangSelector";
 import { ViewModeSelectorConnected } from "./ViewModeSelector";
 
@@ -27,6 +28,7 @@ export const ToolbarComponent: FC<Props> = ({
         {labels.clearFilters}
       </Button>
     )}
+    <GridSelectionInfoConnected />
     {/* behaviors provided by grid component */}
     {p.children}
     {/* custom behaviors provided by us */}

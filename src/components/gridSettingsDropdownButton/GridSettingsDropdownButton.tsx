@@ -8,7 +8,7 @@ export const GridSettingsDropdownButton: FC<ButtonProps> = props => {
     <Button
       outline
       size="sm"
-      className="my-2 btn border-0 d-flex text-dark bg-transparent shadow-none"
+      className="my-2 btn border-0 d-flex align-items-center text-dark bg-transparent shadow-none"
       {...props}
     >
       {children}

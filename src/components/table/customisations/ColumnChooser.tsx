@@ -8,9 +8,11 @@ export const ColumnChooserButton: FC<ColumnChooserBase.ToggleButtonProps> = ({
   onToggle,
   buttonRef
 }) => (
-  <GridSettingsDropdownButton onClick={onToggle} innerRef={buttonRef}>
-    <span>{labels.columns}</span>
-  </GridSettingsDropdownButton>
+  <div className="dropdown">
+    <GridSettingsDropdownButton onClick={onToggle} innerRef={buttonRef}>
+      <span>{labels.columns}</span>
+    </GridSettingsDropdownButton>
+  </div>
 );
 
 export const ColumnChooserItem: FC<ColumnChooserBase.ItemProps> = ({

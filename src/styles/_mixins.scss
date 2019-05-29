@@ -1,3 +1,5 @@
+@import "./variables";
+
 @mixin error {
     font-size: 12px;
     line-height: 18px;
@@ -19,3 +21,6 @@
 
     font-family: 'Source Sans Pro', sans-serif;
 }
+
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";

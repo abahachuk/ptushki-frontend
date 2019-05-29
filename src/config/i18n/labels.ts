@@ -69,6 +69,7 @@ export const labels = {
   },
   addObservation: {
     title: "Добавление наблюдения",
+    actionTitle: "Добавить наблюдение",
     subTitle:
       "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
     labelType: "Тип метки",
@@ -148,5 +149,8 @@ export const labels = {
   ofBirds: "птиц",
   columns: "Колонки",
   import: "Импорт",
-  export: "Экспорт"
+  importData: "Загрузить данные",
+  export: "Экспорт",
+  exportData: "Экспортировать данные",
+  logout: "Выйти"
 };

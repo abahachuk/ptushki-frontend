@@ -10,10 +10,7 @@ interface Props extends PagingPanel.ContainerProps {
 }
 
 export const PagingPanelContent: FC<Props> = ({ selectedCount, ...p }) => (
-  <div className="d-flex align-items-center">
-    <div className="mr-auto">
-      {selectedCount} {labels.of} {p.totalCount} {labels.ofBirds}
-    </div>
+  <div className="d-flex align-items-center justify-content-end">
     <div className="mr-n3">{labels.show}</div>
     <PagingPanel.Container {...p} />
   </div>

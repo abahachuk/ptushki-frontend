@@ -30,5 +30,9 @@ $pagination-active-border-color: $orange;
 $pagination-focus-box-shadow: $orange;
 $pagination-hover-color: $orange;
 
+$root-nav-height: 58px;
+$root-nav-bg: #455A64;
+$root-nav-link-active-bg: #546E7A;
+
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
