@@ -61,7 +61,11 @@ export const OBSERVATION_LIST_COLUMNS_CONFIG: DataGridCol<ObservationData>[] = [
   {
     name: GridColumn.finder,
     title: labels.finder,
-    getCellValue: r => r.finder
+    getCellValue: r => (
+      <>
+        {r.finder.firstName} {r.finder.lastName}
+      </>
+    )
   },
   {
     name: GridColumn.elapsedTime,
