@@ -8,11 +8,13 @@ interface Props {
   totalCount: number;
 }
 
-export const GridSelectionInfo: FC<Props> = ({ selectedCount, ...p }) => (
+export const GridSelectionInfo: FC<Props> = ({ selectedCount }) => (
   <div className="d-flex align-items-center">
-    <div className="mr-auto">
-      {selectedCount} {labels.of} {p.totalCount} {labels.ofBirds}
-    </div>
+    {selectedCount > 0 && (
+      <div className="mr-auto">
+        {labels.selected} {selectedCount} {labels.ofBirds}
+      </div>
+    )}
   </div>
 );
 

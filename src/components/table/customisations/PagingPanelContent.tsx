@@ -12,7 +12,7 @@ interface Props extends PagingPanel.ContainerProps {
 
 export const PagingPanelContent: FC<Props> = ({ selectedCount, ...p }) => (
   <div className="paging-panel-content">
-    <div className="mr-n3">{labels.show}</div>
+    <div>{labels.show}</div>
     <PagingPanel.Container {...p} />
   </div>
 );

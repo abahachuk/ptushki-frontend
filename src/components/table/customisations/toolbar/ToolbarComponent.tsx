@@ -24,12 +24,18 @@ export const ToolbarComponent: FC<Props> = ({
     {...p}
     className="grid-toolbar d-flex flex-wrap justify-content-end align-items-center my-2"
   >
+    <GridSelectionInfoConnected />
+
     {enabledFilters.length > 0 && (
-      <Button size="sm" outline onClick={() => dispatch(setFilters([]))}>
+      <Button
+        color="link"
+        className="text-dark"
+        style={{ fontSize: "inherit" }}
+        onClick={() => dispatch(setFilters([]))}
+      >
         {labels.clearFilters}
       </Button>
     )}
-    <GridSelectionInfoConnected />
     {/* behaviors provided by grid component */}
     {p.children}
     {/* custom behaviors provided by us */}
