@@ -36,6 +36,8 @@ $fixed-part-shadow-width: 10px;
   //font-size: 14px;
 
   .dx-g-bs4-table {
+    font-size: 14px;
+
     thead th {
       border-bottom: none;
       background-color: $lighter-blue !important;
@@ -55,15 +57,12 @@ $fixed-part-shadow-width: 10px;
   }
 }
 
-.dx-g-bs4-toolbar,
 .dx-g-bs4-paging-panel {
   background: none;
   border: none;
   padding-left: 0;
   padding-right: 0;
-}
 
-.dx-g-bs4-paging-panel {
   .pagination {
     margin-left: 2em !important; // override m-0 class set by grid
   }

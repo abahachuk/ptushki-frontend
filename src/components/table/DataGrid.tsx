@@ -32,7 +32,7 @@ import {
 import {
   ColumnChooserButton,
   ColumnChooserItem
-} from "./customisations/ColumnChooser";
+} from "./customisations/toolbar/ColumnChooser";
 import { PagingPanelContentConnected } from "./customisations/PagingPanelContent";
 import {
   SelectorColumn,
@@ -41,7 +41,7 @@ import {
 import { SortingLabel } from "./customisations/SortingLabel";
 import { TableComponent } from "./customisations/TableComponent";
 import { TableHeaderRowContent } from "./customisations/TableHeaderRowContent";
-import { ToolbarConnected } from "./customisations/ToolbarComponent";
+import { ToolbarConnected } from "./customisations/toolbar/ToolbarComponent";
 import { DataGridState } from "./DataGridModels";
 
 export interface DataGridCol<TRow extends {}> extends Column {

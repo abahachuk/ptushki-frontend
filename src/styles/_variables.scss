@@ -17,8 +17,7 @@ $gray-lighter: #f7f7f7;
 $orange: #f9b166;
 $charade: #2c2f3c;
 $tundora: #4d4d4d;
-$blueBayox: #556D7A;
-
+$blueBayox: #556d7a;
 
 $table-bg: $white;
 $table-accent-bg: darken($table-bg, 5%);
@@ -31,8 +30,12 @@ $pagination-focus-box-shadow: $orange;
 $pagination-hover-color: $orange;
 
 $root-nav-height: 58px;
-$root-nav-bg: #455A64;
-$root-nav-link-active-bg: #546E7A;
+$root-nav-bg: #455a64;
+$root-nav-link-active-bg: #546e7a;
+
+$grid-toolbar-font-size: 12px;
+
+$popover-max-width: 500px;
 
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";

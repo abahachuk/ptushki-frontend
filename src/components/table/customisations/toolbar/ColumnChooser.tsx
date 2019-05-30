@@ -1,8 +1,8 @@
 import { ColumnChooser as ColumnChooserBase } from "@devexpress/dx-react-grid";
 import React, { FC } from "react";
-import { labels } from "../../../config/i18n/labels";
-import { BaseCheckbox } from "../../checkbox/BaseCheckbox";
-import { GridSettingsDropdownButton } from "../../gridSettingsDropdownButton/GridSettingsDropdownButton";
+import { labels } from "../../../../config/i18n/labels";
+import { BaseCheckbox } from "../../../checkbox/BaseCheckbox";
+import { GridSettingsDropdownButton } from "../../../gridSettingsDropdownButton/GridSettingsDropdownButton";
 
 export const ColumnChooserButton: FC<ColumnChooserBase.ToggleButtonProps> = ({
   onToggle,
