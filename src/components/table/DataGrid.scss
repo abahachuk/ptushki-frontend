@@ -54,6 +54,14 @@ $fixed-part-shadow-width: 10px;
 
   tbody tr {
     background-color: $table-bg;
+
+    &.table-active {
+      background-color: $lighter-blue;
+
+      > td {
+        background: none;
+      }
+    }
   }
 }
 

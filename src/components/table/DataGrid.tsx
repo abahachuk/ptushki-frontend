@@ -107,6 +107,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
             showSelectAll
             cellComponent={SelectorColumn}
             headerCellComponent={SelectorColumnHeader}
+            highlightRow
           />
           <PagingPanel
             pageSizes={DEFAULT_PAGE_SIZES}
