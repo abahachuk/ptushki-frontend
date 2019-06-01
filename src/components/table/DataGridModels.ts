@@ -21,7 +21,7 @@ export interface FilteringRule {
   value?: string;
 }
 
-export interface DataGridState {
+export interface DataGridState<TFilters = Object> {
   fixedColumns: GridColumn[];
   hiddenColumns: string[];
   selection: string[];
@@ -31,4 +31,5 @@ export interface DataGridState {
   filtering: FilteringRule[];
   sorting: Sorting[];
   search: string;
+  filters: TFilters;
 }

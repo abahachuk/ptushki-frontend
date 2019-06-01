@@ -58,7 +58,7 @@ export default class AjaxService {
     let token = securityService.getAccessToken();
     let response = await this.makeFetch(url, token, data);
 
-    if (response.status === 403) {
+    if (response.status === 401) {
       token = await this.refreshToken();
       response = await this.makeFetch(url, token, data);
     } else if (!response.ok) {

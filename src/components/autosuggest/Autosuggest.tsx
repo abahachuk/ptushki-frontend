@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useState,
-  FC,
-  ReactElement,
-  ReactNode
-} from "react";
+import React, { useCallback, useState, FC, ReactNode } from "react";
 import { DropdownItem, Input } from "reactstrap";
 
 import { CustomDropdown } from "../dropdown/Dropdown";
@@ -29,7 +23,6 @@ export interface IAutosuggest {
   value?: string;
   onChangeValue?: ({ value, type }: IChangeValue) => void;
   type?: string;
-  withSearch?: boolean;
   toggleButton?: ReactNode;
 }
 
@@ -42,7 +35,6 @@ export const Autosuggest: FC<IAutosuggest> = ({
   value,
   onChangeValue,
   type = "",
-  withSearch,
   toggleButton
 }) => {
   const [list, setCollection] = useState(collection);
@@ -60,7 +52,7 @@ export const Autosuggest: FC<IAutosuggest> = ({
       setCollection(
         collection.filter(
           item =>
-            item.value.toLowerCase().indexOf(e.target.value.toLowerCase()) !==
+            item.label.toLowerCase().indexOf(e.target.value.toLowerCase()) !==
             -1
         )
       ),
@@ -68,16 +60,18 @@ export const Autosuggest: FC<IAutosuggest> = ({
   );
 
   const renderItem = useCallback(
-    (item: Item) => (
-      <DropdownItem
-        onClick={onSelect}
-        value={item.value}
-        key={item.id}
-        className={`${blockName}__item`}
-      >
-        {item.label}
-      </DropdownItem>
-    ),
+    (item: Item) =>
+      // @ts-ignore
+      item.label && (
+        <DropdownItem
+          onClick={onSelect}
+          value={item.value}
+          key={item.id}
+          className={`${blockName}__item`}
+        >
+          {item.label}
+        </DropdownItem>
+      ),
     [onSelect]
   );
 
@@ -87,7 +81,7 @@ export const Autosuggest: FC<IAutosuggest> = ({
       placeholder={placeholder}
       toggleButton={toggleButton}
     >
-      {withSearch && (
+      {collection.length > 7 && (
         <div className={`${blockName}__search-container`}>
           <Input
             placeholder={searchPlaceholder}

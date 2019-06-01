@@ -3,7 +3,10 @@ import { connect, DispatchProp } from "react-redux";
 import useMount from "react-use/esm/useMount";
 import { DataGrid } from "../../../components/table/DataGrid";
 import { RootState } from "../../../store";
-import { observationsData } from "../../../store/actions/observationListActions";
+import {
+  observationsData,
+  observationsFiltersRequest
+} from "../../../store/actions/observationListActions";
 import { AsyncResource } from "../../../utils/createAsyncStateReducer";
 import { OBSERVATION_LIST_COLUMNS_CONFIG } from "./cells/observationsGridColumns";
 import {
@@ -21,6 +24,7 @@ export const ObservationList: FC<ObservationListProps> = ({
   dispatch
 }) => {
   useMount(() => {
+    dispatch(observationsFiltersRequest());
     dispatch(observationsData.request());
   });
 

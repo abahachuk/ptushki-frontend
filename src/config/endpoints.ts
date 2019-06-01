@@ -11,4 +11,6 @@ export const REFRESH_ENDPOINT = `${startURL}/${authRoute}/refresh`;
 /**
  * Observations
  */
-export const OBSERVATIONS_ENDPOINT = `${startURL}/observations`;
+const observationRoute = "observations";
+export const OBSERVATIONS_ENDPOINT = `${startURL}/${observationRoute}`;
+export const OBSERVATIONS_FILTERS_ENDPOINT = `${startURL}/${observationRoute}/aggregations`;

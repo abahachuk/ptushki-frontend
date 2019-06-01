@@ -2,7 +2,10 @@ import combineSectionReducers from "combine-section-reducers";
 import reduceReducer from "reduce-reducers";
 import { OBSERVATION_GRID_COLUMN_NAMES } from "../../app/features/observations/cells/observationsGridColumns";
 import { OBSERVATIONS_LIST_NAMESPACE } from "../../app/features/observations/conf";
-import { ObservationData } from "../../app/features/observations/models";
+import {
+  ObservationData,
+  ObservationFilters
+} from "../../app/features/observations/models";
 import { DataGridState } from "../../components/table/DataGridModels";
 import { createDataGridReducer } from "../../components/table/dataGridReducer";
 import {
@@ -33,8 +36,9 @@ const initialState = {
       totalCount: 50
     },
     filtering: [],
-    sorting: []
-  } as DataGridState
+    sorting: [],
+    filters: {}
+  } as DataGridState<ObservationFilters>
 };
 
 export const observationListReducer = reduceReducer(

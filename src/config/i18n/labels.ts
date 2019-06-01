@@ -134,7 +134,12 @@ export const labels = {
   elapsedTime: "Время с первого наблюдения",
   loading: "Загрузка...",
   of: "из",
-  verification: "Модерация",
+  verification: {
+    title: "Модерация",
+    verified: "Принят",
+    rejected: "Отклонен",
+    pending: "Ожидает модерации"
+  },
   idx: "#",
   yes: "Да",
   no: "Нет",
