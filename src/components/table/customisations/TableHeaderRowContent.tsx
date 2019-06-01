@@ -36,10 +36,7 @@ export const TableHeaderRowContent: FC<
           dispatch(setFilters([{ columnName: column.name, value }]))
         }
         toggleButton={
-          <ColumnFilterToggleButton
-            column={column}
-            isFilterApplied={isFilterApplied}
-          />
+          <ColumnFilterToggleButton isFilterApplied={isFilterApplied} />
         }
       />
     )}
