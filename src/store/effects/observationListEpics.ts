@@ -19,6 +19,7 @@ import { getDataGridEpics } from "../../components/table/dataGridEpics";
 import { OBSERVATIONS_ENDPOINT } from "../../config/endpoints";
 import { ajaxService } from "../../services";
 import { getGridQuery } from "../../utils/grid/getGridQuery";
+import { getLangQuery } from "../../utils/lang/getLangQuery";
 import {
   observationGridActions,
   observationsData,
@@ -27,17 +28,14 @@ import {
 import { selectLocale } from "../actions/userPreferencesActions";
 import { RootState } from "../index";
 
-export const requestObservationEpic: Epic<any, any, RootState> = (
-  action$,
-  state$
-) =>
+const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
   action$.pipe(
     filter(isActionOf([observationsData.request])),
     withLatestFrom(state$),
     switchMap(([, state]) => {
       const query = qs.stringify({
         ...getGridQuery(OBSERVATIONS_GRID_STATE_SELECTOR(state)),
-        lang: state.userPreferences.selectedLocale
+        ...getLangQuery(state)
       });
 
       return from(
@@ -51,10 +49,7 @@ export const requestObservationEpic: Epic<any, any, RootState> = (
     })
   );
 
-export const verifyObservationEpic: Epic<any, any, RootState> = (
-  action$,
-  state$
-) =>
+const verifyObservationEpic: Epic<any, any, RootState> = (action$, state$) =>
   action$.pipe(
     filter(isActionOf([setObservationVerificationStatus.request])),
     flatMap(action => {
@@ -63,7 +58,7 @@ export const verifyObservationEpic: Epic<any, any, RootState> = (
     })
   );
 
-export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
+const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
   action$.pipe(
     filter(
       isActionOf([
@@ -80,7 +75,7 @@ export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
   );
 
 export const observationListEpic = combineEpics(
-  requestObservationEpic,
+  requestObservationsEpic,
   verifyObservationEpic,
   reRequestOnGridActionsEpic,
   getDataGridEpics(

@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react";
 import { Form, Formik } from "formik";
 import { Button } from "reactstrap";
 
-import { Layout } from "../../../../components/layout/Layout";
+import { AuthFormLayout } from "../../../../components/layout/AuthFormLayout";
 import { FormControl } from "../../../../components/form/FormControl";
 import {
   objectSchema,
@@ -26,7 +26,7 @@ export const ResetPasswordForm: FC<{
   }, [resetPasswordExit]);
 
   return (
-    <Layout title={labels.resetPassword.title}>
+    <AuthFormLayout title={labels.resetPassword.title}>
       <Formik<ResetPasswordData>
         initialValues={{ email: "" }}
         validationSchema={objectSchema().shape({
@@ -64,6 +64,6 @@ export const ResetPasswordForm: FC<{
           </Form>
         )}
       </Formik>
-    </Layout>
+    </AuthFormLayout>
   );
 };

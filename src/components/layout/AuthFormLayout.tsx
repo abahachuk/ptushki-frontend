@@ -2,13 +2,13 @@ import React, { FC, ReactNode } from "react";
 
 import { labels } from "../../config/i18n/labels";
 
-import "./Layout.scss";
+import "./AuthFormLayout.scss";
 
 const ring = require("../../assets/ring.svg");
 
 const blockName = "layout";
 
-export const Layout: FC<{
+export const AuthFormLayout: FC<{
   title: String;
   children: ReactNode;
 }> = ({ title, children }) => (
