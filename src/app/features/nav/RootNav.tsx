@@ -10,8 +10,9 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
+import { AnyAction } from "redux";
 import { labels } from "../../../config/i18n/labels";
-import { logout } from "../../../store/actions/authActions";
+import { signOut } from "../../../store/actions/authActions";
 import { ROUTE_OBSERVATIONS, ROUTE_SIGN_IN } from "../routing/routes";
 import "./RootNav.scss";
 
@@ -34,7 +35,7 @@ export const RootNav: FC<DispatchProp> = ({ dispatch }) => (
         <NavItem>
           <NavLink
             tag={Link}
-            onClick={() => dispatch(logout())} // TODO this should work but it doesn't
+            onClick={() => dispatch((signOut() as any) as AnyAction)}
             to={ROUTE_SIGN_IN.path}
           >
             <ExitToApp className="mr-2" />
