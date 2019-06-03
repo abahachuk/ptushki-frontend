@@ -12,11 +12,7 @@ import {
 } from "reactstrap";
 import { labels } from "../../../config/i18n/labels";
 import { logout } from "../../../store/actions/authActions";
-import {
-  ROUTE_BIRD_INFO,
-  ROUTE_OBSERVATIONS,
-  ROUTE_SIGN_IN
-} from "../routing/routes";
+import { ROUTE_OBSERVATIONS, ROUTE_SIGN_IN } from "../routing/routes";
 import "./RootNav.scss";
 
 const brandLogo = require("../../../assets/brand-logo.svg");
@@ -35,13 +31,6 @@ export const RootNav: FC<DispatchProp> = ({ dispatch }) => (
     </Nav>
     <Collapse isOpen navbar>
       <Nav className="ml-auto" navbar>
-        {/* TODO: should be moved to observation list item */}
-        <NavItem>
-          <NavLink tag={Link} to={ROUTE_BIRD_INFO.path}>
-            Информация о птице (временная ссылка)
-          </NavLink>
-        </NavItem>
-
         <NavItem>
           <NavLink
             tag={Link}

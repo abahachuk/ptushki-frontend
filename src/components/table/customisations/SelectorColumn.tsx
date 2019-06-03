@@ -1,5 +1,5 @@
-import React, { FC } from "react";
 import { TableSelection as TableSelectionBase } from "@devexpress/dx-react-grid";
+import React, { FC } from "react";
 import { BaseCheckbox } from "../../checkbox/BaseCheckbox";
 
 export const SelectorColumn: FC<TableSelectionBase.CellProps> = ({
@@ -8,7 +8,12 @@ export const SelectorColumn: FC<TableSelectionBase.CellProps> = ({
   ...p
 }) => (
   <td {...p}>
-    <BaseCheckbox checked={p.selected} onChange={p.onToggle} className="p-0" />
+    <BaseCheckbox
+      checked={p.selected}
+      onChange={p.onToggle}
+      className="p-0"
+      onClick={e => e.stopPropagation()}
+    />
   </td>
 );
 

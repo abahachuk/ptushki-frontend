@@ -30,14 +30,15 @@ export const VerificationCell = connect()(
           <IconButton
             className="p-0 mr-2"
             disableRipple
-            onClick={() =>
+            onClick={e => {
+              e.stopPropagation();
               dispatch(
                 setObservationVerificationStatus.request({
                   id,
                   verificationStatus: Pending
                 })
-              )
-            }
+              );
+            }}
           >
             <RadioButtonUnchecked />
           </IconButton>
@@ -51,14 +52,15 @@ export const VerificationCell = connect()(
           <IconButton
             className="p-0 mr-2"
             disableRipple
-            onClick={() =>
+            onClick={e => {
+              e.stopPropagation();
               dispatch(
                 setObservationVerificationStatus.request({
                   id,
                   verificationStatus: Rejected
                 })
-              )
-            }
+              );
+            }}
           >
             <Clear />
           </IconButton>
@@ -72,14 +74,15 @@ export const VerificationCell = connect()(
           <IconButton
             className="p-0 mr-2"
             disableRipple
-            onClick={() =>
+            onClick={e => {
+              e.stopPropagation();
               dispatch(
                 setObservationVerificationStatus.request({
                   id,
                   verificationStatus: Verified
                 })
-              )
-            }
+              );
+            }}
           >
             <Check />
           </IconButton>

@@ -55,6 +55,14 @@ $fixed-part-shadow-width: 10px;
   tbody tr {
     background-color: $table-bg;
 
+    &.clickable {
+      cursor: pointer;
+
+      &:hover {
+        background-color: $athensGray;
+      }
+    }
+
     &.table-active {
       background-color: $lighter-blue;
 

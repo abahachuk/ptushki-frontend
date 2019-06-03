@@ -20,6 +20,7 @@ import {
 import { FillLoader } from "../loader/FillLoader";
 import {
   CustomPagingConnected,
+  DefaultGetRowId,
   FilteringStateConnected,
   PagingStateConnected,
   SelectionStateConnected,
@@ -29,10 +30,6 @@ import {
   TableColumnVisibilityConnected,
   TableFixedColumnsConnected
 } from "./behaviors/DataGridBehaviors";
-import {
-  ColumnChooserButton,
-  ColumnChooserItem
-} from "./customisations/toolbar/ColumnChooser";
 import { PagingPanelContentConnected } from "./customisations/PagingPanelContent";
 import {
   SelectorColumn,
@@ -41,6 +38,11 @@ import {
 import { SortingLabel } from "./customisations/SortingLabel";
 import { TableComponent } from "./customisations/TableComponent";
 import { TableHeaderRowContent } from "./customisations/TableHeaderRowContent";
+import { TableRowConnected } from "./customisations/TableRow";
+import {
+  ColumnChooserButton,
+  ColumnChooserItem
+} from "./customisations/toolbar/ColumnChooser";
 import { ToolbarConnected } from "./customisations/toolbar/ToolbarComponent";
 import { DataGridState } from "./DataGridModels";
 
@@ -54,6 +56,7 @@ interface DataGridProps<TRow extends {}> extends GridProps {
   rows: Array<TRow>;
   columns: DataGridCol<TRow>[];
   getRowId?: (row: TRow) => number | string;
+  onRowClick?: (row: TRow) => void;
 
   namespace: string;
   gridStateSelector: (s: unknown) => DataGridState;
@@ -67,7 +70,14 @@ const TABLE_LABELS = {
 };
 
 export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
-  const { namespace, gridStateSelector, isLoading, ...gridProps } = props;
+  const {
+    namespace,
+    gridStateSelector,
+    isLoading,
+    getRowId = DefaultGetRowId,
+    onRowClick,
+    ...gridProps
+  } = props;
 
   return (
     <SubspaceProviderHacked namespace={namespace} mapState={gridStateSelector}>
@@ -84,6 +94,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
               </BreakOutOfSubspace>
             )
           }))}
+          getRowId={getRowId}
         >
           <SortingStateConnected />
           <PagingStateConnected />
@@ -94,7 +105,13 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
 
           <CustomPagingConnected />
           <IntegratedSelection />
-          <Table messages={TABLE_LABELS} tableComponent={TableComponent} />
+          <Table
+            messages={TABLE_LABELS}
+            tableComponent={TableComponent}
+            rowComponent={p => (
+              <TableRowConnected {...p} onRowClick={onRowClick} />
+            )}
+          />
 
           <TableColumnResizingConnected />
           <TableHeaderRow
@@ -107,7 +124,6 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
             showSelectAll
             cellComponent={SelectorColumn}
             headerCellComponent={SelectorColumnHeader}
-            highlightRow
           />
           <PagingPanel
             pageSizes={DEFAULT_PAGE_SIZES}
