@@ -1,4 +1,4 @@
-@import '../../../styles/variables';
+@import "../../../styles/variables";
 
 .add-observation {
   padding: 15px;
@@ -33,7 +33,7 @@
   &__euring {
     color: $mineSharf;
     font-size: 14px;
-  }  
+  }
 
   &__info-blocks-container {
     display: flex;
@@ -80,7 +80,6 @@
   }
 
   &__field-label {
-    font-family: 'Source Sans Pro', sans-serif;
     color: $tundora;
     font-weight: 600;
     font-size: 14px;

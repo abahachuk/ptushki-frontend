@@ -1,0 +1,6 @@
+@import "../../../styles/mixins";
+
+.paging-panel-content {
+  font-size: 14px;
+  @extend .d-flex, .align-items-center, .justify-content-end;
+}

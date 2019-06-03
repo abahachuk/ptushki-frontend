@@ -36,6 +36,8 @@ $fixed-part-shadow-width: 10px;
   //font-size: 14px;
 
   .dx-g-bs4-table {
+    font-size: 14px;
+
     thead th {
       border-bottom: none;
       background-color: $lighter-blue !important;
@@ -52,18 +54,32 @@ $fixed-part-shadow-width: 10px;
 
   tbody tr {
     background-color: $table-bg;
+
+    &.table-active {
+      background-color: $lighter-blue;
+
+      > td {
+        background: none;
+      }
+    }
   }
 }
 
-.dx-g-bs4-toolbar,
 .dx-g-bs4-paging-panel {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+
+  &:after {
+    display: none !important;
+  }
+
   background: none;
   border: none;
+  margin-left: -15px;
   padding-left: 0;
   padding-right: 0;
-}
 
-.dx-g-bs4-paging-panel {
   .pagination {
     margin-left: 2em !important; // override m-0 class set by grid
   }

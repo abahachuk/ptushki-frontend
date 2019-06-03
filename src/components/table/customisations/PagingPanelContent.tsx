@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import { connect } from "react-redux";
 import { labels } from "../../../config/i18n/labels";
 import { DataGridState } from "../DataGridModels";
+import "./PagingPanelContent.scss";
 
 interface Props extends PagingPanel.ContainerProps {
   selectedCount: number;
@@ -10,11 +11,8 @@ interface Props extends PagingPanel.ContainerProps {
 }
 
 export const PagingPanelContent: FC<Props> = ({ selectedCount, ...p }) => (
-  <div className="d-flex align-items-center">
-    <div className="mr-auto">
-      {selectedCount} {labels.of} {p.totalCount} {labels.ofBirds}
-    </div>
-    <div className="mr-n3">{labels.show}</div>
+  <div className="paging-panel-content">
+    <div>{labels.show}</div>
     <PagingPanel.Container {...p} />
   </div>
 );

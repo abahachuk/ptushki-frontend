@@ -6,11 +6,11 @@ import {
   DropdownToggle,
   UncontrolledDropdown
 } from "reactstrap";
-import { labels } from "../../../config/i18n/labels";
-import { RootState } from "../../../store";
-import { selectViewMode } from "../../../store/actions/userPreferencesActions";
-import { ViewMode } from "../../../store/reducers/userPreferencesReducer";
-import { GridSettingsDropdownButton } from "../../gridSettingsDropdownButton/GridSettingsDropdownButton";
+import { labels } from "../../../../config/i18n/labels";
+import { RootState } from "../../../../store";
+import { selectViewMode } from "../../../../store/actions/userPreferencesActions";
+import { ViewMode } from "../../../../store/reducers/userPreferencesReducer";
+import { GridSettingsDropdownButton } from "../../../gridSettingsDropdownButton/GridSettingsDropdownButton";
 
 interface Props extends DispatchProp {
   selectedViewMode: ViewMode;
@@ -22,13 +22,10 @@ const VIEW_MODE_LABELS: { [key in ViewMode]: string } = {
 
 export const ViewModeSelector: FC<Props> = ({ dispatch, selectedViewMode }) => (
   <UncontrolledDropdown>
-    <DropdownToggle
-      tag={GridSettingsDropdownButton}
-      className="border-0 shadow-none bg-transparent text-dark"
-    >
+    <DropdownToggle tag={GridSettingsDropdownButton}>
       <span>{VIEW_MODE_LABELS[selectedViewMode]}</span>
     </DropdownToggle>
-    <DropdownMenu right>
+    <DropdownMenu right className="grid-settings-dropdown-menu">
       {Object.entries(ViewMode).map(([key, viewMode]: [ViewMode, ViewMode]) => (
         <DropdownItem
           key={key}
