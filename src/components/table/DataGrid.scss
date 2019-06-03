@@ -9,6 +9,7 @@ $fixed-part-shadow-width: 10px;
   // override badly written grid styles
   border-right: none !important;
   background-color: inherit !important;
+  z-index: $zindex-fixed;
 
   // for :after to be visible.
   overflow: visible;
@@ -24,6 +25,11 @@ $fixed-part-shadow-width: 10px;
     width: $fixed-part-shadow-width;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.05), transparent);
   }
+}
+
+th.dx-g-bs4-fixed-cell {
+  // something bigger than z-index of fixed td z-index
+  z-index: 10000000;
 }
 
 .table-cell-value {
@@ -44,7 +50,47 @@ $fixed-part-shadow-width: 10px;
       color: $darker-blue;
       height: 48px;
       vertical-align: middle;
+      padding: 0;
       //font-size: 13px;
+
+      .dx-g-bs4-header-cell-content {
+        padding: 2px 16px;
+
+        .dropdown {
+          position: static;
+          align-self: center;
+        }
+
+        .dropdown__dropdown {
+          border: none;
+          padding: 0;
+          margin-left: 6px;
+          width: auto;
+
+          &:hover,
+          &:active,
+          &:focus {
+            background-color: transparent !important;
+            outline: none !important;
+            box-shadow: none !important;
+          }
+        }
+
+        .dropdown__menu-container {
+          transform: none !important; // to override inline styles
+          top: 100% !important; // to override inline styles
+        }
+      }
+
+      .filter-toggle-button {
+        &:hover,
+        &:active,
+        &:focus {
+          background-color: transparent !important;
+          outline: none !important;
+          box-shadow: none !important;
+        }
+      }
     }
 
     thead tr:first-child th {
@@ -62,6 +108,21 @@ $fixed-part-shadow-width: 10px;
         background: none;
       }
     }
+  }
+}
+
+.filter-toggle-button {
+  background-image: url("../../assets/filter-icon.svg");
+  background-size: 100%;
+  height: 12px;
+  width: 12px;
+
+  &:hover,
+  &:active,
+  &:focus,
+  &--active,
+  .show & {
+    background-image: url("../../assets/filter-icon-active.svg");
   }
 }
 

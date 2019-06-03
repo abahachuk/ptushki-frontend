@@ -40,14 +40,18 @@ import {
 } from "./customisations/SelectorColumn";
 import { SortingLabel } from "./customisations/SortingLabel";
 import { TableComponent } from "./customisations/TableComponent";
-import { TableHeaderRowContent } from "./customisations/TableHeaderRowContent";
+import { TableHeaderRowContentConnected } from "./customisations/TableHeaderRowContent";
 import { ToolbarConnected } from "./customisations/toolbar/ToolbarComponent";
-import { DataGridState } from "./DataGridModels";
+import { DataGridFilter, DataGridState } from "./DataGridModels";
 
 export interface DataGridCol<TRow extends {}> extends Column {
   name: GridColumn;
   // make required and override with TRow generic for type safety
   getCellValue: (row: TRow, columnName: string) => any;
+  filter?: {
+    getValue?: (filter: DataGridFilter) => string;
+    getLabel?: (filter: DataGridFilter) => string;
+  };
 }
 
 interface DataGridProps<TRow extends {}> extends GridProps {
@@ -100,7 +104,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           <TableHeaderRow
             showSortingControls
             sortLabelComponent={SortingLabel}
-            contentComponent={TableHeaderRowContent}
+            contentComponent={TableHeaderRowContentConnected}
           />
 
           <TableSelection

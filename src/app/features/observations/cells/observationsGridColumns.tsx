@@ -2,7 +2,7 @@ import * as React from "react";
 import { DataGridCol } from "../../../../components/table/DataGrid";
 import { labels } from "../../../../config/i18n/labels";
 import { GridColumn } from "../../../../utils/grid/columnsConfig";
-import { ObservationData } from "../models";
+import { ObservationData, ObservationFilters } from "../models";
 import { IndexCell } from "./IndexCell";
 import { VerificationCell } from "./VerificationCell";
 
@@ -15,8 +15,19 @@ export const OBSERVATION_LIST_COLUMNS_CONFIG: DataGridCol<ObservationData>[] = [
   },
   {
     name: GridColumn.verified,
-    title: labels.verification,
-    getCellValue: r => <VerificationCell observation={r} />
+    title: labels.verification.title,
+    getCellValue: r => <VerificationCell observation={r} />,
+    filter: {
+      getLabel: ({ value }) => {
+        if (value === true) {
+          return labels.verification.verified;
+        }
+        if (value === false) {
+          return labels.verification.rejected;
+        }
+        return labels.verification.pending;
+      }
+    }
   },
   {
     name: GridColumn.sex,
@@ -65,7 +76,18 @@ export const OBSERVATION_LIST_COLUMNS_CONFIG: DataGridCol<ObservationData>[] = [
       <>
         {r.finder.firstName} {r.finder.lastName}
       </>
-    )
+    ),
+    filter: {
+      getLabel: ({ value }) =>
+        // @ts-ignore
+        `${value.firstName || ""}${
+          // @ts-ignore
+          value.firstName ? " " : ""
+          // @ts-ignore
+        }${value.lastName || ""}`,
+      // @ts-ignore
+      getValue: ({ value }) => value.id
+    }
   },
   {
     name: GridColumn.elapsedTime,

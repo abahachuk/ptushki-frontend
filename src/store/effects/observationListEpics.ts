@@ -14,19 +14,29 @@ import {
   OBSERVATIONS_GRID_STATE_SELECTOR,
   OBSERVATIONS_LIST_NAMESPACE
 } from "../../app/features/observations/conf";
-import { ObservationsResponse } from "../../app/features/observations/models";
+import {
+  ObservationData,
+  ObservationFilters,
+  ObservationsResponse
+} from "../../app/features/observations/models";
 import { getDataGridEpics } from "../../components/table/dataGridEpics";
-import { OBSERVATIONS_ENDPOINT } from "../../config/endpoints";
+import {
+  OBSERVATIONS_ENDPOINT,
+  OBSERVATIONS_FILTERS_ENDPOINT
+} from "../../config/endpoints";
 import { ajaxService } from "../../services";
 import { getGridQuery } from "../../utils/grid/getGridQuery";
 import { getLangQuery } from "../../utils/lang/getLangQuery";
 import {
   observationGridActions,
   observationsData,
+  observationsFiltersRequest,
   setObservationVerificationStatus
 } from "../actions/observationListActions";
 import { selectLocale } from "../actions/userPreferencesActions";
 import { RootState } from "../index";
+import { signOut } from "../actions/authActions";
+import { SecurityError } from "../../services/SecurutyService";
 
 const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
   action$.pipe(
@@ -44,7 +54,30 @@ const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
         )
       ).pipe(
         map(d => observationsData.success(d.content)),
-        catchError(e => of(observationsData.failure(e)))
+        catchError(e => {
+          if (e instanceof SecurityError) return of(signOut());
+          return of(observationsData.failure(e));
+        })
+      );
+    })
+  );
+
+export const requestObservationFiltersEpic: Epic<any, any, RootState> = (
+  action$,
+  state$
+) =>
+  action$.pipe(
+    filter(isActionOf([observationsFiltersRequest])),
+    withLatestFrom(state$),
+    switchMap(([, state]) => {
+      return from(
+        ajaxService.makeCall<ObservationFilters>(OBSERVATIONS_FILTERS_ENDPOINT)
+      ).pipe(
+        map(d => observationGridActions.addFilters(d)),
+        catchError(e => {
+          if (e instanceof SecurityError) return of(signOut());
+          return EMPTY;
+        })
       );
     })
   );
@@ -78,6 +111,7 @@ export const observationListEpic = combineEpics(
   requestObservationsEpic,
   verifyObservationEpic,
   reRequestOnGridActionsEpic,
+  requestObservationFiltersEpic,
   getDataGridEpics(
     OBSERVATIONS_LIST_NAMESPACE,
     OBSERVATIONS_GRID_STATE_SELECTOR
