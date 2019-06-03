@@ -1,6 +1,6 @@
 import { GridDataResponse, GridQuery } from "../../../utils/grid/models";
 import { UserInfo } from "../auth/models";
-import { DataGridFilter } from "../../../components/table/DataGrid";
+import { DataGridFilter } from "../../../components/table/DataGridModels";
 
 export enum VerificationStatus {
   Pending = "Pending",
@@ -22,18 +22,14 @@ export interface ObservationData {
   remarks: string;
 }
 
-export interface ObservationFilters {
-  id?: DataGridFilter[];
+export type DataGridFiltersObj<TData> = {
+  [key in keyof TData]?: DataGridFilter[]
+};
+
+export interface ObservationFilters
+  extends DataGridFiltersObj<ObservationData> {
   verificationStatus?: (DataGridFilter & { value: boolean })[];
-  colorRing?: DataGridFilter[];
-  note?: DataGridFilter[];
-  placeName?: DataGridFilter[];
-  date?: DataGridFilter[];
-  direction?: DataGridFilter[];
-  distance?: DataGridFilter[];
   finder?: (DataGridFilter & { value: UserInfo })[];
-  elapsedTime?: DataGridFilter[];
-  remarks?: DataGridFilter[];
 }
 
 export interface ObservationsResponse

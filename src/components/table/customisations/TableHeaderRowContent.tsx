@@ -4,24 +4,25 @@ import { connect, DispatchProp } from "react-redux";
 import { Column } from "@devexpress/dx-react-grid";
 import { ColumnFilterToggleButton } from "./ColumnFilterToggleButton";
 import { Autosuggest } from "../../autosuggest/Autosuggest";
-import { DataGridState } from "../DataGridModels";
-import { DataGridCol, DataGridFilter } from "../DataGrid";
+import { DataGridState, DataGridFilter } from "../DataGridModels";
+import { DataGridCol } from "../DataGrid";
 import { setFilters } from "../dataGridActions";
+import { DataGridFiltersObj } from "../../../app/features/observations/models";
 
 export const TableHeaderRowContent: FC<
   TableHeaderRow.ContentProps & {
     isFilterApplied: boolean;
-    filters: DataGridFilter[];
+    availableFilters: DataGridFilter[];
     column: Column & DataGridCol<Object>;
   } & DispatchProp
-> = ({ column, dispatch, children, filters, isFilterApplied }) => (
+> = ({ column, dispatch, children, availableFilters, isFilterApplied }) => (
   <TableHeaderRow.Content column={column} align="left">
     <div className="d-flex align-items-center align-self-center flex-grow-1 justify-content-between">
       {children}
     </div>
-    {filters && !!filters.length && (
+    {availableFilters && !!availableFilters.length && (
       <Autosuggest
-        collection={filters.map((filter, i) => ({
+        collection={availableFilters.map((filter, i) => ({
           label:
             column.filter && column.filter.getLabel
               ? column.filter.getLabel(filter)
@@ -49,13 +50,14 @@ export const TableHeaderRowContentConnected = connect(
       f => f.columnName === ownProps.column.name
     );
 
-    // @ts-ignore
-    const filters = state.filters[ownProps.column.name];
+    const availableFilters = (state.availableFilters as DataGridFiltersObj<
+      any
+    >)[ownProps.column.name];
     const isFilterApplied = !!(columnFilter && columnFilter.value);
 
     return {
       ...ownProps,
-      filters,
+      availableFilters,
       isFilterApplied
     };
   }

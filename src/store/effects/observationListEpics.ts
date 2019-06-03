@@ -76,9 +76,9 @@ export const requestObservationFiltersEpic: Epic<any, any, RootState> = (
         ajaxService.makeCall<ObservationFilters>(OBSERVATIONS_FILTERS_ENDPOINT)
       ).pipe(
         map(d => observationGridActions.addFilters(d)),
-        // eslint-disable-next-line consistent-return
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
+          return EMPTY;
         })
       );
     })

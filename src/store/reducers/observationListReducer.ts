@@ -37,7 +37,7 @@ const initialState = {
     },
     filtering: [],
     sorting: [],
-    filters: {}
+    availableFilters: {}
   } as DataGridState<ObservationFilters>
 };
 

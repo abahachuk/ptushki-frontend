@@ -21,6 +21,11 @@ export interface FilteringRule {
   value?: string;
 }
 
+export interface DataGridFilter {
+  count: number;
+  value: string | boolean;
+}
+
 export interface DataGridState<TFilters = Object> {
   fixedColumns: GridColumn[];
   hiddenColumns: string[];
@@ -31,5 +36,5 @@ export interface DataGridState<TFilters = Object> {
   filtering: FilteringRule[];
   sorting: Sorting[];
   search: string;
-  filters: TFilters;
+  availableFilters: TFilters;
 }

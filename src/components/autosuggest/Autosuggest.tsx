@@ -61,7 +61,6 @@ export const Autosuggest: FC<IAutosuggest> = ({
 
   const renderItem = useCallback(
     (item: Item) =>
-      // @ts-ignore
       item.label && (
         <DropdownItem
           onClick={onSelect}

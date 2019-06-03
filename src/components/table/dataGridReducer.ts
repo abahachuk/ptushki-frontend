@@ -24,7 +24,7 @@ export const createDataGridReducer = (
         addFilters,
         (state, action) => ({
           ...state,
-          filters: action.payload
+          availableFilters: action.payload
         }),
         initialState
       ),

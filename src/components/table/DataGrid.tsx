@@ -42,12 +42,7 @@ import { SortingLabel } from "./customisations/SortingLabel";
 import { TableComponent } from "./customisations/TableComponent";
 import { TableHeaderRowContentConnected } from "./customisations/TableHeaderRowContent";
 import { ToolbarConnected } from "./customisations/toolbar/ToolbarComponent";
-import { DataGridState } from "./DataGridModels";
-
-export interface DataGridFilter {
-  count: number;
-  value: string | boolean;
-}
+import { DataGridFilter, DataGridState } from "./DataGridModels";
 
 export interface DataGridCol<TRow extends {}> extends Column {
   name: GridColumn;
