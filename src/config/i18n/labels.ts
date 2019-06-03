@@ -69,6 +69,7 @@ export const labels = {
   },
   addObservation: {
     title: "Добавление наблюдения",
+    actionTitle: "Добавить наблюдение",
     subTitle:
       "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
     labelType: "Тип метки",
@@ -147,11 +148,15 @@ export const labels = {
   noData: "Нет данных",
   copyright: "© 2019 Ptushki. Все права защищены.",
   filter: "Фильтр",
-  clearFilters: "Сбросить фильтры",
+  clearFilters: "Сбросить все фильтры",
   search: "Поиск",
   show: "Показать",
+  selected: "Выбрано",
   ofBirds: "птиц",
   columns: "Колонки",
   import: "Импорт",
-  export: "Экспорт"
+  importData: "Загрузить данные",
+  export: "Экспорт",
+  exportData: "Экспортировать данные",
+  logout: "Выйти"
 };

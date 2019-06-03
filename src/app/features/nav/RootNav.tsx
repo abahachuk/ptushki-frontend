@@ -1,4 +1,6 @@
-import React from "react";
+import { ExitToApp } from "@material-ui/icons";
+import React, { FC } from "react";
+import { connect, DispatchProp } from "react-redux";
 import { NavLink as Link } from "react-router-dom";
 import {
   Collapse,
@@ -9,19 +11,19 @@ import {
   NavLink
 } from "reactstrap";
 import { labels } from "../../../config/i18n/labels";
+import { logout } from "../../../store/actions/authActions";
 import {
+  ROUTE_BIRD_INFO,
   ROUTE_OBSERVATIONS,
-  ROUTE_USER_INFO,
-  ROUTE_BIRD_INFO
+  ROUTE_SIGN_IN
 } from "../routing/routes";
-import { ProtectedNavItemConnected } from "./ProtectedNavItemConnected";
 import "./RootNav.scss";
 
 const brandLogo = require("../../../assets/brand-logo.svg");
 
-export const RootNav = () => (
-  <Navbar dark expand="sm" className="py-1 px-5 root-nav">
-    <NavbarBrand href="/">
+export const RootNav: FC<DispatchProp> = ({ dispatch }) => (
+  <Navbar dark expand="sm" className="p-0 px-3 root-nav">
+    <NavbarBrand href="/" className="mr-5">
       <img src={brandLogo} alt={labels.brandName} />
     </NavbarBrand>
     <Nav navbar>
@@ -36,17 +38,23 @@ export const RootNav = () => (
         {/* TODO: should be moved to observation list item */}
         <NavItem>
           <NavLink tag={Link} to={ROUTE_BIRD_INFO.path}>
-            Информация о птице
+            Информация о птице (временная ссылка)
           </NavLink>
         </NavItem>
-        <ProtectedNavItemConnected {...ROUTE_USER_INFO}>
-          <img
-            src="http://i.pravatar.cc/60" // TODO this is a placeholder
-            alt="avatar"
-            className="nav-user-img"
-          />
-        </ProtectedNavItemConnected>
+
+        <NavItem>
+          <NavLink
+            tag={Link}
+            onClick={() => dispatch(logout())} // TODO this should work but it doesn't
+            to={ROUTE_SIGN_IN.path}
+          >
+            <ExitToApp className="mr-2" />
+            {labels.logout}
+          </NavLink>
+        </NavItem>
       </Nav>
     </Collapse>
   </Navbar>
 );
+
+export const RootNavConnected = connect()(RootNav);

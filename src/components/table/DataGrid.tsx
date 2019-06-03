@@ -32,7 +32,7 @@ import {
 import {
   ColumnChooserButton,
   ColumnChooserItem
-} from "./customisations/ColumnChooser";
+} from "./customisations/toolbar/ColumnChooser";
 import { PagingPanelContentConnected } from "./customisations/PagingPanelContent";
 import {
   SelectorColumn,
@@ -41,7 +41,7 @@ import {
 import { SortingLabel } from "./customisations/SortingLabel";
 import { TableComponent } from "./customisations/TableComponent";
 import { TableHeaderRowContentConnected } from "./customisations/TableHeaderRowContent";
-import { ToolbarConnected } from "./customisations/ToolbarComponent";
+import { ToolbarConnected } from "./customisations/toolbar/ToolbarComponent";
 import { DataGridState } from "./DataGridModels";
 
 export interface DataGridFilter {
@@ -116,6 +116,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
             showSelectAll
             cellComponent={SelectorColumn}
             headerCellComponent={SelectorColumnHeader}
+            highlightRow
           />
           <PagingPanel
             pageSizes={DEFAULT_PAGE_SIZES}

@@ -1,21 +1,24 @@
+@import "./variables";
+
 @mixin error {
-    font-size: 12px;
-    line-height: 18px;
-    letter-spacing: 0.09px;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.09px;
 }
 
 @mixin text {
-    font-size: 14px;
-    line-height: 18px;
-    letter-spacing: 0.1px;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
 }
 
 @mixin form-text-content {
-    @include text;
+  @include text;
 }
 
 @mixin input-text {
-    @include text;
-
-    font-family: 'Source Sans Pro', sans-serif;
+  @include text;
 }
+
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
