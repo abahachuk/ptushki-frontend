@@ -2,6 +2,7 @@ import reduceReducer from "reduce-reducers";
 import { handleAction } from "redux-actions";
 import { namespaced } from "redux-subspace";
 import {
+  addFilters,
   setFilters,
   setPage,
   setPageSize,
@@ -18,6 +19,15 @@ export const createDataGridReducer = (
   namespaced(namespace)(
     reduceReducer(
       initialState,
+
+      handleAction(
+        addFilters,
+        (state, action) => ({
+          ...state,
+          availableFilters: action.payload
+        }),
+        initialState
+      ),
 
       handleAction(
         setSorting,
