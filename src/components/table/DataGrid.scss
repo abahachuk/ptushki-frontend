@@ -101,6 +101,14 @@ th.dx-g-bs4-fixed-cell {
   tbody tr {
     background-color: $table-bg;
 
+    &.clickable {
+      cursor: pointer;
+
+      &:hover {
+        background-color: $athensGray;
+      }
+    }
+
     &.table-active {
       background-color: $lighter-blue;
 

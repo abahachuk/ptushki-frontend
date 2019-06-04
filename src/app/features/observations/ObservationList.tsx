@@ -1,3 +1,4 @@
+import { push } from "connected-react-router";
 import React, { FC } from "react";
 import { connect, DispatchProp } from "react-redux";
 import useMount from "react-use/esm/useMount";
@@ -8,6 +9,7 @@ import {
   observationsFiltersRequest
 } from "../../../store/actions/observationListActions";
 import { AsyncResource } from "../../../utils/createAsyncStateReducer";
+import { ROUTE_BIRD_INFO } from "../routing/routes";
 import { OBSERVATION_LIST_COLUMNS_CONFIG } from "./cells/observationsGridColumns";
 import {
   OBSERVATIONS_GRID_STATE_SELECTOR,
@@ -35,6 +37,10 @@ export const ObservationList: FC<ObservationListProps> = ({
       rows={observations.error ? [] : observations.value}
       columns={OBSERVATION_LIST_COLUMNS_CONFIG}
       isLoading={observations.isLoading}
+      onRowClick={r => {
+        // TODO pass route param
+        dispatch(push(ROUTE_BIRD_INFO.path));
+      }}
     />
   );
 };

@@ -97,3 +97,5 @@ export const TableColumnVisibilityConnected = connect(
     defaultHiddenColumnNames: state.hiddenColumns
   })
 )(TableColumnVisibility);
+
+export const DefaultGetRowId = ({ id }: { id: string }) => id;
