@@ -37,4 +37,5 @@ export interface DataGridState<TFilters = Object> {
   sorting: Sorting[];
   search: string;
   availableFilters: TFilters;
+  fixedPartWidth: number;
 }

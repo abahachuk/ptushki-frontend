@@ -7,7 +7,6 @@ import {
   PagingPanel,
   Table,
   TableHeaderRow,
-  TableSelection,
   Toolbar
 } from "@devexpress/dx-react-grid-bootstrap4";
 import React from "react";
@@ -31,14 +30,11 @@ import {
   TableFixedColumnsConnected
 } from "./behaviors/DataGridBehaviors";
 import { PagingPanelContentConnected } from "./customisations/PagingPanelContent";
-import {
-  SelectorColumn,
-  SelectorColumnHeader
-} from "./customisations/SelectorColumn";
 import { SortingLabel } from "./customisations/SortingLabel";
-import { TableComponent } from "./customisations/TableComponent";
+import { TableComponentConnected } from "./customisations/TableComponent";
 import { TableHeaderRowContentConnected } from "./customisations/TableHeaderRowContent";
 import { TableRowConnected } from "./customisations/TableRow";
+import { TableSelectionComponent } from "./customisations/TableSelectionComponent";
 import {
   ColumnChooserButton,
   ColumnChooserItem
@@ -111,7 +107,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           <IntegratedSelection />
           <Table
             messages={TABLE_LABELS}
-            tableComponent={TableComponent}
+            tableComponent={TableComponentConnected}
             rowComponent={p => (
               <TableRowConnected {...p} onRowClick={onRowClick} />
             )}
@@ -124,11 +120,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
             contentComponent={TableHeaderRowContentConnected}
           />
 
-          <TableSelection
-            showSelectAll
-            cellComponent={SelectorColumn}
-            headerCellComponent={SelectorColumnHeader}
-          />
+          <TableSelectionComponent />
           <PagingPanel
             pageSizes={DEFAULT_PAGE_SIZES}
             containerComponent={PagingPanelContentConnected}

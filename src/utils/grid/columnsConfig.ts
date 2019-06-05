@@ -1,4 +1,5 @@
-import { intersection } from "ramda";
+import { intersection, sum } from "ramda";
+import { SELECTOR_COLUMN_WIDTH } from "../../components/table/customisations/TableSelectionComponent";
 
 export enum GridColumn {
   id = "id",
@@ -15,6 +16,11 @@ export enum GridColumn {
   finder = "finder",
   elapsedTime = "elapsedTime",
   date = "date"
+}
+
+export interface GridColumnWidth {
+  columnName: GridColumn;
+  width: number;
 }
 
 export const defaultColumnWidths: { [key in GridColumn]: number } = {
@@ -34,7 +40,7 @@ export const defaultColumnWidths: { [key in GridColumn]: number } = {
   date: 300
 };
 
-export const getColumnWidths = (cols: GridColumn[]) =>
+export const getColumnWidths = (cols: GridColumn[]): GridColumnWidth[] =>
   cols.map(c => ({
     columnName: c,
     width: defaultColumnWidths[c]
@@ -48,3 +54,16 @@ export const defaultFixedColumns = [
 
 export const getFixedColumns = (cols: GridColumn[]) =>
   intersection(cols, defaultFixedColumns);
+
+export const getFixedPartWidth = (
+  columnWidths: GridColumnWidth[],
+  fixedColumns: GridColumn[]
+) => {
+  return (
+    sum(
+      columnWidths
+        .filter(cw => fixedColumns.includes(cw.columnName))
+        .map(({ width }) => width)
+    ) + SELECTOR_COLUMN_WIDTH
+  );
+};

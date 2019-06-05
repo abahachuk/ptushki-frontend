@@ -1,6 +1,7 @@
 import { routerMiddleware } from "connected-react-router";
-import { applyMiddleware, createStore } from "redux";
+import { createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { applyMiddleware } from "redux-subspace";
 import { createEpicMiddleware } from "redux-subspace-observable";
 import thunk from "redux-thunk";
 

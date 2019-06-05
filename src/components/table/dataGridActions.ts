@@ -1,4 +1,10 @@
-import { createStandardAction } from "typesafe-actions";
+import { Dictionary, pick } from "ramda";
+import { ThunkAction } from "redux-thunk";
+import { ActionCreator, createStandardAction } from "typesafe-actions";
+import {
+  getFixedPartWidth,
+  GridColumnWidth
+} from "../../utils/grid/columnsConfig";
 import { prefixActionCreator } from "../../utils/subspace/prefixActionCreator";
 import { FilteringRule, Sorting } from "./DataGridModels";
 
@@ -14,6 +20,17 @@ export const setSelection = createStandardAction("SET_SELECTION")<string[]>();
 export const setFilters = createStandardAction("SET_FILTERS")<
   FilteringRule[]
 >();
+export const setFixedPartWidth = createStandardAction("SET_FIXED_PART_WIDTH")<
+  number
+>();
+
+export const onColumnWidthsChangeThunk = (
+  columnWidths: GridColumnWidth[]
+): ThunkAction<any, any, any, any> => (dispatch, getState) => {
+  dispatch(
+    setFixedPartWidth(getFixedPartWidth(columnWidths, getState().fixedColumns))
+  );
+};
 // endregion
 
 export const dataGridActions = <TFilters>(namespace: string) => ({
@@ -25,3 +42,14 @@ export const dataGridActions = <TFilters>(namespace: string) => ({
   setSelection: prefixActionCreator(namespace, setSelection),
   setFilters: prefixActionCreator(namespace, setFilters)
 });
+
+// for getting those actions, after which we need to re-request the data
+export const dataGridActionsRequiringRequest = (
+  actionsObj: Dictionary<ActionCreator<any>>
+): ActionCreator<any>[] =>
+  Object.values(
+    pick(
+      ["setPage", "setPageSize", "setSearch", "setSorting", "setFilters"],
+      actionsObj
+    )
+  );
