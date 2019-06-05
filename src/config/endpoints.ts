@@ -14,3 +14,10 @@ export const REFRESH_ENDPOINT = `${startURL}/${authRoute}/refresh`;
 const observationRoute = "observations";
 export const OBSERVATIONS_ENDPOINT = `${startURL}/${observationRoute}`;
 export const OBSERVATIONS_FILTERS_ENDPOINT = `${startURL}/${observationRoute}/aggregations`;
+
+/**
+ * Birds
+ */
+const birdRoute = "observations"; // TODO replace when birds api is available
+export const BIRDS_ENDPOINT = `${startURL}/${birdRoute}`;
+export const BIRDS_FILTERS_ENDPOINT = `${startURL}/${birdRoute}/aggregations`;

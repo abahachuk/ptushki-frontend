@@ -10,8 +10,8 @@ import {
 } from "../../../store/actions/observationListActions";
 import { AsyncResource } from "../../../utils/createAsyncStateReducer";
 import { ROUTE_BIRD_INFO } from "../routing/routes";
+import { OBSERVATION_LIST_COLUMNS_CONFIG } from "./columns";
 import {
-  OBSERVATION_LIST_COLUMNS_CONFIG,
   OBSERVATIONS_GRID_STATE_SELECTOR,
   OBSERVATIONS_LIST_NAMESPACE
 } from "./conf";

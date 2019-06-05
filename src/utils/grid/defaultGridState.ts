@@ -2,9 +2,9 @@ import { DataGridState } from "../../components/table/DataGridModels";
 import {
   getColumnWidths,
   getFixedColumns,
-  getFixedPartWidth,
-  GridColumn
+  getFixedPartWidth
 } from "./columnsConfig";
+import { GridColumn } from "./GridColumn";
 
 export const defaultDataGridState: DataGridState<any> = {
   fixedColumns: [],

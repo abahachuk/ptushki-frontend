@@ -62,14 +62,14 @@ const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
     })
   );
 
-export const requestObservationFiltersEpic: Epic<any, any, RootState> = (
-  action$,
-  state$
-) =>
+export const requestObservationFiltersEpic: Epic<
+  any,
+  any,
+  RootState
+> = action$ =>
   action$.pipe(
     filter(isActionOf([observationsFiltersRequest])),
-    withLatestFrom(state$),
-    switchMap(([, state]) => {
+    switchMap(() => {
       return from(
         ajaxService.makeCall<ObservationFilters>(OBSERVATIONS_FILTERS_ENDPOINT)
       ).pipe(
@@ -82,7 +82,7 @@ export const requestObservationFiltersEpic: Epic<any, any, RootState> = (
     })
   );
 
-const verifyObservationEpic: Epic<any, any, RootState> = (action$, state$) =>
+const verifyObservationEpic: Epic<any, any, RootState> = action$ =>
   action$.pipe(
     filter(isActionOf([setObservationVerificationStatus.request])),
     flatMap(action => {

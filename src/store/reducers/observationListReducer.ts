@@ -1,9 +1,7 @@
 import combineSectionReducers from "combine-section-reducers";
 import reduceReducer from "reduce-reducers";
-import {
-  OBSERVATION_GRID_COLUMN_NAMES,
-  OBSERVATIONS_LIST_NAMESPACE
-} from "../../app/features/observations/conf";
+import { OBSERVATION_GRID_COLUMN_NAMES } from "../../app/features/observations/columns";
+import { OBSERVATIONS_LIST_NAMESPACE } from "../../app/features/observations/conf";
 import {
   ObservationData,
   ObservationFilters

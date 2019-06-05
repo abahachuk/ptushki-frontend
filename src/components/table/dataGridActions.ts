@@ -1,12 +1,9 @@
 import { Dictionary, pick } from "ramda";
 import { ThunkAction } from "redux-thunk";
 import { ActionCreator, createStandardAction } from "typesafe-actions";
-import {
-  getFixedPartWidth,
-  GridColumnWidth
-} from "../../utils/grid/columnsConfig";
+import { getFixedPartWidth } from "../../utils/grid/columnsConfig";
 import { prefixActionCreator } from "../../utils/subspace/prefixActionCreator";
-import { FilteringRule, Sorting } from "./DataGridModels";
+import { ColumnWidth, FilteringRule, Sorting } from "./DataGridModels";
 
 // region internal
 const addFiltersCreator = <TFilters = Object>() =>
@@ -25,7 +22,7 @@ export const setFixedPartWidth = createStandardAction("SET_FIXED_PART_WIDTH")<
 >();
 
 export const onColumnWidthsChangeThunk = (
-  columnWidths: GridColumnWidth[]
+  columnWidths: ColumnWidth[]
 ): ThunkAction<any, any, any, any> => (dispatch, getState) => {
   dispatch(
     setFixedPartWidth(getFixedPartWidth(columnWidths, getState().fixedColumns))

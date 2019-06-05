@@ -1,8 +1,9 @@
 import {
   DataGridFilter,
-  DataGridFiltersObj
+  DataGridFiltersObj,
+  GridDataResponse,
+  GridQuery
 } from "../../../components/table/DataGridModels";
-import { GridDataResponse, GridQuery } from "../../../utils/grid/models";
 import { UserInfo } from "../auth/models";
 
 export enum VerificationStatus {

@@ -21,7 +21,6 @@ import {
   TableSelection
 } from "@devexpress/dx-react-grid-bootstrap4";
 import { connect } from "react-redux";
-import { GridColumnWidth } from "../../../utils/grid/columnsConfig";
 import {
   onColumnWidthsChangeThunk,
   setFilters,
@@ -30,7 +29,7 @@ import {
   setSelection,
   setSorting
 } from "../dataGridActions";
-import { DataGridState } from "../DataGridModels";
+import { ColumnWidth, DataGridState } from "../DataGridModels";
 
 export const SortingStateConnected = connect(
   (state: DataGridState): SortingStateProps => ({
@@ -80,7 +79,7 @@ export const TableColumnResizingConnected = connect<any, any, any>(
     defaultColumnWidths: state.columnWidths
   }),
   {
-    onColumnWidthsChange: (columnWidths: GridColumnWidth[]) =>
+    onColumnWidthsChange: (columnWidths: ColumnWidth[]) =>
       onColumnWidthsChangeThunk(columnWidths) as any
   }
 )(TableColumnResizing);

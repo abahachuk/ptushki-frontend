@@ -44,3 +44,15 @@ export const ROUTE_OBSERVATIONS: RouteDescription = {
   permissions: [OBSERVER],
   fallback: "/"
 };
+
+export const ROUTE_ADD_BIRD: RouteDescription = {
+  path: "/add-bird/",
+  permissions: [OBSERVER],
+  fallback: "/"
+};
+
+export const ROUTE_BIRDS: RouteDescription = {
+  path: "/birds/",
+  permissions: [OBSERVER],
+  fallback: "/"
+};

@@ -13,7 +13,11 @@ import {
 import { AnyAction } from "redux";
 import { labels } from "../../../config/i18n/labels";
 import { signOut } from "../../../store/actions/authActions";
-import { ROUTE_OBSERVATIONS, ROUTE_SIGN_IN } from "../routing/routes";
+import {
+  ROUTE_BIRDS,
+  ROUTE_OBSERVATIONS,
+  ROUTE_SIGN_IN
+} from "../routing/routes";
 import "./RootNav.scss";
 
 const brandLogo = require("../../../assets/brand-logo.svg");
@@ -24,6 +28,11 @@ export const RootNav: FC<DispatchProp> = ({ dispatch }) => (
       <img src={brandLogo} alt={labels.brandName} />
     </NavbarBrand>
     <Nav navbar>
+      <NavItem>
+        <NavLink tag={Link} to={ROUTE_BIRDS.path}>
+          {labels.birds.title}
+        </NavLink>
+      </NavItem>
       <NavItem>
         <NavLink tag={Link} to={ROUTE_OBSERVATIONS.path}>
           {labels.observations.title}
