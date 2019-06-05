@@ -1,13 +1,16 @@
+import { Column } from "@devexpress/dx-react-grid";
 import { TableHeaderRow } from "@devexpress/dx-react-grid-bootstrap4";
 import React, { FC } from "react";
 import { connect, DispatchProp } from "react-redux";
-import { Column } from "@devexpress/dx-react-grid";
-import { ColumnFilterToggleButton } from "./ColumnFilterToggleButton";
 import { Autosuggest } from "../../autosuggest/Autosuggest";
-import { DataGridState, DataGridFilter } from "../DataGridModels";
 import { DataGridCol } from "../DataGrid";
 import { setFilters } from "../dataGridActions";
-import { DataGridFiltersObj } from "../../../app/features/observations/models";
+import {
+  DataGridFilter,
+  DataGridFiltersObj,
+  DataGridState
+} from "../DataGridModels";
+import { ColumnFilterToggleButton } from "./ColumnFilterToggleButton";
 
 export const TableHeaderRowContent: FC<
   TableHeaderRow.ContentProps & {

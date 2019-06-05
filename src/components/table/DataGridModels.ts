@@ -26,6 +26,10 @@ export interface DataGridFilter {
   value: string | boolean;
 }
 
+export type DataGridFiltersObj<TData> = {
+  [key in keyof TData]?: DataGridFilter[]
+};
+
 export interface DataGridState<TFilters = Object> {
   fixedColumns: GridColumn[];
   hiddenColumns: string[];
