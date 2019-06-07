@@ -1,6 +1,9 @@
 import { TableSelection as TableSelectionBase } from "@devexpress/dx-react-grid";
+import { TableSelection } from "@devexpress/dx-react-grid-bootstrap4";
 import React, { FC } from "react";
 import { BaseCheckbox } from "../../checkbox/BaseCheckbox";
+
+export const SELECTOR_COLUMN_WIDTH = 50;
 
 export const SelectorColumn: FC<TableSelectionBase.CellProps> = ({
   tableColumn,
@@ -32,4 +35,13 @@ export const SelectorColumnHeader: FC<TableSelectionBase.HeaderCellProps> = ({
       className="p-0"
     />
   </th>
+);
+
+export const TableSelectionComponent = () => (
+  <TableSelection
+    showSelectAll
+    cellComponent={SelectorColumn}
+    headerCellComponent={SelectorColumnHeader}
+    selectionColumnWidth={SELECTOR_COLUMN_WIDTH}
+  />
 );

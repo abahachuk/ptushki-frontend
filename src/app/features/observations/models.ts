@@ -1,6 +1,10 @@
-import { GridDataResponse, GridQuery } from "../../../utils/grid/models";
+import {
+  DataGridFilter,
+  DataGridFiltersObj,
+  GridDataResponse,
+  GridQuery
+} from "../../../components/table/DataGridModels";
 import { UserInfo } from "../auth/models";
-import { DataGridFilter } from "../../../components/table/DataGridModels";
 
 export enum VerificationStatus {
   Pending = "Pending",
@@ -21,10 +25,6 @@ export interface ObservationData {
   elapsedTime: string;
   remarks: string;
 }
-
-export type DataGridFiltersObj<TData> = {
-  [key in keyof TData]?: DataGridFilter[]
-};
 
 export interface ObservationFilters
   extends DataGridFiltersObj<ObservationData> {

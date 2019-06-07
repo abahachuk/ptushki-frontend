@@ -15,18 +15,20 @@ import {
   OBSERVATIONS_LIST_NAMESPACE
 } from "../../app/features/observations/conf";
 import {
-  ObservationData,
   ObservationFilters,
   ObservationsResponse
 } from "../../app/features/observations/models";
+import { dataGridActionsRequiringRequest } from "../../components/table/dataGridActions";
 import { getDataGridEpics } from "../../components/table/dataGridEpics";
 import {
   OBSERVATIONS_ENDPOINT,
   OBSERVATIONS_FILTERS_ENDPOINT
 } from "../../config/endpoints";
 import { ajaxService } from "../../services";
+import { SecurityError } from "../../services/SecurutyService";
 import { getGridQuery } from "../../utils/grid/getGridQuery";
 import { getLangQuery } from "../../utils/lang/getLangQuery";
+import { signOut } from "../actions/authActions";
 import {
   observationGridActions,
   observationsData,
@@ -35,8 +37,6 @@ import {
 } from "../actions/observationListActions";
 import { selectLocale } from "../actions/userPreferencesActions";
 import { RootState } from "../index";
-import { signOut } from "../actions/authActions";
-import { SecurityError } from "../../services/SecurutyService";
 
 const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
   action$.pipe(
@@ -62,14 +62,14 @@ const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
     })
   );
 
-export const requestObservationFiltersEpic: Epic<any, any, RootState> = (
-  action$,
-  state$
-) =>
+export const requestObservationFiltersEpic: Epic<
+  any,
+  any,
+  RootState
+> = action$ =>
   action$.pipe(
     filter(isActionOf([observationsFiltersRequest])),
-    withLatestFrom(state$),
-    switchMap(([, state]) => {
+    switchMap(() => {
       return from(
         ajaxService.makeCall<ObservationFilters>(OBSERVATIONS_FILTERS_ENDPOINT)
       ).pipe(
@@ -82,7 +82,7 @@ export const requestObservationFiltersEpic: Epic<any, any, RootState> = (
     })
   );
 
-const verifyObservationEpic: Epic<any, any, RootState> = (action$, state$) =>
+const verifyObservationEpic: Epic<any, any, RootState> = action$ =>
   action$.pipe(
     filter(isActionOf([setObservationVerificationStatus.request])),
     flatMap(action => {
@@ -95,11 +95,7 @@ const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
   action$.pipe(
     filter(
       isActionOf([
-        observationGridActions.setPage,
-        observationGridActions.setPageSize,
-        observationGridActions.setSearch,
-        observationGridActions.setSorting,
-        observationGridActions.setFilters,
+        ...dataGridActionsRequiringRequest(observationGridActions),
         selectLocale,
         setObservationVerificationStatus.success
       ])

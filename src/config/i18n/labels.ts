@@ -114,6 +114,13 @@ export const labels = {
   observations: {
     title: "Наблюдения"
   },
+  addBird: {
+    title: "Добавить птицу",
+    actionTitle: "Добавить птицу"
+  },
+  birds: {
+    title: "Птицы"
+  },
   viewMode: {
     euRingAndTitle: "EURing + Название"
   },

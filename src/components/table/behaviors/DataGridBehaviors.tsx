@@ -8,8 +8,7 @@ import {
   SelectionState,
   SelectionStateProps,
   SortingState,
-  SortingStateProps,
-  TableColumnResizingProps
+  SortingStateProps
 } from "@devexpress/dx-react-grid";
 import {
   TableColumnReordering,
@@ -23,13 +22,14 @@ import {
 } from "@devexpress/dx-react-grid-bootstrap4";
 import { connect } from "react-redux";
 import {
+  onColumnWidthsChangeThunk,
   setFilters,
   setPage,
   setPageSize,
   setSelection,
   setSorting
 } from "../dataGridActions";
-import { DataGridState } from "../DataGridModels";
+import { ColumnWidth, DataGridState } from "../DataGridModels";
 
 export const SortingStateConnected = connect(
   (state: DataGridState): SortingStateProps => ({
@@ -74,10 +74,14 @@ export const CustomPagingConnected = connect(
   })
 )(CustomPaging);
 
-export const TableColumnResizingConnected = connect(
-  (state: DataGridState): TableColumnResizingProps => ({
+export const TableColumnResizingConnected = connect<any, any, any>(
+  (state: DataGridState) => ({
     defaultColumnWidths: state.columnWidths
-  })
+  }),
+  {
+    onColumnWidthsChange: (columnWidths: ColumnWidth[]) =>
+      onColumnWidthsChangeThunk(columnWidths) as any
+  }
 )(TableColumnResizing);
 
 export const TableColumnReorderingConnected = connect(

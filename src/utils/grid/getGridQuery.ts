@@ -1,5 +1,9 @@
-import { DataGridState } from "../../components/table/DataGridModels";
-import { GridFilteringQuery, GridQuery, GridSearch } from "./models";
+import {
+  DataGridState,
+  GridFilteringQuery,
+  GridQuery,
+  GridSearch
+} from "../../components/table/DataGridModels";
 
 export const getGridQuery = <TItem>(
   gridState: DataGridState

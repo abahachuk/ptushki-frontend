@@ -9,6 +9,7 @@ import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetP
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
 import { BirdInfoForm } from "./features/bird-info/BirdInfoForm";
+import { BirdsPage } from "./features/birds/BirdsPage";
 import { RootNavConnected } from "./features/nav/RootNav";
 import { ObservationsPage } from "./features/observations/ObservationsPage";
 import { history } from "./features/routing/history";
@@ -16,6 +17,7 @@ import { ProtectedRouteConnected } from "./features/routing/ProtectedRouteConnec
 import {
   ROUTE_ADD_OBSERVATION,
   ROUTE_BIRD_INFO,
+  ROUTE_BIRDS,
   ROUTE_OBSERVATIONS,
   ROUTE_RESET_PASSWORD,
   ROUTE_SIGN_IN,
@@ -66,6 +68,7 @@ export const App: FC<{
           {...ROUTE_OBSERVATIONS}
           component={ObservationsPage}
         />
+        <ProtectedRouteConnected exact {...ROUTE_BIRDS} component={BirdsPage} />
 
         <ProtectedRouteConnected
           exact

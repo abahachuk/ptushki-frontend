@@ -1,21 +1,17 @@
 import combineSectionReducers from "combine-section-reducers";
 import reduceReducer from "reduce-reducers";
-import { OBSERVATION_GRID_COLUMN_NAMES } from "../../app/features/observations/cells/observationsGridColumns";
+import { OBSERVATION_GRID_COLUMN_NAMES } from "../../app/features/observations/columns";
 import { OBSERVATIONS_LIST_NAMESPACE } from "../../app/features/observations/conf";
 import {
   ObservationData,
   ObservationFilters
 } from "../../app/features/observations/models";
-import { DataGridState } from "../../components/table/DataGridModels";
 import { createDataGridReducer } from "../../components/table/dataGridReducer";
 import {
   AsyncResource,
   createAsyncStateReducer
 } from "../../utils/createAsyncStateReducer";
-import {
-  getColumnWidths,
-  getFixedColumns
-} from "../../utils/grid/columnsConfig";
+import { getDefaultDataGridState } from "../../utils/grid/defaultGridState";
 import { observationsData } from "../actions/observationListActions";
 
 const initialState = {
@@ -24,21 +20,9 @@ const initialState = {
     isLoading: true,
     error: null as string
   } as AsyncResource<ObservationData[]>,
-  gridState: {
-    fixedColumns: getFixedColumns(OBSERVATION_GRID_COLUMN_NAMES),
-    hiddenColumns: [],
-    selection: [],
-    columnsOrder: OBSERVATION_GRID_COLUMN_NAMES,
-    columnWidths: getColumnWidths(OBSERVATION_GRID_COLUMN_NAMES),
-    pagination: {
-      currentPage: 0,
-      pageSize: 15,
-      totalCount: 50
-    },
-    filtering: [],
-    sorting: [],
-    availableFilters: {}
-  } as DataGridState<ObservationFilters>
+  gridState: getDefaultDataGridState<ObservationFilters>(
+    OBSERVATION_GRID_COLUMN_NAMES
+  )
 };
 
 export const observationListReducer = reduceReducer(
