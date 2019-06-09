@@ -129,7 +129,6 @@ export const AddObservation: FC<{
             onChangeValue={onChangeValue}
             type="species"
             value={observation.species}
-            withSearch
           />
           <Field
             label={labels.addObservation.observationsFields.sex}
@@ -184,7 +183,6 @@ export const AddObservation: FC<{
             onChangeValue={onChangeValue}
             type="country"
             value={observation.country}
-            withSearch
           />
           <Field
             label={labels.addObservation.circumstancesFields.region}

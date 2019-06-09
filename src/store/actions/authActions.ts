@@ -1,10 +1,9 @@
-import { ThunkAction } from "redux-thunk";
 import { createAction } from "redux-actions";
-
-import { RootState } from "../index";
+import { ThunkAction } from "redux-thunk";
 import { AuthData, UserInfo } from "../../app/features/auth/models";
 import { SING_IN_ENDPOINT, SING_UP_ENDPOINT } from "../../config/endpoints";
 import { ajaxService, securityService } from "../../services";
+import { RootState } from "../index";
 
 // TODO: update to enum?
 const AuthEndpoint = {

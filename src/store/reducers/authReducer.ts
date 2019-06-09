@@ -1,6 +1,6 @@
-import { handleAction } from "redux-actions";
 import reduceReducer from "reduce-reducers";
-
+import { handleAction } from "redux-actions";
+import { UserInfo } from "../../app/features/auth/models";
 import {
   authFailure,
   authRequest,
@@ -8,7 +8,6 @@ import {
   authUnmount,
   logout
 } from "../actions/authActions";
-import { UserInfo } from "../../app/features/auth/models";
 
 const initialState = {
   error: undefined as string | undefined,
@@ -64,7 +63,7 @@ const authUnmountReducer = handleAction(
 
 const logoutReducer = handleAction(
   logout,
-  (state, action) => initialState,
+  (state, action) => ({ ...initialState, isLoaded: true }),
   initialState
 );
 

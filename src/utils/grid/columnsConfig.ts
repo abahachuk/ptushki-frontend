@@ -1,21 +1,7 @@
-import { intersection } from "ramda";
-
-export enum GridColumn {
-  id = "id",
-  verified = "verified",
-  sex = "sex",
-  ring = "ring",
-  species = "species",
-  status = "status",
-  condition = "condition",
-  remarks = "remarks",
-  placeName = "placeName",
-  direction = "direction",
-  distance = "distance",
-  finder = "finder",
-  elapsedTime = "elapsedTime",
-  date = "date"
-}
+import { intersection, sum } from "ramda";
+import { SELECTOR_COLUMN_WIDTH } from "../../components/table/customisations/TableSelectionComponent";
+import { ColumnWidth } from "../../components/table/DataGridModels";
+import { GridColumn } from "./GridColumn";
 
 export const defaultColumnWidths: { [key in GridColumn]: number } = {
   id: 100,
@@ -34,7 +20,7 @@ export const defaultColumnWidths: { [key in GridColumn]: number } = {
   date: 300
 };
 
-export const getColumnWidths = (cols: GridColumn[]) =>
+export const getColumnWidths = (cols: GridColumn[]): ColumnWidth[] =>
   cols.map(c => ({
     columnName: c,
     width: defaultColumnWidths[c]
@@ -48,3 +34,16 @@ export const defaultFixedColumns = [
 
 export const getFixedColumns = (cols: GridColumn[]) =>
   intersection(cols, defaultFixedColumns);
+
+export const getFixedPartWidth = (
+  columnWidths: ColumnWidth[],
+  fixedColumns: GridColumn[]
+) => {
+  return (
+    sum(
+      columnWidths
+        .filter(cw => fixedColumns.includes(cw.columnName as GridColumn))
+        .map(({ width }) => width)
+    ) + SELECTOR_COLUMN_WIDTH
+  );
+};

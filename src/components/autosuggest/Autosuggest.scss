@@ -8,7 +8,7 @@
   }
 
   &__search-container {
-    padding: 6px 10px;
+    padding: 10px;
     box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.2);
   }
 
@@ -16,10 +16,28 @@
     color: $dustyGray;
     font-size: 12px;
     height: 26px;
+    min-width: 189px;
   }
 
   &__item {
     font-size: 12px;
     color: $mineShaft;
+  }
+}
+
+.dropdown {
+  &__dropdown {
+    .show & {
+      position: relative;
+      z-index: $zindex-dropdown + 1; // to show outline
+    }
+  }
+
+  &__menu-container {
+    border-radius: 0;
+    border: none;
+    min-width: 100%;
+    width: auto;
+    margin-top: 0;
   }
 }

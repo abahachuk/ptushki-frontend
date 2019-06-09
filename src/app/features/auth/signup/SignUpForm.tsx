@@ -3,7 +3,7 @@ import { Form, Formik } from "formik";
 import { Button, Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 
-import { Layout } from "../../../../components/layout/Layout";
+import { AuthFormLayout } from "../../../../components/layout/AuthFormLayout";
 import { FormControl } from "../../../../components/form/FormControl";
 import { SignUpData } from "../models";
 import { CheckboxField } from "../../../../components/checkbox/CheckboxField";
@@ -28,7 +28,7 @@ export const SignUpForm: FC<{
   }, [authExit]);
 
   return (
-    <Layout title={labels.signUp.title}>
+    <AuthFormLayout title={labels.signUp.title}>
       <Formik<SignUpData>
         initialValues={{
           phone: "",
@@ -120,6 +120,6 @@ export const SignUpForm: FC<{
           </Form>
         )}
       </Formik>
-    </Layout>
+    </AuthFormLayout>
   );
 };

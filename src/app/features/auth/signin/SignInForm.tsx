@@ -3,7 +3,7 @@ import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 
-import { Layout } from "../../../../components/layout/Layout";
+import { AuthFormLayout } from "../../../../components/layout/AuthFormLayout";
 import { FormControl } from "../../../../components/form/FormControl";
 import { CheckboxField } from "../../../../components/checkbox/CheckboxField";
 import { FormControlLabel } from "../../../../components/form/FormControlLabel";
@@ -30,7 +30,7 @@ export const SignInForm: FC<{
   }, [authExit]);
 
   return (
-    <Layout title={labels.signIn.title}>
+    <AuthFormLayout title={labels.signIn.title}>
       <Formik<SignInData>
         initialValues={{ email: "", password: "", rememberPassword: true }}
         validationSchema={objectSchema().shape({
@@ -103,6 +103,6 @@ export const SignInForm: FC<{
           </Form>
         )}
       </Formik>
-    </Layout>
+    </AuthFormLayout>
   );
 };

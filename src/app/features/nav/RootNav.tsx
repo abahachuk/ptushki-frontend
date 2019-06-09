@@ -1,4 +1,6 @@
-import React from "react";
+import { ExitToApp } from "@material-ui/icons";
+import React, { FC } from "react";
+import { connect, DispatchProp } from "react-redux";
 import { NavLink as Link } from "react-router-dom";
 import {
   Collapse,
@@ -8,23 +10,29 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
+import { AnyAction } from "redux";
 import { labels } from "../../../config/i18n/labels";
+import { signOut } from "../../../store/actions/authActions";
 import {
+  ROUTE_BIRDS,
   ROUTE_OBSERVATIONS,
-  ROUTE_USER_INFO,
-  ROUTE_BIRD_INFO
+  ROUTE_SIGN_IN
 } from "../routing/routes";
-import { ProtectedNavItemConnected } from "./ProtectedNavItemConnected";
 import "./RootNav.scss";
 
 const brandLogo = require("../../../assets/brand-logo.svg");
 
-export const RootNav = () => (
-  <Navbar dark expand="sm" className="py-1 px-5 root-nav">
-    <NavbarBrand href="/">
+export const RootNav: FC<DispatchProp> = ({ dispatch }) => (
+  <Navbar dark expand="sm" className="p-0 px-3 root-nav">
+    <NavbarBrand href="/" className="mr-5">
       <img src={brandLogo} alt={labels.brandName} />
     </NavbarBrand>
     <Nav navbar>
+      <NavItem>
+        <NavLink tag={Link} to={ROUTE_BIRDS.path}>
+          {labels.birds.title}
+        </NavLink>
+      </NavItem>
       <NavItem>
         <NavLink tag={Link} to={ROUTE_OBSERVATIONS.path}>
           {labels.observations.title}
@@ -33,20 +41,19 @@ export const RootNav = () => (
     </Nav>
     <Collapse isOpen navbar>
       <Nav className="ml-auto" navbar>
-        {/* TODO: should be moved to observation list item */}
         <NavItem>
-          <NavLink tag={Link} to={ROUTE_BIRD_INFO.path}>
-            Информация о птице
+          <NavLink
+            tag={Link}
+            onClick={() => dispatch((signOut() as any) as AnyAction)}
+            to={ROUTE_SIGN_IN.path}
+          >
+            <ExitToApp className="mr-2" />
+            {labels.logout}
           </NavLink>
         </NavItem>
-        <ProtectedNavItemConnected {...ROUTE_USER_INFO}>
-          <img
-            src="http://i.pravatar.cc/60" // TODO this is a placeholder
-            alt="avatar"
-            className="nav-user-img"
-          />
-        </ProtectedNavItemConnected>
       </Nav>
     </Collapse>
   </Navbar>
 );
+
+export const RootNavConnected = connect()(RootNav);

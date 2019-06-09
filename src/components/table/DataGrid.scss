@@ -9,6 +9,7 @@ $fixed-part-shadow-width: 10px;
   // override badly written grid styles
   border-right: none !important;
   background-color: inherit !important;
+  z-index: $zindex-fixed;
 
   // for :after to be visible.
   overflow: visible;
@@ -26,6 +27,11 @@ $fixed-part-shadow-width: 10px;
   }
 }
 
+th.dx-g-bs4-fixed-cell {
+  // something bigger than z-index of fixed td z-index
+  z-index: 10000000;
+}
+
 .table-cell-value {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -36,13 +42,55 @@ $fixed-part-shadow-width: 10px;
   //font-size: 14px;
 
   .dx-g-bs4-table {
+    font-size: 14px;
+
     thead th {
       border-bottom: none;
       background-color: $lighter-blue !important;
       color: $darker-blue;
       height: 48px;
       vertical-align: middle;
+      padding: 0;
       //font-size: 13px;
+
+      .dx-g-bs4-header-cell-content {
+        padding: 2px 16px;
+
+        .dropdown {
+          position: static;
+          align-self: center;
+        }
+
+        .dropdown__dropdown {
+          border: none;
+          padding: 0;
+          margin-left: 6px;
+          width: auto;
+
+          &:hover,
+          &:active,
+          &:focus {
+            background-color: transparent !important;
+            outline: none !important;
+            box-shadow: none !important;
+          }
+        }
+
+        .dropdown__menu-container {
+          transform: none !important; // to override inline styles
+          top: 100% !important; // to override inline styles
+        }
+      }
+
+      .filter-toggle-button {
+        &:hover,
+        &:active,
+        &:focus {
+          background-color: transparent !important;
+          outline: none !important;
+          box-shadow: none !important;
+        }
+      }
     }
 
     thead tr:first-child th {
@@ -52,18 +100,55 @@ $fixed-part-shadow-width: 10px;
 
   tbody tr {
     background-color: $table-bg;
+
+    &.clickable {
+      cursor: pointer;
+
+      &:hover {
+        background-color: $athensGray;
+      }
+    }
+
+    &.table-active {
+      background-color: $lighter-blue;
+
+      > td {
+        background: none;
+      }
+    }
   }
 }
 
-.dx-g-bs4-toolbar,
-.dx-g-bs4-paging-panel {
-  background: none;
-  border: none;
-  padding-left: 0;
-  padding-right: 0;
+.filter-toggle-button {
+  background-image: url("../../assets/filter-icon.svg");
+  background-size: 100%;
+  height: 12px;
+  width: 12px;
+
+  &:hover,
+  &:active,
+  &:focus,
+  &--active,
+  .show & {
+    background-image: url("../../assets/filter-icon-active.svg");
+  }
 }
 
 .dx-g-bs4-paging-panel {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+
+  &:after {
+    display: none !important;
+  }
+
+  background: none;
+  border: none;
+  margin-left: -15px;
+  padding-left: 0;
+  padding-right: 0;
+
   .pagination {
     margin-left: 2em !important; // override m-0 class set by grid
   }

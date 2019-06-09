@@ -9,8 +9,11 @@ import {
 } from "@material-ui/icons";
 import React from "react";
 import { connect, DispatchProp } from "react-redux";
-import { setObservationVerificationStatus } from "../../../../store/actions/observationListActions";
-import { ObservationData, VerificationStatus } from "../models";
+import {
+  ObservationData,
+  VerificationStatus
+} from "../../../app/features/observations/models";
+import { setObservationVerificationStatus } from "../../../store/actions/observationListActions";
 
 export const VerificationCell = connect()(
   ({
@@ -30,14 +33,15 @@ export const VerificationCell = connect()(
           <IconButton
             className="p-0 mr-2"
             disableRipple
-            onClick={() =>
+            onClick={e => {
+              e.stopPropagation();
               dispatch(
                 setObservationVerificationStatus.request({
                   id,
                   verificationStatus: Pending
                 })
-              )
-            }
+              );
+            }}
           >
             <RadioButtonUnchecked />
           </IconButton>
@@ -51,14 +55,15 @@ export const VerificationCell = connect()(
           <IconButton
             className="p-0 mr-2"
             disableRipple
-            onClick={() =>
+            onClick={e => {
+              e.stopPropagation();
               dispatch(
                 setObservationVerificationStatus.request({
                   id,
                   verificationStatus: Rejected
                 })
-              )
-            }
+              );
+            }}
           >
             <Clear />
           </IconButton>
@@ -72,14 +77,15 @@ export const VerificationCell = connect()(
           <IconButton
             className="p-0 mr-2"
             disableRipple
-            onClick={() =>
+            onClick={e => {
+              e.stopPropagation();
               dispatch(
                 setObservationVerificationStatus.request({
                   id,
                   verificationStatus: Verified
                 })
-              )
-            }
+              );
+            }}
           >
             <Check />
           </IconButton>

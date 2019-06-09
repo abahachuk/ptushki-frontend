@@ -69,6 +69,7 @@ export const labels = {
   },
   addObservation: {
     title: "Добавление наблюдения",
+    actionTitle: "Добавить наблюдение",
     subTitle:
       "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
     labelType: "Тип метки",
@@ -113,6 +114,13 @@ export const labels = {
   observations: {
     title: "Наблюдения"
   },
+  addBird: {
+    title: "Добавить птицу",
+    actionTitle: "Добавить птицу"
+  },
+  birds: {
+    title: "Птицы"
+  },
   viewMode: {
     euRingAndTitle: "EURing + Название"
   },
@@ -134,7 +142,12 @@ export const labels = {
   elapsedTime: "Время с первого наблюдения",
   loading: "Загрузка...",
   of: "из",
-  verification: "Модерация",
+  verification: {
+    title: "Модерация",
+    verified: "Принят",
+    rejected: "Отклонен",
+    pending: "Ожидает модерации"
+  },
   idx: "#",
   yes: "Да",
   no: "Нет",
@@ -142,11 +155,15 @@ export const labels = {
   noData: "Нет данных",
   copyright: "© 2019 Ptushki. Все права защищены.",
   filter: "Фильтр",
-  clearFilters: "Сбросить фильтры",
+  clearFilters: "Сбросить все фильтры",
   search: "Поиск",
   show: "Показать",
+  selected: "Выбрано",
   ofBirds: "птиц",
   columns: "Колонки",
   import: "Импорт",
-  export: "Экспорт"
+  importData: "Загрузить данные",
+  export: "Экспорт",
+  exportData: "Экспортировать данные",
+  logout: "Выйти"
 };

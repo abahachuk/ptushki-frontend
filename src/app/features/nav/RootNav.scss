@@ -1,7 +1,59 @@
 @import "../../../styles/variables";
+@import "../../../styles/mixins";
 
 .nav-user-img {
   border-radius: 50%;
   height: 30px;
   width: 30px;
+}
+
+.root-nav {
+  background-color: $root-nav-bg;
+  height: $root-nav-height;
+  display: flex;
+  flex-shrink: 0;
+  align-items: stretch;
+
+  font-size: 14px;
+
+  .navbar-brand {
+    display: flex;
+    margin-right: 80px;
+  }
+
+  .navbar-nav {
+    align-self: stretch;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: stretch;
+    position: relative;
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+
+      @extend .px-4;
+      color: $white;
+
+      &:hover {
+        background-color: $root-nav-link-active-bg;
+      }
+
+      &.active {
+        color: $orange;
+        background-color: $root-nav-link-active-bg;
+
+        &:after {
+          border-bottom: 3px solid $orange;
+          bottom: 0;
+          content: " ";
+          left: 0;
+          position: absolute;
+          right: 0;
+        }
+      }
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, Fragment, ReactElement, ReactNode } from "react";
 import sn from "classnames";
 import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
 
@@ -10,9 +10,36 @@ export interface ICustomDropdown {
   className?: string;
   id?: string;
   disabled?: boolean;
+  toggleButton?: ReactNode;
+}
+
+interface ICustomDropdownToggle {
+  placeholder?: string;
+  value?: string;
+  isOpen?: boolean;
+  disabled?: boolean;
 }
 
 const blockName = "dropdown";
+
+const DefaultCustomDropdownToggle: FC<ICustomDropdownToggle> = ({
+  placeholder,
+  value,
+  isOpen,
+  disabled
+}) => (
+  <Fragment>
+    {value || placeholder}
+    {!disabled && (
+      <span
+        className={sn(
+          `${blockName}__chevron`,
+          isOpen ? `${blockName}__chevron--up` : `${blockName}__chevron--down`
+        )}
+      />
+    )}
+  </Fragment>
+);
 
 export const CustomDropdown: FC<ICustomDropdown> = ({
   placeholder,
@@ -20,7 +47,8 @@ export const CustomDropdown: FC<ICustomDropdown> = ({
   children,
   className,
   id,
-  disabled
+  disabled,
+  toggleButton
 }) => {
   const [isOpen, toggleOpen] = useState(false);
 
@@ -34,7 +62,7 @@ export const CustomDropdown: FC<ICustomDropdown> = ({
       disabled={disabled}
     >
       <DropdownToggle
-        disabled
+        disabled={disabled}
         outline
         className={sn(
           `${blockName}__dropdown`,
@@ -42,15 +70,12 @@ export const CustomDropdown: FC<ICustomDropdown> = ({
           className
         )}
       >
-        {value || placeholder}
-        {!disabled && (
-          <span
-            className={sn(
-              `${blockName}__chevron`,
-              isOpen
-                ? `${blockName}__chevron--up`
-                : `${blockName}__chevron--down`
-            )}
+        {toggleButton || (
+          <DefaultCustomDropdownToggle
+            value={value}
+            placeholder={placeholder}
+            isOpen={isOpen}
+            disabled={disabled}
           />
         )}
       </DropdownToggle>

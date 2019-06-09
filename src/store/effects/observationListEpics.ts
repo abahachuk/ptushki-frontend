@@ -14,30 +14,38 @@ import {
   OBSERVATIONS_GRID_STATE_SELECTOR,
   OBSERVATIONS_LIST_NAMESPACE
 } from "../../app/features/observations/conf";
-import { ObservationsResponse } from "../../app/features/observations/models";
+import {
+  ObservationFilters,
+  ObservationsResponse
+} from "../../app/features/observations/models";
+import { dataGridActionsRequiringRequest } from "../../components/table/dataGridActions";
 import { getDataGridEpics } from "../../components/table/dataGridEpics";
-import { OBSERVATIONS_ENDPOINT } from "../../config/endpoints";
+import {
+  OBSERVATIONS_ENDPOINT,
+  OBSERVATIONS_FILTERS_ENDPOINT
+} from "../../config/endpoints";
 import { ajaxService } from "../../services";
+import { SecurityError } from "../../services/SecurutyService";
 import { getGridQuery } from "../../utils/grid/getGridQuery";
+import { getLangQuery } from "../../utils/lang/getLangQuery";
+import { signOut } from "../actions/authActions";
 import {
   observationGridActions,
   observationsData,
+  observationsFiltersRequest,
   setObservationVerificationStatus
 } from "../actions/observationListActions";
 import { selectLocale } from "../actions/userPreferencesActions";
 import { RootState } from "../index";
 
-export const requestObservationEpic: Epic<any, any, RootState> = (
-  action$,
-  state$
-) =>
+const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
   action$.pipe(
     filter(isActionOf([observationsData.request])),
     withLatestFrom(state$),
     switchMap(([, state]) => {
       const query = qs.stringify({
         ...getGridQuery(OBSERVATIONS_GRID_STATE_SELECTOR(state)),
-        lang: state.userPreferences.selectedLocale
+        ...getLangQuery(state)
       });
 
       return from(
@@ -46,15 +54,35 @@ export const requestObservationEpic: Epic<any, any, RootState> = (
         )
       ).pipe(
         map(d => observationsData.success(d.content)),
-        catchError(e => of(observationsData.failure(e)))
+        catchError(e => {
+          if (e instanceof SecurityError) return of(signOut());
+          return of(observationsData.failure(e));
+        })
       );
     })
   );
 
-export const verifyObservationEpic: Epic<any, any, RootState> = (
-  action$,
-  state$
-) =>
+export const requestObservationFiltersEpic: Epic<
+  any,
+  any,
+  RootState
+> = action$ =>
+  action$.pipe(
+    filter(isActionOf([observationsFiltersRequest])),
+    switchMap(() => {
+      return from(
+        ajaxService.makeCall<ObservationFilters>(OBSERVATIONS_FILTERS_ENDPOINT)
+      ).pipe(
+        map(d => observationGridActions.addFilters(d)),
+        catchError(e => {
+          if (e instanceof SecurityError) return of(signOut());
+          return EMPTY;
+        })
+      );
+    })
+  );
+
+const verifyObservationEpic: Epic<any, any, RootState> = action$ =>
   action$.pipe(
     filter(isActionOf([setObservationVerificationStatus.request])),
     flatMap(action => {
@@ -63,15 +91,11 @@ export const verifyObservationEpic: Epic<any, any, RootState> = (
     })
   );
 
-export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
+const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
   action$.pipe(
     filter(
       isActionOf([
-        observationGridActions.setPage,
-        observationGridActions.setPageSize,
-        observationGridActions.setSearch,
-        observationGridActions.setSorting,
-        observationGridActions.setFilters,
+        ...dataGridActionsRequiringRequest(observationGridActions),
         selectLocale,
         setObservationVerificationStatus.success
       ])
@@ -80,9 +104,10 @@ export const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
   );
 
 export const observationListEpic = combineEpics(
-  requestObservationEpic,
+  requestObservationsEpic,
   verifyObservationEpic,
   reRequestOnGridActionsEpic,
+  requestObservationFiltersEpic,
   getDataGridEpics(
     OBSERVATIONS_LIST_NAMESPACE,
     OBSERVATIONS_GRID_STATE_SELECTOR

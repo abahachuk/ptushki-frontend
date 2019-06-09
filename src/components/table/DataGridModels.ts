@@ -1,5 +1,3 @@
-import { GridColumn } from "../../utils/grid/columnsConfig";
-
 export interface Sorting {
   columnName: string;
   direction: "asc" | "desc";
@@ -21,14 +19,44 @@ export interface FilteringRule {
   value?: string;
 }
 
-export interface DataGridState {
-  fixedColumns: GridColumn[];
+export interface DataGridFilter {
+  count: number;
+  value: string | boolean;
+}
+
+export type DataGridFiltersObj<TData> = {
+  [key in keyof TData]?: DataGridFilter[]
+};
+
+export interface DataGridState<TFilters = Object> {
+  fixedColumns: string[];
   hiddenColumns: string[];
   selection: string[];
-  columnsOrder: GridColumn[];
+  columnsOrder: string[];
   columnWidths: ColumnWidth[];
   pagination: PaginationState;
   filtering: FilteringRule[];
   sorting: Sorting[];
   search: string;
+  availableFilters: TFilters;
+  fixedPartWidth: number;
+}
+
+export interface GridSearch {
+  search: string | undefined;
+  pageNumber: number | undefined;
+  pageSize: number | undefined;
+  sortingColumn: string | undefined;
+  sortingDirection: "ASC" | "DESC";
+}
+
+export type GridFilteringQuery<TData> = { [key in keyof TData]?: string };
+
+export type GridQuery<TData> = GridSearch & GridFilteringQuery<TData>;
+
+export interface GridDataResponse<TItem> {
+  content: TItem[];
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
 }

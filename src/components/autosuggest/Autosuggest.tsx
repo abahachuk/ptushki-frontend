@@ -1,4 +1,4 @@
-import React, { useCallback, useState, FC } from "react";
+import React, { useCallback, useState, FC, ReactNode } from "react";
 import { DropdownItem, Input } from "reactstrap";
 
 import { CustomDropdown } from "../dropdown/Dropdown";
@@ -23,10 +23,10 @@ export interface IAutosuggest {
   value?: string;
   onChangeValue?: ({ value, type }: IChangeValue) => void;
   type?: string;
-  withSearch?: boolean;
   className?: string;
   id?: string;
   disabled?: boolean;
+  toggleButton?: ReactNode;
 }
 
 const blockName = "autosuggest";
@@ -38,10 +38,10 @@ export const Autosuggest: FC<IAutosuggest> = ({
   value,
   onChangeValue,
   type = "",
-  withSearch,
   className,
   id,
-  disabled
+  disabled,
+  toggleButton
 }) => {
   const [list, setCollection] = useState(collection);
 
@@ -58,7 +58,7 @@ export const Autosuggest: FC<IAutosuggest> = ({
       setCollection(
         collection.filter(
           item =>
-            item.value.toLowerCase().indexOf(e.target.value.toLowerCase()) !==
+            item.label.toLowerCase().indexOf(e.target.value.toLowerCase()) !==
             -1
         )
       ),
@@ -66,16 +66,17 @@ export const Autosuggest: FC<IAutosuggest> = ({
   );
 
   const renderItem = useCallback(
-    (item: Item) => (
-      <DropdownItem
-        onClick={onSelect}
-        value={item.value}
-        key={item.id}
-        className={`${blockName}__item`}
-      >
-        {item.label}
-      </DropdownItem>
-    ),
+    (item: Item) =>
+      item.label && (
+        <DropdownItem
+          onClick={onSelect}
+          value={item.value}
+          key={item.id}
+          className={`${blockName}__item`}
+        >
+          {item.label}
+        </DropdownItem>
+      ),
     [onSelect]
   );
 
@@ -83,11 +84,11 @@ export const Autosuggest: FC<IAutosuggest> = ({
     <CustomDropdown
       value={value}
       placeholder={placeholder}
-      className={className}
+      toggleButton={toggleButton}
       id={id}
       disabled={disabled}
     >
-      {withSearch && (
+      {collection.length > 7 && (
         <div className={`${blockName}__search-container`}>
           <Input
             placeholder={searchPlaceholder}

@@ -6,11 +6,11 @@ import {
   DropdownToggle,
   UncontrolledDropdown
 } from "reactstrap";
-import { labels } from "../../../config/i18n/labels";
-import { RootState } from "../../../store";
-import { selectLocale } from "../../../store/actions/userPreferencesActions";
-import { Locale } from "../../../store/reducers/userPreferencesReducer";
-import { GridSettingsDropdownButton } from "../../gridSettingsDropdownButton/GridSettingsDropdownButton";
+import { labels } from "../../../../config/i18n/labels";
+import { RootState } from "../../../../store";
+import { selectLocale } from "../../../../store/actions/userPreferencesActions";
+import { Locale } from "../../../../store/reducers/userPreferencesReducer";
+import { GridSettingsDropdownButton } from "../../../gridSettingsDropdownButton/GridSettingsDropdownButton";
 
 interface Props extends DispatchProp {
   selectedLocale: Locale;
@@ -23,13 +23,10 @@ const LOCALE_LABELS: { [key in Locale]: string } = {
 
 export const LangSelector: FC<Props> = ({ dispatch, selectedLocale }) => (
   <UncontrolledDropdown>
-    <DropdownToggle
-      tag={GridSettingsDropdownButton}
-      className="border-0 shadow-none bg-transparent text-dark"
-    >
+    <DropdownToggle tag={GridSettingsDropdownButton}>
       <span>{LOCALE_LABELS[selectedLocale]}</span>
     </DropdownToggle>
-    <DropdownMenu right>
+    <DropdownMenu right className="grid-settings-dropdown-menu">
       {Object.entries(Locale).map(([key, locale]: [Locale, Locale]) => (
         <DropdownItem
           key={key}

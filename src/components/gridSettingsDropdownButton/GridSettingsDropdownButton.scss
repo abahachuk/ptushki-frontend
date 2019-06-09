@@ -1,0 +1,11 @@
+@import "../../styles/mixins";
+
+.grid-settings-dropdown-btn {
+  font-size: $grid-toolbar-font-size;
+  @extend .d-flex, .align-items-center;
+  @extend .border-0, .text-dark, .bg-transparent, .shadow-none;
+}
+
+.grid-settings-dropdown-menu {
+  font-size: 14px;
+}
