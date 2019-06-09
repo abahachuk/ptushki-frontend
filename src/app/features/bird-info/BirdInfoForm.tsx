@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Button } from "reactstrap";
 
-import { InfoBlock, Bird } from "../../../components/bird/Bird";
+import { Bird } from "../../../components/bird/Bird";
 
 import { BirdInfo } from "./BirdInfoModel";
 import { InfoContainer } from "../../../components/info-container/InfoContainer";
@@ -19,6 +19,12 @@ interface Image {
   id: number;
 }
 
+interface InfoBlock {
+  title: string;
+  value: string | number;
+  className?: string;
+}
+
 const renderImage = function({ src, altText, id }: Image) {
   return (
     <img key={id} src={src} alt={altText} className={`${blockName}__photo`} />
@@ -27,6 +33,15 @@ const renderImage = function({ src, altText, id }: Image) {
 
 const HeaderInfoBlock = ({ label }: { label: string }) => {
   return <p className={`${blockName}__block-info-title`}>{label}</p>;
+};
+
+export const InfoBlock = function({ title, value, className }: InfoBlock) {
+  return (
+    <div className={className}>
+      <p className={`${blockName}__info-title`}>{title}</p>
+      <p className={`${blockName}__info-value`}>{value}</p>
+    </div>
+  );
 };
 
 export const BirdInfoForm: FC<{
@@ -49,7 +64,7 @@ export const BirdInfoForm: FC<{
       <p className={`${blockName}__subtitle`}>{birdData.code}</p>
       <p className={`${blockName}__euring-title`}>{labels.birdInfo.euring}</p>
       <span className={`${blockName}__euring`}>{birdData.euring}</span>
-      <Bird birdParams={birdData.params} />
+      <Bird birdParams={birdData.params} viewMode />
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
           className={`${blockName}__info-block`}

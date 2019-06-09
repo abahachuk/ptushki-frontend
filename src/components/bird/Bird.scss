@@ -18,7 +18,7 @@
 
   &__bird-container {
     position: relative;
-    padding: 85px 0;
+    padding: 85px 0 200px;
     width: 400px;
     margin: 0 auto;
   }
@@ -60,7 +60,7 @@
     width: 190px;
     height: 140px;
     border-bottom: dashed 1px #546E7A;
-    top: 25%;
+    top: 20%;
   }
 
   &__dashed-line-right-wing {
@@ -75,22 +75,22 @@
 
   &__dashed-line-left-knee,
   &__dashed-line-right-knee {
-    width: 290px;
+    width: 285px;
     height: 110px;
     border-bottom: dashed 1px #546E7A;
-    top: 48%;
+    top: 38%;
   }
 
   &__dashed-line-left-knee {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 30%;
-    left: -24%;
+    border-bottom-left-radius: 30%;
+    border-bottom-right-radius: 0;
+    right: -22%;
   }
 
   &__dashed-line-right-knee {
-    border-bottom-left-radius: 30%;
-    border-bottom-right-radius: 0;
-    right: -23%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 30%;
+    left: -23%;
   }
 
   &__dashed-line-left-below-knee,
@@ -98,7 +98,7 @@
     width: 100px;
     height: 40px;
     border-top: dashed 1px #546E7A;
-    top: 77%;
+    top: 60%;
   }
 
   &__dashed-line-left-below-knee {
@@ -108,7 +108,7 @@
 
   &__dashed-line-right-below-knee {
     transform: rotate(32deg);
-    right: 24%;
+    right: 25%;
   }
 
   &__neck-info,
@@ -120,11 +120,13 @@
   &__right-below-knee-info,
   &__left-below-knee-info {
     position: absolute;
+    display: flex;
+    flex-direction: column;
   }
 
   &__neck-info {
-    left: 12%;
-    top: 11%;
+    left: -28%;
+    top: 5%;
   }
 
   &__neck-info-btn {
@@ -134,8 +136,8 @@
   }
 
   &__saddle-info {
-    right: 20%;
-    top: 12%;
+    right: -34%;
+    top: 5%;
   }
 
   &__saddle-info-btn {
@@ -146,69 +148,69 @@
 
   &__right-wing-info,
   &__left-wing-info {
-    top: 38%;
+    top: 27%;
   }
 
   &__right-wing-info {
-    right: -56%;
+    right: -93%;
   }
 
   &__right-wing-info-btn {
     position: absolute;
     right: -36%;
-    top: 41%;
+    top: 34%;
   }
 
   &__left-wing-info {
-    left: -50%;
+    left: -94%;
   }
 
   &__left-wing-info-btn {
     position: absolute;
-    left: -39%;
-    top: 42%;
+    left: -38%;
+    top: 35%;
   }
 
   &__left-knee-info,
   &__right-knee-info {
-    top: 68%;
+    top: 50%;
   }
 
   &__left-knee-info-btn,
   &__right-knee-info-btn {
     position: absolute;
-    bottom: 24%;
+    bottom: 40%;
   }
 
   &__left-knee-info {
-    right: -57%;
+    left: -101%;
   }
 
   &__left-knee-info-btn {
-    left: -32%;
+    left: -30%;
   }
 
   &__right-knee-info {
-    left: -57%;
+    right: -108%;
   }
 
   &__right-knee-info-btn {
-    right: -31%;
+    right: -29%;
   }
 
   &__right-below-knee-info,
   &__left-below-knee-info {
-    top: 85%;
+    top: 66%;
   }
 
   &__right-below-knee-info-btn,
   &__left-below-knee-info-btn {
     position: absolute;
-    bottom: 8%;
+    bottom: 29%;
   }
 
   &__right-below-knee-info {
-    right: 15%;
+    right: -31%;
   }
 
   &__right-below-knee-info-btn {
@@ -216,39 +218,72 @@
   }
 
   &__left-below-knee-info {
-    left: 15%;
+    left: -32%;
   }
 
   &__left-below-knee-info-btn {
     left: 22%;
   }
 
-  &__btn-plus {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border: 2px solid $dark-blue;
-    color: $dark-blue;
-    font-size: 22px;
-    line-height: 19px;
+  &__btn-delete {
     padding: 0;
-    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    height: 36px;
+    margin-left: 10px;
+  }
+
+  &__btn-plus {
+    padding: 0;
     display: flex;
+    border: none;
     justify-content: center;
     align-items: center;
     background-color: $white;
 
-    &:hover {
-      box-shadow: 0 0 10px rgba($dark-blue, 0.5);
-    }
-
     &:active {
       opacity: 0.5;
+      box-shadow: none;
     }
 
     &:focus {
-      box-shadow: 0 0 10px rgba($dark-blue, 0.5);
       outline: none;
     }
+  }
+
+  &__edit-form {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    position: relative;
+  }
+
+  &__edit-form-el {
+    flex-direction: column;
+  }
+
+  &__autosuggest {
+    height: 36px;
+    width: 160px;
+  }
+
+  &__input-field {
+    width: 76px;
+    height: 36px;
+
+    &:disabled {
+      border: none;
+      background-color: transparent;
+      padding-left: 0;
+    }
+  }
+
+  &__input-container {
+    padding-left: 8px;
+  }
+
+  &__plus-edit {
+    height: 33px;
+    margin-left: 10px;
   }
 }

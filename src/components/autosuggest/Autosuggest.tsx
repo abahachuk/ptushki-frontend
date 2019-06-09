@@ -24,6 +24,9 @@ export interface IAutosuggest {
   onChangeValue?: ({ value, type }: IChangeValue) => void;
   type?: string;
   withSearch?: boolean;
+  className?: string;
+  id?: string;
+  disabled?: boolean;
 }
 
 const blockName = "autosuggest";
@@ -35,7 +38,10 @@ export const Autosuggest: FC<IAutosuggest> = ({
   value,
   onChangeValue,
   type = "",
-  withSearch
+  withSearch,
+  className,
+  id,
+  disabled
 }) => {
   const [list, setCollection] = useState(collection);
 
@@ -74,7 +80,13 @@ export const Autosuggest: FC<IAutosuggest> = ({
   );
 
   return (
-    <CustomDropdown value={value} placeholder={placeholder}>
+    <CustomDropdown
+      value={value}
+      placeholder={placeholder}
+      className={className}
+      id={id}
+      disabled={disabled}
+    >
       {withSearch && (
         <div className={`${blockName}__search-container`}>
           <Input
