@@ -156,6 +156,8 @@ export const labels = {
   copyright: "© 2019 Ptushki. Все права защищены.",
   filter: "Фильтр",
   clearFilters: "Сбросить все фильтры",
+  clear: "Сбросить",
+  selectAll: "Выбрать все",
   search: "Поиск",
   show: "Показать",
   selected: "Выбрано",

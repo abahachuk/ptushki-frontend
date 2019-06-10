@@ -18,7 +18,7 @@ export const defaultDataGridState: DataGridState<any> = {
     totalCount: 50
   },
   filtering: [],
-  search: null,
+  search: undefined,
   sorting: [],
   availableFilters: {},
   fixedPartWidth: 0

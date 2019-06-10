@@ -29,7 +29,8 @@ export const COMMON_GRID_COLUMNS: { [key in GridColumn]: DataGridCol<any> } = {
           return labels.verification.rejected;
         }
         return labels.verification.pending;
-      }
+      },
+      getValue: ({ value }) => value.toString()
     }
   },
   sex: {
