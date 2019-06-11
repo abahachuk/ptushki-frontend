@@ -143,6 +143,30 @@ export const labels = {
   observations: {
     title: "Наблюдения"
   },
+  importObservations: {
+    back: "Назад",
+    title: "Загрузка базы наблюдений",
+    description:
+      "Если вы загружаете базу впервые - скачайте шаблонный XLS файл и заполните необходимые поля, после этого загрузите таблицу в форму ниже",
+    uploadTable: "Загрузить заполненную таблицу",
+    dragFile: "Перетащите файл со списком наблюдений сюда",
+    fileUploaded: "Ваш файл загружен",
+    wrongFile: "Неверный формат файла",
+    or: "или",
+    chooseFile: "Выберите файл",
+    useTemplate: "Используйте шаблон, доступный для скачивания ниже",
+    chooseAnotherFile: "Выберите другой файл",
+    cancel: "Отменить",
+    supportedFormats: "Поддерживаемые форматы: .xls",
+    addToDatabase: "Добавить в базу",
+    insertEuring: "Вставить коды EURING",
+    insertCodesHere: "Вставьте коды сюда",
+    loadToDatabase: "Загрузить в базу",
+    tableTemplateTitle: "Шаблон таблицы",
+    tableTemplateDescription:
+      "Чтобы ваши данные корректно отобразились на сайте, скачайте и заполните эталонный excel-файл",
+    tableTemplateButtonCaption: "Скачать файл"
+  },
   addBird: {
     title: "Добавить птицу",
     actionTitle: "Добавить птицу"

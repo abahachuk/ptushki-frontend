@@ -5,6 +5,7 @@ import { ObservationsPage } from "./ObservationsPage";
 import { AddObservation } from "../add-observation/AddObservationForm";
 import { ComponentRoute } from "../routing/ComponentRoute";
 import { BirdInfoForm } from "../bird-info/BirdInfoForm";
+import { ImportObservations } from "../import-observations/ImportObservations";
 
 export const ObservationsRoute: FC<RouteProps> = () => {
   return (
@@ -13,6 +14,7 @@ export const ObservationsRoute: FC<RouteProps> = () => {
       PageComponent={ObservationsPage}
       AddComponent={AddObservation}
       DetailComponent={BirdInfoForm}
+      ImportComponent={ImportObservations}
     />
   );
 };

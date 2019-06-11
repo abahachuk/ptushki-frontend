@@ -26,6 +26,15 @@ export const TableHeader: FC<{
         >
           + {addButtonTitle}
         </Button>
+        <Button
+          size="sm"
+          className="ml-3 px-3"
+          tag={Link}
+          outline
+          to={`${route.path}/import`}
+        >
+          {labels.importData}
+        </Button>
       </CanConnected>
       <CanConnected I={UserAction.import} a={route.scope}>
         <UncontrolledDropdown>
