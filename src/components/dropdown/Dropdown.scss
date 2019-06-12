@@ -57,6 +57,12 @@
         color: $dustyGray;
       }
     }
+
+    &:disabled {
+      border: none;
+      padding-left: 0;
+      color: $black;
+    }
   }
 
   &__chevron {

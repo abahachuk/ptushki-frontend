@@ -88,13 +88,19 @@ export const birdData = {
   euring:
     "ESA|A0|DA…..02876|1|4|ZZ|12430|12430|N|0|Z|U|U|U|0|0|U|--|--|-|11082006|0|----|ES14|+420500-0044500|0|0|99|0|4|00280|241|00097|63.5||U|10|U|U|||||||||3|E||0|||||||||",
   params: {
-    neck: "4cm",
-    saddle: "2cm",
-    rightWing: "10cm",
-    leftWing: "10cm",
-    leftAboveKnee: "3cm",
-    rightAboveKnee: "3cm",
-    leftBelowKnee: "4cm",
-    rightBelowKnee: "4cm"
+    saddle: [{ labelType: "Синее кольцо", value: "5431" }],
+    neck: [{ labelType: "Синее кольцо", value: "5431" }],
+    leftWing: [{ labelType: "Синее кольцо", value: "5431" }],
+    rightWing: [{ labelType: "Синее кольцо", value: "5431" }],
+    leftBobbin: [{ labelType: "Синее кольцо", value: "5431" }],
+    rightBobbin: [
+      { labelType: "Синее кольцо", value: "5431" },
+      { labelType: "Синее кольцо", value: "5431" }
+    ],
+    leftLeg: [
+      { labelType: "Синее кольцо", value: "5431" },
+      { labelType: "Синее кольцо", value: "5431" }
+    ],
+    rightLeg: [{ labelType: "Синее кольцо", value: "5431" }]
   }
 };

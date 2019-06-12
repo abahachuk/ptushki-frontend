@@ -4,6 +4,22 @@
   padding: 15px;
   background-color: $white;
 
+  &__info-title {
+    color: $trout;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  &__info-value {
+    color: $mineSharf;
+    font-weight: 300;
+  }
+
+  &__info-title, &__info-value {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
   &__header {
     display: flex;
     align-items: center;

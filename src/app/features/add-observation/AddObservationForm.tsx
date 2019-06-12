@@ -109,7 +109,7 @@ export const AddObservation: FC<{
       <p className={`${blockName}__subtitle`}>
         {labels.addObservation.subTitle}
       </p>
-      <Bird isEdit birdParams={birdData.params} />
+      <Bird birdParams={birdData.params} />
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
           className={`${blockName}__info-block`}

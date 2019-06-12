@@ -8,6 +8,8 @@ export interface ICustomDropdown {
   placeholder?: string;
   value?: string;
   className?: string;
+  id?: string;
+  disabled?: boolean;
   toggleButton?: ReactNode;
 }
 
@@ -15,6 +17,7 @@ interface ICustomDropdownToggle {
   placeholder?: string;
   value?: string;
   isOpen?: boolean;
+  disabled?: boolean;
 }
 
 const blockName = "dropdown";
@@ -22,16 +25,19 @@ const blockName = "dropdown";
 const DefaultCustomDropdownToggle: FC<ICustomDropdownToggle> = ({
   placeholder,
   value,
-  isOpen
+  isOpen,
+  disabled
 }) => (
   <Fragment>
     {value || placeholder}
-    <span
-      className={sn(
-        `${blockName}__chevron`,
-        isOpen ? `${blockName}__chevron--up` : `${blockName}__chevron--down`
-      )}
-    />
+    {!disabled && (
+      <span
+        className={sn(
+          `${blockName}__chevron`,
+          isOpen ? `${blockName}__chevron--up` : `${blockName}__chevron--down`
+        )}
+      />
+    )}
   </Fragment>
 );
 
@@ -40,6 +46,8 @@ export const CustomDropdown: FC<ICustomDropdown> = ({
   value,
   children,
   className,
+  id,
+  disabled,
   toggleButton
 }) => {
   const [isOpen, toggleOpen] = useState(false);
@@ -47,8 +55,14 @@ export const CustomDropdown: FC<ICustomDropdown> = ({
   const toggleDropdown = () => toggleOpen(!isOpen);
 
   return (
-    <Dropdown isOpen={isOpen} toggle={toggleDropdown}>
+    <Dropdown
+      isOpen={isOpen}
+      toggle={toggleDropdown}
+      id={id}
+      disabled={disabled}
+    >
       <DropdownToggle
+        disabled={disabled}
         outline
         className={sn(
           `${blockName}__dropdown`,
@@ -61,6 +75,7 @@ export const CustomDropdown: FC<ICustomDropdown> = ({
             value={value}
             placeholder={placeholder}
             isOpen={isOpen}
+            disabled={disabled}
           />
         )}
       </DropdownToggle>

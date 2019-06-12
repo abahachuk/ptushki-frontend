@@ -23,6 +23,9 @@ export interface IAutosuggest {
   value?: string;
   onChangeValue?: ({ value, type }: IChangeValue) => void;
   type?: string;
+  className?: string;
+  id?: string;
+  disabled?: boolean;
   toggleButton?: ReactNode;
 }
 
@@ -35,6 +38,9 @@ export const Autosuggest: FC<IAutosuggest> = ({
   value,
   onChangeValue,
   type = "",
+  className,
+  id,
+  disabled,
   toggleButton
 }) => {
   const [list, setCollection] = useState(collection);
@@ -79,6 +85,8 @@ export const Autosuggest: FC<IAutosuggest> = ({
       value={value}
       placeholder={placeholder}
       toggleButton={toggleButton}
+      id={id}
+      disabled={disabled}
     >
       {collection.length > 7 && (
         <div className={`${blockName}__search-container`}>
