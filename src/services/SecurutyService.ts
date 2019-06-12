@@ -15,8 +15,6 @@ export class SecurityError extends Error {
 }
 
 export default class SecurityService {
-  private storage: Storage | null = null;
-
   private accessToken: string | null = null;
 
   private refreshToken: string | null = null;
@@ -24,24 +22,9 @@ export default class SecurityService {
   private userInfo: UserInfo | null = null;
 
   constructor() {
-    this.checkStorage();
-    if (this.storage) {
-      this.getDataFromStorage();
-    }
-  }
-
-  private checkStorage() {
-    if (localStorage.getItem(USER_INFO)) {
-      this.storage = localStorage;
-    } else if (sessionStorage.getItem(USER_INFO)) {
-      this.storage = sessionStorage;
-    }
-  }
-
-  private getDataFromStorage() {
-    this.accessToken = this.storage.getItem(ACCESS_TOKEN);
-    this.refreshToken = this.storage.getItem(REFRESH_TOKEN);
-    this.userInfo = JSON.parse(this.storage.getItem(USER_INFO));
+    this.accessToken = localStorage.getItem(ACCESS_TOKEN);
+    this.refreshToken = localStorage.getItem(REFRESH_TOKEN);
+    this.userInfo = JSON.parse(localStorage.getItem(USER_INFO));
   }
 
   getAccessToken(): string {
@@ -55,24 +38,20 @@ export default class SecurityService {
   updateTokens(access: string, refresh: string): void {
     this.accessToken = access;
     this.refreshToken = refresh;
-    this.storage.setItem(ACCESS_TOKEN, access);
-    this.storage.setItem(REFRESH_TOKEN, refresh);
-  }
-
-  saveTokens(access: string, refresh: string, remember: boolean): void {
-    this.storage = remember ? localStorage : sessionStorage;
-    this.updateTokens(access, refresh);
+    localStorage.setItem(ACCESS_TOKEN, access);
+    localStorage.setItem(REFRESH_TOKEN, refresh);
   }
 
   deleteTokens(): void {
     this.accessToken = null;
     this.refreshToken = null;
-    this.storage.removeItem(REFRESH_TOKEN);
-    this.storage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
+    localStorage.removeItem(ACCESS_TOKEN);
   }
 
   saveUserInfo(userInfo: UserInfo): void {
-    this.storage.setItem(USER_INFO, JSON.stringify(userInfo));
+    this.userInfo = userInfo;
+    localStorage.setItem(USER_INFO, JSON.stringify(userInfo));
   }
 
   getUserInfo(): UserInfo {
@@ -80,22 +59,13 @@ export default class SecurityService {
   }
 
   deleteUserInfo(): void {
-    this.storage.removeItem(USER_INFO);
-  }
-
-  deleteSensitiveData() {
-    this.deleteTokens();
-    this.deleteUserInfo();
+    this.userInfo = null;
+    localStorage.removeItem(USER_INFO);
   }
 
   reset(): void {
-    this.storage = localStorage;
-    this.deleteSensitiveData();
-
-    this.storage = sessionStorage;
-    this.deleteSensitiveData();
-
-    this.storage = null;
+    this.deleteTokens();
+    this.deleteUserInfo();
   }
 
   checkPermissions(permissions: Array<string>, user: UserInfo): boolean {

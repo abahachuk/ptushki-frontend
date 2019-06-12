@@ -78,7 +78,7 @@ export default class AjaxService {
     }
 
     const { user, token, refreshToken } = await response.json();
-    securityService.saveTokens(token, refreshToken, data.rememberPassword);
+    securityService.updateTokens(token, refreshToken);
     securityService.saveUserInfo(user);
 
     return user;

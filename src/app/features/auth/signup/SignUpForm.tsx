@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { AuthFormLayout } from "../../../../components/layout/AuthFormLayout";
 import { FormControl } from "../../../../components/form/FormControl";
 import { SignUpData } from "../models";
-import { CheckboxField } from "../../../../components/checkbox/CheckboxField";
 import { ROUTE_SIGN_IN } from "../../routing/routes";
 import {
   booleanSchema,
@@ -95,11 +94,6 @@ export const SignUpForm: FC<{
               autoComplete="new-password"
               formikProps={formikProps}
               placeholder={labels.form.password.newPasswordPlaceholder}
-            />
-            <CheckboxField
-              formikProps={formikProps}
-              name="rememberPassword"
-              label={labels.signUp.rememberPassword}
             />
             <Button
               className="mt-3 button primary-button"

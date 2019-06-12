@@ -1,4 +1,11 @@
-import { OBSERVER, UNAUTHORIZED } from "../../../config/roles";
+import {
+  ADMIN,
+  MODERATOR,
+  OBSERVER,
+  RINGER,
+  SCIENTIST,
+  UNAUTHORIZED
+} from "../../../config/roles";
 
 export interface RouteDescription {
   path: string;
@@ -29,30 +36,30 @@ export const ROUTE_USER_INFO: RouteDescription = {
 
 export const ROUTE_BIRD_INFO: RouteDescription = {
   path: "/bird-info/",
-  permissions: [OBSERVER],
+  permissions: [OBSERVER, RINGER, SCIENTIST, MODERATOR, ADMIN],
   fallback: "/"
 };
 
 export const ROUTE_ADD_OBSERVATION: RouteDescription = {
   path: "/add-observation/",
-  permissions: [OBSERVER],
+  permissions: [OBSERVER, RINGER, SCIENTIST, MODERATOR, ADMIN],
   fallback: "/"
 };
 
 export const ROUTE_OBSERVATIONS: RouteDescription = {
   path: "/observations/",
-  permissions: [OBSERVER],
+  permissions: [OBSERVER, RINGER, SCIENTIST, MODERATOR, ADMIN],
   fallback: "/"
 };
 
 export const ROUTE_ADD_BIRD: RouteDescription = {
   path: "/add-bird/",
-  permissions: [OBSERVER],
+  permissions: [OBSERVER, RINGER, SCIENTIST, MODERATOR, ADMIN],
   fallback: "/"
 };
 
 export const ROUTE_BIRDS: RouteDescription = {
   path: "/birds/",
-  permissions: [OBSERVER],
+  permissions: [OBSERVER, RINGER, SCIENTIST, MODERATOR, ADMIN],
   fallback: "/"
 };
