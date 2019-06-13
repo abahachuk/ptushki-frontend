@@ -1,5 +1,6 @@
 import { TableSelection as TableSelectionBase } from "@devexpress/dx-react-grid";
 import { TableSelection } from "@devexpress/dx-react-grid-bootstrap4";
+import classNames from "classnames";
 import React, { FC } from "react";
 import { BaseCheckbox } from "../../checkbox/BaseCheckbox";
 
@@ -27,7 +28,7 @@ export const SelectorColumnHeader: FC<TableSelectionBase.HeaderCellProps> = ({
   someSelected,
   ...p
 }) => (
-  <th {...p}>
+  <th {...p} className={classNames("pl-3", (p as any).className)}>
     <BaseCheckbox
       checked={someSelected || allSelected}
       indeterminate={someSelected && !allSelected}
