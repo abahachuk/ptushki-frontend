@@ -1,11 +1,15 @@
 import * as React from "react";
+import { ObservationData } from "../../app/features/observations/models";
+import { EuringAndDescriptionCell } from "../../components/grid/EuringAndDescriptionCell";
 import { DataGridCol } from "../../components/table/DataGrid";
 import { labels } from "../../config/i18n/labels";
 import { IndexCell } from "./cellRenderers/IndexCell";
 import { VerificationCell } from "./cellRenderers/VerificationCell";
 import { GridColumn } from "./GridColumn";
 
-export const COMMON_GRID_COLUMNS: { [key in GridColumn]: DataGridCol<any> } = {
+export const COMMON_GRID_COLUMNS: {
+  [key in GridColumn]: DataGridCol<ObservationData>
+} = {
   id: {
     name: GridColumn.id,
     title: labels.idx,
@@ -14,7 +18,7 @@ export const COMMON_GRID_COLUMNS: { [key in GridColumn]: DataGridCol<any> } = {
   species: {
     name: GridColumn.species,
     title: labels.species,
-    getCellValue: r => r.colorRing
+    getCellValue: r => <EuringAndDescriptionCell {...r.speciesConcluded} />
   },
   verified: {
     name: GridColumn.verified,
@@ -36,22 +40,24 @@ export const COMMON_GRID_COLUMNS: { [key in GridColumn]: DataGridCol<any> } = {
   sex: {
     name: GridColumn.sex,
     title: labels.sex,
-    getCellValue: () => null
+    getCellValue: r => <EuringAndDescriptionCell {...r.sexConcluded} />
   },
   ring: {
-    name: GridColumn.ring,
+    name: GridColumn.primaryIdentificationMethod,
     title: labels.generalIdentificationMethod,
-    getCellValue: () => null
+    getCellValue: r => (
+      <EuringAndDescriptionCell {...r.ring.primaryIdentificationMethod} />
+    )
   },
   status: {
     name: GridColumn.status,
     title: labels.status,
-    getCellValue: r => r.note
+    getCellValue: r => <EuringAndDescriptionCell {...r.status} />
   },
   condition: {
     name: GridColumn.condition,
     title: labels.condition,
-    getCellValue: r => r.note
+    getCellValue: r => <EuringAndDescriptionCell {...r.condition} />
   },
   placeName: {
     name: GridColumn.placeName,

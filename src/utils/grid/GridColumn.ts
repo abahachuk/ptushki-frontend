@@ -2,7 +2,7 @@ export enum GridColumn {
   id = "id",
   verified = "verified",
   sex = "sex",
-  ring = "ring",
+  primaryIdentificationMethod = "ring",
   species = "species",
   status = "status",
   condition = "condition",

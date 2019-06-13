@@ -8,7 +8,7 @@ export const OBSERVATION_LIST_COLUMNS_CONFIG: DataGridCol<ObservationData>[] = [
   COMMON_GRID_COLUMNS[GridColumn.species],
   COMMON_GRID_COLUMNS[GridColumn.verified],
   COMMON_GRID_COLUMNS[GridColumn.sex],
-  COMMON_GRID_COLUMNS[GridColumn.ring],
+  COMMON_GRID_COLUMNS[GridColumn.primaryIdentificationMethod],
   COMMON_GRID_COLUMNS[GridColumn.status],
   COMMON_GRID_COLUMNS[GridColumn.condition],
   COMMON_GRID_COLUMNS[GridColumn.placeName],

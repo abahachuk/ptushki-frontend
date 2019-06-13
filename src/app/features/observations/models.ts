@@ -12,6 +12,13 @@ export enum VerificationStatus {
   Rejected = "Rejected"
 }
 
+// TODO when api is localised, change this
+export interface DescriptedField {
+  id: string;
+  // eslint-disable-next-line camelcase
+  desc_rus: string;
+}
+
 export interface ObservationData {
   id: string;
   verificationStatus: VerificationStatus;
@@ -24,6 +31,14 @@ export interface ObservationData {
   finder: UserInfo;
   elapsedTime: string;
   remarks: string;
+  sexConcluded: DescriptedField;
+  circumstances: DescriptedField;
+  condition: DescriptedField;
+  status: DescriptedField;
+  speciesConcluded: DescriptedField;
+  ring: {
+    primaryIdentificationMethod: DescriptedField;
+  };
 }
 
 export interface ObservationFilters

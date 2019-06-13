@@ -7,7 +7,7 @@ export const BIRDS_LIST_COLUMNS_CONFIG: DataGridCol<BirdData>[] = [
   COMMON_GRID_COLUMNS[GridColumn.id],
   COMMON_GRID_COLUMNS[GridColumn.species],
   COMMON_GRID_COLUMNS[GridColumn.sex],
-  COMMON_GRID_COLUMNS[GridColumn.ring],
+  COMMON_GRID_COLUMNS[GridColumn.primaryIdentificationMethod],
   COMMON_GRID_COLUMNS[GridColumn.status],
   COMMON_GRID_COLUMNS[GridColumn.condition],
   COMMON_GRID_COLUMNS[GridColumn.placeName],

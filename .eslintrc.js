@@ -42,6 +42,8 @@ module.exports = {
     ],
     "func-style": ["error", "expression"],
     "func-names": ["off"],
-    "no-shadow": "off"
+    "no-shadow": "off",
+    // having desc_rus field coming from backend makes this rule a headache
+    camelcase: "off"
   }
 };
