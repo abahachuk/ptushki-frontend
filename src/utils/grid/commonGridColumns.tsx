@@ -84,8 +84,7 @@ export const COMMON_GRID_COLUMNS: {
     title: labels.finder,
     getCellValue: r => (
       <>
-        {r.finder.firstName}
-        {r.finder.lastName}
+        {r.finder.firstName} {r.finder.lastName}
       </>
     ),
     filter: {
