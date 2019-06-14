@@ -25,20 +25,37 @@ export interface ObservationData {
   colorRing: string;
   note: string;
   placeName: string;
+  latitude: number;
+  longitude: number;
   date: string;
-  direction: string;
-  distance: string;
+  direction: number; // deg
+  distance: number; // km
   finder: UserInfo;
-  elapsedTime: string;
+  elapsedTime: number; // days
   remarks: string;
+  sexMentioned: DescriptedField;
   sexConcluded: DescriptedField;
   circumstances: DescriptedField;
+  circumstancesPresumed: DescriptedField;
   condition: DescriptedField;
   status: DescriptedField;
+  speciesMentioned: DescriptedField;
   speciesConcluded: DescriptedField;
+  ageMentioned: DescriptedField;
+  ageConcluded: DescriptedField;
+  manipulated: DescriptedField;
+  movedBeforeTheCapture: DescriptedField;
+  catchingMethod: DescriptedField;
+  catchingLures: DescriptedField;
+  accuracyOfDate: DescriptedField;
+  accuracyOfCoordinates: DescriptedField;
+  pullusAge: DescriptedField;
+  accuracyOfPullusAge: DescriptedField;
+
   ring: {
     primaryIdentificationMethod: DescriptedField;
   };
+  ringMentioned: string;
 }
 
 export interface ObservationFilters

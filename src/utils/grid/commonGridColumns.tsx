@@ -15,10 +15,75 @@ export const COMMON_GRID_COLUMNS: {
     title: labels.idx,
     getCellValue: IndexCell
   },
-  species: {
-    name: GridColumn.species,
+  speciesMentioned: {
+    name: GridColumn.speciesMentioned,
+    title: labels.speciesMentioned,
+    getCellValue: r => <EuringAndDescriptionCell {...r.speciesMentioned} />
+  },
+  speciesConcluded: {
+    name: GridColumn.speciesConcluded,
     title: labels.species,
     getCellValue: r => <EuringAndDescriptionCell {...r.speciesConcluded} />
+  },
+  sexMentioned: {
+    name: GridColumn.sexMentioned,
+    title: labels.sexMentioned,
+    getCellValue: r => <EuringAndDescriptionCell {...r.sexMentioned} />
+  },
+  sexConcluded: {
+    name: GridColumn.sexConcluded,
+    title: labels.sex,
+    getCellValue: r => <EuringAndDescriptionCell {...r.sexConcluded} />
+  },
+  ageMentioned: {
+    name: GridColumn.ageMentioned,
+    title: labels.ageMentioned,
+    getCellValue: r => <EuringAndDescriptionCell {...r.ageMentioned} />
+  },
+  ageConcluded: {
+    name: GridColumn.ageConcluded,
+    title: labels.age,
+    getCellValue: r => <EuringAndDescriptionCell {...r.ageConcluded} />
+  },
+  circumstances: {
+    name: GridColumn.circumstances,
+    title: labels.circumstances,
+    getCellValue: r => <EuringAndDescriptionCell {...r.circumstances} />
+  },
+  circumstancesPresumed: {
+    name: GridColumn.circumstancesPresumed,
+    title: labels.circumstancesPresumed,
+    getCellValue: r => <EuringAndDescriptionCell {...r.circumstancesPresumed} />
+  },
+  manipulated: {
+    name: GridColumn.manipulated,
+    title: labels.manipulated,
+    getCellValue: r => <EuringAndDescriptionCell {...r.manipulated} />
+  },
+  movedBeforeTheCapture: {
+    name: GridColumn.movedBeforeTheCapture,
+    title: labels.movedBeforeTheCapture,
+    getCellValue: r => <EuringAndDescriptionCell {...r.movedBeforeTheCapture} />
+  },
+  catchingMethod: {
+    name: GridColumn.catchingMethod,
+    title: labels.catchingMethod,
+    getCellValue: r => <EuringAndDescriptionCell {...r.catchingMethod} />
+  },
+  catchingLures: {
+    name: GridColumn.catchingLures,
+    title: labels.catchingLures,
+    getCellValue: r => <EuringAndDescriptionCell {...r.catchingLures} />
+  },
+  pullusAge: {
+    name: GridColumn.pullusAge,
+    title: labels.pullusAge,
+    getCellValue: r => <EuringAndDescriptionCell {...r.pullusAge} />
+  },
+  accuracyOfPullusAge: {
+    name: GridColumn.accuracyOfPullusAge,
+    title: labels.accuracyOfPullusAge,
+    getCellValue: r => <EuringAndDescriptionCell {...r.accuracyOfPullusAge} />
   },
   verified: {
     name: GridColumn.verified,
@@ -37,17 +102,17 @@ export const COMMON_GRID_COLUMNS: {
       getValue: ({ value }) => value.toString()
     }
   },
-  sex: {
-    name: GridColumn.sex,
-    title: labels.sex,
-    getCellValue: r => <EuringAndDescriptionCell {...r.sexConcluded} />
-  },
-  ring: {
+  primaryIdentificationMethod: {
     name: GridColumn.primaryIdentificationMethod,
     title: labels.generalIdentificationMethod,
     getCellValue: r => (
       <EuringAndDescriptionCell {...r.ring.primaryIdentificationMethod} />
     )
+  },
+  ringMentioned: {
+    name: GridColumn.ringMentioned,
+    title: labels.ring,
+    getCellValue: r => r.ringMentioned
   },
   status: {
     name: GridColumn.status,
@@ -64,20 +129,38 @@ export const COMMON_GRID_COLUMNS: {
     title: labels.placeName,
     getCellValue: r => r.placeName
   },
+  accuracyOfCoordinates: {
+    name: GridColumn.accuracyOfCoordinates,
+    title: labels.accuracyOfCoordinates,
+    getCellValue: r => <EuringAndDescriptionCell {...r.accuracyOfCoordinates} />
+  },
   date: {
     name: GridColumn.date,
     title: labels.date,
     getCellValue: r => new Date(r.date).toLocaleString()
   },
+  accuracyOfDate: {
+    name: GridColumn.accuracyOfDate,
+    title: labels.accuracyOfDate,
+    getCellValue: r => <EuringAndDescriptionCell {...r.accuracyOfDate} />
+  },
   direction: {
     name: GridColumn.direction,
     title: labels.direction,
-    getCellValue: r => r.direction
+    getCellValue: r => (
+      <>
+        {r.direction} {labels.degreeSymbol}
+      </>
+    )
   },
   distance: {
     name: GridColumn.distance,
     title: labels.distance,
-    getCellValue: r => r.distance
+    getCellValue: r => (
+      <>
+        {r.distance} {labels.km}
+      </>
+    )
   },
   finder: {
     name: GridColumn.finder,
@@ -102,7 +185,11 @@ export const COMMON_GRID_COLUMNS: {
   elapsedTime: {
     name: GridColumn.elapsedTime,
     title: labels.elapsedTime,
-    getCellValue: r => r.elapsedTime
+    getCellValue: r => (
+      <>
+        {r.elapsedTime} {labels.days}
+      </>
+    )
   },
   remarks: {
     name: GridColumn.remarks,
