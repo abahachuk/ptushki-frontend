@@ -1,19 +1,21 @@
 import React, { FC } from "react";
 import { NavItem, NavLink } from "reactstrap";
 import { NavLink as Link } from "react-router-dom";
-import { UserInfo } from "../auth/models";
-import { securityService } from "../../../services";
+import { UserAction } from "../../../config/permissions";
+import { CanConnected } from "../auth/CanConnected";
+import { RouteDescription } from "../routing/routes";
 
-export const ProtectedNavItem: FC<{
-  user: UserInfo;
-  permissions: Array<string>;
-  path: string;
-}> = ({ permissions, user, children, path }) => {
-  return securityService.checkPermissions(permissions, user) ? (
+export const ProtectedNavItem: FC<RouteDescription> = ({
+  scope,
+  children,
+  path
+}) => (
+  // @ts-ignore
+  <CanConnected I={UserAction.observe} a={scope}>
     <NavItem>
       <NavLink tag={Link} to={path}>
         {children}
       </NavLink>
     </NavItem>
-  ) : null;
-};
+  </CanConnected>
+);

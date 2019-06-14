@@ -1,3 +1,5 @@
+import { Ability } from "@casl/ability";
+
 export interface SignInData {
   email: string;
   password: string;
@@ -21,6 +23,11 @@ export interface UserInfo {
   phone: string;
   role: string;
   id: string;
+}
+
+export interface IAuthInfo {
+  user: UserInfo;
+  permissions: Ability;
 }
 
 export type AuthData = SignUpData | SignInData;

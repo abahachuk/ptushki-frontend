@@ -2,7 +2,7 @@ import React, { FC, ButtonHTMLAttributes, useState, useCallback } from "react";
 import { Label, Input } from "reactstrap";
 import sn from "classnames";
 
-import { Autosuggest } from "../../components/autosuggest/Autosuggest";
+import { Autosuggest } from "../autosuggest/Autosuggest";
 
 import { labels } from "../../config/i18n/labels";
 

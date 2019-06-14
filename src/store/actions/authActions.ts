@@ -1,6 +1,6 @@
 import { createAction } from "redux-actions";
 import { ThunkAction } from "redux-thunk";
-import { AuthData, UserInfo } from "../../app/features/auth/models";
+import { AuthData, IAuthInfo, UserInfo } from "../../app/features/auth/models";
 import { SING_IN_ENDPOINT, SING_UP_ENDPOINT } from "../../config/endpoints";
 import { ajaxService, securityService } from "../../services";
 import { RootState } from "../index";
@@ -12,10 +12,10 @@ const AuthEndpoint = {
 };
 
 export const authRequest = createAction<AuthData>("AUTH_REQUEST");
-export const authSuccess = createAction<UserInfo>("AUTH_SUCCESS");
+export const authSuccess = createAction<IAuthInfo>("AUTH_SUCCESS");
 export const authFailure = createAction<string | void>("AUTH_FAILURE");
 export const authUnmount = createAction<void>("AUTH_UNMOUNT");
-export const logout = createAction<void>("LOGOUT");
+export const logout = createAction<IAuthInfo>("LOGOUT");
 
 export const authExit = (): ThunkAction<
   void,
@@ -32,7 +32,8 @@ const auth = (type: "singIn" | "singUp") => (
   dispatch(authRequest(data));
   try {
     const userInfo = await ajaxService.makeAuthCall(AuthEndpoint[type], data);
-    dispatch(authSuccess(userInfo));
+    securityService.saveUserInfo(userInfo);
+    dispatch(authSuccess(securityService.getAuthInfo()));
   } catch (e) {
     dispatch(authFailure(e.message));
   }
@@ -47,8 +48,8 @@ export const signOut = (): ThunkAction<
   undefined,
   any
 > => dispatch => {
-  securityService.reset();
-  dispatch(logout());
+  const authInfo = securityService.reset();
+  dispatch(logout(authInfo));
 };
 
 export const getUser = (): ThunkAction<
@@ -57,9 +58,9 @@ export const getUser = (): ThunkAction<
   undefined,
   any
 > => dispatch => {
-  const user = securityService.getUserInfo();
-  if (user) {
-    dispatch(authSuccess(user));
+  const authInfo = securityService.getAuthInfo();
+  if (authInfo) {
+    dispatch(authSuccess(authInfo));
   } else {
     dispatch(authFailure());
   }

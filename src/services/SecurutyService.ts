@@ -1,5 +1,6 @@
-/* eslint-disable class-methods-use-this */
-import { UserInfo } from "../app/features/auth/models";
+import { Ability, AbilityBuilder } from "@casl/ability";
+import { IAuthInfo, UserInfo } from "../app/features/auth/models";
+import { UserRole, UserRoles } from "../config/permissions";
 
 const REFRESH_TOKEN = "refreshToken";
 const ACCESS_TOKEN = "accessToken";
@@ -21,10 +22,13 @@ export default class SecurityService {
 
   private userInfo: UserInfo | null = null;
 
+  public permissions: Ability = new Ability([]);
+
   constructor() {
     this.accessToken = localStorage.getItem(ACCESS_TOKEN);
     this.refreshToken = localStorage.getItem(REFRESH_TOKEN);
     this.userInfo = JSON.parse(localStorage.getItem(USER_INFO));
+    this.updatePermissions();
   }
 
   getAccessToken(): string {
@@ -49,27 +53,40 @@ export default class SecurityService {
     localStorage.removeItem(ACCESS_TOKEN);
   }
 
-  saveUserInfo(userInfo: UserInfo): void {
+  saveUserInfo(userInfo: UserInfo): UserInfo {
     this.userInfo = userInfo;
     localStorage.setItem(USER_INFO, JSON.stringify(userInfo));
-  }
-
-  getUserInfo(): UserInfo {
+    this.updatePermissions();
     return this.userInfo;
   }
 
-  deleteUserInfo(): void {
-    this.userInfo = null;
-    localStorage.removeItem(USER_INFO);
+  updatePermissions() {
+    const role: UserRole =
+      // @ts-ignore
+      UserRoles[this.userInfo ? this.userInfo.role : "unauthorized"];
+    // @ts-ignore
+    this.permissions = AbilityBuilder.define(can => {
+      const keys = Object.entries(role.permissions).forEach(
+        ([scope, actions]) => {
+          can(actions, scope);
+        }
+      );
+    });
+    return this.permissions;
   }
 
-  reset(): void {
+  getAuthInfo(): IAuthInfo {
+    return { user: this.userInfo, permissions: this.permissions };
+  }
+
+  deleteUserInfo(): { user: UserInfo; permissions: Ability } {
+    this.saveUserInfo(null as UserInfo);
+    this.updatePermissions();
+    return { user: this.userInfo, permissions: this.permissions };
+  }
+
+  reset(): IAuthInfo {
     this.deleteTokens();
-    this.deleteUserInfo();
-  }
-
-  checkPermissions(permissions: Array<string>, user: UserInfo): boolean {
-    const userRole = user && user.role;
-    return permissions.some(role => role === userRole);
+    return this.deleteUserInfo();
   }
 }
