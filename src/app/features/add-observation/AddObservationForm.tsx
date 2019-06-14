@@ -9,6 +9,11 @@ import {
   ModalFooter
 } from "reactstrap";
 
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
+import moment from "moment";
+import { SingleDatePicker } from "react-dates";
+
 import { Bird } from "../../../components/bird/Bird";
 import { Map } from "../../../components/map/Map";
 
@@ -75,6 +80,8 @@ export const AddObservation: FC<{
 }> = () => {
   const [observation, seObservationInfo] = useState<IBirdInfo>({});
   const [isOpened, setIsOpen] = useState(false);
+  const [calendarFocused, onFocusChange] = useState(false);
+  const [createdAt, onDateChange] = useState(moment());
 
   const toggleModal = useCallback(() => setIsOpen(!isOpened), [isOpened]);
 
@@ -218,12 +225,22 @@ export const AddObservation: FC<{
             {labels.addObservation.circumstancesFields.findOnMap}
           </Button>
           <div className={`${blockName}__separator`} />
-          {/* <Field
-            label={labels.addObservation.circumstancesFields.timeAndDate}
-            placeholder={
-              labels.addObservation.circumstancesFields.timeAndDatePlaceholder
-            }
-          /> */}
+          <div className={`${blockName}__field-container`}>
+            <p className={`${blockName}__field-label`}>
+              {labels.addObservation.circumstancesFields.timeDelta}
+            </p>
+            <SingleDatePicker
+              date={createdAt}
+              onDateChange={onDateChange}
+              focused={calendarFocused}
+              onFocusChange={({ focused }) => onFocusChange(focused)}
+              id="date"
+              numberOfMonths={1}
+              showDefaultInputIcon
+              inputIconPosition="after"
+            />
+          </div>
+
           <Field
             label={labels.addObservation.circumstancesFields.timeDelta}
             placeholder={
