@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" 
+  xmlns:tns="http://tempuri.org/" 
+  xmlns:s1="http://microsoft.com/wsdl/types/">
+  <soap:Header>
+    <AuthHeader xmlns="http://tempuri.org/">
+      <Username>ApiUserDubaiExperience</Username>
+      <Password>nR8zLeWgstJQ24u</Password>
+    </AuthHeader>
+  </soap:Header>
+  <soap:Body>
+    <InsertReservation xmlns="http://tempuri.org/">
+      <insertReservationRequest>
+        <CurrencyID>784</CurrencyID>
+        <ExecuteInsert>false</ExecuteInsert>
+        <LanguageID>en</LanguageID>
+        <MarketID>1</MarketID>
+        <PaymentMethodID>22</PaymentMethodID>
+        
+        <Customer>
+          <Email>ivan@lemax.net</Email>
+          <Name>John Smith</Name>
+          <Gender>1</Gender>
+          <BirthDate>1993-10-10T05:09:52</BirthDate>
+          <CountryID>2</CountryID>
+          <CitizenshipCountryID>2</CitizenshipCountryID>
+          <City>txtCity</City>
+          <Telephone>1245</Telephone>
+          <CustomerType>1</CustomerType>
+          <LanguageID>0</LanguageID>
+        </Customer>
+        
+        <ReservationItems>
+          <InsertReservationItemRQ>
+            <ClientComment>No comment</ClientComment>
+            <StartDate>2019-01-02T00:00:00</StartDate>
+            <EndDate>2019-01-05T00:00:00</EndDate>
+            <ReservationItemOrder>1</ReservationItemOrder>
+            <UnitID>1311</UnitID>
+
+            <Passengers>
+              <InsertReservationPassengerRQ>
+                <Name>John</Name>
+                <Surname>Smith</Surname>
+                <DateOfBirth>1968-10-10T05:09:52</DateOfBirth>
+              </InsertReservationPassengerRQ>
+              <InsertReservationPassengerRQ>
+                <Name>Jane</Name>
+                <Surname>Smith</Surname>
+                <DateOfBirth>1943-10-10T05:09:52</DateOfBirth>
+              </InsertReservationPassengerRQ>
+            </Passengers>
+
+            <SelectedServices>
+              <InsertReservationServiceRQ>
+                <ServiceID>205</ServiceID>
+                <Amount>0</Amount>
+              </InsertReservationServiceRQ>
+            </SelectedServices>
+          </InsertReservationItemRQ>
+        </ReservationItems>
+      </insertReservationRequest>
+    </InsertReservation>
+  </soap:Body>
+</soap:Envelope>

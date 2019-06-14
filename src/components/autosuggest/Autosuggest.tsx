@@ -87,6 +87,7 @@ export const Autosuggest: FC<IAutosuggest> = ({
       toggleButton={toggleButton}
       id={id}
       disabled={disabled}
+      className={className}
     >
       {collection.length > 7 && (
         <div className={`${blockName}__search-container`}>

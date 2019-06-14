@@ -24,20 +24,3 @@
     color: $mineShaft;
   }
 }
-
-.dropdown {
-  &__dropdown {
-    .show & {
-      position: relative;
-      z-index: $zindex-dropdown + 1; // to show outline
-    }
-  }
-
-  &__menu-container {
-    border-radius: 0;
-    border: none;
-    min-width: 100%;
-    width: auto;
-    margin-top: 0;
-  }
-}

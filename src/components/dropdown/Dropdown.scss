@@ -73,12 +73,21 @@
     transition: .3s all cubic-bezier(1, 0.25, 0.25, .8);
     will-change: transform;
 
-    &--up {
+    &--down {
       transform: rotate(135deg);
     }
 
-    &--down {
+    &--up {
       transform: rotate(-45deg);
     }
+  }
+
+  &__value-container {
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 99%;
   }
 }

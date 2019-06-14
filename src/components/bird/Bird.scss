@@ -18,7 +18,7 @@
 
   &__bird-container {
     position: relative;
-    padding: 85px 0 200px;
+    padding: 85px 0 285px;
     width: 400px;
     margin: 0 auto;
   }
@@ -60,7 +60,7 @@
     width: 190px;
     height: 140px;
     border-bottom: dashed 1px #546E7A;
-    top: 20%;
+    top: 17%;
   }
 
   &__dashed-line-right-wing {
@@ -78,7 +78,7 @@
     width: 285px;
     height: 110px;
     border-bottom: dashed 1px #546E7A;
-    top: 38%;
+    top: 33%;
   }
 
   &__dashed-line-left-knee {
@@ -98,7 +98,7 @@
     width: 100px;
     height: 40px;
     border-top: dashed 1px #546E7A;
-    top: 60%;
+    top: 52%;
   }
 
   &__dashed-line-left-below-knee {
@@ -148,7 +148,7 @@
 
   &__right-wing-info,
   &__left-wing-info {
-    top: 27%;
+    top: 22%;
   }
 
   &__right-wing-info {
@@ -158,7 +158,7 @@
   &__right-wing-info-btn {
     position: absolute;
     right: -36%;
-    top: 34%;
+    top: 29%;
   }
 
   &__left-wing-info {
@@ -168,18 +168,18 @@
   &__left-wing-info-btn {
     position: absolute;
     left: -38%;
-    top: 35%;
+    top: 30%;
   }
 
   &__left-knee-info,
   &__right-knee-info {
-    top: 50%;
+    top: 43%;
   }
 
   &__left-knee-info-btn,
   &__right-knee-info-btn {
     position: absolute;
-    bottom: 40%;
+    bottom: 48%;
   }
 
   &__left-knee-info {
@@ -200,13 +200,13 @@
 
   &__right-below-knee-info,
   &__left-below-knee-info {
-    top: 66%;
+    top: 57%;
   }
 
   &__right-below-knee-info-btn,
   &__left-below-knee-info-btn {
     position: absolute;
-    bottom: 29%;
+    bottom: 39%;
   }
 
   &__right-below-knee-info {
@@ -268,7 +268,7 @@
   }
 
   &__input-field {
-    width: 76px;
+    width: 78px;
     height: 36px;
 
     &:disabled {
