@@ -1,10 +1,10 @@
 import React from "react";
 import "../../../components/table/DataGrid.scss";
+import { Route } from "react-router";
 import { labels } from "../../../config/i18n/labels";
-import { ROUTE_ADD_OBSERVATION } from "../routing/routes";
+import { ROUTE_OBSERVATIONS } from "../routing/routes";
 import { ObservationListConnected } from "./ObservationList";
 import { TableHeader } from "../../../components/table/TableHeader";
-import { Scope } from "../../../config/permissions";
 
 export const ObservationsPage = () => {
   return (
@@ -12,8 +12,7 @@ export const ObservationsPage = () => {
       <TableHeader
         title={labels.observations.title}
         addButtonTitle={labels.addObservation.actionTitle}
-        addButtonPath={ROUTE_ADD_OBSERVATION.path}
-        scope={Scope.observations}
+        route={ROUTE_OBSERVATIONS}
       />
       <ObservationListConnected />
     </div>
