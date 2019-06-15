@@ -25,7 +25,8 @@ export enum Scope {
   observations = "observations",
   birds = "birds",
   rings = "rings",
-  auth = "auth"
+  auth = "auth",
+  users = "users"
 }
 
 export interface UserPermissions {
@@ -33,6 +34,7 @@ export interface UserPermissions {
   [Scope.birds]?: UserAction[];
   [Scope.rings]?: UserAction[];
   [Scope.auth]?: UserAction[];
+  [Scope.users]?: UserAction[];
 }
 
 export interface UserRoleDescriptor {
@@ -50,7 +52,8 @@ export const USER_ROLES: { [key in UserRole]: UserRoleDescriptor } = {
   observer: {
     value: "observer",
     permissions: {
-      [Scope.observations]: BASIC_ACTIONS
+      [Scope.observations]: BASIC_ACTIONS,
+      [Scope.birds]: [UserAction.observe]
     }
   },
   ringer: {
@@ -90,7 +93,8 @@ export const USER_ROLES: { [key in UserRole]: UserRoleDescriptor } = {
     permissions: {
       [Scope.observations]: ALL_ACTIONS,
       [Scope.birds]: ALL_ACTIONS,
-      [Scope.rings]: ALL_ACTIONS
+      [Scope.rings]: ALL_ACTIONS,
+      [Scope.users]: ALL_ACTIONS
     }
   }
 };
