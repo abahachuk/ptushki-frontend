@@ -11,6 +11,8 @@ import { labels } from "../../../config/i18n/labels";
 import { ringingData, photos, birdData } from "./test-data";
 
 import "./BirdInfo.scss";
+import { Scope, UserAction } from "../../../config/permissions";
+import { CanConnected } from "../auth/CanConnected";
 
 const blockName = "bird-info";
 
@@ -52,9 +54,11 @@ export const BirdInfoForm: FC<{
     <div className={blockName}>
       <div className={`${blockName}__header`}>
         <h1 className={`${blockName}__title`}>{birdData.name}</h1>
-        <Button outline className={`${blockName}__btn`}>
-          {labels.birdInfo.export}
-        </Button>
+        <CanConnected I={UserAction.export} a={Scope.observations}>
+          <Button outline className={`${blockName}__btn`}>
+            {labels.birdInfo.export}
+          </Button>
+        </CanConnected>
         <Button outline className={`${blockName}__btn`}>
           {labels.birdInfo.edit}
         </Button>

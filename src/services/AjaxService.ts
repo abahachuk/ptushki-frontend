@@ -5,6 +5,10 @@ import { REFRESH_ENDPOINT } from "../config/endpoints";
 import { SecurityError } from "./SecurutyService";
 
 export default class AjaxService {
+  private refreshingCall: Promise<Response> | null = null;
+
+  private pendingRequests: (() => void)[] = [];
+
   private async parseError(response: Response): Promise<string> {
     const { statusText } = response;
     let message;
@@ -34,24 +38,38 @@ export default class AjaxService {
   }
 
   private async refreshToken(): Promise<string> {
-    const refreshToken = securityService.getRefreshToken();
+    if (!this.refreshingCall) {
+      const refresh = securityService.getRefreshToken();
 
-    if (!refreshToken) {
-      throw new SecurityError("No refresh token provided");
+      if (!refresh) {
+        throw new SecurityError("No refresh token provided");
+      }
+
+      this.refreshingCall = this.makeFetch(REFRESH_ENDPOINT, null, {
+        refreshToken: refresh
+      });
+    } else {
+      await new Promise(resolve => {
+        this.pendingRequests.push(resolve);
+      });
+      return securityService.getAccessToken();
     }
 
-    const response = await this.makeFetch(REFRESH_ENDPOINT, null, {
-      refreshToken
-    });
+    const response = await this.refreshingCall;
+    this.refreshingCall = null;
 
     if (!response.ok) {
+      this.pendingRequests = [];
       throw new SecurityError("Unable to refresh token");
     }
 
-    const { access, refresh } = await response.json();
-    securityService.updateTokens(access, refresh);
+    const { token, refreshToken } = await response.json();
+    securityService.updateTokens(token, refreshToken);
 
-    return access;
+    this.pendingRequests.forEach((resolve: any) => resolve());
+    this.pendingRequests = [];
+
+    return token;
   }
 
   async makeCall<TResponse>(url: string, data?: Object): Promise<TResponse> {
@@ -78,9 +96,9 @@ export default class AjaxService {
     }
 
     const { user, token, refreshToken } = await response.json();
-    securityService.saveTokens(token, refreshToken, data.rememberPassword);
-    securityService.saveUserInfo(user);
+    securityService.updateTokens(token, refreshToken);
+    const permissions = securityService.saveUserInfo(user);
 
-    return user;
+    return { ...user, permissions };
   }
 }

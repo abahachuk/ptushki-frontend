@@ -5,7 +5,6 @@ import { Button } from "reactstrap";
 
 import { AuthFormLayout } from "../../../../components/layout/AuthFormLayout";
 import { FormControl } from "../../../../components/form/FormControl";
-import { CheckboxField } from "../../../../components/checkbox/CheckboxField";
 import { FormControlLabel } from "../../../../components/form/FormControlLabel";
 import { SignInData } from "../models";
 import { ROUTE_RESET_PASSWORD, ROUTE_SIGN_UP } from "../../routing/routes";
@@ -74,11 +73,6 @@ export const SignInForm: FC<{
                 </div>
               )}
               placeholder={labels.form.password.placeholder}
-            />
-            <CheckboxField
-              label={labels.signIn.rememberPassword}
-              name="rememberPassword"
-              formikProps={formikProps}
             />
             <Button
               block

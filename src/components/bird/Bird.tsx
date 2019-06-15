@@ -1,11 +1,8 @@
-import React, { FC, ButtonHTMLAttributes, useState, useCallback } from "react";
-import { Label, Input } from "reactstrap";
 import sn from "classnames";
-
-import { Autosuggest } from "../../components/autosuggest/Autosuggest";
-
+import React, { ButtonHTMLAttributes, FC, useCallback, useState } from "react";
+import { Input, Label } from "reactstrap";
 import { labels } from "../../config/i18n/labels";
-
+import { Autosuggest } from "../autosuggest/Autosuggest";
 import "./Bird.scss";
 
 const blockName = "bird";
@@ -221,7 +218,6 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
   const deleteLabel = (type: string, i: number) => {
     setBirdAttributes({
       ...bird,
-      // @ts-ignore
       [type]: bird[type].filter((_, idx) => idx !== i)
     });
   };

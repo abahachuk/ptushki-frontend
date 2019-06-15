@@ -1,5 +1,6 @@
-/* eslint-disable class-methods-use-this */
-import { UserInfo } from "../app/features/auth/models";
+import { Ability, AbilityBuilder } from "@casl/ability";
+import { IAuthInfo, UserInfo } from "../app/features/auth/models";
+import { USER_ROLES, UserRoleDescriptor } from "../config/permissions";
 
 const REFRESH_TOKEN = "refreshToken";
 const ACCESS_TOKEN = "accessToken";
@@ -15,33 +16,16 @@ export class SecurityError extends Error {
 }
 
 export default class SecurityService {
-  private storage: Storage | null = null;
-
+  public permissions: Ability = new Ability([]);
   private accessToken: string | null = null;
-
   private refreshToken: string | null = null;
-
   private userInfo: UserInfo | null = null;
 
   constructor() {
-    this.checkStorage();
-    if (this.storage) {
-      this.getDataFromStorage();
-    }
-  }
-
-  private checkStorage() {
-    if (localStorage.getItem(USER_INFO)) {
-      this.storage = localStorage;
-    } else if (sessionStorage.getItem(USER_INFO)) {
-      this.storage = sessionStorage;
-    }
-  }
-
-  private getDataFromStorage() {
-    this.accessToken = this.storage.getItem(ACCESS_TOKEN);
-    this.refreshToken = this.storage.getItem(REFRESH_TOKEN);
-    this.userInfo = JSON.parse(this.storage.getItem(USER_INFO));
+    this.accessToken = localStorage.getItem(ACCESS_TOKEN);
+    this.refreshToken = localStorage.getItem(REFRESH_TOKEN);
+    this.userInfo = JSON.parse(localStorage.getItem(USER_INFO));
+    this.updatePermissions();
   }
 
   getAccessToken(): string {
@@ -55,51 +39,51 @@ export default class SecurityService {
   updateTokens(access: string, refresh: string): void {
     this.accessToken = access;
     this.refreshToken = refresh;
-    this.storage.setItem(ACCESS_TOKEN, access);
-    this.storage.setItem(REFRESH_TOKEN, refresh);
-  }
-
-  saveTokens(access: string, refresh: string, remember: boolean): void {
-    this.storage = remember ? localStorage : sessionStorage;
-    this.updateTokens(access, refresh);
+    localStorage.setItem(ACCESS_TOKEN, access);
+    localStorage.setItem(REFRESH_TOKEN, refresh);
   }
 
   deleteTokens(): void {
     this.accessToken = null;
     this.refreshToken = null;
-    this.storage.removeItem(REFRESH_TOKEN);
-    this.storage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
+    localStorage.removeItem(ACCESS_TOKEN);
   }
 
-  saveUserInfo(userInfo: UserInfo): void {
-    this.storage.setItem(USER_INFO, JSON.stringify(userInfo));
-  }
-
-  getUserInfo(): UserInfo {
+  saveUserInfo(userInfo: UserInfo): UserInfo {
+    this.userInfo = userInfo;
+    localStorage.setItem(USER_INFO, JSON.stringify(userInfo));
+    this.updatePermissions();
     return this.userInfo;
   }
 
-  deleteUserInfo(): void {
-    this.storage.removeItem(USER_INFO);
+  updatePermissions() {
+    const role: UserRoleDescriptor =
+      USER_ROLES[this.userInfo ? this.userInfo.role : "unauthorized"];
+    this.permissions = AbilityBuilder.define((
+      can: any // this casl library is purely typed
+    ) => {
+      const keys = Object.entries(role.permissions).forEach(
+        ([scope, actions]) => {
+          can(actions, scope);
+        }
+      );
+    });
+    return this.permissions;
   }
 
-  deleteSensitiveData() {
+  getAuthInfo(): IAuthInfo {
+    return { user: this.userInfo, permissions: this.permissions };
+  }
+
+  deleteUserInfo(): { user: UserInfo; permissions: Ability } {
+    this.saveUserInfo(null as UserInfo);
+    this.updatePermissions();
+    return { user: this.userInfo, permissions: this.permissions };
+  }
+
+  reset(): IAuthInfo {
     this.deleteTokens();
-    this.deleteUserInfo();
-  }
-
-  reset(): void {
-    this.storage = localStorage;
-    this.deleteSensitiveData();
-
-    this.storage = sessionStorage;
-    this.deleteSensitiveData();
-
-    this.storage = null;
-  }
-
-  checkPermissions(permissions: Array<string>, user: UserInfo): boolean {
-    const userRole = user && user.role;
-    return permissions.some(role => role === userRole);
+    return this.deleteUserInfo();
   }
 }

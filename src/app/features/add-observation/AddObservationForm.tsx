@@ -70,9 +70,7 @@ const Field = function({ label, ...props }: Field) {
   );
 };
 
-export const AddObservation: FC<{
-  birdInfo: any;
-}> = () => {
+export const AddObservation = () => {
   const [observation, seObservationInfo] = useState<IBirdInfo>({});
   const [isOpened, setIsOpen] = useState(false);
 

@@ -1,18 +1,20 @@
 @import "../../styles/variables";
 
-.checkbox-label {
-  display: inline-flex;
-  margin-left: -2px; //correction for material internal padding
+.checkbox {
+  padding: 0 !important;
 
-  .checkbox-label-text {
-    padding-left: 5px;
+  &-label {
+    display: flex !important;
+    margin-left: 0 !important; //correction for material internal padding
+    margin-right: 0 !important; //correction for material internal padding
   }
-}
 
-.checkbox-root {
-  color: $border-color !important;
-}
+  &-root {
+    color: $border-color !important;
+  }
 
-.checkbox-checked {
-  color: $primary !important;
+  &-checked {
+    color: $primary !important;
+  }
+
 }

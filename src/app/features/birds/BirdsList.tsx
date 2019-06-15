@@ -9,7 +9,7 @@ import {
   birdsFiltersRequest
 } from "../../../store/actions/birdsListActions";
 import { AsyncResource } from "../../../utils/createAsyncStateReducer";
-import { ROUTE_BIRD_INFO } from "../routing/routes";
+import { ROUTE_BIRDS } from "../routing/routes";
 import { BIRDS_LIST_COLUMNS_CONFIG } from "./columns";
 import { BIRDS_GRID_STATE_SELECTOR, BIRDS_LIST_NAMESPACE } from "./conf";
 import { BirdData } from "./models";
@@ -32,8 +32,7 @@ export const BirdsList: FC<BirdsListProps> = ({ birds, dispatch }) => {
       columns={BIRDS_LIST_COLUMNS_CONFIG}
       isLoading={birds.isLoading}
       onRowClick={r => {
-        // TODO pass route param
-        dispatch(push(ROUTE_BIRD_INFO.path));
+        dispatch(push(`${ROUTE_BIRDS.path}/${r.id}`));
       }}
     />
   );

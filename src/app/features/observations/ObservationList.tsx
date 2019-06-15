@@ -9,13 +9,13 @@ import {
   observationsFiltersRequest
 } from "../../../store/actions/observationListActions";
 import { AsyncResource } from "../../../utils/createAsyncStateReducer";
-import { ROUTE_BIRD_INFO } from "../routing/routes";
 import { OBSERVATION_LIST_COLUMNS_CONFIG } from "./columns";
 import {
   OBSERVATIONS_GRID_STATE_SELECTOR,
   OBSERVATIONS_LIST_NAMESPACE
 } from "./conf";
 import { ObservationData } from "./models";
+import { ROUTE_OBSERVATIONS } from "../routing/routes";
 
 interface ObservationListProps extends DispatchProp {
   observations: AsyncResource<ObservationData[]>;
@@ -38,8 +38,7 @@ export const ObservationList: FC<ObservationListProps> = ({
       columns={OBSERVATION_LIST_COLUMNS_CONFIG}
       isLoading={observations.isLoading}
       onRowClick={r => {
-        // TODO pass route param
-        dispatch(push(ROUTE_BIRD_INFO.path));
+        dispatch(push(`${ROUTE_OBSERVATIONS.path}/${r.id}`));
       }}
     />
   );
