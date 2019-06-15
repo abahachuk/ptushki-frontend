@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 import { CustomScrollContainer } from "../../scrollbars/CustomScrollContainer";
 import { DataGridState } from "../DataGridModels";
 
-export const TableComponent: FC<TableProps & { fixedPartWidth: number }> = ({
-  fixedPartWidth,
-  ...props
-}) => (
+export const TableComponent: FC<
+  TableProps & { fixedPartWidth: number; autoHeight: boolean }
+> = ({ fixedPartWidth, autoHeight, ...props }) => (
   <CustomScrollContainer
+    autoHeight={autoHeight}
     renderTrackHorizontal={({ style, ...trackProps }) => (
       <div
         {...trackProps}
@@ -28,6 +28,7 @@ export const TableComponent: FC<TableProps & { fixedPartWidth: number }> = ({
         (props as any).className,
         "table-striped table-borderless"
       )}
+      style={{ height: "100%" }}
     />
   </CustomScrollContainer>
 );

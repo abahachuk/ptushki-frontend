@@ -8,7 +8,6 @@ import { CanConnected } from "./features/auth/CanConnected";
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
-import { BirdInfoForm } from "./features/bird-info/BirdInfoForm";
 import { RootNavConnected } from "./features/nav/RootNav";
 import { history } from "./features/routing/history";
 import { ProtectedRoute } from "./features/routing/ProtectedRoute";

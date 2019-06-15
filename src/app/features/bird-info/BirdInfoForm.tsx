@@ -49,7 +49,8 @@ export const InfoBlock = function({ title, value, className }: InfoBlock) {
 
 export const BirdInfoForm: FC<{
   birdInfo: BirdInfo;
-}> = () => {
+  scope: Scope;
+}> = ({ scope }) => {
   return (
     <div className={blockName}>
       <div className={`${blockName}__header`}>
@@ -59,12 +60,16 @@ export const BirdInfoForm: FC<{
             {labels.birdInfo.export}
           </Button>
         </CanConnected>
-        <Button outline className={`${blockName}__btn`}>
-          {labels.birdInfo.edit}
-        </Button>
-        <Button outline className={`${blockName}__btn`}>
-          {labels.birdInfo.delete}
-        </Button>
+        <CanConnected I={UserAction.edit} a={scope}>
+          <Button outline className={`${blockName}__btn`}>
+            {labels.birdInfo.edit}
+          </Button>
+        </CanConnected>
+        <CanConnected I={UserAction.remove} a={scope}>
+          <Button outline className={`${blockName}__btn`}>
+            {labels.birdInfo.delete}
+          </Button>
+        </CanConnected>
       </div>
       <p className={`${blockName}__subtitle`}>{birdData.code}</p>
       <p className={`${blockName}__euring-title`}>{labels.birdInfo.euring}</p>

@@ -5,6 +5,36 @@
 
 $fixed-part-shadow-width: 10px;
 
+.data-grid-wrapper {
+  position: relative;
+  z-index: 2;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.data-grid-root {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+
+}
+
+.data-grid-no-data {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
 .dx-g-bs4-fixed-cell {
   // override badly written grid styles
   border-right: none !important;
@@ -76,7 +106,7 @@ th.dx-g-bs4-fixed-cell {
             padding: 0;
             margin-left: 6px;
             width: auto;
-  
+
             &:hover,
             &:active,
             &:focus {
@@ -84,7 +114,7 @@ th.dx-g-bs4-fixed-cell {
               outline: none !important;
               box-shadow: none !important;
             }
-  
+
             .show & {
               position: relative;
               z-index: $zindex-dropdown + 1; // to show outline
