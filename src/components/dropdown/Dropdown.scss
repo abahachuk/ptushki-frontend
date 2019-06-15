@@ -1,9 +1,11 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
+@import "../../styles/mixins";
 
 .dropdown {
   &__menu-container {
     width: 100%;
     padding-top: 0;
+    @extend .shadow;
   }
 
   &__dropdown {
@@ -70,7 +72,7 @@
     height: 10px;
     border-top: 2px solid $dustyGray;
     border-right: 2px solid $dustyGray;
-    transition: .3s all cubic-bezier(1, 0.25, 0.25, .8);
+    transition: 0.3s all cubic-bezier(1, 0.25, 0.25, 0.8);
     will-change: transform;
 
     &--down {
