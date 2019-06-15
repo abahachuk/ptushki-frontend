@@ -4,7 +4,6 @@ import { EMPTY, from, of } from "rxjs";
 import {
   catchError,
   filter,
-  flatMap,
   map,
   switchMap,
   withLatestFrom
@@ -15,9 +14,9 @@ import {
   BIRD_OBSERVATIONS_LIST_NAMESPACE
 } from "../../app/features/bird-info/conf";
 import {
-  BirdObservationFilters,
-  BirdObservationsResponse
-} from "../../app/features/bird-info/models";
+  ObservationFilters,
+  ObservationsResponse
+} from "../../app/features/observations/models";
 import { dataGridActionsRequiringRequest } from "../../components/table/dataGridActions";
 import { getDataGridEpics } from "../../components/table/dataGridEpics";
 import {
@@ -32,9 +31,9 @@ import { signOut } from "../actions/authActions";
 import {
   observationGridActions,
   birdObservationsData,
-  observationsFiltersRequest,
-  setObservationVerificationStatus
+  observationsFiltersRequest
 } from "../actions/birdObservationsListActions";
+import { setObservationVerificationStatus } from "../actions/verificationActions";
 import { selectLocale } from "../actions/userPreferencesActions";
 import { RootState } from "../index";
 
@@ -49,7 +48,7 @@ const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
       });
 
       return from(
-        ajaxService.makeCall<BirdObservationsResponse>(
+        ajaxService.makeCall<ObservationsResponse>(
           `${OBSERVATIONS_ENDPOINT}?${query}`
         )
       ).pipe(
@@ -71,9 +70,7 @@ export const requestObservationFiltersEpic: Epic<
     filter(isActionOf([observationsFiltersRequest])),
     switchMap(() => {
       return from(
-        ajaxService.makeCall<BirdObservationFilters>(
-          OBSERVATIONS_FILTERS_ENDPOINT
-        )
+        ajaxService.makeCall<ObservationFilters>(OBSERVATIONS_FILTERS_ENDPOINT)
       ).pipe(
         map(d => observationGridActions.addFilters(d)),
         catchError(e => {
@@ -81,15 +78,6 @@ export const requestObservationFiltersEpic: Epic<
           return EMPTY;
         })
       );
-    })
-  );
-
-const verifyObservationEpic: Epic<any, any, RootState> = action$ =>
-  action$.pipe(
-    filter(isActionOf([setObservationVerificationStatus.request])),
-    flatMap(action => {
-      // TODO wire up
-      return EMPTY;
     })
   );
 
@@ -107,7 +95,6 @@ const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
 
 export const birdObnservationsListEpic = combineEpics(
   requestObservationsEpic,
-  verifyObservationEpic,
   reRequestOnGridActionsEpic,
   requestObservationFiltersEpic,
   getDataGridEpics(

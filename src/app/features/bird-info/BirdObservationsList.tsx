@@ -10,15 +10,15 @@ import {
 } from "../../../store/actions/birdObservationsListActions";
 import { AsyncResource } from "../../../utils/createAsyncStateReducer";
 import { ROUTE_BIRD_INFO } from "../routing/routes";
-import { BIRD_OBSERVATION_LIST_COLUMNS_CONFIG } from "./columns";
+import { OBSERVATION_LIST_COLUMNS_CONFIG } from "../observations/columns";
 import {
   BIRD_OBSERVATIONS_GRID_STATE_SELECTOR,
   BIRD_OBSERVATIONS_LIST_NAMESPACE
 } from "./conf";
-import { BirdObservationData } from "./models";
+import { ObservationData } from "../observations/models";
 
 interface ObservationListProps extends DispatchProp {
-  observations: AsyncResource<BirdObservationData[]>;
+  observations: AsyncResource<ObservationData[]>;
 }
 
 export const BirdObservationsList: FC<ObservationListProps> = ({
@@ -35,7 +35,7 @@ export const BirdObservationsList: FC<ObservationListProps> = ({
       namespace={BIRD_OBSERVATIONS_LIST_NAMESPACE}
       gridStateSelector={BIRD_OBSERVATIONS_GRID_STATE_SELECTOR}
       rows={observations.error ? [] : observations.value}
-      columns={BIRD_OBSERVATION_LIST_COLUMNS_CONFIG}
+      columns={OBSERVATION_LIST_COLUMNS_CONFIG}
       isLoading={observations.isLoading}
       onRowClick={r => {
         // TODO pass route param

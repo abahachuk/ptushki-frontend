@@ -1,11 +1,11 @@
 import combineSectionReducers from "combine-section-reducers";
 import reduceReducer from "reduce-reducers";
-import { BIRD_OBSERVATION_GRID_COLUMN_NAMES } from "../../app/features/bird-info/columns";
+import { OBSERVATION_GRID_COLUMN_NAMES } from "../../app/features/observations/columns";
 import { BIRD_OBSERVATIONS_LIST_NAMESPACE } from "../../app/features/bird-info/conf";
 import {
-  BirdObservationData,
-  BirdObservationFilters
-} from "../../app/features/bird-info/models";
+  ObservationData,
+  ObservationFilters
+} from "../../app/features/observations/models";
 import { createDataGridReducer } from "../../components/table/dataGridReducer";
 import {
   AsyncResource,
@@ -19,9 +19,9 @@ const initialState = {
     value: [],
     isLoading: true,
     error: null as string
-  } as AsyncResource<BirdObservationData[]>,
-  gridState: getDefaultDataGridState<BirdObservationFilters>(
-    BIRD_OBSERVATION_GRID_COLUMN_NAMES
+  } as AsyncResource<ObservationData[]>,
+  gridState: getDefaultDataGridState<ObservationFilters>(
+    OBSERVATION_GRID_COLUMN_NAMES
   )
 };
 

@@ -4,7 +4,6 @@ import { EMPTY, from, of } from "rxjs";
 import {
   catchError,
   filter,
-  flatMap,
   map,
   switchMap,
   withLatestFrom
@@ -82,15 +81,6 @@ export const requestObservationFiltersEpic: Epic<
     })
   );
 
-const verifyObservationEpic: Epic<any, any, RootState> = action$ =>
-  action$.pipe(
-    filter(isActionOf([setObservationVerificationStatus.request])),
-    flatMap(action => {
-      // TODO wire up
-      return EMPTY;
-    })
-  );
-
 const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
   action$.pipe(
     filter(
@@ -105,7 +95,6 @@ const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
 
 export const observationListEpic = combineEpics(
   requestObservationsEpic,
-  verifyObservationEpic,
   reRequestOnGridActionsEpic,
   requestObservationFiltersEpic,
   getDataGridEpics(
