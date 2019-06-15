@@ -2,20 +2,20 @@ import { push } from "connected-react-router";
 import React, { FC } from "react";
 import { connect, DispatchProp } from "react-redux";
 import useMount from "react-use/esm/useMount";
-import { DataGrid } from "../../../components/table/DataGrid";
+import { DataGridLazy } from "../../../components/table/DataGridLazy";
 import { RootState } from "../../../store";
 import {
   observationsData,
   observationsFiltersRequest
 } from "../../../store/actions/observationListActions";
 import { AsyncResource } from "../../../utils/createAsyncStateReducer";
+import { ROUTE_OBSERVATIONS } from "../routing/routes";
 import { OBSERVATION_LIST_COLUMNS_CONFIG } from "./columns";
 import {
   OBSERVATIONS_GRID_STATE_SELECTOR,
   OBSERVATIONS_LIST_NAMESPACE
 } from "./conf";
 import { ObservationData } from "./models";
-import { ROUTE_OBSERVATIONS } from "../routing/routes";
 
 interface ObservationListProps extends DispatchProp {
   observations: AsyncResource<ObservationData[]>;
@@ -31,7 +31,7 @@ export const ObservationList: FC<ObservationListProps> = ({
   });
 
   return (
-    <DataGrid
+    <DataGridLazy
       namespace={OBSERVATIONS_LIST_NAMESPACE}
       gridStateSelector={OBSERVATIONS_GRID_STATE_SELECTOR}
       rows={observations.error ? [] : observations.value}
