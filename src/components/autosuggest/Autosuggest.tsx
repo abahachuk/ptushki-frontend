@@ -124,6 +124,7 @@ export const Autosuggest: FC<IAutosuggest> = ({
       toggleButton={toggleButton}
       id={id}
       disabled={disabled}
+      className={className}
     >
       {withSearchContainer && (
         <div className={`${blockName}__search-container d-flex flex-column`}>

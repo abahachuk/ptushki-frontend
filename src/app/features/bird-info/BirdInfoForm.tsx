@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { Button } from "reactstrap";
 
 import { Bird } from "../../../components/bird/Bird";
+import { BirdObservationsListConnected } from "./BirdObservationsList";
 
 import { BirdInfo } from "./BirdInfoModel";
 import { InfoContainer } from "../../../components/info-container/InfoContainer";
@@ -104,6 +105,7 @@ export const BirdInfoForm: FC<{
           ))}
         </InfoContainer>
       </div>
+      <BirdObservationsListConnected />
       <p className={`${blockName}__photos-title`}>{labels.birdInfo.photos}</p>
       <div>{photos.map(renderImage)}</div>
     </div>

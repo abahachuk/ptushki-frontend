@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import { authReducer } from "./authReducer";
 import { birdsListReducer } from "./birdsListReducer";
+import { birdObservationsListReducer } from "./birdObservationsReducer";
 import { observationListReducer } from "./observationListReducer";
 import { resetPasswordReducer } from "./resetPasswordReducer";
 
@@ -13,5 +14,6 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   userPreferences: userPreferencesReducer,
   observationList: observationListReducer,
-  birdsList: birdsListReducer
+  birdsList: birdsListReducer,
+  birdObservationsList: birdObservationsListReducer
 });

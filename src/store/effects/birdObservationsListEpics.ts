@@ -10,9 +10,9 @@ import {
 } from "rxjs/operators";
 import { isActionOf } from "typesafe-actions";
 import {
-  OBSERVATIONS_GRID_STATE_SELECTOR,
-  OBSERVATIONS_LIST_NAMESPACE
-} from "../../app/features/observations/conf";
+  BIRD_OBSERVATIONS_GRID_STATE_SELECTOR,
+  BIRD_OBSERVATIONS_LIST_NAMESPACE
+} from "../../app/features/bird-info/conf";
 import {
   ObservationFilters,
   ObservationsResponse
@@ -30,20 +30,20 @@ import { getLangQuery } from "../../utils/lang/getLangQuery";
 import { signOut } from "../actions/authActions";
 import {
   observationGridActions,
-  observationsData,
-  observationsFiltersRequest,
-  setObservationVerificationStatus
-} from "../actions/observationListActions";
+  birdObservationsData,
+  observationsFiltersRequest
+} from "../actions/birdObservationsListActions";
+import { setObservationVerificationStatus } from "../actions/verificationActions";
 import { selectLocale } from "../actions/userPreferencesActions";
 import { RootState } from "../index";
 
 const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
   action$.pipe(
-    filter(isActionOf([observationsData.request])),
+    filter(isActionOf([birdObservationsData.request])),
     withLatestFrom(state$),
     switchMap(([, state]) => {
       const query = qs.stringify({
-        ...getGridQuery(OBSERVATIONS_GRID_STATE_SELECTOR(state)),
+        ...getGridQuery(BIRD_OBSERVATIONS_GRID_STATE_SELECTOR(state)),
         ...getLangQuery(state)
       });
 
@@ -52,10 +52,10 @@ const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
           `${OBSERVATIONS_ENDPOINT}?${query}`
         )
       ).pipe(
-        map(d => observationsData.success(d.content)),
+        map(d => birdObservationsData.success(d.content)),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
-          return of(observationsData.failure(e));
+          return of(birdObservationsData.failure(e));
         })
       );
     })
@@ -90,15 +90,15 @@ const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
         setObservationVerificationStatus.success
       ])
     ),
-    map(() => observationsData.request())
+    map(() => birdObservationsData.request())
   );
 
-export const observationListEpic = combineEpics(
+export const birdObnservationsListEpic = combineEpics(
   requestObservationsEpic,
   reRequestOnGridActionsEpic,
   requestObservationFiltersEpic,
   getDataGridEpics(
-    OBSERVATIONS_LIST_NAMESPACE,
-    OBSERVATIONS_GRID_STATE_SELECTOR
+    BIRD_OBSERVATIONS_LIST_NAMESPACE,
+    BIRD_OBSERVATIONS_GRID_STATE_SELECTOR
   )
 );

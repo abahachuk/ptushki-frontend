@@ -29,7 +29,7 @@ const DefaultCustomDropdownToggle: FC<ICustomDropdownToggle> = ({
   disabled
 }) => (
   <Fragment>
-    {value || placeholder}
+    <p className={`${blockName}__value-container`}>{value || placeholder}</p>
     {!disabled && (
       <span
         className={sn(

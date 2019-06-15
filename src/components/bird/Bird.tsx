@@ -10,6 +10,8 @@ const birdImg = require("../../assets/bird.svg");
 const deleteImg = require("../../assets/delete.svg");
 const plusBtn = require("../../assets/plus.svg");
 
+const DEFAULT_NUMBER_OF_LABELS = 1;
+
 type ChangeFunction = ({
   value,
   type,
@@ -23,6 +25,7 @@ type ChangeFunction = ({
 interface BirdValue {
   labelType: string;
   value: string;
+  id: number;
 }
 
 interface EditForm {
@@ -41,13 +44,14 @@ interface InfoBlock {
   className?: string;
   viewMode?: boolean;
   btnClassName?: string;
-  values?: Array<{ labelType: string; value: string }>;
+  values?: Array<BirdValue>;
   type?: string;
   onSelect?: ChangeFunction;
   onChange?: ChangeFunction;
   single?: boolean;
   onAdd?: (type: string) => void;
   onDelete?: (type: string, i: number) => void;
+  maxLabels?: number;
 }
 
 interface BirdParams {
@@ -155,43 +159,27 @@ const InfoBlock = ({
   onChange,
   onAdd,
   onDelete,
-  single
+  single,
+  maxLabels = DEFAULT_NUMBER_OF_LABELS
 }: InfoBlock) => {
   return !values.length ? (
     <PlusButton onClick={() => onAdd(type)} className={btnClassName} />
   ) : (
     <div className={className}>
-      {values.map((value, i) => {
-        if (i === 0 && !single) {
-          return (
-            <EditForm
-              onSelect={onSelect}
-              value={value}
-              key={type}
-              index={i}
-              type={type}
-              onChange={onChange}
-              onAdd={onAdd}
-              onDelete={onDelete}
-              withPlus
-              viewMode={viewMode}
-            />
-          );
-        }
-        return (
-          <EditForm
-            onSelect={onSelect}
-            value={value}
-            key={type}
-            index={i}
-            type={type}
-            onChange={onChange}
-            onDelete={onDelete}
-            onAdd={onAdd}
-            viewMode={viewMode}
-          />
-        );
-      })}
+      {values.map((value, i) => (
+        <EditForm
+          onSelect={onSelect}
+          value={value}
+          key={value.id}
+          index={i}
+          type={type}
+          onChange={onChange}
+          onAdd={onAdd}
+          onDelete={onDelete}
+          withPlus={i === 0 && !single && values.length < maxLabels}
+          viewMode={viewMode}
+        />
+      ))}
     </div>
   );
 };
@@ -220,7 +208,10 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
   const addLabel = (type: string) => {
     setBirdAttributes({
       ...bird,
-      [type]: [...bird[type], { labelType: "", value: "" }]
+      [type]: [
+        ...bird[type],
+        { labelType: "", value: "", id: bird[type].length }
+      ]
     });
   };
 
@@ -296,6 +287,7 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
         onChange={onChange}
         onDelete={deleteLabel}
         onAdd={addLabel}
+        maxLabels={5}
       />
       <span className={`${blockName}__dashed-line-left-knee`} />
       <InfoBlock
@@ -308,6 +300,7 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
         onChange={onChange}
         onDelete={deleteLabel}
         onAdd={addLabel}
+        maxLabels={5}
       />
       <span className={`${blockName}__dashed-line-right-below-knee`} />
       <InfoBlock
@@ -320,6 +313,7 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
         onChange={onChange}
         onDelete={deleteLabel}
         onAdd={addLabel}
+        maxLabels={4}
       />
       <span className={`${blockName}__dashed-line-left-below-knee`} />
       <InfoBlock
@@ -332,6 +326,7 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
         onChange={onChange}
         onDelete={deleteLabel}
         onAdd={addLabel}
+        maxLabels={4}
       />
       <img className={`${blockName}__bird-img`} src={birdImg} alt="bird" />
     </div>
