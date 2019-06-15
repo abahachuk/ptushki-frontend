@@ -1,5 +1,6 @@
 import combineSectionReducers from "combine-section-reducers";
 import reduceReducer from "reduce-reducers";
+import { handleAction } from "redux-actions";
 import { OBSERVATION_GRID_COLUMN_NAMES } from "../../app/features/observations/columns";
 import { OBSERVATIONS_LIST_NAMESPACE } from "../../app/features/observations/conf";
 import {
@@ -12,7 +13,10 @@ import {
   createAsyncStateReducer
 } from "../../utils/createAsyncStateReducer";
 import { getDefaultDataGridState } from "../../utils/grid/defaultGridState";
-import { observationsData } from "../actions/observationListActions";
+import {
+  observationsData,
+  observationsFlush
+} from "../actions/observationListActions";
 
 const initialState = {
   observations: {
@@ -37,5 +41,13 @@ export const observationListReducer = reduceReducer(
       initialState.gridState,
       OBSERVATIONS_LIST_NAMESPACE
     )
-  })
+  }),
+
+  handleAction(
+    observationsFlush,
+    () => ({
+      ...initialState
+    }),
+    initialState
+  )
 );

@@ -2,7 +2,7 @@ import { push } from "connected-react-router";
 import React, { FC } from "react";
 import { connect, DispatchProp } from "react-redux";
 import useMount from "react-use/esm/useMount";
-import { DataGrid } from "../../../components/table/DataGrid";
+import { DataGridLazy } from "../../../components/table/DataGridLazy";
 import { RootState } from "../../../store";
 import {
   birdsData,
@@ -25,7 +25,7 @@ export const BirdsList: FC<BirdsListProps> = ({ birds, dispatch }) => {
   });
 
   return (
-    <DataGrid
+    <DataGridLazy
       namespace={BIRDS_LIST_NAMESPACE}
       gridStateSelector={BIRDS_GRID_STATE_SELECTOR}
       rows={birds.error ? [] : birds.value}

@@ -13,6 +13,10 @@ export const observationsData = createAsyncAction(
   "OBSERVATIONS_FAILURE"
 )<void, ObservationData[], string>();
 
+export const observationsFlush = createStandardAction("OBSERVATIONS_FLUSH")<
+  void
+>();
+
 export const observationsFiltersRequest = createStandardAction(
   "OBSERVATIONS_FILTERS_REQUEST"
 )();
