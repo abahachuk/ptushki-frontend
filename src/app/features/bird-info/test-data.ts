@@ -104,3 +104,15 @@ export const birdData = {
     rightLeg: [{ labelType: "Синее кольцо", value: "5431", id: 0 }]
   }
 };
+
+export const formValues = {
+  species: "Желтая трясогузка",
+  sex: "Женский",
+  age: "Больше 1 года",
+  state: "Птица здорова",
+  country: "Беларусь",
+  region: "Брестская",
+  coordinates: "123.32 324.123",
+  timeError: "5 минут",
+  comment: "-"
+};

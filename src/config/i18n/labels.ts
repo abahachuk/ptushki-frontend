@@ -52,6 +52,8 @@ export const labels = {
     photos: "Фотографии",
     export: "Экспорт",
     edit: "Редактировать",
+    back: "Назад",
+    observationsHistory: "История наблюдений",
     delete: "Удалить",
     birdTitle: "Птица",
     ringingTitle: "Кольцевание и отлов",
@@ -66,6 +68,22 @@ export const labels = {
       leftBelowKnee: "Слева под коленом",
       rightBelowKnee: "Справа под коленом"
     }
+  },
+  createBird: {
+    title: "Создание птицы",
+    subtitle:
+      "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
+    saveBird: "Сохранить птицу",
+    back: "Назад"
+  },
+  observationInfo: {
+    title: "Информация о наблюдении",
+    subtitle:
+      "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
+    edit: "Редактировать",
+    delete: "Удалить",
+    back: "Назад",
+    editObservation: "Редактировать наблюдение"
   },
   addObservation: {
     title: "Добавление наблюдения",

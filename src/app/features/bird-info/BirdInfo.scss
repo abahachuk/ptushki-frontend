@@ -70,41 +70,44 @@
   &__euring {
     color: $mineSharf;
     font-size: 14px;
-  }  
-
-  &__info-blocks-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
-  &__info-block {
-    margin-right: 33px;
+  &__obs-history-title {
+    color: $charade;
+    font-family: "Open Sans";
+    font-weight: 300;
+    font-size: 24px;
+    padding: 30px 0 10px;
+  }
 
-    &:last-child {
-      margin-right: 0;
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 36px;
+  }
+
+  &__back-btn,
+  &__edit-btn {
+    height: 30px;
+    font-size: 15px;
+    padding: 0 20px;
+    border: none;
+  }
+
+  &__back-btn {
+    background-color: rgba($blueBayox, 0.9);
+
+    &:hover {
+      background-color: rgba($blueBayox, 1);
     }
   }
 
-  &__observations-column {
-    display: flex;
-    flex-direction: column;
-  }
+  &__edit-btn {
+    background-color: rgba($orange, 0.9);
 
-  &__photos-title {
-    font-weight: 100;
-    color: $mineSharf;
-    font-size: 24px;
-    line-height: 42px;
-  }
-
-  &__photo {
-    width: 226px;
-    height: 154px;
-    margin-right: 18px;
-
-    &:last-child {
-      margin-right: 0;
+    &:hover {
+      background-color: rgba($orange, 1);
     }
   }
 }

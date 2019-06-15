@@ -22,6 +22,12 @@ type ChangeFunction = ({
   index: number;
 }) => void;
 
+interface CollectionItem {
+  value: string;
+  id: number;
+  label: string;
+}
+
 interface BirdValue {
   labelType: string;
   value: string;
@@ -38,6 +44,7 @@ interface EditForm {
   onAdd?: (type: string) => void;
   onDelete?: (type: string, i: number) => void;
   viewMode: boolean;
+  collection: Array<CollectionItem>;
 }
 
 interface InfoBlock {
@@ -52,15 +59,35 @@ interface InfoBlock {
   onAdd?: (type: string) => void;
   onDelete?: (type: string, i: number) => void;
   maxLabels?: number;
+  collection: Array<CollectionItem>;
 }
 
-interface BirdParams {
+export interface BirdParams {
+  saddle: Array<BirdValue>;
+  neck: Array<BirdValue>;
+  leftWing: Array<BirdValue>;
+  rightWing: Array<BirdValue>;
+  leftBobbin: Array<BirdValue>;
+  rightBobbin: Array<BirdValue>;
+  leftLeg: Array<BirdValue>;
+  rightLeg: Array<BirdValue>;
   [key: string]: Array<BirdValue>;
 }
 
-interface Bird {
+export interface IBird {
   viewMode?: boolean;
   birdParams?: BirdParams;
+  birdConfig?: {
+    neck: Array<CollectionItem>;
+    saddle: Array<CollectionItem>;
+    leftWing: Array<CollectionItem>;
+    rightWing: Array<CollectionItem>;
+    leftBobbin: Array<CollectionItem>;
+    rightBobbin: Array<CollectionItem>;
+    leftLeg: Array<CollectionItem>;
+    rightLeg: Array<CollectionItem>;
+  };
+  onChangeBirdValues?: (birdParams: any) => void;
 }
 
 interface PlusButton extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -88,7 +115,8 @@ const EditForm = function({
   withPlus,
   onAdd,
   onDelete,
-  viewMode
+  viewMode,
+  collection
 }: EditForm) {
   const onSelectValue = ({ type, value }: { type: string; value: string }) =>
     onSelect({ type, value, index });
@@ -105,10 +133,7 @@ const EditForm = function({
         </Label>
         <Autosuggest
           id="label-type"
-          collection={[
-            { value: "123", label: "123", id: 1 },
-            { value: "123", label: "123", id: 2 }
-          ]}
+          collection={collection}
           placeholder={labels.addObservation.labelType}
           className={`${blockName}__autosuggest`}
           value={value.labelType}
@@ -160,7 +185,8 @@ const InfoBlock = ({
   onAdd,
   onDelete,
   single,
-  maxLabels = DEFAULT_NUMBER_OF_LABELS
+  maxLabels = DEFAULT_NUMBER_OF_LABELS,
+  collection
 }: InfoBlock) => {
   return !values.length ? (
     <PlusButton onClick={() => onAdd(type)} className={btnClassName} />
@@ -178,47 +204,51 @@ const InfoBlock = ({
           onDelete={onDelete}
           withPlus={i === 0 && !single && values.length < maxLabels}
           viewMode={viewMode}
+          collection={collection}
         />
       ))}
     </div>
   );
 };
 
-export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
-  const [bird, setBirdAttributes] = useState(birdParams);
-
+export const Bird: FC<IBird> = ({
+  viewMode,
+  birdParams,
+  birdConfig,
+  onChangeBirdValues
+}) => {
   const onSelect = useCallback(
     ({ value, type, index }) => {
-      const newBird = bird;
+      const newBird = birdParams;
       newBird[type][index].labelType = value;
-      setBirdAttributes({ ...newBird });
+      onChangeBirdValues(newBird);
     },
-    [bird, setBirdAttributes]
+    [birdParams, onChangeBirdValues]
   );
 
   const onChange = useCallback(
     ({ value, type, index }) => {
-      const newBird = bird;
+      const newBird = birdParams;
       newBird[type][index].value = value;
-      setBirdAttributes({ ...newBird });
+      onChangeBirdValues(newBird);
     },
-    [bird, setBirdAttributes]
+    [birdParams, onChangeBirdValues]
   );
 
   const addLabel = (type: string) => {
-    setBirdAttributes({
-      ...bird,
+    onChangeBirdValues({
+      ...birdParams,
       [type]: [
-        ...bird[type],
-        { labelType: "", value: "", id: bird[type].length }
+        ...birdParams[type],
+        { labelType: "", value: "", id: birdParams[type].length }
       ]
     });
   };
 
   const deleteLabel = (type: string, i: number) => {
-    setBirdAttributes({
-      ...bird,
-      [type]: bird[type].filter((_, idx) => idx !== i)
+    onChangeBirdValues({
+      ...birdParams,
+      [type]: birdParams[type].filter((_, idx) => idx !== i)
     });
   };
 
@@ -229,12 +259,13 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
         className={`${blockName}__neck-info`}
         viewMode={viewMode}
         btnClassName={`${blockName}__neck-info-btn`}
-        values={bird.neck}
+        values={birdParams.neck}
         type="neck"
         onSelect={onSelect}
         onChange={onChange}
         onAdd={addLabel}
         onDelete={deleteLabel}
+        collection={birdConfig.neck}
         single
       />
       <span className={`${blockName}__dashed-line-saddle`} />
@@ -242,12 +273,13 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
         className={`${blockName}__saddle-info`}
         viewMode={viewMode}
         btnClassName={`${blockName}__saddle-info-btn`}
-        values={bird.saddle}
+        values={birdParams.saddle}
         type="saddle"
         onSelect={onSelect}
         onChange={onChange}
         onAdd={addLabel}
         onDelete={deleteLabel}
+        collection={birdConfig.saddle}
         single
       />
       <span className={`${blockName}__dashed-line-right-wing`} />
@@ -255,12 +287,13 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
         className={`${blockName}__right-wing-info`}
         viewMode={viewMode}
         btnClassName={`${blockName}__right-wing-info-btn`}
-        values={bird.rightWing}
+        values={birdParams.rightWing}
         type="rightWing"
         onSelect={onSelect}
         onChange={onChange}
         onAdd={addLabel}
         onDelete={deleteLabel}
+        collection={birdConfig.rightWing}
         single
       />
       <span className={`${blockName}__dashed-line-left-wing`} />
@@ -268,12 +301,13 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
         className={`${blockName}__left-wing-info`}
         viewMode={viewMode}
         btnClassName={`${blockName}__left-wing-info-btn`}
-        values={bird.leftWing}
+        values={birdParams.leftWing}
         type="leftWing"
         onSelect={onSelect}
         onChange={onChange}
         onAdd={addLabel}
         onDelete={deleteLabel}
+        collection={birdConfig.leftWing}
         single
       />
       <span className={`${blockName}__dashed-line-right-knee`} />
@@ -281,12 +315,13 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
         className={`${blockName}__right-knee-info`}
         viewMode={viewMode}
         btnClassName={`${blockName}__right-knee-info-btn`}
-        values={bird.rightBobbin}
+        values={birdParams.rightBobbin}
         type="rightBobbin"
         onSelect={onSelect}
         onChange={onChange}
         onDelete={deleteLabel}
         onAdd={addLabel}
+        collection={birdConfig.rightBobbin}
         maxLabels={5}
       />
       <span className={`${blockName}__dashed-line-left-knee`} />
@@ -294,12 +329,13 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
         className={`${blockName}__left-knee-info`}
         viewMode={viewMode}
         btnClassName={`${blockName}__left-knee-info-btn`}
-        values={bird.leftBobbin}
+        values={birdParams.leftBobbin}
         type="leftBobbin"
         onSelect={onSelect}
         onChange={onChange}
         onDelete={deleteLabel}
         onAdd={addLabel}
+        collection={birdConfig.leftBobbin}
         maxLabels={5}
       />
       <span className={`${blockName}__dashed-line-right-below-knee`} />
@@ -307,12 +343,13 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
         className={`${blockName}__right-below-knee-info`}
         viewMode={viewMode}
         btnClassName={`${blockName}__right-below-knee-info-btn`}
-        values={bird.rightLeg}
+        values={birdParams.rightLeg}
         type="rightLeg"
         onSelect={onSelect}
         onChange={onChange}
         onDelete={deleteLabel}
         onAdd={addLabel}
+        collection={birdConfig.rightLeg}
         maxLabels={4}
       />
       <span className={`${blockName}__dashed-line-left-below-knee`} />
@@ -320,12 +357,13 @@ export const Bird: FC<Bird> = ({ viewMode, birdParams }) => {
         className={`${blockName}__left-below-knee-info`}
         viewMode={viewMode}
         btnClassName={`${blockName}__left-below-knee-info-btn`}
-        values={bird.leftLeg}
+        values={birdParams.leftLeg}
         type="leftLeg"
         onSelect={onSelect}
         onChange={onChange}
         onDelete={deleteLabel}
         onAdd={addLabel}
+        collection={birdConfig.leftLeg}
         maxLabels={4}
       />
       <img className={`${blockName}__bird-img`} src={birdImg} alt="bird" />
