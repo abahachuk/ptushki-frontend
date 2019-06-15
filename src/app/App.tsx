@@ -3,7 +3,9 @@ import React, { FC } from "react";
 import { Redirect, Route, Switch } from "react-router";
 import useMount from "react-use/esm/useMount";
 import { Footer } from "../components/footer/Footer";
+import { Scope, UserAction } from "../config/permissions";
 import { AddObservation } from "./features/add-observation/AddObservationForm";
+import { CanConnected } from "./features/auth/CanConnected";
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
@@ -12,6 +14,7 @@ import { BirdsPage } from "./features/birds/BirdsPage";
 import { RootNavConnected } from "./features/nav/RootNav";
 import { ObservationsPage } from "./features/observations/ObservationsPage";
 import { history } from "./features/routing/history";
+import { ProtectedRoute } from "./features/routing/ProtectedRoute";
 import {
   HOME,
   ROUTE_ADD_OBSERVATION,
@@ -22,10 +25,6 @@ import {
   ROUTE_SIGN_IN,
   ROUTE_SIGN_UP
 } from "./features/routing/routes";
-import { Scope, UserAction } from "../config/permissions";
-import { securityService } from "../services";
-import { CanConnected } from "./features/auth/CanConnected";
-import { ProtectedRoute } from "./features/routing/ProtectedRoute";
 
 export const App: FC<{
   getUser: () => void;
@@ -41,13 +40,12 @@ export const App: FC<{
 
       <Switch>
         <Route exact path={HOME}>
-          // @ts-ignore
           <CanConnected
             I={UserAction.observe}
             a={Scope.observations}
             passThrough
           >
-            {(can: any) => {
+            {can => {
               return (
                 <Redirect
                   to={can ? ROUTE_OBSERVATIONS.path : ROUTE_SIGN_IN.path}

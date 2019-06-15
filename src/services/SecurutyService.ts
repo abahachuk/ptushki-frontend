@@ -1,6 +1,6 @@
 import { Ability, AbilityBuilder } from "@casl/ability";
 import { IAuthInfo, UserInfo } from "../app/features/auth/models";
-import { UserRole, UserRoles } from "../config/permissions";
+import { USER_ROLES, UserRoleDescriptor } from "../config/permissions";
 
 const REFRESH_TOKEN = "refreshToken";
 const ACCESS_TOKEN = "accessToken";
@@ -16,13 +16,10 @@ export class SecurityError extends Error {
 }
 
 export default class SecurityService {
-  private accessToken: string | null = null;
-
-  private refreshToken: string | null = null;
-
-  private userInfo: UserInfo | null = null;
-
   public permissions: Ability = new Ability([]);
+  private accessToken: string | null = null;
+  private refreshToken: string | null = null;
+  private userInfo: UserInfo | null = null;
 
   constructor() {
     this.accessToken = localStorage.getItem(ACCESS_TOKEN);
@@ -61,11 +58,11 @@ export default class SecurityService {
   }
 
   updatePermissions() {
-    const role: UserRole =
-      // @ts-ignore
-      UserRoles[this.userInfo ? this.userInfo.role : "unauthorized"];
-    // @ts-ignore
-    this.permissions = AbilityBuilder.define(can => {
+    const role: UserRoleDescriptor =
+      USER_ROLES[this.userInfo ? this.userInfo.role : "unauthorized"];
+    this.permissions = AbilityBuilder.define((
+      can: any // this casl library is purely typed
+    ) => {
       const keys = Object.entries(role.permissions).forEach(
         ([scope, actions]) => {
           can(actions, scope);

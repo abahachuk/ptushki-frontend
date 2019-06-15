@@ -1,3 +1,5 @@
+import { UserRole } from "../app/features/auth/models";
+
 export enum UserAction {
   observe = "observe",
   add = "add",
@@ -33,21 +35,12 @@ export interface UserPermissions {
   [Scope.auth]?: UserAction[];
 }
 
-export interface UserRole {
+export interface UserRoleDescriptor {
   value: string;
   permissions: UserPermissions;
 }
 
-export interface IUserRoles {
-  unauthorized: UserRole;
-  observer: UserRole;
-  ringer: UserRole;
-  scientist: UserRole;
-  moderator: UserRole;
-  admin: UserRole;
-}
-
-export const UserRoles: IUserRoles = {
+export const USER_ROLES: { [key in UserRole]: UserRoleDescriptor } = {
   unauthorized: {
     value: "unauthorized",
     permissions: {

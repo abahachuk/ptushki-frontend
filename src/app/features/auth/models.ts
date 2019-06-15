@@ -16,12 +16,21 @@ export interface ResetPasswordData {
   email: string;
 }
 
+export enum UserRole {
+  unauthorized = "unauthorized",
+  observer = "observer",
+  ringer = "ringer",
+  scientist = "scientist",
+  moderator = "moderator",
+  admin = "admin"
+}
+
 export interface UserInfo {
   email: string;
   firstName: string;
   lastName: string;
   phone: string;
-  role: string;
+  role: UserRole;
   id: string;
 }
 

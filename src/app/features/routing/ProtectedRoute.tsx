@@ -8,8 +8,7 @@ export const ProtectedRoute: FC<RouteDescription & RouteProps> = ({
   scope,
   ...props
 }) => (
-  // @ts-ignore
   <CanConnected I={UserAction.observe} a={scope} passThrough>
-    {(can: any) => (can ? <Route {...props} /> : <Redirect to={HOME} />)}
+    {can => (can ? <Route {...props} /> : <Redirect to={HOME} />)}
   </CanConnected>
 );

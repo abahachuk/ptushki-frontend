@@ -83,15 +83,12 @@ export const COMMON_GRID_COLUMNS: { [key in GridColumn]: DataGridCol<any> } = {
       </>
     ),
     filter: {
-      getLabel: ({ value }) =>
-        // @ts-ignore
+      // TODO type DataGridFilter to allow any or generic value as it actually does, instead of restricting it
+      getLabel: ({ value }: any) =>
         `${value.firstName || ""}${
-          // @ts-ignore
           value.firstName ? " " : ""
-          // @ts-ignore
         }${value.lastName || ""}`,
-      // @ts-ignore
-      getValue: ({ value }) => value.id
+      getValue: ({ value }: any) => value.id
     }
   },
   elapsedTime: {
