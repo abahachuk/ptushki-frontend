@@ -19,6 +19,7 @@ module.exports = {
   rules: {
     // no-unused-vars throws false positives for TS types, so using typescript/no-unused-vars
     "no-unused-vars": "off",
+    "lines-between-class-members": "off",
     "typescript/no-unused-vars": "error",
 
     "import/no-unresolved": "disable",

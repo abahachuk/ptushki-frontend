@@ -1,5 +1,6 @@
 import reduceReducer from "reduce-reducers";
 import { handleAction } from "redux-actions";
+import { Ability } from "@casl/ability";
 import { UserInfo } from "../../app/features/auth/models";
 import {
   authFailure,
@@ -13,6 +14,7 @@ const initialState = {
   error: undefined as string | undefined,
   isPending: false,
   user: null as UserInfo,
+  permissions: new Ability([]),
   isLoaded: false
 };
 
@@ -43,7 +45,8 @@ const authSuccessReducer = handleAction(
   authSuccess,
   (state, action) => ({
     ...state,
-    user: action.payload,
+    user: action.payload.user,
+    permissions: action.payload.permissions,
     error: undefined,
     isPending: false,
     isLoaded: true
@@ -63,7 +66,12 @@ const authUnmountReducer = handleAction(
 
 const logoutReducer = handleAction(
   logout,
-  (state, action) => ({ ...initialState, isLoaded: true }),
+  (state, action) => ({
+    ...initialState,
+    isLoaded: true,
+    user: action.payload.user,
+    permissions: action.payload.permissions
+  }),
   initialState
 );
 

@@ -3,8 +3,9 @@ import React, { FC } from "react";
 import { Redirect, Route, Switch } from "react-router";
 import useMount from "react-use/esm/useMount";
 import { Footer } from "../components/footer/Footer";
+import { Scope, UserAction } from "../config/permissions";
 import { AddObservation } from "./features/add-observation/AddObservationForm";
-import { UserInfo } from "./features/auth/models";
+import { CanConnected } from "./features/auth/CanConnected";
 import { ResetPasswordFormConnected } from "./features/auth/resetpassword/ResetPasswordFormConnected";
 import { SignInFormConnected } from "./features/auth/signin/SignInFormConnected";
 import { SignUpFormConnected } from "./features/auth/signup/SignUpFormConnected";
@@ -13,8 +14,9 @@ import { BirdsPage } from "./features/birds/BirdsPage";
 import { RootNavConnected } from "./features/nav/RootNav";
 import { ObservationsPage } from "./features/observations/ObservationsPage";
 import { history } from "./features/routing/history";
-import { ProtectedRouteConnected } from "./features/routing/ProtectedRouteConnected";
+import { ProtectedRoute } from "./features/routing/ProtectedRoute";
 import {
+  HOME,
   ROUTE_ADD_OBSERVATION,
   ROUTE_BIRD_INFO,
   ROUTE_BIRDS,
@@ -26,58 +28,65 @@ import {
 
 export const App: FC<{
   getUser: () => void;
-  user: UserInfo;
   isLoaded: boolean;
-}> = ({ getUser, user, isLoaded }) => {
+}> = ({ getUser, isLoaded }) => {
   useMount(getUser);
 
   if (!isLoaded) return null;
 
   return (
     <ConnectedRouter history={history}>
-      {user && <RootNavConnected />}
+      <RootNavConnected />
 
       <Switch>
-        <Route exact path="/">
-          <Redirect to={user ? ROUTE_OBSERVATIONS.path : ROUTE_SIGN_IN.path} />
+        <Route exact path={HOME}>
+          <CanConnected
+            I={UserAction.observe}
+            a={Scope.observations}
+            passThrough
+          >
+            {can => {
+              return (
+                <Redirect
+                  to={can ? ROUTE_OBSERVATIONS.path : ROUTE_SIGN_IN.path}
+                />
+              );
+            }}
+          </CanConnected>
         </Route>
 
-        <ProtectedRouteConnected
-          exact
-          {...ROUTE_BIRD_INFO}
-          component={BirdInfoForm}
-        />
+        <ProtectedRoute exact {...ROUTE_BIRD_INFO} component={BirdInfoForm} />
 
-        <ProtectedRouteConnected
+        <ProtectedRoute
           exact
           {...ROUTE_SIGN_UP}
           component={SignUpFormConnected}
         />
-        <ProtectedRouteConnected
+        <ProtectedRoute
           exact
           {...ROUTE_SIGN_IN}
           component={SignInFormConnected}
         />
-        <ProtectedRouteConnected
+        <ProtectedRoute
           exact
           {...ROUTE_RESET_PASSWORD}
           component={ResetPasswordFormConnected}
         />
-        <ProtectedRouteConnected
+        <ProtectedRoute
           exact
           {...ROUTE_OBSERVATIONS}
           component={ObservationsPage}
         />
-        <ProtectedRouteConnected exact {...ROUTE_BIRDS} component={BirdsPage} />
+        <ProtectedRoute exact {...ROUTE_BIRDS} component={BirdsPage} />
 
-        <ProtectedRouteConnected
+        <ProtectedRoute
           exact
           {...ROUTE_ADD_OBSERVATION}
           component={AddObservation}
         />
       </Switch>
 
-      {user && <Footer />}
+      <Footer />
     </ConnectedRouter>
   );
 };
