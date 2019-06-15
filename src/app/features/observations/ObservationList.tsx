@@ -2,13 +2,11 @@ import { push } from "connected-react-router";
 import React, { FC } from "react";
 import { connect, DispatchProp } from "react-redux";
 import useMount from "react-use/esm/useMount";
-import useUnmount from "react-use/esm/useUnmount";
 import { DataGridLazy } from "../../../components/table/DataGridLazy";
 import { RootState } from "../../../store";
 import {
   observationsData,
-  observationsFiltersRequest,
-  observationsFlush
+  observationsFiltersRequest
 } from "../../../store/actions/observationListActions";
 import { AsyncResource } from "../../../utils/createAsyncStateReducer";
 import { ROUTE_OBSERVATIONS } from "../routing/routes";
@@ -30,10 +28,6 @@ export const ObservationList: FC<ObservationListProps> = ({
   useMount(() => {
     dispatch(observationsFiltersRequest());
     dispatch(observationsData.request());
-  });
-
-  useUnmount(() => {
-    dispatch(observationsFlush());
   });
 
   return (

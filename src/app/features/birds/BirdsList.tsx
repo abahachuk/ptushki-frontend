@@ -2,13 +2,11 @@ import { push } from "connected-react-router";
 import React, { FC } from "react";
 import { connect, DispatchProp } from "react-redux";
 import useMount from "react-use/esm/useMount";
-import useUnmount from "react-use/esm/useUnmount";
 import { DataGridLazy } from "../../../components/table/DataGridLazy";
 import { RootState } from "../../../store";
 import {
   birdsData,
-  birdsFiltersRequest,
-  birdsFlush
+  birdsFiltersRequest
 } from "../../../store/actions/birdsListActions";
 import { AsyncResource } from "../../../utils/createAsyncStateReducer";
 import { ROUTE_BIRDS } from "../routing/routes";
@@ -24,10 +22,6 @@ export const BirdsList: FC<BirdsListProps> = ({ birds, dispatch }) => {
   useMount(() => {
     dispatch(birdsFiltersRequest());
     dispatch(birdsData.request());
-  });
-
-  useUnmount(() => {
-    dispatch(birdsFlush());
   });
 
   return (
