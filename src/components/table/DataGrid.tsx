@@ -51,7 +51,7 @@ export interface DataGridCol<TRow extends {}> extends Column {
   };
 }
 
-interface DataGridProps<TRow extends {}> extends GridProps {
+export interface DataGridProps<TRow extends {}> extends GridProps {
   rows: Array<TRow>;
   columns: DataGridCol<TRow>[];
   getRowId?: (row: TRow) => number | string;
@@ -139,3 +139,5 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
     </SubspaceProviderHacked>
   );
 };
+
+export default DataGrid;
