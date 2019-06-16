@@ -11,7 +11,13 @@ export const ComponentRoute: FC<{
   AddComponent: any;
   DetailComponent: any;
   ImportComponent?: any;
-}> = ({ route, PageComponent, AddComponent, DetailComponent, ImportComponent }) => {
+}> = ({
+  route,
+  PageComponent,
+  AddComponent,
+  DetailComponent,
+  ImportComponent
+}) => {
   return (
     <ProtectedRoute {...route}>
       <Switch>

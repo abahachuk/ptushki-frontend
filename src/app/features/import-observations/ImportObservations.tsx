@@ -19,6 +19,8 @@ import { labels } from "../../../config/i18n/labels";
 import { DropAreaStates, VaryingContent, LoadedFile } from "./models";
 import { dropZoneContent } from "./dropAreaMappings";
 import { ROUTE_OBSERVATIONS } from "../routing/routes";
+import { OBSERVATIONS_DOWNLOAD_EXCEL_TEMPLATE } from "../../../config/endpoints";
+import { ajaxService } from "../../../services";
 import "./ImportObservations.scss";
 
 export const blockName = "import-observations";
@@ -44,6 +46,7 @@ const ImportButton = ({
 export const ImportObservations: FC = () => {
   const [file, setFile] = useState(null);
   const [dragAreaState, setDragAreaState] = useState(DropAreaStates.Intact);
+  const [shouldDownloadTemplate, setShouldDownloadTemplate] = useState(false);
 
   useEffect(() => {
     if (file) {
@@ -62,6 +65,22 @@ export const ImportObservations: FC = () => {
     }
   }, [file]);
 
+  useEffect(() => {
+    if (shouldDownloadTemplate) {
+      const donwloadTemplate = async () => {
+        setShouldDownloadTemplate(false);
+        try {
+          await ajaxService.makeCall(OBSERVATIONS_DOWNLOAD_EXCEL_TEMPLATE, {
+            method: "POST"
+          });
+        } catch (e) {
+          // TODO: probably it's should add some user notification about unability to download template
+        }
+      };
+      donwloadTemplate();
+    }
+  }, [shouldDownloadTemplate]);
+
   const onFileLoaded = (loadedFile: LoadedFile) => {
     setFile(loadedFile);
   };
@@ -69,6 +88,10 @@ export const ImportObservations: FC = () => {
   const revertDragAreaToIntact = () => {
     setDragAreaState(DropAreaStates.Intact);
     setFile(null);
+  };
+
+  const onDownloadTemplate = async () => {
+    setShouldDownloadTemplate(true);
   };
 
   const {
@@ -139,7 +162,10 @@ export const ImportObservations: FC = () => {
               <div className={`${blockName}__template-block-description`}>
                 {labels.importObservations.tableTemplateDescription}
               </div>
-              <Button className={sn(`${blockName}__template-block-button`)}>
+              <Button
+                onClick={onDownloadTemplate}
+                className={sn(`${blockName}__template-block-button`)}
+              >
                 {labels.importObservations.tableTemplateButtonCaption}
               </Button>
             </div>

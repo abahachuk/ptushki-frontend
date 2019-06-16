@@ -14,6 +14,8 @@ export const REFRESH_ENDPOINT = `${startURL}/${authRoute}/refresh`;
 const observationRoute = "observations";
 export const OBSERVATIONS_ENDPOINT = `${startURL}/${observationRoute}`;
 export const OBSERVATIONS_FILTERS_ENDPOINT = `${startURL}/${observationRoute}/aggregations`;
+const exportRoute = "export";
+export const OBSERVATIONS_DOWNLOAD_EXCEL_TEMPLATE = `${startURL}/${observationRoute}/${exportRoute}/template`;
 
 /**
  * Birds
