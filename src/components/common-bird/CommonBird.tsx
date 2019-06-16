@@ -8,88 +8,19 @@ import {
   Input,
   Label
 } from "reactstrap";
-import {
-  Autosuggest,
-  IAutosuggest,
-  IChangeValue
-} from "../autosuggest/Autosuggest";
-
-import { Map } from "../map/Map";
-
-import { labels } from "../../config/i18n/labels";
-
-import { Bird, IBird } from "../bird/Bird";
+import { Autosuggest } from "../autosuggest/Autosuggest";
+import { Bird } from "../bird/Bird";
 import { InfoContainer } from "../info-container/InfoContainer";
 import { DropZone } from "../drag-n-drop/DragAndDrop";
+import { Map } from "../map/Map";
+import { labels } from "../../config/i18n/labels";
+import { IBlockHeader, IField, ICommonBird } from "./CommonBirdModels";
 
 import "./CommonBird.scss";
 
 const blockName = "common-bird";
 
-interface CollectionItem {
-  value: string;
-  id: number;
-  label: string;
-}
-
-interface PhotoItem {
-  url: string;
-  id: number;
-}
-
-export interface FormValues {
-  species: string;
-  sex: string;
-  age: string;
-  state: string;
-  country: string;
-  region: string;
-  coordinates: string;
-  timeError: string;
-  comment: string;
-}
-
-interface CommonBird extends IBird {
-  observationConfig: {
-    birdSpecies: Array<CollectionItem>;
-    sex: Array<CollectionItem>;
-    age: Array<CollectionItem>;
-    birdState: Array<CollectionItem>;
-    photos: Array<PhotoItem>;
-    comment: string;
-  };
-  circumstancesConfig: {
-    country: Array<CollectionItem>;
-    region: Array<CollectionItem>;
-    coordinates: string;
-    timeDate: string;
-    timeError: Array<CollectionItem>;
-  };
-  birdConfig: {
-    neck: Array<CollectionItem>;
-    saddle: Array<CollectionItem>;
-    leftWing: Array<CollectionItem>;
-    rightWing: Array<CollectionItem>;
-    leftBobbin: Array<CollectionItem>;
-    rightBobbin: Array<CollectionItem>;
-    leftLeg: Array<CollectionItem>;
-    rightLeg: Array<CollectionItem>;
-  };
-  onChangeBirdValues: (birdParams: any) => void;
-  onChangeFormValue: ({ value, type }: IChangeValue) => void;
-  formValues: FormValues;
-}
-
-interface BlockHeader {
-  title: string;
-  subtitle: string;
-}
-
-interface Field extends IAutosuggest {
-  label: string;
-}
-
-const BlockHeader = function({ title, subtitle }: BlockHeader) {
+const BlockHeader = function({ title, subtitle }: IBlockHeader) {
   return (
     <div className={`${blockName}__block-header-container`}>
       <p className={`${blockName}__block-header-title`}>{title}</p>
@@ -98,7 +29,7 @@ const BlockHeader = function({ title, subtitle }: BlockHeader) {
   );
 };
 
-const Field = function({ label, ...props }: Field) {
+const Field = function({ label, ...props }: IField) {
   return (
     <div className={`${blockName}__field-container`}>
       <p className={`${blockName}__field-label`}>{label}</p>
@@ -107,7 +38,7 @@ const Field = function({ label, ...props }: Field) {
   );
 };
 
-export const CommonBird: FC<CommonBird> = ({
+export const CommonBird: FC<ICommonBird> = ({
   observationConfig,
   circumstancesConfig,
   birdConfig,

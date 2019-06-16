@@ -96,7 +96,9 @@
   }
 
   &__back-btn {
-    background-color: rgba($blueBayox, 0.9);
+    background-color: transparent;
+    color: $dark-blue;
+    border: 1px solid $dark-blue;
 
     &:hover {
       background-color: rgba($blueBayox, 1);

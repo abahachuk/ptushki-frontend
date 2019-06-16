@@ -1,10 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { Button } from "reactstrap";
 
-import {
-  CommonBird,
-  FormValues
-} from "../../../components/common-bird/CommonBird";
+import { CommonBird } from "../../../components/common-bird/CommonBird";
+import { FormValues } from "../../../components/common-bird/CommonBirdModels";
 import { IChangeValue } from "../../../components/autosuggest/Autosuggest";
 
 import { labels } from "../../../config/i18n/labels";

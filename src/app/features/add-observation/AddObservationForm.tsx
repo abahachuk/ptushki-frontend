@@ -15,10 +15,8 @@ import {
 
 import { labels } from "../../../config/i18n/labels";
 
-import {
-  CommonBird,
-  FormValues
-} from "../../../components/common-bird/CommonBird";
+import { FormValues } from "../../../components/common-bird/CommonBirdModels";
+import { CommonBird } from "../../../components/common-bird/CommonBird";
 
 import "./AddObservation.scss";
 

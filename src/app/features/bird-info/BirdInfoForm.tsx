@@ -1,10 +1,8 @@
 import React, { FC, useState, useCallback } from "react";
 import { Button } from "reactstrap";
 
-import {
-  CommonBird,
-  FormValues
-} from "../../../components/common-bird/CommonBird";
+import { CommonBird } from "../../../components/common-bird/CommonBird";
+import { FormValues } from "../../../components/common-bird/CommonBirdModels";
 import { IChangeValue } from "../../../components/autosuggest/Autosuggest";
 import { BirdObservationsListConnected } from "./BirdObservationsList";
 
@@ -24,37 +22,6 @@ import { Scope, UserAction } from "../../../config/permissions";
 import { CanConnected } from "../auth/CanConnected";
 
 const blockName = "bird-info";
-
-interface Image {
-  src: string;
-  altText: string;
-  id: number;
-}
-
-interface InfoBlock {
-  title: string;
-  value: string | number;
-  className?: string;
-}
-
-const renderImage = function({ src, altText, id }: Image) {
-  return (
-    <img key={id} src={src} alt={altText} className={`${blockName}__photo`} />
-  );
-};
-
-const HeaderInfoBlock = ({ label }: { label: string }) => {
-  return <p className={`${blockName}__block-info-title`}>{label}</p>;
-};
-
-export const InfoBlock = function({ title, value, className }: InfoBlock) {
-  return (
-    <div className={className}>
-      <p className={`${blockName}__info-title`}>{title}</p>
-      <p className={`${blockName}__info-value`}>{value}</p>
-    </div>
-  );
-};
 
 export const BirdInfoForm: FC<{
   birdInfo: BirdInfo;
