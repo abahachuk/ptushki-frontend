@@ -107,12 +107,12 @@ export const birdData = {
 
 export const formValues = {
   species: "Желтая трясогузка",
-  sex: "Женский",
-  age: "Больше 1 года",
-  state: "Птица здорова",
+  sexMentioned: "Женский",
+  ageMentioned: "Больше 1 года",
+  status: "Птица здорова",
   country: "Беларусь",
   region: "Брестская",
   coordinates: "123.32 324.123",
-  timeError: "5 минут",
+  accuracyOfDate: "5 минут",
   comment: "-"
 };

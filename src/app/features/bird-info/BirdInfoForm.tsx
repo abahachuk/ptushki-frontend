@@ -89,9 +89,7 @@ export const BirdInfoForm: FC<IBirdInfoForm> = ({ scope, dispatch }) => {
       <p className={`${blockName}__euring-title`}>{labels.birdInfo.euring}</p>
       <span className={`${blockName}__euring`}>{birdData.euring}</span>
       <CommonBird
-        birdConfig={birdConfig}
         circumstancesConfig={circumstancesConfig}
-        observationConfig={observationConfig}
         onChangeBirdValues={setBird}
         birdParams={bird}
         onChangeFormValue={onChangeValue}

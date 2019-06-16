@@ -1,3 +1,5 @@
+import { Scope } from "../permissions";
+
 export const labels = {
   brandName: "Кольца Птушак",
   back: "Назад",
@@ -214,5 +216,29 @@ export const labels = {
   ring: "Кольцо по информатору",
   degreeSymbol: "°",
   km: "км",
-  days: "д"
+  days: "д",
+  createPage: {
+    [Scope.observations]: {
+      send: "Отправить наблюдение",
+      title: "Добавление наблюдения",
+      circumstancesTitle: "Обстоятельства",
+      circumstancesSubtitle:
+        "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
+      observationsTitle: "Наблюдения",
+      observationsSubtitle:
+        "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определить вид на florafauna.by"
+    },
+    [Scope.birds]: {
+      send: "Сохранить птицу",
+      title: "Создание птицы",
+      circumstancesSubtitle:
+        "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
+      observationsTitle: "Последнее наблюдение птицы",
+      observationsSubtitle:
+        "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определитель птиц беларуси на florafauna.by, чтобы узнать вид."
+    },
+    subTitle:
+      "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
+    back: "Назад"
+  }
 } as const;

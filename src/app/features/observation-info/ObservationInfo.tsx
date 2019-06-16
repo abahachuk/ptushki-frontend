@@ -14,11 +14,7 @@ import { birdData, formValues } from "../bird-info/test-data";
 
 import { labels } from "../../../config/i18n/labels";
 
-import {
-  circumstancesConfig,
-  observationConfig,
-  birdConfig
-} from "../add-observation/test.data";
+import { circumstancesConfig } from "../add-observation/test.data";
 
 import "./ObservationInfo.scss";
 
@@ -32,7 +28,9 @@ const CIRCUMSTANCES_LABELS = {
 
 const blockName = "observation-info";
 
-export const ObservationInfoForm: FC<DispatchProp> = ({ dispatch }) => {
+export const ObservationInfoForm: FC<
+  DispatchProp & { match: { params: { id: string } } }
+> = ({ dispatch, match }) => {
   const [form, setFormValues] = useState<FormValues>(formValues);
   const [bird, setBird] = useState(birdData.params);
   const [editMode, setEditMode] = useState(false);
@@ -81,9 +79,7 @@ export const ObservationInfoForm: FC<DispatchProp> = ({ dispatch }) => {
         )}
       </div>
       <CommonBird
-        birdConfig={birdConfig}
         circumstancesConfig={circumstancesConfig}
-        observationConfig={observationConfig}
         onChangeBirdValues={setBird}
         birdParams={bird}
         onChangeFormValue={onChangeValue}

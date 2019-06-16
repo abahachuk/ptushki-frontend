@@ -1,9 +1,10 @@
 import { connect } from "react-redux";
 
 import { ObservationInfoForm } from "./ObservationInfo";
+import { RootState } from "../../../store";
 
-export { ObservationInfoForm } from "./ObservationInfo";
-
-export const ObservationInfoFormConnected = connect(() => ({}))(
-  ObservationInfoForm
-);
+export const ObservationInfoFormConnected = connect(
+  (state: RootState, ownProps: any) => {
+    return {};
+  }
+)(ObservationInfoForm);
