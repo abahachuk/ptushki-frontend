@@ -8,6 +8,7 @@ import {
   Input,
   Label
 } from "reactstrap";
+import sn from "classnames";
 import { Autosuggest } from "../autosuggest/Autosuggest";
 import { Bird } from "../bird/Bird";
 import { InfoContainer } from "../info-container/InfoContainer";
@@ -24,7 +25,9 @@ const BlockHeader = function({ title, subtitle }: IBlockHeader) {
   return (
     <div className={`${blockName}__block-header-container`}>
       <p className={`${blockName}__block-header-title`}>{title}</p>
-      <p className={`${blockName}__block-header-subtitle`}>{subtitle}</p>
+      {subtitle && (
+        <p className={`${blockName}__block-header-subtitle`}>{subtitle}</p>
+      )}
     </div>
   );
 };
@@ -46,7 +49,9 @@ export const CommonBird: FC<ICommonBird> = ({
   birdParams,
   onChangeFormValue,
   formValues,
-  viewMode
+  viewMode,
+  observationsLabels,
+  circumstancesLabels
 }) => {
   const [isOpened, setIsOpen] = useState(false);
 
@@ -92,12 +97,7 @@ export const CommonBird: FC<ICommonBird> = ({
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
           className={`${blockName}__info-block`}
-          renderHeader={
-            <BlockHeader
-              title={labels.addObservation.observationsTitle}
-              subtitle={labels.addObservation.observationsSubtitle}
-            />
-          }
+          renderHeader={<BlockHeader {...observationsLabels} />}
         >
           <Field
             label={labels.addObservation.observationsFields.birdSpecies}
@@ -146,14 +146,15 @@ export const CommonBird: FC<ICommonBird> = ({
           <p className={`${blockName}__field-label`}>
             {labels.addObservation.observationsFields.photos}
           </p>
-          <DropZone />
+          <DropZone className={`${blockName}__field-container`} />
           <Label for="comment" className={`${blockName}__field-label`}>
             {labels.addObservation.observationsFields.comment}
           </Label>
           <Input
-            className={`${blockName}__input`}
+            className={sn(`${blockName}__input`, `${blockName}__input--area`)}
             id="comment"
             type="textarea"
+            rows={3}
             placeholder={
               labels.addObservation.observationsFields.commentPlaceholder
             }
@@ -164,12 +165,7 @@ export const CommonBird: FC<ICommonBird> = ({
         </InfoContainer>
         <InfoContainer
           className={`${blockName}__info-block`}
-          renderHeader={
-            <BlockHeader
-              title={labels.addObservation.circumstancesTitle}
-              subtitle={labels.addObservation.circumstancesSubtitle}
-            />
-          }
+          renderHeader={<BlockHeader {...circumstancesLabels} />}
         >
           <Field
             label={labels.addObservation.circumstancesFields.country}

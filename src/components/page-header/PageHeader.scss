@@ -1,0 +1,19 @@
+@import "../../styles/variables";
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    color: $mineSharf;
+    font-size: 36px;
+    font-weight: 100;
+  }
+
+  &__subtitle {
+    color: $trout;
+    font-size: 14px;
+    line-height: 18px;
+    width: 450px;
+  }
+}

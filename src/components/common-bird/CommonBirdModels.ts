@@ -25,6 +25,11 @@ export interface FormValues {
   comment: string;
 }
 
+interface FormLabels {
+  title: string;
+  subtitle?: string;
+}
+
 export interface ICommonBird extends IBird {
   observationConfig: {
     birdSpecies: Array<CollectionItem>;
@@ -54,11 +59,13 @@ export interface ICommonBird extends IBird {
   onChangeBirdValues: (birdParams: any) => void;
   onChangeFormValue: ({ value, type }: IChangeValue) => void;
   formValues: FormValues;
+  observationsLabels: FormLabels;
+  circumstancesLabels: FormLabels;
 }
 
 export interface IBlockHeader {
   title: string;
-  subtitle: string;
+  subtitle?: string;
 }
 
 export interface IField extends IAutosuggest {

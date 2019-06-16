@@ -1,5 +1,5 @@
 import sn from "classnames";
-import React, { ButtonHTMLAttributes, FC, useCallback, useState } from "react";
+import React, { ButtonHTMLAttributes, FC, useCallback } from "react";
 import { Input, Label } from "reactstrap";
 import { labels } from "../../config/i18n/labels";
 import { Autosuggest } from "../autosuggest/Autosuggest";

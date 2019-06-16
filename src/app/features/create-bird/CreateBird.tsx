@@ -4,6 +4,7 @@ import { Button } from "reactstrap";
 import { CommonBird } from "../../../components/common-bird/CommonBird";
 import { FormValues } from "../../../components/common-bird/CommonBirdModels";
 import { IChangeValue } from "../../../components/autosuggest/Autosuggest";
+import { PageHeader } from "../../../components/page-header/PageHeader";
 
 import { labels } from "../../../config/i18n/labels";
 
@@ -16,6 +17,16 @@ import {
 import "./CreateBird.scss";
 
 const blockName = "create-bird";
+
+const OBSERVATION_LABELS = {
+  title: labels.createBird.observations,
+  subtitle: labels.createBird.observationsSubtitle
+};
+
+const CIRCUMSTANCES_LABELS = {
+  title: labels.createBird.circumstances,
+  subtitle: labels.createBird.circumstancesSubtitle
+};
 
 export const CreateBirdForm = () => {
   const [form, setFormValues] = useState<FormValues>({
@@ -41,10 +52,8 @@ export const CreateBirdForm = () => {
   });
 
   const onChangeValue = useCallback(
-    ({ value, type }: IChangeValue) => {
-      setFormValues({ ...form, [type]: value });
-      console.log(form);
-    },
+    ({ value, type }: IChangeValue) =>
+      setFormValues({ ...form, [type]: value }),
     [form]
   );
 
@@ -53,12 +62,10 @@ export const CreateBirdForm = () => {
   return (
     <div className={blockName}>
       <div className={`${blockName}__header`}>
-        <div className={`${blockName}__title-container`}>
-          <h1 className={`${blockName}__title`}>{labels.createBird.title}</h1>
-          <p className={`${blockName}__subtitle`}>
-            {labels.createBird.subtitle}
-          </p>
-        </div>
+        <PageHeader
+          title={labels.createBird.title}
+          subtitle={labels.createBird.subtitle}
+        />
         <Button className={`${blockName}__save-btn`}>
           {labels.createBird.saveBird}
         </Button>
@@ -71,6 +78,8 @@ export const CreateBirdForm = () => {
         birdParams={bird}
         onChangeFormValue={onChangeValue}
         formValues={form}
+        observationsLabels={OBSERVATION_LABELS}
+        circumstancesLabels={CIRCUMSTANCES_LABELS}
       />
       <div className={`${blockName}__buttons`}>
         <Button className={`${blockName}__back-btn`}>

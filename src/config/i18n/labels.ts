@@ -50,7 +50,7 @@ export const labels = {
     euring: "Euring",
     addRing: "Добавить кольцо",
     photos: "Фотографии",
-    export: "Экспорт",
+    export: "Экспортировать в .xls",
     edit: "Редактировать",
     back: "Назад",
     observationsHistory: "История наблюдений",
@@ -58,6 +58,8 @@ export const labels = {
     birdTitle: "Птица",
     ringingTitle: "Кольцевание и отлов",
     observationTime: "Время наблюдения",
+    observationsTitle: "Последнее наблюдение птицы",
+    circumstancesTitle: "Обстоятельства последнего наблюдения",
     bird: {
       neck: "Шея",
       leftWing: "Левое крыло",
@@ -74,7 +76,13 @@ export const labels = {
     subtitle:
       "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
     saveBird: "Сохранить птицу",
-    back: "Назад"
+    back: "Назад",
+    observations: "Наблюдения",
+    observationsSubtitle:
+      "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определитель птиц беларуси на florafauna.by, чтобы узнать вид.",
+    circumstances: "Обстоятельства",
+    circumstancesSubtitle:
+      "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить."
   },
   observationInfo: {
     title: "Информация о наблюдении",
@@ -83,7 +91,9 @@ export const labels = {
     edit: "Редактировать",
     delete: "Удалить",
     back: "Назад",
-    editObservation: "Редактировать наблюдение"
+    editObservation: "Редактировать наблюдение",
+    observations: "Наблюдения",
+    circumstances: "Обстоятельства"
   },
   addObservation: {
     title: "Добавление наблюдения",

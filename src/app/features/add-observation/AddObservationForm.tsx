@@ -1,11 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { Button } from "reactstrap";
 
-import {
-  Autosuggest,
-  IAutosuggest,
-  IChangeValue
-} from "../../../components/autosuggest/Autosuggest";
+import { IChangeValue } from "../../../components/autosuggest/Autosuggest";
 
 import {
   circumstancesConfig,
@@ -17,37 +13,21 @@ import { labels } from "../../../config/i18n/labels";
 
 import { FormValues } from "../../../components/common-bird/CommonBirdModels";
 import { CommonBird } from "../../../components/common-bird/CommonBird";
+import { PageHeader } from "../../../components/page-header/PageHeader";
 
 import "./AddObservation.scss";
 
+const OBSERVATION_LABELS = {
+  title: labels.addObservation.observationsTitle,
+  subtitle: labels.addObservation.observationsSubtitle
+};
+
+const CIRCUMSTANCES_LABELS = {
+  title: labels.addObservation.circumstancesTitle,
+  subtitle: labels.addObservation.circumstancesSubtitle
+};
+
 const blockName = "add-observation";
-
-interface BlockHeader {
-  title: string;
-  subtitle: string;
-}
-
-interface Field extends IAutosuggest {
-  label: string;
-}
-
-const BlockHeader = function({ title, subtitle }: BlockHeader) {
-  return (
-    <div className={`${blockName}__block-header-container`}>
-      <p className={`${blockName}__block-header-title`}>{title}</p>
-      <p className={`${blockName}__block-header-subtitle`}>{subtitle}</p>
-    </div>
-  );
-};
-
-const Field = function({ label, ...props }: Field) {
-  return (
-    <div className={`${blockName}__field-container`}>
-      <p className={`${blockName}__field-label`}>{label}</p>
-      <Autosuggest {...props} />
-    </div>
-  );
-};
 
 export const AddObservation = () => {
   const [form, setFormValues] = useState<FormValues>({
@@ -73,19 +53,22 @@ export const AddObservation = () => {
   });
 
   const onChangeValue = useCallback(
-    ({ value, type }: IChangeValue) => {
-      setFormValues({ ...form, [type]: value });
-      console.log(form);
-    },
+    ({ value, type }: IChangeValue) =>
+      setFormValues({ ...form, [type]: value }),
     [form]
   );
 
   return (
     <div className={blockName}>
-      <h1 className={`${blockName}__title`}>{labels.addObservation.title}</h1>
-      <p className={`${blockName}__subtitle`}>
-        {labels.addObservation.subTitle}
-      </p>
+      <div className={`${blockName}__header`}>
+        <PageHeader
+          title={labels.addObservation.title}
+          subtitle={labels.addObservation.subTitle}
+        />
+        <Button className={`${blockName}__send-btn`}>
+          {labels.addObservation.sendObservation}
+        </Button>
+      </div>
       <CommonBird
         birdConfig={birdConfig}
         circumstancesConfig={circumstancesConfig}
@@ -94,6 +77,8 @@ export const AddObservation = () => {
         birdParams={bird}
         onChangeFormValue={onChangeValue}
         formValues={form}
+        observationsLabels={OBSERVATION_LABELS}
+        circumstancesLabels={CIRCUMSTANCES_LABELS}
       />
       <div className={`${blockName}__buttons`}>
         <Button className={`${blockName}__back-btn`}>

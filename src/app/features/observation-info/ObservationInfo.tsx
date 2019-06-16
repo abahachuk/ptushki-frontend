@@ -4,6 +4,8 @@ import { Button } from "reactstrap";
 import { CommonBird } from "../../../components/common-bird/CommonBird";
 import { FormValues } from "../../../components/common-bird/CommonBirdModels";
 import { IChangeValue } from "../../../components/autosuggest/Autosuggest";
+import { PageHeader } from "../../../components/page-header/PageHeader";
+import { ActionButton } from "../../../components/action-button/ActionButton";
 
 import { birdData, formValues } from "../bird-info/test-data";
 
@@ -17,37 +19,38 @@ import {
 
 import "./ObservationInfo.scss";
 
+const OBSERVATION_LABELS = {
+  title: labels.observationInfo.observations
+};
+
+const CIRCUMSTANCES_LABELS = {
+  title: labels.observationInfo.circumstances
+};
+
 const blockName = "observation-info";
 
 export const ObservationInfoForm = () => {
   const [form, setFormValues] = useState<FormValues>(formValues);
   const [bird, setBird] = useState(birdData.params);
-  const [viewMode, changeMode] = useState(true);
 
   const onChangeValue = useCallback(
-    ({ value, type }: IChangeValue) => {
-      setFormValues({ ...form, [type]: value });
-      console.log(form);
-    },
+    ({ value, type }: IChangeValue) =>
+      setFormValues({ ...form, [type]: value }),
     [form]
   );
-
-  const onClickEdit = useCallback(() => changeMode(false), [changeMode]);
 
   return (
     <div className={blockName}>
       <div className={`${blockName}__header`}>
-        <div className={`${blockName}__title-container`}>
-          <h1 className={`${blockName}__title`}>
-            {labels.observationInfo.title}
-          </h1>
-          <p className={`${blockName}__subtitle`}>
-            {labels.observationInfo.subtitle}
-          </p>
+        <PageHeader
+          title={labels.observationInfo.title}
+          subtitle={labels.observationInfo.subtitle}
+          className={`${blockName}__page-header`}
+        />
+        <div className={`${blockName}__header-buttons`}>
+          <ActionButton icon="edit" label={labels.observationInfo.edit} />
+          <ActionButton icon="delete" label={labels.observationInfo.delete} />
         </div>
-        <Button className={`${blockName}__edit-btn`} onClick={onClickEdit}>
-          {labels.observationInfo.edit}
-        </Button>
       </div>
       <CommonBird
         birdConfig={birdConfig}
@@ -57,13 +60,15 @@ export const ObservationInfoForm = () => {
         birdParams={bird}
         onChangeFormValue={onChangeValue}
         formValues={form}
-        viewMode={viewMode}
+        viewMode
+        observationsLabels={OBSERVATION_LABELS}
+        circumstancesLabels={CIRCUMSTANCES_LABELS}
       />
       <div className={`${blockName}__buttons`}>
         <Button className={`${blockName}__back-btn`}>
           {labels.observationInfo.back}
         </Button>
-        <Button className={`${blockName}__edit-btn`} onClick={onClickEdit}>
+        <Button className={`${blockName}__edit-btn`}>
           {labels.observationInfo.editObservation}
         </Button>
       </div>
