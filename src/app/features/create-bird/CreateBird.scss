@@ -1,8 +1,27 @@
-@import "../../../styles/variables";
+@import '../../../styles/variables';
 
-.add-observation {
+.create-bird {
   padding: 15px;
   background-color: $white;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__title {
+    color: $mineSharf;
+    font-size: 36px;
+    font-weight: 100;
+  }
+
+  &__subtitle {
+    color: $trout;
+    font-size: 14px;
+    line-height: 18px;
+    width: 450px;
+  }
 
   &__buttons {
     display: flex;
@@ -11,17 +30,10 @@
     padding-top: 36px;
   }
 
-  &__header {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-    justify-content: space-between;
-  }
-
   &__back-btn,
-  &__send-btn {
+  &__save-btn {
     height: 36px;
-    font-size: 15px;
+    font-size: 16px;
     padding: 0 20px;
     border: none;
   }
@@ -31,16 +43,16 @@
     color: $dark-blue;
     border: 1px solid $dark-blue;
 
-    &:hover, &:active {
-      background-color: rgba($blueBayox, 1) !important;
+    &:hover {
+      background-color: rgba($blueBayox, 1);
     }
   }
 
-  &__send-btn {
+  &__save-btn {
     background-color: rgba($orange, 0.9);
 
-    &:hover, &:active {
-      background-color: rgba($orange, 1) !important;
+    &:hover {
+      background-color: rgba($orange, 1);
     }
   }
 

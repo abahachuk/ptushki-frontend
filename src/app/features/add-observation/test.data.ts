@@ -1,4 +1,4 @@
-export const birdSpecies = [
+const birdSpecies = [
   { label: "Желтая трясогузка", value: "Желтая трясогузка", id: 0 },
   { label: "Белая трясогузка", value: "Белая трясогузка", id: 1 },
   { label: "Выпь", value: "Выпь", id: 2 },
@@ -88,3 +88,49 @@ export const timeError = [
   { label: "1 час", value: "1 час", id: 5 },
   { label: "2 часа", value: "2 часа", id: 6 }
 ];
+
+const birdValues = [
+  { label: "Синее кольцо", value: "Синее кольцо", id: 1 },
+  { label: "Желтое кольцо", value: "Желтое кольцо", id: 2 },
+  { label: "Металлическое кольцо", value: "Металлическое кольцо", id: 3 },
+  { label: "Пластиковое кольцо", value: "Пластиковое кольцо", id: 4 }
+];
+
+export const observationConfig = {
+  birdSpecies,
+  sex: birdSex,
+  age: birdAge,
+  birdState,
+  photos: [
+    {
+      url:
+        "https://media.mnn.com/assets/images/2015/03/Goldcrest_1%20copy.jpg.653x0_q80_crop-smart.jpg",
+      id: 0
+    },
+    {
+      url:
+        "https://media.mnn.com/assets/images/2015/03/Goldcrest_1%20copy.jpg.653x0_q80_crop-smart.jpg",
+      id: 1
+    }
+  ],
+  comment: "123"
+};
+
+export const circumstancesConfig = {
+  country,
+  region,
+  coordinates: "213 123",
+  timeDate: "2019-06-12T13:00",
+  timeError
+};
+
+export const birdConfig = {
+  neck: birdValues,
+  saddle: birdValues,
+  leftWing: birdValues,
+  rightWing: birdValues,
+  leftBobbin: birdValues,
+  rightBobbin: birdValues,
+  leftLeg: birdValues,
+  rightLeg: birdValues
+};

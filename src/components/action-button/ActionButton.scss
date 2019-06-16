@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  border: 1px solid $dark-blue;
+  color: $dark-blue;
+  height: 30px;
+  padding: 0 15px 0;
+  background-color: transparent;
+  font-family: "Open Sans";
+  font-size: 13px;
+  margin: 0 5px 0;
+
+  &:hover, &:active {
+    @include button-shadow;
+
+    background-color: transparent !important;
+    color: $dark-blue !important;
+  }
+
+  &__icon {
+    width: 13px;
+    height: 13px;
+    margin-right: 10px;
+  }
+}

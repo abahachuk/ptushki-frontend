@@ -16,7 +16,7 @@ interface Item {
 export interface IChangeValue {
   value: string;
   type: string;
-  checked: boolean;
+  checked?: boolean;
 }
 
 export interface IAutosuggest {

@@ -20,5 +20,9 @@
   @include text;
 }
 
+@mixin button-shadow {
+  box-shadow: 0 0 6px rgba($black, 0.2);
+}
+
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";

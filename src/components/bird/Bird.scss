@@ -286,4 +286,12 @@
     height: 33px;
     margin-left: 10px;
   }
+
+  &__field-label {
+    font-family: "Open Sans";
+    color: $mineSharf;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+  }
 }

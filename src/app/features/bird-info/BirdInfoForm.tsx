@@ -1,14 +1,25 @@
-import React, { FC } from "react";
+import React, { FC, useState, useCallback, Fragment } from "react";
+import { goBack } from "connected-react-router";
+import { DispatchProp } from "react-redux";
 import { Button } from "reactstrap";
 
-import { Bird } from "../../../components/bird/Bird";
+import { CommonBird } from "../../../components/common-bird/CommonBird";
+import { FormValues } from "../../../components/common-bird/CommonBirdModels";
+import { IChangeValue } from "../../../components/autosuggest/Autosuggest";
+import { ActionButton } from "../../../components/action-button/ActionButton";
 import { BirdObservationsListConnected } from "./BirdObservationsList";
+import { BackButton } from "../../../components/back-button/BackButton";
 
 import { BirdInfo } from "./BirdInfoModel";
-import { InfoContainer } from "../../../components/info-container/InfoContainer";
 import { labels } from "../../../config/i18n/labels";
 
-import { ringingData, photos, birdData } from "./test-data";
+import {
+  circumstancesConfig,
+  observationConfig,
+  birdConfig
+} from "../add-observation/test.data";
+
+import { birdData, formValues } from "./test-data";
 
 import "./BirdInfo.scss";
 import { Scope, UserAction } from "../../../config/permissions";
@@ -16,103 +27,101 @@ import { CanConnected } from "../auth/CanConnected";
 
 const blockName = "bird-info";
 
-interface Image {
-  src: string;
-  altText: string;
-  id: number;
-}
-
-interface InfoBlock {
-  title: string;
-  value: string | number;
-  className?: string;
-}
-
-const renderImage = function({ src, altText, id }: Image) {
-  return (
-    <img key={id} src={src} alt={altText} className={`${blockName}__photo`} />
-  );
-};
-
-const HeaderInfoBlock = ({ label }: { label: string }) => {
-  return <p className={`${blockName}__block-info-title`}>{label}</p>;
-};
-
-export const InfoBlock = function({ title, value, className }: InfoBlock) {
-  return (
-    <div className={className}>
-      <p className={`${blockName}__info-title`}>{title}</p>
-      <p className={`${blockName}__info-value`}>{value}</p>
-    </div>
-  );
-};
-
-export const BirdInfoForm: FC<{
+interface IBirdInfoForm extends DispatchProp {
   birdInfo: BirdInfo;
   scope: Scope;
-}> = ({ scope }) => {
+}
+
+export const BirdInfoForm: FC<IBirdInfoForm> = ({ scope, dispatch }) => {
+  const [form, setFormValues] = useState<FormValues>(formValues);
+  const [bird, setBird] = useState(birdData.params);
+  const [editMode, setEditMode] = useState(false);
+
+  const onChangeValue = useCallback(
+    ({ value, type }: IChangeValue) =>
+      setFormValues({ ...form, [type]: value }),
+    [form]
+  );
+
+  const onClickEdit = useCallback(() => setEditMode(true), [setEditMode]);
+
+  const onClickSave = useCallback(() => {
+    // TODO: logic for saving
+    setEditMode(false);
+  }, [setEditMode]);
+
+  const onGoBack = useCallback(() => dispatch(goBack()), [dispatch]);
+
   return (
     <div className={blockName}>
+      <BackButton
+        className={`${blockName}__page-back-btn`}
+        label={labels.back}
+        onClick={onGoBack}
+      />
       <div className={`${blockName}__header`}>
         <h1 className={`${blockName}__title`}>{birdData.name}</h1>
-        <CanConnected I={UserAction.export} a={Scope.observations}>
-          <Button outline className={`${blockName}__btn`}>
-            {labels.birdInfo.export}
+        {!editMode ? (
+          <div className={`${blockName}__header-buttons`}>
+            <CanConnected I={UserAction.edit} a={scope}>
+              <ActionButton
+                icon="edit"
+                label={labels.birdInfo.edit}
+                onClick={onClickEdit}
+              />
+            </CanConnected>
+            <CanConnected I={UserAction.remove} a={scope}>
+              <ActionButton icon="delete" label={labels.birdInfo.delete} />
+            </CanConnected>
+            <CanConnected I={UserAction.export} a={Scope.observations}>
+              <Button outline className={`${blockName}__btn`}>
+                {labels.birdInfo.export}
+              </Button>
+            </CanConnected>
+          </div>
+        ) : (
+          <Button className={`${blockName}__edit-btn`}>
+            {labels.createBird.saveBird}
           </Button>
-        </CanConnected>
-        <CanConnected I={UserAction.edit} a={scope}>
-          <Button outline className={`${blockName}__btn`}>
-            {labels.birdInfo.edit}
-          </Button>
-        </CanConnected>
-        <CanConnected I={UserAction.remove} a={scope}>
-          <Button outline className={`${blockName}__btn`}>
-            {labels.birdInfo.delete}
-          </Button>
-        </CanConnected>
+        )}
       </div>
       <p className={`${blockName}__subtitle`}>{birdData.code}</p>
       <p className={`${blockName}__euring-title`}>{labels.birdInfo.euring}</p>
       <span className={`${blockName}__euring`}>{birdData.euring}</span>
-      <Bird birdParams={birdData.params} viewMode />
-      <div className={`${blockName}__info-blocks-container`}>
-        <InfoContainer
-          className={`${blockName}__info-block`}
-          renderButton={
-            <Button outline color="primary">
-              {labels.birdInfo.addRing}
-            </Button>
-          }
-          renderHeader={
-            <HeaderInfoBlock label={labels.birdInfo.ringingTitle} />
-          }
-        >
-          {ringingData.map(({ title, value, id }) => (
-            <InfoBlock key={id} title={title} value={value} />
-          ))}
-        </InfoContainer>
-        <InfoContainer
-          className={`${blockName}__info-block`}
-          renderHeader={<HeaderInfoBlock label={labels.birdInfo.birdTitle} />}
-        >
-          {ringingData.map(({ title, value, id }) => (
-            <InfoBlock key={id} title={title} value={value} />
-          ))}
-        </InfoContainer>
-        <InfoContainer
-          className={`${blockName}__info-block`}
-          renderHeader={
-            <HeaderInfoBlock label={labels.birdInfo.observationTime} />
-          }
-        >
-          {ringingData.map(({ title, value, id }) => (
-            <InfoBlock key={id} title={title} value={value} />
-          ))}
-        </InfoContainer>
+      <CommonBird
+        birdConfig={birdConfig}
+        circumstancesConfig={circumstancesConfig}
+        observationConfig={observationConfig}
+        onChangeBirdValues={setBird}
+        birdParams={bird}
+        onChangeFormValue={onChangeValue}
+        formValues={form}
+        observationsLabels={{ title: labels.birdInfo.observationsTitle }}
+        circumstancesLabels={{ title: labels.birdInfo.circumstancesTitle }}
+        viewMode={!editMode}
+      />
+      {!editMode && (
+        <Fragment>
+          <p className={`${blockName}__obs-history-title`}>
+            {labels.birdInfo.observationsHistory}
+          </p>
+          <BirdObservationsListConnected />
+        </Fragment>
+      )}
+      <div className={`${blockName}__buttons`}>
+        <Button className={`${blockName}__back-btn`}>
+          {labels.birdInfo.back}
+        </Button>
+        {!editMode ? (
+          <Button onClick={onClickEdit} className={`${blockName}__edit-btn`}>
+            {labels.birdInfo.edit}
+          </Button>
+        ) : (
+          <Button onClick={onClickSave} className={`${blockName}__edit-btn`}>
+            {labels.createBird.saveBird}
+          </Button>
+        )}
       </div>
-      <BirdObservationsListConnected />
-      <p className={`${blockName}__photos-title`}>{labels.birdInfo.photos}</p>
-      <div>{photos.map(renderImage)}</div>
     </div>
   );
 };

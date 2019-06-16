@@ -3,36 +3,35 @@ import { goBack } from "connected-react-router";
 import { DispatchProp } from "react-redux";
 import { Button } from "reactstrap";
 
+import { CommonBird } from "../../../components/common-bird/CommonBird";
+import { FormValues } from "../../../components/common-bird/CommonBirdModels";
 import { IChangeValue } from "../../../components/autosuggest/Autosuggest";
+import { PageHeader } from "../../../components/page-header/PageHeader";
+import { BackButton } from "../../../components/back-button/BackButton";
+
+import { labels } from "../../../config/i18n/labels";
 
 import {
   circumstancesConfig,
   observationConfig,
   birdConfig
-} from "./test.data";
+} from "../add-observation/test.data";
 
-import { labels } from "../../../config/i18n/labels";
+import "./CreateBird.scss";
 
-import { FormValues } from "../../../components/common-bird/CommonBirdModels";
-import { CommonBird } from "../../../components/common-bird/CommonBird";
-import { PageHeader } from "../../../components/page-header/PageHeader";
-import { BackButton } from "../../../components/back-button/BackButton";
-
-import "./AddObservation.scss";
+const blockName = "create-bird";
 
 const OBSERVATION_LABELS = {
-  title: labels.addObservation.observationsTitle,
-  subtitle: labels.addObservation.observationsSubtitle
+  title: labels.createBird.observations,
+  subtitle: labels.createBird.observationsSubtitle
 };
 
 const CIRCUMSTANCES_LABELS = {
-  title: labels.addObservation.circumstancesTitle,
-  subtitle: labels.addObservation.circumstancesSubtitle
+  title: labels.createBird.circumstances,
+  subtitle: labels.createBird.circumstancesSubtitle
 };
 
-const blockName = "add-observation";
-
-export const AddObservation: FC<DispatchProp> = ({ dispatch }) => {
+export const CreateBirdForm: FC<DispatchProp> = ({ dispatch }) => {
   const [form, setFormValues] = useState<FormValues>({
     species: "",
     sex: "",
@@ -61,6 +60,8 @@ export const AddObservation: FC<DispatchProp> = ({ dispatch }) => {
     [form]
   );
 
+  const onSave = () => {};
+
   const onGoBack = useCallback(() => dispatch(goBack()), [dispatch]);
 
   return (
@@ -72,11 +73,11 @@ export const AddObservation: FC<DispatchProp> = ({ dispatch }) => {
       />
       <div className={`${blockName}__header`}>
         <PageHeader
-          title={labels.addObservation.title}
-          subtitle={labels.addObservation.subTitle}
+          title={labels.createBird.title}
+          subtitle={labels.createBird.subtitle}
         />
-        <Button className={`${blockName}__send-btn`}>
-          {labels.addObservation.sendObservation}
+        <Button className={`${blockName}__save-btn`}>
+          {labels.createBird.saveBird}
         </Button>
       </div>
       <CommonBird
@@ -92,10 +93,10 @@ export const AddObservation: FC<DispatchProp> = ({ dispatch }) => {
       />
       <div className={`${blockName}__buttons`}>
         <Button className={`${blockName}__back-btn`}>
-          {labels.addObservation.back}
+          {labels.createBird.back}
         </Button>
-        <Button className={`${blockName}__send-btn`}>
-          {labels.addObservation.sendObservation}
+        <Button className={`${blockName}__save-btn`} onClick={onSave}>
+          {labels.createBird.saveBird}
         </Button>
       </div>
     </div>
