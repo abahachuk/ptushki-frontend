@@ -1,10 +1,10 @@
-import React, { useCallback, useState, FC, ReactNode, Fragment } from "react";
+import React, { FC, Fragment, ReactNode, useCallback, useState } from "react";
 import { Button, DropdownItem, Input } from "reactstrap";
-
-import { CustomDropdown } from "../dropdown/Dropdown";
-import "./Autosuggest.scss";
-import { CheckboxField } from "../checkbox/CheckboxField";
 import { labels } from "../../config/i18n/labels";
+import { CheckboxField } from "../checkbox/CheckboxField";
+import { CustomDropdown } from "../dropdown/Dropdown";
+import { CustomScrollContainer } from "../scrollbars/CustomScrollContainer";
+import "./Autosuggest.scss";
 
 interface Item {
   label: string;
@@ -162,7 +162,9 @@ export const Autosuggest: FC<IAutosuggest> = ({
           )}
         </div>
       )}
-      <div className={`${blockName}__menu`}>{list.map(renderItem)}</div>
+      <CustomScrollContainer autoHeight autoHeightMax={200}>
+        <div className={`${blockName}__menu`}>{list.map(renderItem)}</div>
+      </CustomScrollContainer>
     </CustomDropdown>
   );
 };

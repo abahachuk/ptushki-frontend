@@ -24,7 +24,6 @@ const ALL_ACTIONS = [
 export enum Scope {
   observations = "observations",
   birds = "birds",
-  rings = "rings",
   auth = "auth",
   users = "users"
 }
@@ -32,7 +31,6 @@ export enum Scope {
 export interface UserPermissions {
   [Scope.observations]?: UserAction[];
   [Scope.birds]?: UserAction[];
-  [Scope.rings]?: UserAction[];
   [Scope.auth]?: UserAction[];
   [Scope.users]?: UserAction[];
 }
@@ -52,20 +50,19 @@ export const USER_ROLES: { [key in UserRole]: UserRoleDescriptor } = {
   observer: {
     value: "observer",
     permissions: {
-      [Scope.observations]: BASIC_ACTIONS,
+      [Scope.observations]: [...BASIC_ACTIONS, ...MANAGE_ACTIONS],
       [Scope.birds]: [UserAction.observe]
     }
   },
   ringer: {
     value: "ringer",
     permissions: {
-      [Scope.observations]: [...BASIC_ACTIONS, ...IMPORT_EXPORT_ACTIONS],
-      [Scope.birds]: [
+      [Scope.observations]: [
         ...BASIC_ACTIONS,
         ...MANAGE_ACTIONS,
         ...IMPORT_EXPORT_ACTIONS
       ],
-      [Scope.rings]: [
+      [Scope.birds]: [
         ...BASIC_ACTIONS,
         ...MANAGE_ACTIONS,
         ...IMPORT_EXPORT_ACTIONS
@@ -76,16 +73,14 @@ export const USER_ROLES: { [key in UserRole]: UserRoleDescriptor } = {
     value: "scientist",
     permissions: {
       [Scope.observations]: [UserAction.observe, UserAction.export],
-      [Scope.birds]: [UserAction.observe, UserAction.export],
-      [Scope.rings]: [UserAction.observe, UserAction.export]
+      [Scope.birds]: [UserAction.observe, UserAction.export]
     }
   },
   moderator: {
     value: "moderator",
     permissions: {
       [Scope.observations]: ALL_ACTIONS,
-      [Scope.birds]: ALL_ACTIONS,
-      [Scope.rings]: ALL_ACTIONS
+      [Scope.birds]: ALL_ACTIONS
     }
   },
   admin: {
@@ -93,7 +88,6 @@ export const USER_ROLES: { [key in UserRole]: UserRoleDescriptor } = {
     permissions: {
       [Scope.observations]: ALL_ACTIONS,
       [Scope.birds]: ALL_ACTIONS,
-      [Scope.rings]: ALL_ACTIONS,
       [Scope.users]: ALL_ACTIONS
     }
   }

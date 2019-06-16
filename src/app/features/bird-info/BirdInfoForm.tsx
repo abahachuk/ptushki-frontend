@@ -26,7 +26,8 @@ const blockName = "bird-info";
 
 export const BirdInfoForm: FC<{
   birdInfo: BirdInfo;
-}> = () => {
+  scope: Scope;
+}> = ({ scope }) => {
   const [form, setFormValues] = useState<FormValues>(formValues);
   const [bird, setBird] = useState(birdData.params);
 
@@ -41,8 +42,12 @@ export const BirdInfoForm: FC<{
       <div className={`${blockName}__header`}>
         <h1 className={`${blockName}__title`}>{birdData.name}</h1>
         <div className={`${blockName}__header-buttons`}>
-          <ActionButton icon="edit" label={labels.birdInfo.edit} />
-          <ActionButton icon="delete" label={labels.birdInfo.delete} />
+          <CanConnected I={UserAction.edit} a={scope}>
+            <ActionButton icon="edit" label={labels.birdInfo.edit} />
+          </CanConnected>
+          <CanConnected I={UserAction.remove} a={scope}>
+            <ActionButton icon="delete" label={labels.birdInfo.delete} />
+          </CanConnected>
           <CanConnected I={UserAction.export} a={Scope.observations}>
             <Button outline className={`${blockName}__btn`}>
               {labels.birdInfo.export}

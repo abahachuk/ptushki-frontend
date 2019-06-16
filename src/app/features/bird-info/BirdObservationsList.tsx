@@ -35,6 +35,7 @@ export const BirdObservationsList: FC<ObservationListProps> = ({
       rows={observations.error ? [] : observations.value}
       columns={OBSERVATION_LIST_COLUMNS_CONFIG}
       isLoading={observations.isLoading}
+      autoHeight
     />
   );
 };
