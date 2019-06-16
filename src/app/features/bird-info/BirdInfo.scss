@@ -22,6 +22,7 @@
     color: $mineSharf;
     font-size: 42px;
     font-weight: 100;
+    line-height: 51px;
   }
 
   &__btn {
@@ -97,9 +98,14 @@
 
   &__edit-btn {
     background-color: rgba($orange, 0.9);
+    margin-left: auto;
 
     &:hover {
       background-color: rgba($orange, 1);
     }
+  }
+
+  &__page-back-btn {
+    margin: 2px 0 10px;
   }
 }

@@ -1,5 +1,6 @@
 export const labels = {
   brandName: "Кольца Птушак",
+  back: "Назад",
   form: {
     subtitleTop: "Центр Кольцевания Птиц",
     subtitleBottom: "при Академии наук Республики Беларусь",

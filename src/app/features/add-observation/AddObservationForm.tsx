@@ -1,4 +1,6 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, FC } from "react";
+import { goBack } from "connected-react-router";
+import { DispatchProp } from "react-redux";
 import { Button } from "reactstrap";
 
 import { IChangeValue } from "../../../components/autosuggest/Autosuggest";
@@ -14,6 +16,7 @@ import { labels } from "../../../config/i18n/labels";
 import { FormValues } from "../../../components/common-bird/CommonBirdModels";
 import { CommonBird } from "../../../components/common-bird/CommonBird";
 import { PageHeader } from "../../../components/page-header/PageHeader";
+import { BackButton } from "../../../components/back-button/BackButton";
 
 import "./AddObservation.scss";
 
@@ -29,7 +32,7 @@ const CIRCUMSTANCES_LABELS = {
 
 const blockName = "add-observation";
 
-export const AddObservation = () => {
+export const AddObservation: FC<DispatchProp> = ({ dispatch }) => {
   const [form, setFormValues] = useState<FormValues>({
     species: "",
     sex: "",
@@ -58,8 +61,15 @@ export const AddObservation = () => {
     [form]
   );
 
+  const onGoBack = useCallback(() => dispatch(goBack()), [dispatch]);
+
   return (
     <div className={blockName}>
+      <BackButton
+        className={`${blockName}__page-back-btn`}
+        label={labels.back}
+        onClick={onGoBack}
+      />
       <div className={`${blockName}__header`}>
         <PageHeader
           title={labels.addObservation.title}
