@@ -4,6 +4,7 @@ import { ROUTE_BIRDS } from "../routing/routes";
 import { AddObservation } from "../add-observation/AddObservationForm";
 import { ComponentRoute } from "../routing/ComponentRoute";
 import { BirdsPage } from "./BirdsPage";
+import { BirdInfoForm } from "../bird-info/BirdInfoForm";
 
 export const BirdsRoute: FC<RouteProps> = () => {
   return (
@@ -11,7 +12,7 @@ export const BirdsRoute: FC<RouteProps> = () => {
       route={ROUTE_BIRDS}
       PageComponent={BirdsPage}
       AddComponent={AddObservation}
-      DetailComponent={AddObservation}
+      DetailComponent={BirdInfoForm}
     />
   );
 };

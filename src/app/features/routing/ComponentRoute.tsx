@@ -27,7 +27,7 @@ export const ComponentRoute: FC<{
           <AddComponent />
         </ProtectedRoute>
         <Route path={`${route.path}/:id`}>
-          <DetailComponent />
+          <DetailComponent scope={route.scope} />
         </Route>
       </Switch>
     </ProtectedRoute>
