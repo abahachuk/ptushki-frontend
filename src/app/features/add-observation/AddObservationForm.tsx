@@ -80,8 +80,8 @@ export const AddObservation: FC<{
 }> = () => {
   const [observation, seObservationInfo] = useState<IBirdInfo>({});
   const [isOpened, setIsOpen] = useState(false);
-  const [calendarFocused, onFocusChange] = useState(false);
-  const [createdAt, onDateChange] = useState(moment());
+  const [calendarFocused, setCalendarFocused] = useState(false);
+  const [date, setDate] = useState(null);
 
   const toggleModal = useCallback(() => setIsOpen(!isOpened), [isOpened]);
 
@@ -227,17 +227,22 @@ export const AddObservation: FC<{
           <div className={`${blockName}__separator`} />
           <div className={`${blockName}__field-container`}>
             <p className={`${blockName}__field-label`}>
-              {labels.addObservation.circumstancesFields.timeDelta}
+              {labels.addObservation.circumstancesFields.timeAndDate}
             </p>
             <SingleDatePicker
-              date={createdAt}
-              onDateChange={onDateChange}
+              date={date}
+              onDateChange={setDate}
               focused={calendarFocused}
-              onFocusChange={({ focused }) => onFocusChange(focused)}
+              onFocusChange={({ focused }) => setCalendarFocused(focused)}
+              placeholder={
+                labels.addObservation.circumstancesFields.timeAndDatePlaceholder
+              }
               id="date"
               numberOfMonths={1}
+              block
               showDefaultInputIcon
               inputIconPosition="after"
+              isOutsideRange={() => false}
             />
           </div>
 

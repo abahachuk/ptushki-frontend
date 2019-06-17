@@ -77,6 +77,24 @@
   &__field-container {
     padding-bottom: 15px;
     width: 100%;
+
+    .SingleDatePicker {
+      .DateInput__block {
+          padding-right: 42px;
+      }
+    
+      .SingleDatePickerInput_calendarIcon {
+          position: absolute;
+          right: 0;
+          padding: 0 10px;
+          line-height: 36px;
+      }
+      .DateInput_input {
+        font-weight: 400;
+        font-size: 1rem;
+        padding: 7px 11px 5px
+      }
+    }
   }
 
   &__field-label {
