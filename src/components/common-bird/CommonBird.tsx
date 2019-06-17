@@ -1,72 +1,46 @@
-import React, { useState, FC, useCallback } from "react";
+import React, { FC, Fragment, useCallback, useState } from "react";
 import {
   Button,
-  Label,
   Input,
+  Label,
   Modal,
-  ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  ModalHeader
 } from "reactstrap";
-
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import moment from "moment";
+import sn from "classnames";
 import { SingleDatePicker } from "react-dates";
+import { Autosuggest } from "../autosuggest/Autosuggest";
+import { Bird } from "../bird/Bird";
+import { InfoContainer } from "../info-container/InfoContainer";
+import { DropZone } from "../drag-n-drop/DragAndDrop";
+import { Map } from "../map/Map";
+import { labels } from "../../config/i18n/labels";
+import { IBlockHeader, ICommonBird, IField } from "./CommonBirdModels";
 
-import { Bird } from "../../../components/bird/Bird";
-import { Map } from "../../../components/map/Map";
-
+import "./CommonBird.scss";
 import {
-  Autosuggest,
-  IAutosuggest,
-  IChangeValue
-} from "../../../components/autosuggest/Autosuggest";
+  IInitialDataDescriptor,
+  InitialData
+} from "../../app/features/create-page/models";
 
-import { DropZone } from "../../../components/drag-n-drop/DragAndDrop";
+const blockName = "common-bird";
 
-import { birdData } from "../bird-info/test-data";
-
-import { InfoContainer } from "../../../components/info-container/InfoContainer";
-import { labels } from "../../../config/i18n/labels";
-
-import {
-  birdSpecies,
-  birdSex,
-  birdAge,
-  birdState,
-  country,
-  region,
-  timeError
-} from "./test.data";
-
-import "./AddObservation.scss";
-
-const blockName = "add-observation";
-
-interface BlockHeader {
-  title: string;
-  subtitle: string;
-}
-
-interface Field extends IAutosuggest {
-  label: string;
-}
-
-interface IBirdInfo {
-  [s: string]: string;
-}
-
-const BlockHeader = function({ title, subtitle }: BlockHeader) {
+const BlockHeader = function({ title, subtitle }: IBlockHeader) {
   return (
     <div className={`${blockName}__block-header-container`}>
       <p className={`${blockName}__block-header-title`}>{title}</p>
-      <p className={`${blockName}__block-header-subtitle`}>{subtitle}</p>
+      {subtitle && (
+        <p className={`${blockName}__block-header-subtitle`}>{subtitle}</p>
+      )}
     </div>
   );
 };
 
-const Field = function({ label, ...props }: Field) {
+const Field = function({ label, ...props }: IField) {
   return (
     <div className={`${blockName}__field-container`}>
       <p className={`${blockName}__field-label`}>{label}</p>
@@ -75,24 +49,52 @@ const Field = function({ label, ...props }: Field) {
   );
 };
 
-export const AddObservation: FC<{
-  birdInfo: any;
-}> = () => {
-  const [observation, seObservationInfo] = useState<IBirdInfo>({});
+export const CommonBird: FC<ICommonBird> = ({
+  circumstancesConfig,
+  onChangeBirdValues,
+  birdParams,
+  onChangeFormValue,
+  formValues,
+  viewMode,
+  observationsLabels,
+  circumstancesLabels,
+  initialValues
+}) => {
   const [isOpened, setIsOpen] = useState(false);
   const [calendarFocused, setCalendarFocused] = useState(false);
-  const [date, setDate] = useState(null);
+  // const [date, setDate] = useState(null);
 
   const toggleModal = useCallback(() => setIsOpen(!isOpened), [isOpened]);
 
-  const onChangeValue = useCallback(
-    ({ value, type }: IChangeValue) =>
-      seObservationInfo({ ...observation, [type]: value }),
-    [observation]
+  const onChangeCoordinates = useCallback(
+    e => onChangeFormValue({ value: e.target.value, type: "coordinates" }),
+    [onChangeFormValue]
+  );
+
+  const onChangeComment = useCallback(
+    e => onChangeFormValue({ value: e.target.value, type: "comment" }),
+    [onChangeFormValue]
+  );
+
+  const onChangeDate = useCallback(
+    date => onChangeFormValue({ value: date, type: "date" }),
+    [onChangeFormValue]
+  );
+
+  const getCollection = useCallback(
+    (key: InitialData) =>
+      initialValues
+        ? initialValues[key].map((item: IInitialDataDescriptor) => ({
+            label: item.desc_rus || item.desc_eng || item[key],
+            value: item.value || item.id,
+            id: item.id
+          }))
+        : [],
+    [initialValues]
   );
 
   return (
-    <div className={blockName}>
+    <Fragment>
       <Modal isOpen={isOpened} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>
           {labels.addObservation.selectOnMap}
@@ -112,110 +114,120 @@ export const AddObservation: FC<{
           </Button>
         </ModalFooter>
       </Modal>
-      <h1 className={`${blockName}__title`}>{labels.addObservation.title}</h1>
-      <p className={`${blockName}__subtitle`}>
-        {labels.addObservation.subTitle}
-      </p>
-      <Bird birdParams={birdData.params} />
+      <Bird
+        birdParams={birdParams}
+        onChangeBirdValues={onChangeBirdValues}
+        viewMode={viewMode}
+        collection={getCollection(InitialData.primaryIdentificationMethod)}
+      />
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
           className={`${blockName}__info-block`}
-          renderHeader={
-            <BlockHeader
-              title={labels.addObservation.observationsTitle}
-              subtitle={labels.addObservation.observationsSubtitle}
-            />
-          }
+          renderHeader={<BlockHeader {...observationsLabels} />}
         >
           <Field
             label={labels.addObservation.observationsFields.birdSpecies}
             placeholder={
               labels.addObservation.observationsFields.birdSpeciesPlaceholder
             }
-            collection={birdSpecies}
-            onChangeValue={onChangeValue}
+            collection={getCollection(InitialData.species)}
+            onChangeValue={onChangeFormValue}
             type="species"
-            value={observation.species}
+            value={formValues.species}
+            disabled={viewMode}
           />
           <Field
             label={labels.addObservation.observationsFields.sex}
             placeholder={
               labels.addObservation.observationsFields.sexPlaceholder
             }
-            collection={birdSex}
-            onChangeValue={onChangeValue}
-            type="sex"
-            value={observation.sex}
+            collection={getCollection(InitialData.sex)}
+            onChangeValue={onChangeFormValue}
+            type="sexMentioned"
+            value={formValues.sexMentioned}
+            disabled={viewMode}
           />
           <Field
             label={labels.addObservation.observationsFields.age}
             placeholder={
               labels.addObservation.observationsFields.agePlaceholder
             }
-            collection={birdAge}
-            onChangeValue={onChangeValue}
-            type="age"
-            value={observation.age}
+            collection={getCollection(InitialData.age)}
+            onChangeValue={onChangeFormValue}
+            type="ageMentioned"
+            value={formValues.ageMentioned}
+            disabled={viewMode}
           />
           <Field
             label={labels.addObservation.observationsFields.birdState}
             placeholder={
               labels.addObservation.observationsFields.birdStatePlaceholder
             }
-            collection={birdState}
-            onChangeValue={onChangeValue}
-            type="state"
-            value={observation.state}
+            collection={getCollection(InitialData.status)}
+            onChangeValue={onChangeFormValue}
+            type="status"
+            value={formValues.status}
+            disabled={viewMode}
           />
           <p className={`${blockName}__field-label`}>
             {labels.addObservation.observationsFields.photos}
           </p>
-          <DropZone />
+          <DropZone className={`${blockName}__field-container`} />
+          <Label for="comment" className={`${blockName}__field-label`}>
+            {labels.addObservation.observationsFields.comment}
+          </Label>
+          <Input
+            className={sn(`${blockName}__input`, `${blockName}__input--area`)}
+            id="comment"
+            type="textarea"
+            rows={3}
+            placeholder={
+              labels.addObservation.observationsFields.commentPlaceholder
+            }
+            onChange={onChangeComment}
+            value={formValues.comment}
+            disabled={viewMode}
+          />
         </InfoContainer>
         <InfoContainer
           className={`${blockName}__info-block`}
-          renderHeader={
-            <BlockHeader
-              title={labels.addObservation.circumstancesTitle}
-              subtitle={labels.addObservation.circumstancesSubtitle}
-            />
-          }
+          renderHeader={<BlockHeader {...circumstancesLabels} />}
         >
           <Field
             label={labels.addObservation.circumstancesFields.country}
             placeholder={
               labels.addObservation.circumstancesFields.countryPlaceholder
             }
-            collection={country}
-            onChangeValue={onChangeValue}
+            collection={circumstancesConfig.country}
+            onChangeValue={onChangeFormValue}
             type="country"
-            value={observation.country}
+            value={formValues.country}
+            disabled={viewMode}
           />
           <Field
             label={labels.addObservation.circumstancesFields.region}
             placeholder={
               labels.addObservation.circumstancesFields.regionPlaceholder
             }
-            collection={region}
-            onChangeValue={onChangeValue}
+            collection={circumstancesConfig.region}
+            onChangeValue={onChangeFormValue}
             type="region"
-            value={observation.region}
+            value={formValues.region}
+            disabled={viewMode}
           />
           <Label for="coordinates" className={`${blockName}__field-label`}>
             {labels.addObservation.circumstancesFields.coordinates}
           </Label>
           <Input
+            className={`${blockName}__input`}
             id="coordinates"
             placeholder={
               labels.addObservation.circumstancesFields.coordinatesPlaceholder
             }
+            onChange={onChangeCoordinates}
+            value={formValues.coordinates}
+            disabled={viewMode}
           />
-          {/* <Field
-            label={labels.addObservation.circumstancesFields.coordinates}
-            placeholder={
-              labels.addObservation.circumstancesFields.coordinatesPlaceholder
-            }
-          /> */}
           <Button
             outline
             color="primary"
@@ -230,8 +242,8 @@ export const AddObservation: FC<{
               {labels.addObservation.circumstancesFields.timeAndDate}
             </p>
             <SingleDatePicker
-              date={date}
-              onDateChange={setDate}
+              date={moment(formValues.date)}
+              onDateChange={onChangeDate}
               focused={calendarFocused}
               onFocusChange={({ focused }) => setCalendarFocused(focused)}
               placeholder={
@@ -245,27 +257,19 @@ export const AddObservation: FC<{
               isOutsideRange={() => false}
             />
           </div>
-
           <Field
             label={labels.addObservation.circumstancesFields.timeDelta}
             placeholder={
               labels.addObservation.circumstancesFields.timeDeltaPlaceholder
             }
-            collection={timeError}
-            onChangeValue={onChangeValue}
-            type="timeError"
-            value={observation.timeError}
+            collection={getCollection(InitialData.accuracyOfDate)}
+            onChangeValue={onChangeFormValue}
+            type="accuracyOfDate"
+            value={formValues.accuracyOfDate}
+            disabled={viewMode}
           />
         </InfoContainer>
       </div>
-      <div className={`${blockName}__buttons`}>
-        <Button className={`${blockName}__back-btn`}>
-          {labels.addObservation.back}
-        </Button>
-        <Button className={`${blockName}__send-btn`}>
-          {labels.addObservation.sendObservation}
-        </Button>
-      </div>
-    </div>
+    </Fragment>
   );
 };

@@ -1,10 +1,7 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .autosuggest {
   &__menu {
-    max-height: 200px;
-    height: auto;
-    overflow-y: auto;
     padding-top: 12px;
 
     .checkbox-label {
@@ -27,22 +24,10 @@
   &__item {
     font-size: 12px;
     color: $mineShaft;
-  }
-}
 
-.dropdown {
-  &__dropdown {
-    .show & {
-      position: relative;
-      z-index: $zindex-dropdown + 1; // to show outline
+    &:hover {
+      background-color: $dark-blue;
+      color: $white;
     }
-  }
-
-  &__menu-container {
-    border-radius: 0;
-    border: none;
-    min-width: 100%;
-    width: auto;
-    margin-top: 0;
   }
 }

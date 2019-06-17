@@ -3,32 +3,33 @@ import { SELECTOR_COLUMN_WIDTH } from "../../components/table/customisations/Tab
 import { ColumnWidth } from "../../components/table/DataGridModels";
 import { GridColumn } from "./GridColumn";
 
-export const defaultColumnWidths: { [key in GridColumn]: number } = {
+const DEFAULT_COL_WIDTH = 200;
+
+const COL_WIDTH_OVERRIDES: { [key in GridColumn]?: number } = {
   id: 100,
   verified: 180,
-  sex: 100,
-  ring: 220,
-  species: 200,
+  sexMentioned: 150,
+  sexConcluded: 150,
+  ringMentioned: 220,
   status: 170,
   condition: 300,
   remarks: 300,
   placeName: 300,
-  direction: 300,
-  distance: 300,
-  finder: 300,
-  elapsedTime: 300,
-  date: 300
+  direction: 150,
+  distance: 200,
+  elapsedTime: 180,
+  finder: 300
 };
 
 export const getColumnWidths = (cols: GridColumn[]): ColumnWidth[] =>
   cols.map(c => ({
     columnName: c,
-    width: defaultColumnWidths[c]
+    width: COL_WIDTH_OVERRIDES[c] || DEFAULT_COL_WIDTH
   }));
 
 export const defaultFixedColumns = [
   GridColumn.id,
-  GridColumn.species,
+  GridColumn.speciesConcluded,
   GridColumn.verified
 ];
 

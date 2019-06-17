@@ -9,6 +9,7 @@ import { StateType } from "typesafe-actions";
 import { RootAction } from "typesafe-actions/dist/create-reducer";
 import { history } from "../app/features/routing/history";
 import { rootEpic } from "./effects";
+import { prevRouterLocationMiddleware } from "./prevRouterLocationMiddleware";
 import { rootReducer } from "./reducers";
 
 const epicMiddleware = createEpicMiddleware<
@@ -20,7 +21,12 @@ const epicMiddleware = createEpicMiddleware<
 export const store = createStore(
   rootReducer,
   composeWithDevTools(
-    applyMiddleware(thunk, epicMiddleware, routerMiddleware(history))
+    applyMiddleware(
+      prevRouterLocationMiddleware,
+      thunk,
+      epicMiddleware,
+      routerMiddleware(history)
+    )
   )
 );
 

@@ -9,6 +9,12 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 900;
+  // override th zindex. idk why is it so big, no time to investigate
+  // TODO create a file with z-indexes
+  z-index: 100000000000;
   background-color: transparentize($body-bg, 0.5);
+
+  &--full-page {
+    position: fixed;
+  }
 }

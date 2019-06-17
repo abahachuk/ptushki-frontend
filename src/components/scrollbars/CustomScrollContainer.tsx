@@ -14,7 +14,6 @@ const ScrollTrack: ScrollbarsProps["renderTrackHorizontal"] = props => {
 
 export const CustomScrollContainer: FC<ScrollbarsProps> = props => (
   <Scrollbars
-    autoHeight
     autoHeightMax={Number.MAX_SAFE_INTEGER}
     {...props}
     renderThumbHorizontal={ScrollTrack}

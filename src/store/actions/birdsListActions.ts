@@ -9,6 +9,8 @@ export const birdsData = createAsyncAction(
   "BIRDS_FAILURE"
 )<void, BirdData[], string>();
 
+export const birdsFlush = createStandardAction("BIRDS_FLUSH")<void>();
+
 export const birdsFiltersRequest = createStandardAction(
   "BIRDS_FILTERS_REQUEST"
 )();

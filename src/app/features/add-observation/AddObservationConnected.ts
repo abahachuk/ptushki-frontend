@@ -1,1 +1,0 @@
-export { AddObservation } from "./AddObservationForm";

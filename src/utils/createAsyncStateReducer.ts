@@ -14,7 +14,7 @@ export const createAsyncStateReducer = <
 >(
   initState: TState,
   asyncAction: {
-    request: PayloadAC<string, void>;
+    request: PayloadAC<string, any>;
     success: PayloadAC<string, TData>;
     failure: PayloadAC<string, string>;
   }

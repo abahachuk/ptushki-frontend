@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, FC } from "react";
 import sn from "classnames";
 import { useDropzone } from "react-dropzone";
 
@@ -6,7 +6,11 @@ import "./DragAndDrop.scss";
 
 const blockName = "drag-and-drop";
 
-export const DropZone = () => {
+interface IDropZone {
+  className?: string;
+}
+
+export const DropZone: FC<IDropZone> = ({ className }) => {
   const [images, setImages] = useState([]);
 
   const onDrop = useCallback(
@@ -23,7 +27,10 @@ export const DropZone = () => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div {...getRootProps()} className={`${blockName}__container`}>
+    <div
+      {...getRootProps()}
+      className={sn(`${blockName}__container`, className)}
+    >
       <input {...getInputProps()} />
       {images.map((img: string, idx: number) => (
         // eslint-disable-next-line

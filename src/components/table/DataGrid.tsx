@@ -51,7 +51,7 @@ export interface DataGridCol<TRow extends {}> extends Column {
   };
 }
 
-interface DataGridProps<TRow extends {}> extends GridProps {
+export interface DataGridProps<TRow extends {}> extends GridProps {
   rows: Array<TRow>;
   columns: DataGridCol<TRow>[];
   getRowId?: (row: TRow) => number | string;
@@ -60,13 +60,11 @@ interface DataGridProps<TRow extends {}> extends GridProps {
   namespace: string;
   gridStateSelector: (s: unknown) => DataGridState;
 
+  autoHeight?: boolean;
   isLoading?: boolean;
 }
 
 const DEFAULT_PAGE_SIZES = [10, 15, 30, 50];
-const TABLE_LABELS = {
-  noData: labels.noData
-};
 
 export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
   const {
@@ -75,14 +73,19 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
     isLoading,
     getRowId = DefaultGetRowId,
     onRowClick,
+    rows,
+    autoHeight,
     ...gridProps
   } = props;
 
   return (
     <SubspaceProviderHacked namespace={namespace} mapState={gridStateSelector}>
-      <div className="position-relative">
+      <div className="data-grid-wrapper">
         <Grid
           {...gridProps}
+          rootComponent={({ children }) => (
+            <div className="data-grid-root">{children}</div>
+          )}
           columns={gridProps.columns.map(col => ({
             ...col,
             getCellValue: (...args) => (
@@ -94,6 +97,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
             )
           }))}
           getRowId={getRowId}
+          rows={rows}
         >
           <SortingStateConnected />
           <PagingStateConnected />
@@ -105,11 +109,13 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           <CustomPagingConnected />
           <IntegratedSelection />
           <Table
-            messages={TABLE_LABELS}
-            tableComponent={TableComponentConnected}
+            tableComponent={p => (
+              <TableComponentConnected autoHeight={autoHeight} {...p} />
+            )}
             rowComponent={p => (
               <TableRowConnected {...p} onRowClick={onRowClick} />
             )}
+            noDataRowComponent={() => null}
           />
 
           <TableColumnResizingConnected />
@@ -135,7 +141,12 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           />
         </Grid>
         {isLoading && <FillLoader />}
+        {!isLoading && !rows.length && (
+          <div className="data-grid-no-data">{labels.noData}</div>
+        )}
       </div>
     </SubspaceProviderHacked>
   );
 };
+
+export default DataGrid;

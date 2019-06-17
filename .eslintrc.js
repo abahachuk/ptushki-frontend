@@ -19,6 +19,7 @@ module.exports = {
   rules: {
     // no-unused-vars throws false positives for TS types, so using typescript/no-unused-vars
     "no-unused-vars": "off",
+    "lines-between-class-members": "off",
     "typescript/no-unused-vars": "error",
 
     "import/no-unresolved": "disable",
@@ -42,6 +43,8 @@ module.exports = {
     ],
     "func-style": ["error", "expression"],
     "func-names": ["off"],
-    "no-shadow": "off"
+    "no-shadow": "off",
+    // having desc_rus field coming from backend makes this rule a headache
+    camelcase: "off"
   }
 };
