@@ -22,14 +22,15 @@ export const TableComponent: FC<
       />
     )}
   >
-    <Table.Table
-      {...props}
-      className={classNames(
-        (props as any).className,
-        "table-striped table-borderless"
-      )}
-      style={{ height: "100%" }}
-    />
+    <div style={{ height: "100%" }}>
+      <Table.Table
+        {...props}
+        className={classNames(
+          (props as any).className,
+          "table-striped table-borderless"
+        )}
+      />
+    </div>
   </CustomScrollContainer>
 );
 

@@ -1,27 +1,8 @@
-@import '../../../styles/variables';
+@import "../../../styles/variables";
 
-.create-bird {
+.create-page {
   padding: 15px;
   background-color: $white;
-
-  &__header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  &__title {
-    color: $mineSharf;
-    font-size: 36px;
-    font-weight: 100;
-  }
-
-  &__subtitle {
-    color: $trout;
-    font-size: 14px;
-    line-height: 18px;
-    width: 450px;
-  }
 
   &__buttons {
     display: flex;
@@ -30,10 +11,17 @@
     padding-top: 36px;
   }
 
+  &__header {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-between;
+  }
+
   &__back-btn,
-  &__save-btn {
+  &__send-btn {
     height: 36px;
-    font-size: 16px;
+    font-size: 15px;
     padding: 0 20px;
     border: none;
   }
@@ -43,16 +31,16 @@
     color: $dark-blue;
     border: 1px solid $dark-blue;
 
-    &:hover {
-      background-color: rgba($blueBayox, 1);
+    &:hover, &:active {
+      background-color: rgba($blueBayox, 1) !important;
     }
   }
 
-  &__save-btn {
+  &__send-btn {
     background-color: rgba($orange, 0.9);
 
-    &:hover {
-      background-color: rgba($orange, 1);
+    &:hover, &:active {
+      background-color: rgba($orange, 1) !important;
     }
   }
 

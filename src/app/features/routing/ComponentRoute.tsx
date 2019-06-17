@@ -10,26 +10,26 @@ export const ComponentRoute: FC<{
   PageComponent: any;
   AddComponent: any;
   DetailComponent: any;
-}> = ({ route, PageComponent, AddComponent, DetailComponent }) => {
-  return (
-    <ProtectedRoute {...route}>
-      <Switch>
-        <Route path={route.path} exact>
-          <PageComponent />
-        </Route>
-        <ProtectedRoute
-          path={`${route.path}/add`}
-          scope={route.scope}
-          action={UserAction.add}
-          fallback={route.path}
-          exact
-        >
-          <AddComponent />
-        </ProtectedRoute>
-        <Route path={`${route.path}/:id`}>
-          <DetailComponent scope={route.scope} />
-        </Route>
-      </Switch>
-    </ProtectedRoute>
-  );
-};
+}> = ({ route, PageComponent, AddComponent, DetailComponent }) => (
+  <ProtectedRoute {...route}>
+    <Switch>
+      <Route
+        path={route.path}
+        exact
+        component={(p: any) => <PageComponent {...p} />}
+      />
+      <ProtectedRoute
+        path={`${route.path}/add`}
+        scope={route.scope}
+        action={UserAction.add}
+        fallback={route.path}
+        exact
+        component={(p: any) => <AddComponent {...p} />}
+      />
+      <Route
+        path={`${route.path}/:id`}
+        component={(p: any) => <DetailComponent scope={route.scope} {...p} />}
+      />
+    </Switch>
+  </ProtectedRoute>
+);

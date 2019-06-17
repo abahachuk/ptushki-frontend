@@ -9,6 +9,11 @@ export const RESTORE_PASSWORD_ENDPOINT = `${startURL}/${authRoute}/resetpassword
 export const REFRESH_ENDPOINT = `${startURL}/${authRoute}/refresh`;
 
 /**
+ * Initial data
+ */
+export const INITIAL_DATA_ENDPOINT = "/initial-data";
+
+/**
  * Observations
  */
 const observationRoute = "observations";
