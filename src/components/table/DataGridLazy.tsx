@@ -1,8 +1,8 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, memo, Suspense } from "react";
 import { FillLoader } from "../loader/FillLoader";
 import DataGrid from "./DataGrid";
 
-const LazyDataGrid = lazy(() => import("./DataGrid"));
+const LazyDataGrid = memo(lazy(() => import("./DataGrid")));
 
 export const DataGridLazy: typeof DataGrid = props => (
   <Suspense fallback={<FillLoader />}>

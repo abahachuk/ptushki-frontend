@@ -1,7 +1,7 @@
 import { Table } from "@devexpress/dx-react-grid-bootstrap4";
 import classNames from "classnames";
 import { noop } from "ramda-adjunct";
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { connect } from "react-redux";
 import { DataGridState } from "../DataGridModels";
 
@@ -17,7 +17,7 @@ export const TableRow: FC<
   return (
     <Table.Row
       {...props}
-      onClick={() => onRowClick(row)}
+      onClick={useCallback(() => onRowClick(row), [onRowClick, row])}
       className={classNames(className, "clickable", {
         "table-active": selection && selection.includes(id)
       })}

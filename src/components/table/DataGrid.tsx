@@ -9,12 +9,9 @@ import {
   TableHeaderRow,
   Toolbar
 } from "@devexpress/dx-react-grid-bootstrap4";
-import React from "react";
+import React, { FC, useCallback } from "react";
 import { labels } from "../../config/i18n/labels";
-import {
-  BreakOutOfSubspace,
-  SubspaceProviderHacked
-} from "../../utils/subspace/SubspaceProviderHacked";
+import { SubspaceProviderHacked } from "../../utils/subspace/SubspaceProviderHacked";
 import { FillLoader } from "../loader/FillLoader";
 import {
   CustomPagingConnected,
@@ -28,6 +25,7 @@ import {
   TableColumnVisibilityConnected,
   TableFixedColumnsConnected
 } from "./behaviors/DataGridBehaviors";
+import { GridColumn, RootComponent } from "./customisations/GridRoot";
 import { PagingPanelContentConnected } from "./customisations/PagingPanelContent";
 import { SortingLabel } from "./customisations/SortingLabel";
 import { TableComponentConnected } from "./customisations/TableComponent";
@@ -66,6 +64,8 @@ export interface DataGridProps<TRow extends {}> extends GridProps {
 
 const DEFAULT_PAGE_SIZES = [10, 15, 30, 50];
 
+const NoDataRowComponent: FC<{}> = () => null;
+
 export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
   const {
     namespace,
@@ -78,24 +78,23 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
     ...gridProps
   } = props;
 
+  const TableComponent = useCallback(
+    (p: any) => <TableComponentConnected autoHeight={autoHeight} {...p} />,
+    [autoHeight]
+  );
+
+  const RowComponent = useCallback(
+    p => <TableRowConnected {...p} onRowClick={onRowClick} />,
+    [onRowClick]
+  );
+
   return (
     <SubspaceProviderHacked namespace={namespace} mapState={gridStateSelector}>
       <div className="data-grid-wrapper">
         <Grid
           {...gridProps}
-          rootComponent={({ children }) => (
-            <div className="data-grid-root">{children}</div>
-          )}
-          columns={gridProps.columns.map(col => ({
-            ...col,
-            getCellValue: (...args) => (
-              <BreakOutOfSubspace>
-                <div className="table-cell-value">
-                  {col.getCellValue(...args)}
-                </div>
-              </BreakOutOfSubspace>
-            )
-          }))}
+          rootComponent={RootComponent}
+          columns={gridProps.columns.map(GridColumn)}
           getRowId={getRowId}
           rows={rows}
         >
@@ -109,13 +108,9 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           <CustomPagingConnected />
           <IntegratedSelection />
           <Table
-            tableComponent={p => (
-              <TableComponentConnected autoHeight={autoHeight} {...p} />
-            )}
-            rowComponent={p => (
-              <TableRowConnected {...p} onRowClick={onRowClick} />
-            )}
-            noDataRowComponent={() => null}
+            tableComponent={TableComponent}
+            rowComponent={RowComponent}
+            noDataRowComponent={NoDataRowComponent}
           />
 
           <TableColumnResizingConnected />
