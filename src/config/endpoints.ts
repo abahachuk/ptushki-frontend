@@ -23,6 +23,6 @@ export const OBSERVATIONS_FILTERS_ENDPOINT = `${startURL}/${observationRoute}/ag
 /**
  * Birds
  */
-const birdRoute = "observations"; // TODO replace when birds api is available
+const birdRoute = "rings-by";
 export const BIRDS_ENDPOINT = `${startURL}/${birdRoute}`;
 export const BIRDS_FILTERS_ENDPOINT = `${startURL}/${birdRoute}/aggregations`;

@@ -89,7 +89,7 @@ export const timeError = [
   { label: "2 часа", value: "2 часа", id: 6 }
 ];
 
-const birdValues = [
+export const birdValues = [
   { label: "Синее кольцо", value: "Синее кольцо", id: 1 },
   { label: "Желтое кольцо", value: "Желтое кольцо", id: 2 },
   { label: "Металлическое кольцо", value: "Металлическое кольцо", id: 3 },

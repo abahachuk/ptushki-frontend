@@ -14,7 +14,8 @@ export interface PhotoItem {
 }
 
 export interface FormValues {
-  species: string;
+  species?: string;
+  speciesMentioned?: string;
   sexMentioned: string;
   ageMentioned: string;
   status: string;
@@ -32,16 +33,9 @@ interface FormLabels {
 
 export interface ICommonBird extends IBird {
   initialValues?: IInitialData;
-  circumstancesConfig: {
-    country: Array<CollectionItem>;
-    region: Array<CollectionItem>;
-    coordinates: string;
-    timeDate: string;
-    timeError: Array<CollectionItem>;
-  };
-  onChangeBirdValues: (birdParams: any) => void;
-  onChangeFormValue: ({ value, type }: IChangeValue) => void;
-  formValues: FormValues;
+  onChangeBirdValues?: (birdParams: any) => void;
+  onChangeFormValue?: ({ value, type }: IChangeValue) => void;
+  formValues?: FormValues;
   observationsLabels: FormLabels;
   circumstancesLabels: FormLabels;
 }

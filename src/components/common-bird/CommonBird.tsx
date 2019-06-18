@@ -46,7 +46,6 @@ const Field = function({ label, ...props }: IField) {
 };
 
 export const CommonBird: FC<ICommonBird> = ({
-  circumstancesConfig,
   onChangeBirdValues,
   birdParams,
   onChangeFormValue,
@@ -54,7 +53,8 @@ export const CommonBird: FC<ICommonBird> = ({
   viewMode,
   observationsLabels,
   circumstancesLabels,
-  initialValues
+  initialValues,
+  collection
 }) => {
   const [isOpened, setIsOpen] = useState(false);
 
@@ -107,7 +107,7 @@ export const CommonBird: FC<ICommonBird> = ({
         birdParams={birdParams}
         onChangeBirdValues={onChangeBirdValues}
         viewMode={viewMode}
-        collection={getCollection(InitialData.primaryIdentificationMethod)}
+        collection={collection}
       />
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
@@ -121,8 +121,8 @@ export const CommonBird: FC<ICommonBird> = ({
             }
             collection={getCollection(InitialData.species)}
             onChangeValue={onChangeFormValue}
-            type="species"
-            value={formValues.species}
+            type="speciesMentioned"
+            value={formValues.speciesMentioned}
             disabled={viewMode}
           />
           <Field
@@ -183,22 +183,11 @@ export const CommonBird: FC<ICommonBird> = ({
           renderHeader={<BlockHeader {...circumstancesLabels} />}
         >
           <Field
-            label={labels.addObservation.circumstancesFields.country}
-            placeholder={
-              labels.addObservation.circumstancesFields.countryPlaceholder
-            }
-            collection={circumstancesConfig.country}
-            onChangeValue={onChangeFormValue}
-            type="country"
-            value={formValues.country}
-            disabled={viewMode}
-          />
-          <Field
             label={labels.addObservation.circumstancesFields.region}
             placeholder={
               labels.addObservation.circumstancesFields.regionPlaceholder
             }
-            collection={circumstancesConfig.region}
+            collection={getCollection(InitialData.placeCode)}
             onChangeValue={onChangeFormValue}
             type="region"
             value={formValues.region}

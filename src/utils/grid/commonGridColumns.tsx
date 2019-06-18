@@ -106,7 +106,12 @@ export const COMMON_GRID_COLUMNS: {
     name: GridColumn.primaryIdentificationMethod,
     title: labels.generalIdentificationMethod,
     getCellValue: r => (
-      <EuringAndDescriptionCell {...r.ring.primaryIdentificationMethod} />
+      // TODO: update
+      <EuringAndDescriptionCell
+        {...(r.ring
+          ? r.ring.primaryIdentificationMethod
+          : r.primaryIdentificationMethod)}
+      />
     )
   },
   ringMentioned: {
