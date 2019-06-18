@@ -34,6 +34,7 @@ import { TableRowConnected } from "./customisations/TableRow";
 import { TableSelectionComponent } from "./customisations/TableSelectionComponent";
 import {
   ColumnChooserButton,
+  ColumnChooserContainer,
   ColumnChooserItem
 } from "./customisations/toolbar/ColumnChooser";
 import { ToolbarConnected } from "./customisations/toolbar/ToolbarComponent";
@@ -131,6 +132,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           <TableColumnVisibilityConnected />
           <Toolbar rootComponent={ToolbarConnected} />
           <ColumnChooser
+            containerComponent={ColumnChooserContainer}
             itemComponent={ColumnChooserItem}
             toggleButtonComponent={ColumnChooserButton}
           />
