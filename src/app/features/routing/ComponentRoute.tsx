@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import "../../../components/table/DataGrid.scss";
 import { Route, Switch } from "react-router";
-import { RouteDescription } from "./routes";
+import "../../../components/table/DataGrid.scss";
 import { UserAction } from "../../../config/permissions";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { RouteDescription } from "./routes";
 
 export const ComponentRoute: FC<{
   route: RouteDescription;
@@ -33,15 +33,15 @@ export const ComponentRoute: FC<{
         >
           <AddComponent />
         </ProtectedRoute>
-        <Route path={`${route.path}/:id`}>
-          <DetailComponent scope={route.scope} />
-        </Route>
         {/* TODO: remove if condition once import option added to the Birds page */}
         {ImportComponent && (
           <Route path={`${route.path}/import`}>
             <ImportComponent />
           </Route>
         )}
+        <Route path={`${route.path}/:id`}>
+          <DetailComponent scope={route.scope} />
+        </Route>
       </Switch>
     </ProtectedRoute>
   );
