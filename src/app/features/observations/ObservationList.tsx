@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { connect, DispatchProp } from "react-redux";
 import useMount from "react-use/esm/useMount";
 import { DataGridLazy } from "../../../components/table/DataGridLazy";
@@ -37,9 +37,12 @@ export const ObservationList: FC<ObservationListProps> = ({
       rows={observations.error ? [] : observations.value}
       columns={OBSERVATION_LIST_COLUMNS_CONFIG}
       isLoading={observations.isLoading}
-      onRowClick={r => {
-        dispatch(push(`${ROUTE_OBSERVATIONS.path}/${r.id}`));
-      }}
+      onRowClick={useCallback(
+        r => {
+          dispatch(push(`${ROUTE_OBSERVATIONS.path}/${r.id}`));
+        },
+        [dispatch]
+      )}
     />
   );
 };

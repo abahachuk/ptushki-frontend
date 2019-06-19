@@ -3,6 +3,15 @@ import React, { FC } from "react";
 import { labels } from "../../../../config/i18n/labels";
 import { BaseCheckbox } from "../../../checkbox/BaseCheckbox";
 import { GridSettingsDropdownButton } from "../../../gridSettingsDropdownButton/GridSettingsDropdownButton";
+import { CustomScrollContainer } from "../../../scrollbars/CustomScrollContainer";
+
+export const ColumnChooserContainer: FC<
+  ColumnChooserBase.ContainerProps
+> = p => (
+  <CustomScrollContainer autoHeight autoHeightMax={400}>
+    {p.children}
+  </CustomScrollContainer>
+);
 
 export const ColumnChooserButton: FC<ColumnChooserBase.ToggleButtonProps> = ({
   onToggle,
