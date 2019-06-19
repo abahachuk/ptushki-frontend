@@ -1,16 +1,23 @@
 import React, { FC } from "react";
-import "../../../components/table/DataGrid.scss";
 import { Route, Switch } from "react-router";
-import { RouteDescription } from "./routes";
+import "../../../components/table/DataGrid.scss";
 import { UserAction } from "../../../config/permissions";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { RouteDescription } from "./routes";
 
 export const ComponentRoute: FC<{
   route: RouteDescription;
   PageComponent: any;
   AddComponent: any;
   DetailComponent: any;
-}> = ({ route, PageComponent, AddComponent, DetailComponent }) => (
+  ImportComponent?: any;
+}> = ({
+  route,
+  PageComponent,
+  AddComponent,
+  DetailComponent,
+  ImportComponent
+}) => (
   <ProtectedRoute {...route}>
     <Switch>
       <Route
@@ -26,6 +33,18 @@ export const ComponentRoute: FC<{
         exact
         component={(p: any) => <AddComponent {...p} />}
       />
+
+      {/* TODO: remove if condition once import option added to the Birds page */}
+      {ImportComponent && (
+        <ProtectedRoute
+          path={`${route.path}/import`}
+          scope={route.scope}
+          action={UserAction.import}
+          fallback={route.path}
+          exact
+          component={(p: any) => <ImportComponent {...p} />}
+        />
+      )}
       <Route
         path={`${route.path}/:id`}
         component={(p: any) => <DetailComponent scope={route.scope} {...p} />}

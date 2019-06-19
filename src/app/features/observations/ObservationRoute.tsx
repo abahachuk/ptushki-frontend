@@ -12,6 +12,7 @@ import {
 } from "../../../store/actions/observationActions";
 import { InfoPageConnected } from "../info-page/InfoPageConnected";
 import { RootState } from "../../../store";
+import { ImportObservations } from "../import-observations/ImportObservations";
 
 const commonProps = {
   sendFn: addObservation.request,
@@ -37,6 +38,7 @@ export const ObservationsRoute: FC<RouteProps> = () => {
       PageComponent={ObservationsPage}
       AddComponent={AddObservation}
       DetailComponent={InfoPage}
+      ImportComponent={ImportObservations}
     />
   );
 };
