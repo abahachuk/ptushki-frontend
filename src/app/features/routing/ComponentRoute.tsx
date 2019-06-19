@@ -36,9 +36,14 @@ export const ComponentRoute: FC<{
 
       {/* TODO: remove if condition once import option added to the Birds page */}
       {ImportComponent && (
-        <Route path={`${route.path}/import`}>
-          <ImportComponent />
-        </Route>
+        <ProtectedRoute
+          path={`${route.path}/import`}
+          scope={route.scope}
+          action={UserAction.import}
+          fallback={route.path}
+          exact
+          component={(p: any) => <ImportComponent {...p} />}
+        />
       )}
       <Route
         path={`${route.path}/:id`}
