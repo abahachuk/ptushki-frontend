@@ -1,22 +1,17 @@
 import { routerMiddleware } from "connected-react-router";
-import { createStore } from "redux";
+import { createStore, AnyAction } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { applyMiddleware } from "redux-subspace";
 import { createEpicMiddleware } from "redux-subspace-observable";
 import thunk from "redux-thunk";
 
 import { StateType } from "typesafe-actions";
-import { RootAction } from "typesafe-actions/dist/create-reducer";
 import { history } from "../app/features/routing/history";
 import { rootEpic } from "./effects";
 import { prevRouterLocationMiddleware } from "./prevRouterLocationMiddleware";
 import { rootReducer } from "./reducers";
 
-const epicMiddleware = createEpicMiddleware<
-  RootAction,
-  RootAction,
-  RootState
->();
+const epicMiddleware = createEpicMiddleware<AnyAction, AnyAction, RootState>();
 
 export const store = createStore(
   rootReducer,

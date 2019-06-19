@@ -1,4 +1,11 @@
-import React, { FC, Fragment, ReactNode, useCallback, useState } from "react";
+import React, {
+  FC,
+  Fragment,
+  ReactNode,
+  useCallback,
+  useState,
+  useEffect
+} from "react";
 import { Button, DropdownItem, Input } from "reactstrap";
 import { labels } from "../../config/i18n/labels";
 import { CheckboxField } from "../checkbox/CheckboxField";
@@ -56,12 +63,14 @@ export const Autosuggest: FC<IAutosuggest> = ({
     collection.filter(item => item.checked).map(item => item.id)
   );
 
+  useEffect(() => setCollection(collection), [collection]);
+
   const onSelect = useCallback(
     (items: Item[], checked: boolean = true) => {
       onChangeValue({
         value: multiselect
           ? items.map(item => item.value).toString()
-          : items[0].value,
+          : items[0].label,
         type,
         checked
       });

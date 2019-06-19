@@ -125,6 +125,7 @@ export const InfoPage: FC<DispatchProp & InfoPageProps> = ({
         formValues={form}
         observationsLabels={observationsLabels}
         circumstancesLabels={circumstancesLabels}
+        onChangeBirdValues={setBird}
         viewMode
       />
       {historyComponent && (

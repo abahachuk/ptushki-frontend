@@ -8,7 +8,7 @@ import { VerificationCell } from "./cellRenderers/VerificationCell";
 import { GridColumn } from "./GridColumn";
 
 export const COMMON_GRID_COLUMNS: {
-  [key in GridColumn]: DataGridCol<ObservationData>
+  [key in GridColumn]: DataGridCol<ObservationData>;
 } = {
   id: {
     name: GridColumn.id,
