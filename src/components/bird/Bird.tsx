@@ -177,7 +177,7 @@ const InfoBlock = ({
   onDelete,
   single,
   maxLabels = DEFAULT_NUMBER_OF_LABELS,
-  collection
+  collection = []
 }: InfoBlock) => {
   return !values.length ? (
     <PlusButton onClick={() => onAdd(type)} className={btnClassName} />

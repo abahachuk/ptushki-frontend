@@ -5,7 +5,8 @@ import { observationListEpic } from "./observationListEpics";
 import { birdObnservationsListEpic } from "./birdObservationsListEpics";
 import { verifyObservationEpic } from "./verificationEpics";
 import { requestInitialDataEpic } from "./initialDataEpics";
-import { requestAddObservationEpic } from "./addObservationEpics";
+import { observationEpic } from "./observationEpics";
+import { birdEpic } from "./birdEpics";
 
 export const rootEpic = combineEpics(
   observationListEpic,
@@ -14,5 +15,6 @@ export const rootEpic = combineEpics(
   verifyObservationEpic,
   navigationEpic,
   requestInitialDataEpic,
-  requestAddObservationEpic
+  observationEpic,
+  birdEpic
 );

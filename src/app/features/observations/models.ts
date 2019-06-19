@@ -52,6 +52,8 @@ export interface ObservationData {
   pullusAge: DescriptedField;
   accuracyOfPullusAge: DescriptedField;
 
+  // TODO: update
+  primaryIdentificationMethod?: DescriptedField;
   ring: {
     primaryIdentificationMethod: DescriptedField;
   };

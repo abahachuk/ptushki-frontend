@@ -45,7 +45,6 @@ export const createAsyncStateReducer = <
       asyncAction.failure,
       (state, action) => ({
         ...state,
-        value: null,
         isLoading: false,
         error: action.payload
       }),

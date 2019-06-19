@@ -3,17 +3,32 @@ import { RouteProps } from "react-router";
 import { ROUTE_BIRDS } from "../routing/routes";
 import { ComponentRoute } from "../routing/ComponentRoute";
 import { BirdsPage } from "./BirdsPage";
-import { BirdInfoForm } from "../bird-info/BirdInfoForm";
 import { CreatePageConnected } from "../create-page/CreatePageConnected";
 import { Scope } from "../../../config/permissions";
-import { circumstancesConfig } from "../add-observation/test.data";
-import { addObservation } from "../../../store/actions/addObservationsActions";
+import { InfoPageConnected } from "../info-page/InfoPageConnected";
+import { BirdObservationsListConnected } from "../bird-info/BirdObservationsList";
+import { addObservation } from "../../../store/actions/observationActions";
+import { RootState } from "../../../store";
+import { addBird, updateBird } from "../../../store/actions/birdActions";
+
+const commonProps = {
+  sendFn: addBird.request,
+  updateFn: updateBird,
+  scope: Scope.birds,
+  stateSelector: (state: RootState) => state.bird
+};
 
 const AddBird = () => (
-  <CreatePageConnected
-    scope={Scope.birds}
-    circumstancesConfig={circumstancesConfig}
-    requestFn={addObservation.request}
+  // @ts-ignore
+  <CreatePageConnected {...commonProps} />
+);
+
+const InfoPage = () => (
+  // @ts-ignore
+  <InfoPageConnected
+    {...commonProps}
+    removeFn={addObservation.request}
+    historyComponent={<BirdObservationsListConnected />}
   />
 );
 
@@ -23,7 +38,7 @@ export const BirdsRoute: FC<RouteProps> = () => {
       route={ROUTE_BIRDS}
       PageComponent={BirdsPage}
       AddComponent={AddBird}
-      DetailComponent={BirdInfoForm}
+      DetailComponent={InfoPage}
     />
   );
 };

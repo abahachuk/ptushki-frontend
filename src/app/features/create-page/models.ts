@@ -5,19 +5,21 @@ import { FormValues } from "../../../components/common-bird/CommonBirdModels";
 import { AsyncResource } from "../../../utils/createAsyncStateReducer";
 
 export interface ICreateScopeLabel {
-  send: string;
-  title: string;
-  circumstancesTitle: string;
-  circumstancesSubtitle: string;
-  observationsTitle: string;
-  observationsSubtitle: string;
+  send?: string;
+  title?: string;
+  subTitle?: string;
+  circumstancesTitle?: string;
+  circumstancesSubtitle?: string;
+  observationsTitle?: string;
+  observationsSubtitle?: string;
 }
 
 export interface CreatePageProps {
-  scope: Scope;
-  requestFn: (form: FormValues) => AnyAction;
-  circumstancesConfig: any;
+  sendFn: (form: FormValues) => AnyAction;
+  updateFn: (form: FormValues) => AnyAction;
   initials: AsyncResource<IInitialData>;
+  scope: Scope;
+  entity: AsyncResource<FormValues>;
   header?: ReactNode;
 }
 
@@ -27,7 +29,8 @@ export enum InitialData {
   status = "status",
   accuracyOfDate = "accuracyOfDate",
   species = "species",
-  primaryIdentificationMethod = "primaryIdentificationMethod"
+  primaryIdentificationMethod = "primaryIdentificationMethod",
+  placeCode = "placeCode"
 }
 
 type InitialDataDescriptorMap = { [key in InitialData]?: string };

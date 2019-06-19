@@ -29,7 +29,6 @@ export const BIRDS_LIST_COLUMNS_CONFIG: DataGridCol<BirdData>[] = [
   COMMON_GRID_COLUMNS[GridColumn.direction],
   COMMON_GRID_COLUMNS[GridColumn.distance],
   COMMON_GRID_COLUMNS[GridColumn.elapsedTime],
-  COMMON_GRID_COLUMNS[GridColumn.finder],
   COMMON_GRID_COLUMNS[GridColumn.remarks]
 ];
 
