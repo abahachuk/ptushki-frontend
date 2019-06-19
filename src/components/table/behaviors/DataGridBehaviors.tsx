@@ -14,6 +14,7 @@ import {
   TableColumnReordering,
   TableColumnReorderingProps,
   TableColumnResizing,
+  TableColumnResizingProps,
   TableColumnVisibility,
   TableColumnVisibilityProps,
   TableFixedColumns,
@@ -75,11 +76,13 @@ export const CustomPagingConnected = connect(
 )(CustomPaging);
 
 export const TableColumnResizingConnected = connect<any, any, any>(
-  (state: DataGridState) => ({
+  (state: DataGridState): TableColumnResizingProps => ({
     defaultColumnWidths: state.columnWidths
   }),
   {
-    onColumnWidthsChange: (columnWidths: ColumnWidth[]) =>
+    onColumnWidthsChange: (
+      columnWidths: ColumnWidth[]
+    ): TableColumnResizingProps =>
       onColumnWidthsChangeThunk(columnWidths) as any
   }
 )(TableColumnResizing);

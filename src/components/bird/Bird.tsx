@@ -24,7 +24,7 @@ type ChangeFunction = ({
 
 interface CollectionItem {
   value: string;
-  id: number;
+  id: number | string;
   label: string;
 }
 
@@ -77,16 +77,7 @@ export interface BirdParams {
 export interface IBird {
   viewMode?: boolean;
   birdParams?: BirdParams;
-  birdConfig?: {
-    neck: Array<CollectionItem>;
-    saddle: Array<CollectionItem>;
-    leftWing: Array<CollectionItem>;
-    rightWing: Array<CollectionItem>;
-    leftBobbin: Array<CollectionItem>;
-    rightBobbin: Array<CollectionItem>;
-    leftLeg: Array<CollectionItem>;
-    rightLeg: Array<CollectionItem>;
-  };
+  collection?: Array<CollectionItem>;
   onChangeBirdValues?: (birdParams: any) => void;
 }
 
@@ -186,7 +177,7 @@ const InfoBlock = ({
   onDelete,
   single,
   maxLabels = DEFAULT_NUMBER_OF_LABELS,
-  collection
+  collection = []
 }: InfoBlock) => {
   return !values.length ? (
     <PlusButton onClick={() => onAdd(type)} className={btnClassName} />
@@ -214,8 +205,8 @@ const InfoBlock = ({
 export const Bird: FC<IBird> = ({
   viewMode,
   birdParams,
-  birdConfig,
-  onChangeBirdValues
+  onChangeBirdValues,
+  collection
 }) => {
   const onSelect = useCallback(
     ({ value, type, index }) => {
@@ -265,7 +256,7 @@ export const Bird: FC<IBird> = ({
         onChange={onChange}
         onAdd={addLabel}
         onDelete={deleteLabel}
-        collection={birdConfig.neck}
+        collection={collection}
         single
       />
       <span className={`${blockName}__dashed-line-saddle`} />
@@ -279,7 +270,7 @@ export const Bird: FC<IBird> = ({
         onChange={onChange}
         onAdd={addLabel}
         onDelete={deleteLabel}
-        collection={birdConfig.saddle}
+        collection={collection}
         single
       />
       <span className={`${blockName}__dashed-line-right-wing`} />
@@ -293,7 +284,7 @@ export const Bird: FC<IBird> = ({
         onChange={onChange}
         onAdd={addLabel}
         onDelete={deleteLabel}
-        collection={birdConfig.rightWing}
+        collection={collection}
         single
       />
       <span className={`${blockName}__dashed-line-left-wing`} />
@@ -307,7 +298,7 @@ export const Bird: FC<IBird> = ({
         onChange={onChange}
         onAdd={addLabel}
         onDelete={deleteLabel}
-        collection={birdConfig.leftWing}
+        collection={collection}
         single
       />
       <span className={`${blockName}__dashed-line-right-knee`} />
@@ -321,7 +312,7 @@ export const Bird: FC<IBird> = ({
         onChange={onChange}
         onDelete={deleteLabel}
         onAdd={addLabel}
-        collection={birdConfig.rightBobbin}
+        collection={collection}
         maxLabels={5}
       />
       <span className={`${blockName}__dashed-line-left-knee`} />
@@ -335,7 +326,7 @@ export const Bird: FC<IBird> = ({
         onChange={onChange}
         onDelete={deleteLabel}
         onAdd={addLabel}
-        collection={birdConfig.leftBobbin}
+        collection={collection}
         maxLabels={5}
       />
       <span className={`${blockName}__dashed-line-right-below-knee`} />
@@ -349,7 +340,7 @@ export const Bird: FC<IBird> = ({
         onChange={onChange}
         onDelete={deleteLabel}
         onAdd={addLabel}
-        collection={birdConfig.rightLeg}
+        collection={collection}
         maxLabels={4}
       />
       <span className={`${blockName}__dashed-line-left-below-knee`} />
@@ -363,7 +354,7 @@ export const Bird: FC<IBird> = ({
         onChange={onChange}
         onDelete={deleteLabel}
         onAdd={addLabel}
-        collection={birdConfig.leftLeg}
+        collection={collection}
         maxLabels={4}
       />
       <img className={`${blockName}__bird-img`} src={birdImg} alt="bird" />

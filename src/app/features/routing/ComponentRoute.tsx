@@ -17,32 +17,33 @@ export const ComponentRoute: FC<{
   AddComponent,
   DetailComponent,
   ImportComponent
-}) => {
-  return (
-    <ProtectedRoute {...route}>
-      <Switch>
-        <Route path={route.path} exact>
-          <PageComponent />
+}) => (
+  <ProtectedRoute {...route}>
+    <Switch>
+      <Route
+        path={route.path}
+        exact
+        component={(p: any) => <PageComponent {...p} />}
+      />
+      <ProtectedRoute
+        path={`${route.path}/add`}
+        scope={route.scope}
+        action={UserAction.add}
+        fallback={route.path}
+        exact
+        component={(p: any) => <AddComponent {...p} />}
+      />
+
+      {/* TODO: remove if condition once import option added to the Birds page */}
+      {ImportComponent && (
+        <Route path={`${route.path}/import`}>
+          <ImportComponent />
         </Route>
-        <ProtectedRoute
-          path={`${route.path}/add`}
-          scope={route.scope}
-          action={UserAction.add}
-          fallback={route.path}
-          exact
-        >
-          <AddComponent />
-        </ProtectedRoute>
-        {/* TODO: remove if condition once import option added to the Birds page */}
-        {ImportComponent && (
-          <Route path={`${route.path}/import`}>
-            <ImportComponent />
-          </Route>
-        )}
-        <Route path={`${route.path}/:id`}>
-          <DetailComponent scope={route.scope} />
-        </Route>
-      </Switch>
-    </ProtectedRoute>
-  );
-};
+      )}
+      <Route
+        path={`${route.path}/:id`}
+        component={(p: any) => <DetailComponent scope={route.scope} {...p} />}
+      />
+    </Switch>
+  </ProtectedRoute>
+);

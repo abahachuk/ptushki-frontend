@@ -1,12 +1,12 @@
-import React, { FC, useState, useCallback, Fragment } from "react";
+import React, { FC, Fragment, useCallback, useState } from "react";
 import {
   Button,
+  Input,
+  Label,
   Modal,
-  ModalHeader,
   ModalBody,
   ModalFooter,
-  Input,
-  Label
+  ModalHeader
 } from "reactstrap";
 import sn from "classnames";
 import { Autosuggest } from "../autosuggest/Autosuggest";
@@ -15,9 +15,13 @@ import { InfoContainer } from "../info-container/InfoContainer";
 import { DropZone } from "../drag-n-drop/DragAndDrop";
 import { Map } from "../map/Map";
 import { labels } from "../../config/i18n/labels";
-import { IBlockHeader, IField, ICommonBird } from "./CommonBirdModels";
+import { IBlockHeader, ICommonBird, IField } from "./CommonBirdModels";
 
 import "./CommonBird.scss";
+import {
+  IInitialDataDescriptor,
+  InitialData
+} from "../../app/features/create-page/models";
 
 const blockName = "common-bird";
 
@@ -42,16 +46,15 @@ const Field = function({ label, ...props }: IField) {
 };
 
 export const CommonBird: FC<ICommonBird> = ({
-  observationConfig,
-  circumstancesConfig,
-  birdConfig,
   onChangeBirdValues,
   birdParams,
   onChangeFormValue,
   formValues,
   viewMode,
   observationsLabels,
-  circumstancesLabels
+  circumstancesLabels,
+  initialValues,
+  collection
 }) => {
   const [isOpened, setIsOpen] = useState(false);
 
@@ -65,6 +68,18 @@ export const CommonBird: FC<ICommonBird> = ({
   const onChangeComment = useCallback(
     e => onChangeFormValue({ value: e.target.value, type: "comment" }),
     [onChangeFormValue]
+  );
+
+  const getCollection = useCallback(
+    (key: InitialData) =>
+      initialValues
+        ? initialValues[key].map((item: IInitialDataDescriptor) => ({
+            label: item.desc_rus || item.desc_eng || item[key],
+            value: item.value || item.id,
+            id: item.id
+          }))
+        : [],
+    [initialValues]
   );
 
   return (
@@ -90,9 +105,9 @@ export const CommonBird: FC<ICommonBird> = ({
       </Modal>
       <Bird
         birdParams={birdParams}
-        birdConfig={birdConfig}
         onChangeBirdValues={onChangeBirdValues}
         viewMode={viewMode}
+        collection={collection}
       />
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
@@ -104,10 +119,10 @@ export const CommonBird: FC<ICommonBird> = ({
             placeholder={
               labels.addObservation.observationsFields.birdSpeciesPlaceholder
             }
-            collection={observationConfig.birdSpecies}
+            collection={getCollection(InitialData.species)}
             onChangeValue={onChangeFormValue}
-            type="species"
-            value={formValues.species}
+            type="speciesMentioned"
+            value={formValues.speciesMentioned}
             disabled={viewMode}
           />
           <Field
@@ -115,10 +130,10 @@ export const CommonBird: FC<ICommonBird> = ({
             placeholder={
               labels.addObservation.observationsFields.sexPlaceholder
             }
-            collection={observationConfig.sex}
+            collection={getCollection(InitialData.sex)}
             onChangeValue={onChangeFormValue}
-            type="sex"
-            value={formValues.sex}
+            type="sexMentioned"
+            value={formValues.sexMentioned}
             disabled={viewMode}
           />
           <Field
@@ -126,10 +141,10 @@ export const CommonBird: FC<ICommonBird> = ({
             placeholder={
               labels.addObservation.observationsFields.agePlaceholder
             }
-            collection={observationConfig.age}
+            collection={getCollection(InitialData.age)}
             onChangeValue={onChangeFormValue}
-            type="age"
-            value={formValues.age}
+            type="ageMentioned"
+            value={formValues.ageMentioned}
             disabled={viewMode}
           />
           <Field
@@ -137,10 +152,10 @@ export const CommonBird: FC<ICommonBird> = ({
             placeholder={
               labels.addObservation.observationsFields.birdStatePlaceholder
             }
-            collection={observationConfig.birdState}
+            collection={getCollection(InitialData.status)}
             onChangeValue={onChangeFormValue}
-            type="state"
-            value={formValues.state}
+            type="status"
+            value={formValues.status}
             disabled={viewMode}
           />
           <p className={`${blockName}__field-label`}>
@@ -168,22 +183,11 @@ export const CommonBird: FC<ICommonBird> = ({
           renderHeader={<BlockHeader {...circumstancesLabels} />}
         >
           <Field
-            label={labels.addObservation.circumstancesFields.country}
-            placeholder={
-              labels.addObservation.circumstancesFields.countryPlaceholder
-            }
-            collection={circumstancesConfig.country}
-            onChangeValue={onChangeFormValue}
-            type="country"
-            value={formValues.country}
-            disabled={viewMode}
-          />
-          <Field
             label={labels.addObservation.circumstancesFields.region}
             placeholder={
               labels.addObservation.circumstancesFields.regionPlaceholder
             }
-            collection={circumstancesConfig.region}
+            collection={getCollection(InitialData.placeCode)}
             onChangeValue={onChangeFormValue}
             type="region"
             value={formValues.region}
@@ -216,10 +220,10 @@ export const CommonBird: FC<ICommonBird> = ({
             placeholder={
               labels.addObservation.circumstancesFields.timeDeltaPlaceholder
             }
-            collection={circumstancesConfig.timeError}
+            collection={getCollection(InitialData.accuracyOfDate)}
             onChangeValue={onChangeFormValue}
-            type="timeError"
-            value={formValues.timeError}
+            type="accuracyOfDate"
+            value={formValues.accuracyOfDate}
             disabled={viewMode}
           />
         </InfoContainer>

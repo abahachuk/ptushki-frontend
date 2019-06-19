@@ -9,6 +9,11 @@ export const RESTORE_PASSWORD_ENDPOINT = `${startURL}/${authRoute}/resetpassword
 export const REFRESH_ENDPOINT = `${startURL}/${authRoute}/refresh`;
 
 /**
+ * Initial data
+ */
+export const INITIAL_DATA_ENDPOINT = "/initial-data";
+
+/**
  * Observations
  */
 const observationRoute = "observations";
@@ -20,6 +25,6 @@ export const OBSERVATIONS_DOWNLOAD_EXCEL_TEMPLATE = `${startURL}/${observationRo
 /**
  * Birds
  */
-const birdRoute = "observations"; // TODO replace when birds api is available
+const birdRoute = "rings-by";
 export const BIRDS_ENDPOINT = `${startURL}/${birdRoute}`;
 export const BIRDS_FILTERS_ENDPOINT = `${startURL}/${birdRoute}/aggregations`;

@@ -1,6 +1,11 @@
 @import '../../styles/variables';
 
 .bird {
+  &__bird-img {
+    height: 267px;
+    width: 399px;
+  }
+
   &__info-title {
     color: $trout;
     margin-bottom: 5px;

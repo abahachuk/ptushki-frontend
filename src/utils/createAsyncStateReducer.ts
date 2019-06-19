@@ -14,7 +14,7 @@ export const createAsyncStateReducer = <
 >(
   initState: TState,
   asyncAction: {
-    request: PayloadAC<string, void>;
+    request: PayloadAC<string, any>;
     success: PayloadAC<string, TData>;
     failure: PayloadAC<string, string>;
   }
@@ -45,7 +45,6 @@ export const createAsyncStateReducer = <
       asyncAction.failure,
       (state, action) => ({
         ...state,
-        value: null,
         isLoading: false,
         error: action.payload
       }),

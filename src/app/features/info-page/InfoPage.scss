@@ -1,26 +1,25 @@
 @import '../../../styles/variables';
+@import '../../../styles/mixins';
 
-.create-bird {
+.info-page {
   padding: 15px;
   background-color: $white;
 
   &__header {
     display: flex;
+    align-items: center;
     flex-direction: row;
-    justify-content: space-between;
   }
 
-  &__title {
-    color: $mineSharf;
-    font-size: 36px;
-    font-weight: 100;
+  &__page-header {
+    padding-right: 30px;
   }
 
-  &__subtitle {
-    color: $trout;
-    font-size: 14px;
-    line-height: 18px;
-    width: 450px;
+  &__header-buttons {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
   }
 
   &__buttons {
@@ -30,8 +29,24 @@
     padding-top: 36px;
   }
 
+  &__btn {
+    height: 30px;
+    background-color: $dark-blue;
+    color: $white;
+    padding: 0 20px 0;
+    font-family: "Open Sans";
+    font-size: 13px;
+    margin-left: auto;
+
+    &:hover, &:active {
+      @include button-shadow;
+
+      background-color: $dark-blue !important;
+    }
+  }
+
   &__back-btn,
-  &__save-btn {
+  &__edit-btn {
     height: 36px;
     font-size: 16px;
     padding: 0 20px;
@@ -48,8 +63,9 @@
     }
   }
 
-  &__save-btn {
+  &__edit-btn {
     background-color: rgba($orange, 0.9);
+    margin-left: auto;
 
     &:hover {
       background-color: rgba($orange, 1);
