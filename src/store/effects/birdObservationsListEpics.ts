@@ -1,9 +1,10 @@
 import qs from "qs";
 import { combineEpics, Epic } from "redux-observable";
-import { EMPTY, from, of } from "rxjs";
+import { EMPTY, from, merge, of } from "rxjs";
 import {
   catchError,
   filter,
+  flatMap,
   map,
   switchMap,
   withLatestFrom
@@ -37,6 +38,7 @@ import {
 import { selectLocale } from "../actions/userPreferencesActions";
 import { setObservationVerificationStatus } from "../actions/verificationActions";
 import { RootState } from "../index";
+import { observationsData } from "../actions/observationListActions";
 
 const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
   action$.pipe(
@@ -53,7 +55,13 @@ const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
           `${OBSERVATIONS_ENDPOINT}?${query}`
         )
       ).pipe(
-        map(d => birdObservationsData.success(d.content)),
+        flatMap(d =>
+          merge(
+            // @ts-ignore
+            of(birdObservationsData.success(d.content)),
+            of(observationGridActions.setTotalCount(d.totalElements))
+          )
+        ),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
           return of(birdObservationsData.failure(e));

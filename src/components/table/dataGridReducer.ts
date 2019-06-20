@@ -9,7 +9,8 @@ import {
   setPageSize,
   setSearch,
   setSelection,
-  setSorting
+  setSorting,
+  setTotalCount
 } from "./dataGridActions";
 import { DataGridState } from "./DataGridModels";
 
@@ -85,6 +86,18 @@ export const createDataGridReducer = (
           pagination: {
             ...state.pagination,
             pageSize: action.payload
+          }
+        }),
+        initialState
+      ),
+
+      handleAction(
+        setTotalCount,
+        (state, action) => ({
+          ...state,
+          pagination: {
+            ...state.pagination,
+            totalCount: action.payload
           }
         }),
         initialState

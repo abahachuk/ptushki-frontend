@@ -10,6 +10,7 @@ export const TableComponent: FC<
 > = ({ fixedPartWidth, autoHeight, ...props }) => (
   <CustomScrollContainer
     autoHeight={autoHeight}
+    autoHeightMin={200}
     renderTrackHorizontal={({ style, ...trackProps }) => (
       <div
         {...trackProps}
