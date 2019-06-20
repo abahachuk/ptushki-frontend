@@ -21,6 +21,8 @@ export const OBSERVATIONS_ENDPOINT = `${startURL}/${observationRoute}`;
 export const OBSERVATIONS_FILTERS_ENDPOINT = `${startURL}/${observationRoute}/aggregations`;
 const exportRoute = "export";
 export const OBSERVATIONS_DOWNLOAD_EXCEL_TEMPLATE = `${startURL}/${observationRoute}/${exportRoute}/template`;
+const importRoute = "import";
+export const OBSERVATIONS_IMPORT = `${startURL}/${observationRoute}/${importRoute}/xls`;
 export const OBSERVATIONS_SET_VERIFICATION = `${startURL}/${observationRoute}/set-verification`;
 
 /**

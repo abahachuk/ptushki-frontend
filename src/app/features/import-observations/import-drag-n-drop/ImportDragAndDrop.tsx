@@ -1,39 +1,47 @@
-import React, { useState, useEffect, useCallback, FC, MouseEvent } from "react";
-import sn from "classnames";
 import { Close } from "@material-ui/icons";
-import { Button } from "reactstrap";
+import sn from "classnames";
+import React, { FC, MouseEvent, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { labels } from "../../../../config/i18n/labels";
+import { Button } from "reactstrap";
 import { DropAreaStates, DropZoneProps } from "../models";
 import "./ImportDragAndDrop.scss";
 
 const blockName = "import-drag-and-drop";
 
-export const DropZone: FC<DropZoneProps> = ({
+export const ImportDragAndDrop: FC<DropZoneProps> = ({
   dragAreaState,
   onFileLoaded,
   revertDragAreaToIntact,
   Icon,
   title,
   subtitle,
+  inputProps,
   FileActionButton
 }) => {
   const onDrop = useCallback(
     acceptedFiles => {
+      if (!acceptedFiles.length) {
+        return;
+      }
+
       const file = acceptedFiles[acceptedFiles.length - 1];
       const reader = new FileReader();
       reader.onload = () =>
         onFileLoaded({
           fileContent: reader.result,
           fileName: file.name,
-          fileSize: `${Math.round(file.size / 1000)} kb`
+          fileSize: `${Math.round(file.size / 1000)} kb`,
+          file
         });
       reader.readAsDataURL(file);
     },
     [onFileLoaded]
   );
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop
+    // ...dropZoneProps
+  });
 
   const onCloseClick = (e: MouseEvent) => {
     e.stopPropagation();
@@ -46,6 +54,7 @@ export const DropZone: FC<DropZoneProps> = ({
         {...(dragAreaState !== DropAreaStates.Success
           ? getInputProps()
           : { hidden: true })}
+        {...inputProps}
       />
       <div
         className={sn(
