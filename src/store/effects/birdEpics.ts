@@ -2,21 +2,22 @@ import { combineEpics, Epic } from "redux-observable";
 import {
   catchError,
   filter,
+  flatMap,
   map,
   switchMap,
   withLatestFrom
 } from "rxjs/operators";
 import { isActionOf } from "typesafe-actions";
-import { from, of } from "rxjs";
+import { from, merge, of } from "rxjs";
+import { push } from "connected-react-router";
 import { RootState } from "../index";
 import { ajaxService } from "../../services";
-import { BIRDS_ENDPOINT, OBSERVATIONS_ENDPOINT } from "../../config/endpoints";
+import { BIRDS_ENDPOINT } from "../../config/endpoints";
 import { SecurityError } from "../../services/SecurutyService";
 import { signOut } from "../actions/authActions";
-import { FormValues } from "../../components/common-bird/CommonBirdModels";
 import { addBird, deleteBird, getBird, putBird } from "../actions/birdActions";
 import { getFormValues, transformToFormValues } from "./observationEpics";
-import { deleteObservation } from "../actions/observationActions";
+import { ROUTE_BIRDS } from "../../app/features/routing/routes";
 
 export const addBirdEpic: Epic<any, any, RootState> = (action$, state$) =>
   action$.pipe(
@@ -29,7 +30,13 @@ export const addBirdEpic: Epic<any, any, RootState> = (action$, state$) =>
           getFormValues(action.payload)
         )
       ).pipe(
-        map(d => addBird.success(transformToFormValues(d))),
+        flatMap(d =>
+          merge(
+            // @ts-ignore
+            of(push(`${ROUTE_BIRDS.path}/${d.id}`)),
+            of(addBird.success(transformToFormValues(d)))
+          )
+        ),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
           return of(addBird.failure(e));
@@ -49,7 +56,7 @@ export const getBirdEpic: Epic<any, any, RootState> = (action$, state$) =>
         map(d => getBird.success(transformToFormValues(d))),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
-          return of(getBird.failure(e));
+          return of(push(ROUTE_BIRDS.path));
         })
       );
     })
@@ -63,11 +70,11 @@ export const deleteBirdEpic: Epic<any, any, RootState> = (action$, state$) =>
       return from(
         ajaxService.makeCall<FormData>(
           `${BIRDS_ENDPOINT}/${action.payload}`,
-          null,
+          undefined,
           "delete"
         )
       ).pipe(
-        map(d => deleteBird.success()),
+        map(() => push(ROUTE_BIRDS.path)),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
           return of(deleteBird.failure(e));
@@ -89,7 +96,13 @@ export const putBirdEpic: Epic<any, any, RootState> = (action$, state$) =>
           "put"
         )
       ).pipe(
-        map(d => putBird.success(transformToFormValues(d))),
+        flatMap(d =>
+          merge(
+            // @ts-ignore
+            of(push(`${ROUTE_BIRDS.path}/${d.id}`)),
+            of(putBird.success(transformToFormValues(d)))
+          )
+        ),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
           return of(putBird.failure(e));

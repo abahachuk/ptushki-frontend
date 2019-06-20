@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { Scope } from "../../../config/permissions";
 import { FormValues } from "../../../components/common-bird/CommonBirdModels";
 import { AsyncResource } from "../../../utils/createAsyncStateReducer";
+import { BirdParams } from "../../../components/bird/Bird";
 
 export interface ICreateScopeLabel {
   send?: string;
@@ -21,6 +22,7 @@ export interface CreatePageProps {
   scope: Scope;
   entity: AsyncResource<FormValues>;
   header?: ReactNode;
+  bird?: BirdParams;
 }
 
 export enum InitialData {

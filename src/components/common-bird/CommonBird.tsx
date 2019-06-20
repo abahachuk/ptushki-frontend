@@ -204,8 +204,8 @@ export const CommonBird: FC<ICommonBird> = ({
             }
             collection={getCollection(InitialData.placeCode)}
             onChangeValue={onChangeFormValue}
-            type="region"
-            value={formValues.region && formValues.region.label}
+            type="placeCode"
+            value={formValues.placeCode && formValues.placeCode.label}
             disabled={viewMode}
           />
           <Label for="coordinates" className={`${blockName}__field-label`}>

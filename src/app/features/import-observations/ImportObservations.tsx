@@ -107,7 +107,7 @@ export const ImportObservations: FC = () => {
       : dropZoneContent[dragAreaState]();
 
   return (
-    <div className={blockName}>
+    <div className={blockName} style={{ flexGrow: 1 }}>
       <div className={`${blockName}__buttons`}>
         <Button
           className={`${blockName}__back-btn-arrow`}

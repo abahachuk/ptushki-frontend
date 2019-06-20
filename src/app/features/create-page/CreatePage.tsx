@@ -46,22 +46,25 @@ export const CreatePage: FC<DispatchProp & CreatePageProps> = ({
   updateFn,
   initials,
   header,
-  entity
+  entity,
+  bird
 }) => {
   useMount(() => {
     dispatch(initialData.request());
   });
 
-  const [bird, setBird] = useState({
-    saddle: [],
-    neck: [],
-    leftWing: [],
-    rightWing: [],
-    leftBobbin: [],
-    rightBobbin: [],
-    leftLeg: [],
-    rightLeg: []
-  });
+  const [birdState, setBird] = useState(
+    bird || {
+      saddle: [],
+      neck: [],
+      leftWing: [],
+      rightWing: [],
+      leftBobbin: [],
+      rightBobbin: [],
+      leftLeg: [],
+      rightLeg: []
+    }
+  );
 
   // @ts-ignore
   const scopeLabels: ICreateScopeLabel = labels.createPage[
@@ -110,7 +113,7 @@ export const CreatePage: FC<DispatchProp & CreatePageProps> = ({
       </div>
       <CommonBird
         onChangeBirdValues={setBird}
-        birdParams={bird}
+        birdParams={birdState}
         onChangeFormValue={onChangeValue}
         formValues={entity.value}
         observationsLabels={observationsLabels}

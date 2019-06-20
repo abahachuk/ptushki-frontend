@@ -17,7 +17,7 @@ export const deleteBird = createAsyncAction(
   "DELETE_BIRD_REQUEST",
   "DELETE_BIRD_SUCCESS",
   "DELETE_BIRD_FAILURE"
-)<string, void, string>();
+)<string, {}, string>();
 
 export const putBird = createAsyncAction(
   "PUT_BIRD_REQUEST",

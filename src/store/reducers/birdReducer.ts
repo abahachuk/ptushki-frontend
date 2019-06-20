@@ -7,6 +7,7 @@ import {
 import { FormValues } from "../../components/common-bird/CommonBirdModels";
 import {
   addBird,
+  deleteBird,
   flushBird,
   getBird,
   putBird,
@@ -27,6 +28,8 @@ export const birdReducer = reduceReducer(
   createAsyncStateReducer(initialState, getBird),
 
   createAsyncStateReducer(initialState, putBird),
+
+  createAsyncStateReducer(initialState, deleteBird),
 
   handleAction(
     updateBird,
