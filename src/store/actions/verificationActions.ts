@@ -8,7 +8,7 @@ export const setObservationVerificationStatus = createAsyncAction(
 )<
   {
     id: string;
-    verificationStatus: VerificationStatus;
+    status: VerificationStatus;
   },
   any,
   string

@@ -1,3 +1,4 @@
+import { Ability } from "@casl/ability";
 import { IconButton } from "@material-ui/core";
 import {
   AddCircle,
@@ -9,14 +10,21 @@ import {
 } from "@material-ui/icons";
 import React from "react";
 import { connect, DispatchProp } from "react-redux";
-import { Ability } from "@casl/ability";
 import {
   ObservationData,
   VerificationStatus
 } from "../../../app/features/observations/models";
-import { setObservationVerificationStatus } from "../../../store/actions/observationListActions";
-import { RootState } from "../../../store";
 import { Scope, UserAction } from "../../../config/permissions";
+import { RootState } from "../../../store";
+import { setObservationVerificationStatus } from "../../../store/actions/verificationActions";
+import "./VerificationCell.scss";
+
+// actions emitted through dispatch provided by connect are not passed to redux-observable.
+// probably a bug in redux-subspace observable.
+// TODO investigate. and replace those strange fragments
+// import("../../../store").then(({ store }) => {
+//   store.dispatch
+// });
 
 export const VerificationCell = connect((state: RootState) => ({
   ability: state.auth.permissions
@@ -26,16 +34,16 @@ export const VerificationCell = connect((state: RootState) => ({
     observation,
     ability
   }: DispatchProp & { observation: ObservationData; ability: Ability }) => {
-    const { id, verificationStatus } = observation;
-    const { Pending, Verified, Rejected } = VerificationStatus;
+    const { id, verified } = observation;
+    const { pending, approved, rejected } = VerificationStatus;
     const isDisabled = ability.cannot(UserAction.moderate, Scope.observations);
 
     return (
       <>
-        {verificationStatus === Pending ? (
+        {verified === pending ? (
           <IconButton
             disabled={isDisabled}
-            className="p-0 mr-2 text-primary"
+            className="p-0 mr-2 verification-pending"
             disableRipple
           >
             <RadioButtonChecked />
@@ -50,12 +58,14 @@ export const VerificationCell = connect((state: RootState) => ({
                 ? undefined
                 : e => {
                     e.stopPropagation();
-                    dispatch(
-                      setObservationVerificationStatus.request({
-                        id,
-                        verificationStatus: Pending
-                      })
-                    );
+                    import("../../../store").then(({ store }) => {
+                      store.dispatch(
+                        setObservationVerificationStatus.request({
+                          id,
+                          status: pending
+                        })
+                      );
+                    });
                   }
             }
           >
@@ -63,7 +73,7 @@ export const VerificationCell = connect((state: RootState) => ({
           </IconButton>
         )}
 
-        {verificationStatus === Rejected ? (
+        {verified === rejected ? (
           <IconButton
             disabled={isDisabled}
             className="p-0 mr-2 text-danger"
@@ -81,12 +91,14 @@ export const VerificationCell = connect((state: RootState) => ({
                 ? undefined
                 : e => {
                     e.stopPropagation();
-                    dispatch(
-                      setObservationVerificationStatus.request({
-                        id,
-                        verificationStatus: Rejected
-                      })
-                    );
+                    import("../../../store").then(({ store }) => {
+                      store.dispatch(
+                        setObservationVerificationStatus.request({
+                          id,
+                          status: rejected
+                        })
+                      );
+                    });
                   }
             }
           >
@@ -94,7 +106,7 @@ export const VerificationCell = connect((state: RootState) => ({
           </IconButton>
         )}
 
-        {verificationStatus === Verified ? (
+        {verified === approved ? (
           <IconButton className="p-0 mr-2 text-success" disableRipple>
             <CheckCircle />
           </IconButton>
@@ -108,12 +120,14 @@ export const VerificationCell = connect((state: RootState) => ({
                 ? undefined
                 : e => {
                     e.stopPropagation();
-                    dispatch(
-                      setObservationVerificationStatus.request({
-                        id,
-                        verificationStatus: Verified
-                      })
-                    );
+                    import("../../../store").then(({ store }) => {
+                      store.dispatch(
+                        setObservationVerificationStatus.request({
+                          id,
+                          status: approved
+                        })
+                      );
+                    });
                   }
             }
           >
