@@ -62,7 +62,6 @@ export const CommonBird: FC<ICommonBird> = ({
 }) => {
   const [isOpened, setIsOpen] = useState(false);
   const [calendarFocused, setCalendarFocused] = useState(false);
-  // const [date, setDate] = useState(null);
 
   const toggleModal = useCallback(() => setIsOpen(!isOpened), [isOpened]);
 
