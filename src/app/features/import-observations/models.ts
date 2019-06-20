@@ -1,3 +1,6 @@
+import { ComponentProps } from "react";
+import { DropzoneOptions } from "react-dropzone";
+
 export enum DropAreaStates {
   Intact = "intact",
   Success = "success",
@@ -12,6 +15,7 @@ export interface DropZoneProps {
   title: string;
   subtitle: string;
   FileActionButton: Function;
+  dropZoneProps?: DropzoneOptions;
 }
 
 export interface VaryingContent {

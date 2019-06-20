@@ -1,27 +1,15 @@
-import React, {
-  useState,
-  FC,
-  useCallback,
-  useEffect,
-  MouseEventHandler
-} from "react";
-import { Link } from "react-router-dom";
-import {
-  ArrowBack,
-  CloudUpload,
-  CloudDone,
-  CloudOff
-} from "@material-ui/icons";
+import { ArrowBack } from "@material-ui/icons";
 import sn from "classnames";
+import React, { FC, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
-import { DropZone } from "./import-drag-n-drop/ImportDragAndDrop";
 import { labels } from "../../../config/i18n/labels";
-import { DropAreaStates, VaryingContent, LoadedFile } from "./models";
-import { dropZoneContent } from "./dropAreaMappings";
 import { ROUTE_OBSERVATIONS } from "../routing/routes";
-import { OBSERVATIONS_DOWNLOAD_EXCEL_TEMPLATE } from "../../../config/endpoints";
-import { ajaxService } from "../../../services";
+import { dropZoneContent } from "./dropAreaMappings";
+import { ImportDragAndDrop } from "./import-drag-n-drop/ImportDragAndDrop";
 import "./ImportObservations.scss";
+import { DropAreaStates, LoadedFile } from "./models";
+import { downloadTemplate } from "./service";
 
 export const blockName = "import-observations";
 
@@ -46,7 +34,6 @@ const ImportButton = ({
 export const ImportObservations: FC = () => {
   const [file, setFile] = useState(null);
   const [dragAreaState, setDragAreaState] = useState(DropAreaStates.Intact);
-  const [shouldDownloadTemplate, setShouldDownloadTemplate] = useState(false);
 
   useEffect(() => {
     if (file) {
@@ -65,22 +52,6 @@ export const ImportObservations: FC = () => {
     }
   }, [file]);
 
-  useEffect(() => {
-    if (shouldDownloadTemplate) {
-      const donwloadTemplate = async () => {
-        setShouldDownloadTemplate(false);
-        try {
-          await ajaxService.makeCall(OBSERVATIONS_DOWNLOAD_EXCEL_TEMPLATE, {
-            method: "POST"
-          });
-        } catch (e) {
-          // TODO: probably it's should add some user notification about unability to download template
-        }
-      };
-      donwloadTemplate();
-    }
-  }, [shouldDownloadTemplate]);
-
   const onFileLoaded = (loadedFile: LoadedFile) => {
     setFile(loadedFile);
   };
@@ -88,10 +59,6 @@ export const ImportObservations: FC = () => {
   const revertDragAreaToIntact = () => {
     setDragAreaState(DropAreaStates.Intact);
     setFile(null);
-  };
-
-  const onDownloadTemplate = async () => {
-    setShouldDownloadTemplate(true);
   };
 
   const {
@@ -132,7 +99,7 @@ export const ImportObservations: FC = () => {
             <h2 className={`${blockName}__import-block-title`}>
               {labels.importObservations.uploadTable}
             </h2>
-            <DropZone
+            <ImportDragAndDrop
               onFileLoaded={onFileLoaded}
               dragAreaState={dragAreaState}
               revertDragAreaToIntact={revertDragAreaToIntact}
@@ -140,6 +107,10 @@ export const ImportObservations: FC = () => {
               title={title}
               subtitle={subtitle}
               FileActionButton={FileActionButton}
+              dropZoneProps={{
+                accept:
+                  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              }}
             />
             <div className="mt-2">
               <FileInfoBlock />
@@ -163,7 +134,7 @@ export const ImportObservations: FC = () => {
                 {labels.importObservations.tableTemplateDescription}
               </div>
               <Button
-                onClick={onDownloadTemplate}
+                onClick={downloadTemplate}
                 className={sn(`${blockName}__template-block-button`)}
               >
                 {labels.importObservations.tableTemplateButtonCaption}

@@ -25,14 +25,16 @@ export default class AjaxService {
     url: string,
     token: string | null,
     data?: any,
-    method?: string
-  ): Promise<any> {
+    method?: string,
+    headers?: HeadersInit
+  ): Promise<Response> {
     return fetch(url, {
       method: method || (data ? "POST" : "GET"),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: token
+        Authorization: token,
+        ...headers
       },
       body: JSON.stringify(data)
     });
@@ -76,20 +78,27 @@ export default class AjaxService {
   async makeCall<TResponse>(
     url: string,
     data?: Object,
-    method?: string
+    method?: string,
+    headers?: HeadersInit
   ): Promise<TResponse> {
     let token = securityService.getAccessToken();
-    let response = await this.makeFetch(url, token, data, method);
+    let response = await this.makeFetch(url, token, data, method, headers);
 
     if (response.status === 401) {
       token = await this.refreshToken();
-      response = await this.makeFetch(url, token, data);
+      response = await this.makeFetch(url, token, data, undefined, headers);
     } else if (!response.ok) {
       const message = await this.parseError(response);
       throw new Error(message);
     }
+    console.log(response.headers);
 
-    return response.json();
+    const contentType = response.headers.get("content-type");
+
+    // assume absent content type to be json
+    return !contentType || contentType.includes("application/json")
+      ? response.json()
+      : response;
   }
 
   async makeAuthCall(url: string, data: AuthData): Promise<UserInfo> {

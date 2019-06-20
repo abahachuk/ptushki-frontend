@@ -244,9 +244,7 @@ export const CommonBird: FC<ICommonBird> = ({
               {labels.addObservation.circumstancesFields.timeAndDate}
             </p>
             <SingleDatePicker
-              // TODO: integrate date picker
-              // date={formValues.date && formValues.date.label}
-              date={null}
+              date={formValues.date && formValues.date.value}
               onDateChange={onChangeDate}
               focused={calendarFocused}
               onFocusChange={({ focused }) => setCalendarFocused(focused)}
