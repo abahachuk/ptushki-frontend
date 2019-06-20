@@ -10,6 +10,6 @@ export const setObservationVerificationStatus = createAsyncAction(
     id: string;
     status: VerificationStatus;
   },
-  any,
+  void,
   string
 >();
