@@ -32,6 +32,7 @@ const initialForm = {
   country: "",
   region: "",
   coordinates: "",
+  date: "",
   accuracyOfDate: "",
   comment: ""
 };

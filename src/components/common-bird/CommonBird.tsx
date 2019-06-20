@@ -8,7 +8,10 @@ import {
   ModalFooter,
   ModalHeader
 } from "reactstrap";
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
 import sn from "classnames";
+import { SingleDatePicker } from "react-dates";
 import { Autosuggest } from "../autosuggest/Autosuggest";
 import { Bird } from "../bird/Bird";
 import { InfoContainer } from "../info-container/InfoContainer";
@@ -58,6 +61,7 @@ export const CommonBird: FC<ICommonBird> = ({
   photos
 }) => {
   const [isOpened, setIsOpen] = useState(false);
+  const [calendarFocused, setCalendarFocused] = useState(false);
 
   const toggleModal = useCallback(() => setIsOpen(!isOpened), [isOpened]);
 
@@ -68,6 +72,11 @@ export const CommonBird: FC<ICommonBird> = ({
 
   const onChangeComment = useCallback(
     e => onChangeFormValue({ value: e.target.value, type: "comment" }),
+    [onChangeFormValue]
+  );
+
+  const onChangeDate = useCallback(
+    date => onChangeFormValue({ value: date, type: "date" }),
     [onChangeFormValue]
   );
 
@@ -228,6 +237,26 @@ export const CommonBird: FC<ICommonBird> = ({
             {labels.addObservation.circumstancesFields.findOnMap}
           </Button>
           <div className={`${blockName}__separator`} />
+          <div className={`${blockName}__field-container`}>
+            <p className={`${blockName}__field-label`}>
+              {labels.addObservation.circumstancesFields.timeAndDate}
+            </p>
+            <SingleDatePicker
+              date={formValues.date}
+              onDateChange={onChangeDate}
+              focused={calendarFocused}
+              onFocusChange={({ focused }) => setCalendarFocused(focused)}
+              placeholder={
+                labels.addObservation.circumstancesFields.timeAndDatePlaceholder
+              }
+              id="date"
+              numberOfMonths={1}
+              block
+              showDefaultInputIcon
+              inputIconPosition="after"
+              isOutsideRange={() => false}
+            />
+          </div>
           <Field
             label={labels.addObservation.circumstancesFields.timeDelta}
             placeholder={

@@ -112,6 +112,8 @@ export const formValues = {
   status: "Птица здорова",
   country: "Беларусь",
   region: "Брестская",
+  coordinates: "123.32 324.123",
+  date: "",
   longitude: "-77.0364",
   latitude: "38.8951",
   accuracyOfDate: "5 минут",

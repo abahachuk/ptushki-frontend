@@ -21,6 +21,8 @@ export interface FormValues {
   status: string;
   country: string;
   region: string;
+  coordinates: string;
+  date: any;
   longitude: string;
   latitude: string;
   accuracyOfDate: string;

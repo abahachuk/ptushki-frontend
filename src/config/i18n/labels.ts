@@ -135,7 +135,7 @@ export const labels = {
       longitude: "Долгота",
       findOnMap: "Найти место на карте",
       timeAndDate: "Время/Дата",
-      timeAndDatePlaceholder: "Время/Дата",
+      timeAndDatePlaceholder: "Введите примерное время и дату",
       timeDelta: "Погрешность времени",
       timeDeltaPlaceholder: "Погрешность времени"
     },
