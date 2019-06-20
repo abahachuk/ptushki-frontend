@@ -18,7 +18,8 @@ interface Props extends DispatchProp {
 
 const LOCALE_LABELS: { [key in Locale]: string } = {
   en: labels.lang.eng,
-  ru: labels.lang.rus
+  ru: labels.lang.rus,
+  by: labels.lang.by
 };
 
 export const LangSelector: FC<Props> = ({ dispatch, selectedLocale }) => (
