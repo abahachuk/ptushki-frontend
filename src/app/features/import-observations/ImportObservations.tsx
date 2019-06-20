@@ -135,27 +135,33 @@ export const ImportObservations: FC<DispatchProp> = ({ dispatch }) => {
               <FileInfoBlock />
               {validationResponse && (
                 <div className="text-danger mb-3">
-                  <div className="my-2">
-                    <h5>Ошибки EURing:</h5>
-                    {validationResponse.euRingErrors.map(err => (
-                      <div className="ml-2">
-                        <span>Ряд {err.rowNumber}: </span>
-                        {err.status.error}
-                      </div>
-                    ))}
-                  </div>
-                  <h5>Ошибки формата записей:</h5>
-                  {validationResponse.invalidDataFormat.map(err => (
-                    <div className="ml-2">
-                      <span>Ряд {err.rowNumber}: </span>
-                      {Object.entries(err.result).map(([key, errors]) => (
+                  {!!validationResponse.euRingErrors.length && (
+                    <div className="my-2">
+                      <h5>Ошибки EURing:</h5>
+                      {validationResponse.euRingErrors.map(err => (
                         <div className="ml-2">
-                          <span className="font-weight-bold">{key}: </span>
-                          {errors.join("; ")}
+                          <span>Ряд {err.rowNumber}: </span>
+                          {err.status.error}
                         </div>
                       ))}
                     </div>
-                  ))}
+                  )}
+                  {!!validationResponse.euRingErrors.length && (
+                    <div>
+                      <h5>Ошибки формата записей:</h5>
+                      {validationResponse.invalidDataFormat.map(err => (
+                        <div className="ml-2">
+                          <span>Ряд {err.rowNumber}: </span>
+                          {Object.entries(err.result).map(([key, errors]) => (
+                            <div className="ml-2">
+                              <span className="font-weight-bold">{key}: </span>
+                              {errors.join("; ")}
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
