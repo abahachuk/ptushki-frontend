@@ -17,6 +17,7 @@ import {
   ObservationFilters,
   ObservationsResponse
 } from "../../app/features/observations/models";
+import { ROUTE_OBSERVATIONS } from "../../app/features/routing/routes";
 import { dataGridActionsRequiringRequest } from "../../components/table/dataGridActions";
 import { getDataGridEpics } from "../../components/table/dataGridEpics";
 import {
@@ -31,10 +32,10 @@ import { signOut } from "../actions/authActions";
 import {
   observationGridActions,
   observationsData,
-  observationsFiltersRequest,
-  setObservationVerificationStatus
+  observationsFiltersRequest
 } from "../actions/observationListActions";
 import { selectLocale } from "../actions/userPreferencesActions";
+import { setObservationVerificationStatus } from "../actions/verificationActions";
 import { RootState } from "../index";
 
 const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
@@ -81,7 +82,10 @@ export const requestObservationFiltersEpic: Epic<
     })
   );
 
-const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
+const reRequestOnGridActionsEpic: Epic<any, any, RootState> = (
+  action$,
+  state$
+) =>
   action$.pipe(
     filter(
       isActionOf([
@@ -89,6 +93,10 @@ const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
         selectLocale,
         setObservationVerificationStatus.success
       ])
+    ),
+    withLatestFrom(state$),
+    filter(
+      ([_, state]) => state.router.location.pathname === ROUTE_OBSERVATIONS.path
     ),
     map(() => observationsData.request())
   );

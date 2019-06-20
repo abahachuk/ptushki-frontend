@@ -1,12 +1,12 @@
 import { combineEpics } from "redux-observable";
-import { birdsListEpic } from "./birdsListEpics";
-import { navigationEpic } from "./navigationEpic";
-import { observationListEpic } from "./observationListEpics";
-import { birdObnservationsListEpic } from "./birdObservationsListEpics";
-import { verifyObservationEpic } from "./verificationEpics";
-import { requestInitialDataEpic } from "./initialDataEpics";
-import { observationEpic } from "./observationEpics";
 import { birdEpic } from "./birdEpics";
+import { birdObnservationsListEpic } from "./birdObservationsListEpics";
+import { birdsListEpic } from "./birdsListEpics";
+import { requestInitialDataEpic } from "./initialDataEpics";
+import { navigationEpic } from "./navigationEpic";
+import { observationEpic } from "./observationEpics";
+import { observationListEpic } from "./observationListEpics";
+import { verifyObservationEpic } from "./verificationEpics";
 
 export const rootEpic = combineEpics(
   observationListEpic,
