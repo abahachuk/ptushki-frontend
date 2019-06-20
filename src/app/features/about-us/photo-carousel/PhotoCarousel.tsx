@@ -1,6 +1,4 @@
-import React, { useState, useCallback, useEffect, FC } from "react";
-import { ArrowLeft, ArrowRight } from "@material-ui/icons";
-import { Button } from "reactstrap";
+import React, { FC } from "react";
 import Carousel from "react-leaf-carousel";
 
 import "./PhotoCarousel.scss";
@@ -41,6 +39,7 @@ export const PhotoCarousel: FC<PhotoCarouselProps> = ({ imgList }) => {
     >
       {imgList.map((imgItem: any) => (
         <img
+          key={imgItem}
           className={`${blockName}__photo`}
           src={imgItem}
           alt="galleryPhoto"

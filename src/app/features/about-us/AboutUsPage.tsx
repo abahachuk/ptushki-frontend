@@ -1,7 +1,6 @@
-import React, { useState, useCallback, FC } from "react";
-import { Button } from "reactstrap";
+import React, { FC } from "react";
+import { CustomScrollContainer } from "../../../components/scrollbars/CustomScrollContainer";
 import { labels } from "../../../config/i18n/labels";
-import { PhotoCarousel } from "./photo-carousel/PhotoCarousel";
 
 import "./AboutUsPage.scss";
 
@@ -82,8 +81,16 @@ export const AboutUsPage: FC = () => {
               {labels.aboutUs.photos}
             </h2>
           </article>
+          <CustomScrollContainer autoHeight>
+            <div className={`${blockName}__images-container`}>
+              {galleryPhotos.map(img => (
+                <div key={img} className={`${blockName}__image`}>
+                  <img src={img} alt="Gallery pic" />
+                </div>
+              ))}
+            </div>
+          </CustomScrollContainer>
         </section>
-        <PhotoCarousel imgList={galleryPhotos} />
         <section className={`${blockName}__contact-information`}>
           <h2 className={`${blockName}__article-heading`}>
             {labels.aboutUs.contactInformation}
