@@ -1,0 +1,14 @@
+.photo-carousel {
+  display: flex;
+  overflow: hidden;
+
+  &__photo {
+    height: 256px;
+    width: 290px;
+    border-radius: 8px;
+
+    &:not(:first-child) {
+      margin-left: 30px;
+    }
+  }
+}

@@ -30,3 +30,8 @@ export const ROUTE_BIRDS: RouteDescription = {
   path: "/birds",
   scope: Scope.birds
 };
+
+export const ROUTE_ABOUT_US: RouteDescription = {
+  path: "/about-us",
+  scope: null
+};
