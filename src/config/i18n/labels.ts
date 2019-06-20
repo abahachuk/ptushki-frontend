@@ -223,7 +223,8 @@ export const labels = {
   },
   lang: {
     rus: "Рус",
-    eng: "Eng"
+    eng: "Eng",
+    by: "Бел"
   },
   species: "Вид",
   speciesMentioned: "Вид по информатору",

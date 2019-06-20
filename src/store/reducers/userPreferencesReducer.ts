@@ -7,7 +7,8 @@ import {
 
 export enum Locale {
   ru = "ru",
-  en = "en"
+  en = "en",
+  by = "by"
 }
 
 export enum ViewMode {
