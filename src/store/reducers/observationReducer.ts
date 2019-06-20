@@ -6,6 +6,9 @@ import {
 } from "../../utils/createAsyncStateReducer";
 import {
   addObservation,
+  flushObservation,
+  getObservation,
+  putObservation,
   updateObservation
 } from "../actions/observationActions";
 import { FormValues } from "../../components/common-bird/CommonBirdModels";
@@ -21,11 +24,25 @@ export const observationReducer = reduceReducer(
 
   createAsyncStateReducer(initialState, addObservation),
 
+  createAsyncStateReducer(initialState, getObservation),
+
+  createAsyncStateReducer(initialState, putObservation),
+
   handleAction(
     updateObservation,
     (state, action) => ({
       ...state,
       value: action.payload
+    }),
+    initialState
+  ),
+
+  handleAction(
+    // @ts-ignore
+    flushObservation,
+    (state, action) => ({
+      ...state,
+      value: {}
     }),
     initialState
   )

@@ -14,16 +14,14 @@ import { CustomScrollContainer } from "../scrollbars/CustomScrollContainer";
 import "./Autosuggest.scss";
 
 interface Item {
-  label: string;
+  label?: string;
   value: string;
-  id: number | string;
+  id?: number | string;
   checked?: boolean;
 }
 
-export interface IChangeValue {
-  value: string;
+export interface IChangeValue extends Item {
   type: string;
-  checked?: boolean;
 }
 
 export interface IAutosuggest {
@@ -70,7 +68,11 @@ export const Autosuggest: FC<IAutosuggest> = ({
       onChangeValue({
         value: multiselect
           ? items.map(item => item.value).toString()
+          : items[0].value,
+        label: multiselect
+          ? items.map(item => item.label).toString()
           : items[0].label,
+        id: multiselect ? items.map(item => item.id).toString() : items[0].id,
         type,
         checked
       });

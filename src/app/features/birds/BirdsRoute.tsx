@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { RouteProps } from "react-router";
+import { RouteComponentProps, RouteProps } from "react-router";
 import { ROUTE_BIRDS } from "../routing/routes";
 import { ComponentRoute } from "../routing/ComponentRoute";
 import { BirdsPage } from "./BirdsPage";
@@ -7,12 +7,17 @@ import { CreatePageConnected } from "../create-page/CreatePageConnected";
 import { Scope } from "../../../config/permissions";
 import { InfoPageConnected } from "../info-page/InfoPageConnected";
 import { BirdObservationsListConnected } from "../bird-info/BirdObservationsList";
-import { addObservation } from "../../../store/actions/observationActions";
 import { RootState } from "../../../store";
-import { addBird, updateBird } from "../../../store/actions/birdActions";
+import {
+  addBird,
+  deleteBird,
+  flushBird,
+  getBird,
+  putBird,
+  updateBird
+} from "../../../store/actions/birdActions";
 
 const commonProps = {
-  sendFn: addBird.request,
   updateFn: updateBird,
   scope: Scope.birds,
   stateSelector: (state: RootState) => state.bird
@@ -20,15 +25,20 @@ const commonProps = {
 
 const AddBird = () => (
   // @ts-ignore
-  <CreatePageConnected {...commonProps} />
+  <CreatePageConnected {...commonProps} sendFn={addBird.request} />
 );
 
-const InfoPage = () => (
+const InfoPage = (routeProps: RouteComponentProps<{ id: string }>) => (
   // @ts-ignore
   <InfoPageConnected
     {...commonProps}
-    removeFn={addObservation.request}
+    {...routeProps}
+    removeFn={deleteBird.request}
     historyComponent={<BirdObservationsListConnected />}
+    getFn={getBird.request}
+    // @ts-ignore
+    flushFn={flushBird}
+    sendFn={putBird.request}
   />
 );
 

@@ -24,10 +24,11 @@ export default class AjaxService {
   private async makeFetch(
     url: string,
     token: string | null,
-    data?: any
+    data?: any,
+    method?: string
   ): Promise<any> {
     return fetch(url, {
-      method: data ? "POST" : "GET",
+      method: method || (data ? "POST" : "GET"),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -72,9 +73,13 @@ export default class AjaxService {
     return token;
   }
 
-  async makeCall<TResponse>(url: string, data?: Object): Promise<TResponse> {
+  async makeCall<TResponse>(
+    url: string,
+    data?: Object,
+    method?: string
+  ): Promise<TResponse> {
     let token = securityService.getAccessToken();
-    let response = await this.makeFetch(url, token, data);
+    let response = await this.makeFetch(url, token, data, method);
 
     if (response.status === 401) {
       token = await this.refreshToken();
