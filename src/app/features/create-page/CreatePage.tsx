@@ -4,7 +4,6 @@ import { goBack } from "connected-react-router";
 import { DispatchProp } from "react-redux";
 import { Button } from "reactstrap";
 
-import { FormValues } from "../../../components/common-bird/CommonBirdModels";
 import { IChangeValue } from "../../../components/autosuggest/Autosuggest";
 import { ICreateScopeLabel, CreatePageProps } from "./models";
 
@@ -17,8 +16,16 @@ import { BackButton } from "../../../components/back-button/BackButton";
 import { FillLoader } from "../../../components/loader/FillLoader";
 import "./CreatePage.scss";
 
+// TODO: remove
+import {
+  circumstancesConfig,
+  observationConfig,
+  birdConfig,
+  birdValues
+} from "./test.data";
+
 const initialForm = {
-  species: "",
+  speciesMentioned: "",
   sexMentioned: "",
   ageMentioned: "",
   status: "",
@@ -35,16 +42,16 @@ const blockName = "create-page";
 export const CreatePage: FC<DispatchProp & CreatePageProps> = ({
   dispatch,
   scope,
-  requestFn,
-  circumstancesConfig,
+  sendFn,
+  updateFn,
   initials,
-  header
+  header,
+  entity
 }) => {
   useMount(() => {
     dispatch(initialData.request());
   });
 
-  const [form, setFormValues] = useState<FormValues>(initialForm);
   const [bird, setBird] = useState({
     saddle: [],
     neck: [],
@@ -71,30 +78,30 @@ export const CreatePage: FC<DispatchProp & CreatePageProps> = ({
 
   const onChangeValue = useCallback(
     ({ value, type }: IChangeValue) =>
-      setFormValues({ ...form, [type]: value }),
-    [form]
+      dispatch(updateFn({ ...entity.value, [type]: value })),
+    [dispatch, entity.value, updateFn]
   );
 
   const onGoBack = useCallback(() => dispatch(goBack()), [dispatch]);
 
-  const onClickSend = useCallback(() => dispatch(requestFn(form)), [
+  const onClickSend = useCallback(() => dispatch(sendFn(entity.value)), [
     dispatch,
-    form,
-    requestFn
+    entity,
+    sendFn
   ]);
 
   return (
     <div className={blockName}>
       <BackButton
         className={`${blockName}__page-back-btn`}
-        label={labels.back}
+        label={labels.buttons.back}
         onClick={onGoBack}
       />
       <div className={`${blockName}__header`}>
         {header || (
           <PageHeader
             title={scopeLabels.title}
-            subtitle={labels.createPage.subTitle}
+            subtitle={scopeLabels.subTitle}
           />
         )}
         <Button className={`${blockName}__send-btn`} onClick={onClickSend}>
@@ -102,18 +109,19 @@ export const CreatePage: FC<DispatchProp & CreatePageProps> = ({
         </Button>
       </div>
       <CommonBird
-        circumstancesConfig={circumstancesConfig}
         onChangeBirdValues={setBird}
         birdParams={bird}
         onChangeFormValue={onChangeValue}
-        formValues={form}
+        formValues={entity.value}
         observationsLabels={observationsLabels}
         circumstancesLabels={circumstancesLabels}
         initialValues={initials.value}
+        // TODO: remove mock data
+        collection={birdValues}
       />
       <div className={`${blockName}__buttons`}>
-        <Button className={`${blockName}__back-btn`}>
-          {labels.createPage.back}
+        <Button className={`${blockName}__back-btn`} onClick={onGoBack}>
+          {labels.buttons.back}
         </Button>
         <Button className={`${blockName}__send-btn`} onClick={onClickSend}>
           {scopeLabels.send}

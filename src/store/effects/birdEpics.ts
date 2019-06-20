@@ -1,4 +1,4 @@
-import { Epic } from "redux-observable";
+import { combineEpics, Epic } from "redux-observable";
 import {
   catchError,
   filter,
@@ -10,28 +10,27 @@ import { isActionOf } from "typesafe-actions";
 import { from, of } from "rxjs";
 import { RootState } from "../index";
 import { ajaxService } from "../../services";
-import { OBSERVATIONS_ENDPOINT } from "../../config/endpoints";
+import { BIRDS_ENDPOINT } from "../../config/endpoints";
 import { SecurityError } from "../../services/SecurutyService";
 import { signOut } from "../actions/authActions";
 import { FormValues } from "../../components/common-bird/CommonBirdModels";
-import { addObservation } from "../actions/addObservationsActions";
+import { addBird } from "../actions/birdActions";
 
-export const requestAddObservationEpic: Epic<any, any, RootState> = (
-  action$,
-  state$
-) =>
+export const addBirdEpic: Epic<any, any, RootState> = (action$, state$) =>
   action$.pipe(
-    filter(isActionOf([addObservation.request])),
+    filter(isActionOf([addBird.request])),
     withLatestFrom(state$),
     switchMap(([action, state]) => {
       return from(
-        ajaxService.makeCall<FormValues>(OBSERVATIONS_ENDPOINT, action.payload)
+        ajaxService.makeCall<FormValues>(BIRDS_ENDPOINT, action.payload)
       ).pipe(
-        map(d => addObservation.success(d)),
+        map(d => addBird.success(d)),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
-          return of(addObservation.failure(e));
+          return of(addBird.failure(e));
         })
       );
     })
   );
+
+export const birdEpic = combineEpics(addBirdEpic);

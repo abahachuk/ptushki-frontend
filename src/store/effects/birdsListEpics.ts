@@ -43,7 +43,9 @@ const requestBirdsEpic: Epic<any, any, RootState> = (action$, state$) =>
       return from(
         ajaxService.makeCall<BirdsResponse>(`${BIRDS_ENDPOINT}?${query}`)
       ).pipe(
-        map(d => birdsData.success(d.content)),
+        // TODO: update after backend fix
+        // @ts-ignore
+        map(d => birdsData.success(d)),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
           return of(birdsData.failure(e));

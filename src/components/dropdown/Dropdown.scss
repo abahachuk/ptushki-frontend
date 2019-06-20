@@ -72,15 +72,15 @@
     height: 10px;
     border-top: 2px solid $dustyGray;
     border-right: 2px solid $dustyGray;
-    transition: 0.3s all cubic-bezier(1, 0.25, 0.25, 0.8);
+    transition: 0.15s all cubic-bezier(1, 0.25, 0.25, 0.8);
     will-change: transform;
 
     &--down {
-      transform: rotate(135deg);
+      transform: translateY(-2px) rotate(135deg);
     }
 
     &--up {
-      transform: rotate(-45deg);
+      transform: translateY(2px) rotate(-45deg);
     }
   }
 

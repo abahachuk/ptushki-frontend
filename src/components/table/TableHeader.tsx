@@ -1,10 +1,10 @@
-import { Button, DropdownToggle, UncontrolledDropdown } from "reactstrap";
-import { Link } from "react-router-dom";
 import React, { FC } from "react";
-import { labels } from "../../config/i18n/labels";
-import { Scope, UserAction } from "../../config/permissions";
+import { Link } from "react-router-dom";
+import { Button, DropdownToggle, UncontrolledDropdown } from "reactstrap";
 import { CanConnected } from "../../app/features/auth/CanConnected";
 import { RouteDescription } from "../../app/features/routing/routes";
+import { labels } from "../../config/i18n/labels";
+import { UserAction } from "../../config/permissions";
 
 export const TableHeader: FC<{
   title: string;
@@ -28,11 +28,15 @@ export const TableHeader: FC<{
         </Button>
       </CanConnected>
       <CanConnected I={UserAction.import} a={route.scope}>
-        <UncontrolledDropdown>
-          <DropdownToggle outline size="sm" caret className="ml-3 px-3">
-            {labels.importData}
-          </DropdownToggle>
-        </UncontrolledDropdown>
+        <Button
+          size="sm"
+          className="ml-3 px-3"
+          tag={Link}
+          outline
+          to={`${route.path}/import`}
+        >
+          {labels.importData}
+        </Button>
       </CanConnected>
       <div className="mr-auto" />
       <CanConnected I={UserAction.export} a={route.scope}>

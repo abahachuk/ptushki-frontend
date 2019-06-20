@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { connect, DispatchProp } from "react-redux";
 import useMount from "react-use/esm/useMount";
 import { DataGridLazy } from "../../../components/table/DataGridLazy";
@@ -31,9 +31,12 @@ export const BirdsList: FC<BirdsListProps> = ({ birds, dispatch }) => {
       rows={birds.error ? [] : birds.value}
       columns={BIRDS_LIST_COLUMNS_CONFIG}
       isLoading={birds.isLoading}
-      onRowClick={r => {
-        dispatch(push(`${ROUTE_BIRDS.path}/${r.id}`));
-      }}
+      onRowClick={useCallback(
+        r => {
+          dispatch(push(`${ROUTE_BIRDS.path}/${r.id}`));
+        },
+        [dispatch]
+      )}
     />
   );
 };

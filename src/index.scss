@@ -16,7 +16,7 @@ body {
   font-family: "Open Sans", Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 1280px;
+  min-width: 1280px;
   background-color: transparent;
   display: flex;
   align-items: stretch;

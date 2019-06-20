@@ -127,7 +127,7 @@ export const labels = {
     circumstancesFields: {
       country: "Страна",
       countryPlaceholder: "Выбрать страну",
-      region: "Область",
+      region: "Регион",
       regionPlaceholder: "Выбрать район",
       coordinates: "Координаты",
       coordinatesPlaceholder: "Координаты",
@@ -144,6 +144,30 @@ export const labels = {
   },
   observations: {
     title: "Наблюдения"
+  },
+  importObservations: {
+    back: "Назад",
+    title: "Загрузка базы наблюдений",
+    description:
+      "Если вы загружаете базу впервые - скачайте шаблонный XLS файл и заполните необходимые поля, после этого загрузите таблицу в форму ниже",
+    uploadTable: "Загрузить заполненную таблицу",
+    dragFile: "Перетащите файл со списком наблюдений сюда",
+    fileUploaded: "Ваш файл загружен",
+    wrongFile: "Неверный формат файла",
+    or: "или",
+    chooseFile: "Выберите файл",
+    useTemplate: "Используйте шаблон, доступный для скачивания ниже",
+    chooseAnotherFile: "Выберите другой файл",
+    cancel: "Отменить",
+    supportedFormats: "Поддерживаемые форматы: .xls",
+    addToDatabase: "Добавить в базу",
+    insertEuring: "Вставить коды EURING",
+    insertCodesHere: "Вставьте коды сюда",
+    loadToDatabase: "Загрузить в базу",
+    tableTemplateTitle: "Шаблон таблицы",
+    tableTemplateDescription:
+      "Чтобы ваши данные корректно отобразились на сайте, скачайте и заполните эталонный excel-файл",
+    tableTemplateButtonCaption: "Скачать файл"
   },
   addBird: {
     title: "Добавить птицу",
@@ -221,6 +245,8 @@ export const labels = {
     [Scope.observations]: {
       send: "Отправить наблюдение",
       title: "Добавление наблюдения",
+      subTitle:
+        "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
       circumstancesTitle: "Обстоятельства",
       circumstancesSubtitle:
         "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
@@ -231,14 +257,43 @@ export const labels = {
     [Scope.birds]: {
       send: "Сохранить птицу",
       title: "Создание птицы",
+      subTitle:
+        "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
+      circumstancesTitle: "Обстоятельства последнего наблюдения",
       circumstancesSubtitle:
         "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
       observationsTitle: "Последнее наблюдение птицы",
       observationsSubtitle:
         "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определитель птиц беларуси на florafauna.by, чтобы узнать вид."
+    }
+  },
+  infoPage: {
+    [Scope.observations]: {
+      edit: "Редактировать наблюдение",
+      title: "Информация о наблюдении",
+      circumstancesTitle: "Обстоятельства",
+      circumstancesSubtitle:
+        "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
+      observationsTitle: "Наблюдения",
+      observationsSubtitle:
+        "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определить вид на florafauna.by"
     },
-    subTitle:
-      "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
-    back: "Назад"
+    [Scope.birds]: {
+      edit: "Редактировать птицу",
+      title: "Информация о птице",
+      circumstancesTitle: "Обстоятельства последнего наблюдения",
+      circumstancesSubtitle:
+        "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
+      observationsTitle: "Последнее наблюдение птицы",
+      observationsSubtitle:
+        "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определитель птиц беларуси на florafauna.by, чтобы узнать вид.",
+      history: "История наблюдений"
+    }
+  },
+  buttons: {
+    back: "Назад",
+    edit: "Редактировать",
+    delete: "Удлить",
+    export: "Экспортировать в .xls"
   }
 } as const;

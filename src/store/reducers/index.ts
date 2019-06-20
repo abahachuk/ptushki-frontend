@@ -7,7 +7,8 @@ import { resetPasswordReducer } from "./resetPasswordReducer";
 import { routerReducer } from "./routerReducer";
 import { userPreferencesReducer } from "./userPreferencesReducer";
 import { initialDataReducer } from "./initialDataReducer";
-import { addObservationReducer } from "./addObservationReducer";
+import { observationReducer } from "./observationReducer";
+import { birdReducer } from "./birdReducer";
 
 export const rootReducer = combineReducers({
   router: routerReducer,
@@ -18,5 +19,6 @@ export const rootReducer = combineReducers({
   birdsList: birdsListReducer,
   birdObservationsList: birdObservationsListReducer,
   initialData: initialDataReducer,
-  addObservation: addObservationReducer
+  observation: observationReducer,
+  bird: birdReducer
 });

@@ -1,0 +1,78 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.info-page {
+  padding: 15px;
+  background-color: $white;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  &__page-header {
+    padding-right: 30px;
+  }
+
+  &__header-buttons {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 36px;
+  }
+
+  &__btn {
+    height: 30px;
+    background-color: $dark-blue;
+    color: $white;
+    padding: 0 20px 0;
+    font-family: "Open Sans";
+    font-size: 13px;
+    margin-left: auto;
+
+    &:hover, &:active {
+      @include button-shadow;
+
+      background-color: $dark-blue !important;
+    }
+  }
+
+  &__back-btn,
+  &__edit-btn {
+    height: 36px;
+    font-size: 16px;
+    padding: 0 20px;
+    border: none;
+  }
+
+  &__back-btn {
+    background-color: transparent;
+    color: $dark-blue;
+    border: 1px solid $dark-blue;
+
+    &:hover {
+      background-color: rgba($blueBayox, 1);
+    }
+  }
+
+  &__edit-btn {
+    background-color: rgba($orange, 0.9);
+    margin-left: auto;
+
+    &:hover {
+      background-color: rgba($orange, 1);
+    }
+  }
+
+  &__page-back-btn {
+    margin: 2px 0 7px;
+  }
+}

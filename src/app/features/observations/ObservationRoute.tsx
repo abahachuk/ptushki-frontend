@@ -3,18 +3,32 @@ import { RouteProps } from "react-router";
 import { ROUTE_OBSERVATIONS } from "../routing/routes";
 import { ObservationsPage } from "./ObservationsPage";
 import { ComponentRoute } from "../routing/ComponentRoute";
-import { ObservationInfoFormConnected } from "../observation-info/ObservationInfoConnected";
 import { CreatePageConnected } from "../create-page/CreatePageConnected";
 import { Scope } from "../../../config/permissions";
-import { circumstancesConfig } from "../add-observation/test.data";
-import { addObservation } from "../../../store/actions/addObservationsActions";
+import { circumstancesConfig } from "../create-page/test.data";
+import {
+  addObservation,
+  updateObservation
+} from "../../../store/actions/observationActions";
+import { InfoPageConnected } from "../info-page/InfoPageConnected";
+import { RootState } from "../../../store";
+import { ImportObservations } from "../import-observations/ImportObservations";
+
+const commonProps = {
+  sendFn: addObservation.request,
+  updateFn: updateObservation,
+  scope: Scope.observations,
+  stateSelector: (state: RootState) => state.observation
+};
 
 const AddObservation = () => (
-  <CreatePageConnected
-    scope={Scope.observations}
-    circumstancesConfig={circumstancesConfig}
-    requestFn={addObservation.request}
-  />
+  // @ts-ignore
+  <CreatePageConnected {...commonProps} />
+);
+
+const InfoPage = () => (
+  // @ts-ignore
+  <InfoPageConnected {...commonProps} removeFn={addObservation.request} />
 );
 
 export const ObservationsRoute: FC<RouteProps> = () => {
@@ -23,7 +37,8 @@ export const ObservationsRoute: FC<RouteProps> = () => {
       route={ROUTE_OBSERVATIONS}
       PageComponent={ObservationsPage}
       AddComponent={AddObservation}
-      DetailComponent={ObservationInfoFormConnected}
+      DetailComponent={InfoPage}
+      ImportComponent={ImportObservations}
     />
   );
 };

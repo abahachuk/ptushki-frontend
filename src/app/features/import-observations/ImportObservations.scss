@@ -1,0 +1,128 @@
+@import "../../../styles/variables";
+
+.import-observations {
+  padding: 15px;
+  background: $white;
+
+  &__title {
+    color: $mineSharf;
+    font-size: 36px;
+    font-weight: 100;
+  }
+
+  &__subtitle {
+    color: $trout;
+    font-size: 14px;
+    line-height: 18px;
+    width: 450px;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__back-btn-arrow {
+    height: 30px;
+    font-size: 15px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: $dark-blue;
+    &:hover {
+      color: rgba($blueBayox, 1);
+      background: transparent;
+    }
+  }
+
+  &__import-sections {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__import-block-container {
+    flex: 1;
+    border-radius: 4px;
+    box-shadow: 0 1px 24px 0 rgba(0,0,0,0.04);
+  }
+
+  &__import-block-title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  &__euring-area {
+    height: 360px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid silver;
+    resize: none;
+    border-radius: 4px;
+  }
+
+  &__import-button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__import-button {
+    border: none;
+    padding-left: 21px;
+    padding-right: 21px;
+    font-size: 16px;
+
+    &[disabled] {
+      color: white;
+    }
+  }
+
+  &__import-button-success {
+    border: none;
+    font-size: 14px;
+    color: mediumturquoise;
+    text-decoration: underline;
+    background: transparent;
+
+    &:hover {
+      color: mediumturquoise;
+      text-decoration: none;
+      background: transparent;
+    }
+  }
+
+  &__template-block {
+    padding: 25px 24px 36px;
+    background: whitesmoke;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+
+  &__template-block-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: darkslategray;
+  }
+
+  &__template-block-main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &__template-block-description {
+    margin-right: 50px;
+    font-size: 14px;
+  }
+
+  &__template-block-button-container {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &__template-block-button {
+    flex: 0 0 164px;
+    background: $dark-blue;
+  }
+}
