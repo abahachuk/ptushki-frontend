@@ -1,10 +1,10 @@
-import React, { MouseEventHandler } from "react";
-import { CloudUpload, CloudDone, CloudOff } from "@material-ui/icons";
+import { CloudDone, CloudOff, CloudUpload } from "@material-ui/icons";
 import sn from "classnames";
+import React, { MouseEventHandler } from "react";
 import { Button } from "reactstrap";
 import { labels } from "../../../config/i18n/labels";
 import { blockName } from "./ImportObservations";
-import { DropAreaStates, VaryingContent, LoadedFile } from "./models";
+import { DropAreaStates, LoadedFile, VaryingContent } from "./models";
 
 export const dropZoneContent: {
   [id: string]: (
@@ -47,7 +47,7 @@ export const dropZoneContent: {
       </Button>
     ),
     FileInfoBlock: () => (
-      <div>here will be file analysis result once implemented</div>
+      <div>{/* here will be file analysis result once implemented */}</div>
     ),
     isSubmitButtonDisabled: false
   }),

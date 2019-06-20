@@ -27,7 +27,7 @@ export default class AjaxService {
     data?: any,
     method?: string,
     headers?: any
-  ): Promise<any> {
+  ): Promise<Response> {
     return fetch(url, {
       method: method || (data ? "POST" : "GET"),
       headers: headers
@@ -40,6 +40,7 @@ export default class AjaxService {
             "Content-Type": "application/json",
             Authorization: token
           },
+      // TODO check for content type and refactor this assumption
       body: !headers ? JSON.stringify(data) : data
     });
   }
@@ -86,11 +87,11 @@ export default class AjaxService {
     headers?: HeadersInit
   ): Promise<TResponse> {
     let token = securityService.getAccessToken();
-    const response = await this.makeFetch(url, token, data, method);
+    let response = await this.makeFetch(url, token, data, method, headers);
 
     if (response.status === 401) {
       token = await this.refreshToken();
-      const response = await this.makeFetch(url, token, data, method, headers);
+      response = await this.makeFetch(url, token, data, undefined, headers);
     } else if (!response.ok) {
       const message = await this.parseError(response);
       throw new Error(message);

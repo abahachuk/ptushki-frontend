@@ -21,10 +21,11 @@ import "./VerificationCell.scss";
 
 // actions emitted through dispatch provided by connect are not passed to redux-observable.
 // probably a bug in redux-subspace observable.
-// TODO investigate. and replace those strange fragments
+// as a workaround, now we are using dispatch directly:
 // import("../../../store").then(({ store }) => {
-//   store.dispatch
+//   store.dispatch ...
 // });
+// TODO investigate the issue and replace with normal dispatch
 
 export const VerificationCell = connect((state: RootState) => ({
   ability: state.auth.permissions
