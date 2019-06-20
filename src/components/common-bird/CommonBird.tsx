@@ -12,6 +12,7 @@ import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import sn from "classnames";
 import { SingleDatePicker } from "react-dates";
+import moment from "moment";
 import { Autosuggest } from "../autosuggest/Autosuggest";
 import { Bird } from "../bird/Bird";
 import { InfoContainer } from "../info-container/InfoContainer";
@@ -244,7 +245,9 @@ export const CommonBird: FC<ICommonBird> = ({
               {labels.addObservation.circumstancesFields.timeAndDate}
             </p>
             <SingleDatePicker
-              date={formValues.date && formValues.date.value}
+              {...(formValues.date
+                ? { date: moment(formValues.date && formValues.date.value) }
+                : { date: formValues.date })}
               onDateChange={onChangeDate}
               focused={calendarFocused}
               onFocusChange={({ focused }) => setCalendarFocused(focused)}
@@ -257,6 +260,7 @@ export const CommonBird: FC<ICommonBird> = ({
               showDefaultInputIcon
               inputIconPosition="after"
               isOutsideRange={() => false}
+              {...(viewMode ? { disabled: true } : {})}
             />
           </div>
           <Field
