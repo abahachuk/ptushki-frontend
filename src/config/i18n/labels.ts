@@ -284,6 +284,7 @@ export const labels = {
   degreeSymbol: "°",
   km: "км",
   days: "д",
+  actionButtonTitle: "Невозможно изменить наблюдение, принятое модератором",
   createPage: {
     [Scope.observations]: {
       send: "Отправить наблюдение",
@@ -336,7 +337,7 @@ export const labels = {
   buttons: {
     back: "Назад",
     edit: "Редактировать",
-    delete: "Удлить",
+    delete: "Удалить",
     export: "Экспортировать в .xls"
   }
 } as const;

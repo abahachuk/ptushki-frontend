@@ -5,7 +5,7 @@ import { goBack } from "connected-react-router";
 import { DispatchProp } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { Button } from "reactstrap";
-import { birdData, formValues } from "../bird-info/test-data";
+import { birdData } from "../bird-info/test-data";
 
 import { labels } from "../../../config/i18n/labels";
 
@@ -19,18 +19,7 @@ import "./InfoPage.scss";
 import { UserAction } from "../../../config/permissions";
 import { CanConnected } from "../auth/CanConnected";
 import { FillLoader } from "../../../components/loader/FillLoader";
-
-const initialForm = {
-  species: "",
-  sexMentioned: "",
-  ageMentioned: "",
-  status: "",
-  country: "",
-  region: "",
-  coordinates: "",
-  accuracyOfDate: "",
-  comment: ""
-};
+import { VerificationStatus } from "../observations/models";
 
 const blockName = "info-page";
 
@@ -75,6 +64,14 @@ export const InfoPage: FC<
     removeFn
   ]);
 
+  const isApproved =
+    entity &&
+    entity.value &&
+    entity.value.verified &&
+    entity.value.verified.value === VerificationStatus.approved;
+
+  const actionButtonTitle = isApproved && labels.actionButtonTitle;
+
   const header = (
     <PageHeader
       title={scopeLabels.title}
@@ -89,6 +86,7 @@ export const InfoPage: FC<
       scope={scope}
       sendFn={sendFn}
       {...props}
+      bird={bird}
     />
   ) : (
     <div className={blockName}>
@@ -105,6 +103,8 @@ export const InfoPage: FC<
               icon="edit"
               label={labels.buttons.edit}
               onClick={onClickEdit}
+              disabled={isApproved}
+              title={actionButtonTitle}
             />
           </CanConnected>
           <CanConnected I={UserAction.remove} a={scope}>
@@ -112,6 +112,8 @@ export const InfoPage: FC<
               icon="delete"
               label={labels.buttons.delete}
               onClick={onClickDelete}
+              disabled={isApproved}
+              title={actionButtonTitle}
             />
           </CanConnected>
           <CanConnected I={UserAction.export} a={scope}>

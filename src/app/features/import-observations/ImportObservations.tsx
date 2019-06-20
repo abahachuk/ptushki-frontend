@@ -81,7 +81,7 @@ export const ImportObservations: FC<DispatchProp> = ({ dispatch }) => {
       : dropZoneContent[dragAreaState]();
 
   return (
-    <div className={blockName}>
+    <div className={blockName} style={{ flexGrow: 1 }}>
       <div className={`${blockName}__buttons`}>
         <Button
           className={`${blockName}__back-btn-arrow`}

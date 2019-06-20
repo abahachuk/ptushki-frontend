@@ -25,8 +25,7 @@ export interface FormValues {
   sexMentioned: FormValueDescriptor;
   ageMentioned: FormValueDescriptor;
   status: FormValueDescriptor;
-  country: FormValueDescriptor;
-  region: FormValueDescriptor;
+  placeCode: FormValueDescriptor;
   coordinates: FormValueDescriptor;
   accuracyOfDate: FormValueDescriptor;
   comment: FormValueDescriptor;
@@ -34,6 +33,7 @@ export interface FormValues {
   date: any;
   longitude: FormValueDescriptor;
   latitude: FormValueDescriptor;
+  verified: FormValueDescriptor;
 }
 
 interface FormLabels {
