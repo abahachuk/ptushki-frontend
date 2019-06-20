@@ -17,6 +17,7 @@ import {
   ObservationFilters,
   ObservationsResponse
 } from "../../app/features/observations/models";
+import { ROUTE_BIRDS } from "../../app/features/routing/routes";
 import { dataGridActionsRequiringRequest } from "../../components/table/dataGridActions";
 import { getDataGridEpics } from "../../components/table/dataGridEpics";
 import {
@@ -29,12 +30,12 @@ import { getGridQuery } from "../../utils/grid/getGridQuery";
 import { getLangQuery } from "../../utils/lang/getLangQuery";
 import { signOut } from "../actions/authActions";
 import {
-  observationGridActions,
   birdObservationsData,
+  observationGridActions,
   observationsFiltersRequest
 } from "../actions/birdObservationsListActions";
-import { setObservationVerificationStatus } from "../actions/verificationActions";
 import { selectLocale } from "../actions/userPreferencesActions";
+import { setObservationVerificationStatus } from "../actions/verificationActions";
 import { RootState } from "../index";
 
 const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
@@ -81,7 +82,10 @@ export const requestObservationFiltersEpic: Epic<
     })
   );
 
-const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
+const reRequestOnGridActionsEpic: Epic<any, any, RootState> = (
+  action$,
+  state$
+) =>
   action$.pipe(
     filter(
       isActionOf([
@@ -89,6 +93,10 @@ const reRequestOnGridActionsEpic: Epic<any, any, RootState> = action$ =>
         selectLocale,
         setObservationVerificationStatus.success
       ])
+    ),
+    withLatestFrom(state$),
+    filter(([_, state]) =>
+      state.router.location.pathname.includes(`${ROUTE_BIRDS.path}/`)
     ),
     map(() => birdObservationsData.request())
   );

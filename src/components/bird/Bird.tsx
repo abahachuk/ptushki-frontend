@@ -85,6 +85,8 @@ interface PlusButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
+const uniqueId = () => new Date().getTime();
+
 const PlusButton = function({ className, ...props }: PlusButton) {
   return (
     <button
@@ -210,7 +212,7 @@ export const Bird: FC<IBird> = ({
 }) => {
   const onSelect = useCallback(
     ({ value, type, index }) => {
-      const newBird = birdParams;
+      const newBird = { ...birdParams };
       newBird[type][index].labelType = value;
       onChangeBirdValues(newBird);
     },
@@ -219,7 +221,7 @@ export const Bird: FC<IBird> = ({
 
   const onChange = useCallback(
     ({ value, type, index }) => {
-      const newBird = birdParams;
+      const newBird = { ...birdParams };
       newBird[type][index].value = value;
       onChangeBirdValues(newBird);
     },
@@ -231,7 +233,7 @@ export const Bird: FC<IBird> = ({
       ...birdParams,
       [type]: [
         ...birdParams[type],
-        { labelType: "", value: "", id: birdParams[type].length }
+        { labelType: "", value: "", id: uniqueId() }
       ]
     });
   };

@@ -25,7 +25,7 @@ export interface DataGridFilter {
 }
 
 export type DataGridFiltersObj<TData> = {
-  [key in keyof TData]?: DataGridFilter[]
+  [key in keyof TData]?: DataGridFilter[];
 };
 
 export interface DataGridState<TFilters = Object> {

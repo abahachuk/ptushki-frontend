@@ -13,13 +13,15 @@ import { history } from "./features/routing/history";
 import { ProtectedRoute } from "./features/routing/ProtectedRoute";
 import { ObservationsRoute } from "./features/observations/ObservationRoute";
 import { BirdsRoute } from "./features/birds/BirdsRoute";
+import { AboutUsPage } from "./features/about-us/AboutUsPage";
 import {
   HOME,
   ROUTE_BIRDS,
   ROUTE_OBSERVATIONS,
   ROUTE_RESET_PASSWORD,
   ROUTE_SIGN_IN,
-  ROUTE_SIGN_UP
+  ROUTE_SIGN_UP,
+  ROUTE_ABOUT_US
 } from "./features/routing/routes";
 
 export const App: FC<{
@@ -66,6 +68,7 @@ export const App: FC<{
           {...ROUTE_RESET_PASSWORD}
           component={ResetPasswordFormConnected}
         />
+        <ProtectedRoute exact {...ROUTE_ABOUT_US} component={AboutUsPage} />
 
         <BirdsRoute path={ROUTE_BIRDS.path} />
         <ObservationsRoute path={ROUTE_OBSERVATIONS.path} />

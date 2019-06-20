@@ -51,7 +51,7 @@
         color: $dustyGray;
       }
 
-      &:active {
+      &:enabled:active {
         color: $dustyGray !important;
       }
 
@@ -63,7 +63,9 @@
     &:disabled {
       border: none;
       padding-left: 0;
-      color: $black;
+      color: $black !important;
+      outline: none;
+      box-shadow: none !important;
     }
   }
 

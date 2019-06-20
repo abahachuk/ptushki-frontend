@@ -16,7 +16,8 @@ import { signOut } from "../../../store/actions/authActions";
 import {
   ROUTE_BIRDS,
   ROUTE_OBSERVATIONS,
-  ROUTE_SIGN_IN
+  ROUTE_SIGN_IN,
+  ROUTE_ABOUT_US
 } from "../routing/routes";
 import "./RootNav.scss";
 import { ProtectedNavItemConnected } from "./ProtectedNavItemConnected";
@@ -40,6 +41,11 @@ export const RootNav: FC<DispatchProp & { user: UserInfo }> = ({
       <ProtectedNavItemConnected {...ROUTE_OBSERVATIONS}>
         {labels.observations.title}
       </ProtectedNavItemConnected>
+      <NavItem>
+        <NavLink tag={Link} to={ROUTE_ABOUT_US.path}>
+          {labels.aboutUs.title}
+        </NavLink>
+      </NavItem>
     </Nav>
     <Collapse isOpen navbar>
       <Nav className="ml-auto" navbar>

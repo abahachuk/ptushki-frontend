@@ -74,21 +74,23 @@
   }
 
   &__find-btn {
-    float: right;
     height: 30px;
     font-size: 12px;
     color: $mineSharf;
-    margin-top: 16px;
+    display: block;
+    margin-right: 0;
+    margin-left: auto;
   }
 
   &__separator {
     border-bottom: 1px dashed $dark-blue;
-    padding-top: 46px;
-    margin: 24px 0;
-    height: 1px;
+    padding-top: 24px;
+    margin-bottom: 24px;
   }
 
   &__input {
+    margin-bottom: 15px;
+
     &:disabled {
       background: transparent;
       border: none;

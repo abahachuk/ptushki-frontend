@@ -7,9 +7,9 @@ import {
 import { UserInfo } from "../auth/models";
 
 export enum VerificationStatus {
-  Pending = "Pending",
-  Verified = "Verified",
-  Rejected = "Rejected"
+  pending = "pending",
+  approved = "approved",
+  rejected = "rejected"
 }
 
 // TODO when api is localised, change this
@@ -21,7 +21,7 @@ export interface DescriptedField {
 
 export interface ObservationData {
   id: string;
-  verificationStatus: VerificationStatus;
+  verified: VerificationStatus;
   colorRing: string;
   note: string;
   placeName: string;

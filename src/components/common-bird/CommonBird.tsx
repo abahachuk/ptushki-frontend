@@ -57,7 +57,8 @@ export const CommonBird: FC<ICommonBird> = ({
   observationsLabels,
   circumstancesLabels,
   initialValues,
-  collection
+  collection,
+  photos
 }) => {
   const [isOpened, setIsOpen] = useState(false);
   const [calendarFocused, setCalendarFocused] = useState(false);
@@ -171,7 +172,10 @@ export const CommonBird: FC<ICommonBird> = ({
           <p className={`${blockName}__field-label`}>
             {labels.addObservation.observationsFields.photos}
           </p>
-          <DropZone className={`${blockName}__field-container`} />
+          <DropZone
+            className={`${blockName}__field-container`}
+            photos={photos}
+          />
           <Label for="comment" className={`${blockName}__field-label`}>
             {labels.addObservation.observationsFields.comment}
           </Label>
@@ -204,16 +208,25 @@ export const CommonBird: FC<ICommonBird> = ({
             disabled={viewMode}
           />
           <Label for="coordinates" className={`${blockName}__field-label`}>
-            {labels.addObservation.circumstancesFields.coordinates}
+            {labels.addObservation.circumstancesFields.latitude}
           </Label>
           <Input
             className={`${blockName}__input`}
-            id="coordinates"
-            placeholder={
-              labels.addObservation.circumstancesFields.coordinatesPlaceholder
-            }
+            id="latitude"
+            placeholder={labels.addObservation.circumstancesFields.latitude}
             onChange={onChangeCoordinates}
-            value={formValues.coordinates}
+            value={formValues.latitude}
+            disabled={viewMode}
+          />
+          <Label for="coordinates" className={`${blockName}__field-label`}>
+            {labels.addObservation.circumstancesFields.longitude}
+          </Label>
+          <Input
+            className={`${blockName}__input`}
+            id="longitude"
+            placeholder={labels.addObservation.circumstancesFields.longitude}
+            onChange={onChangeCoordinates}
+            value={formValues.longitude}
             disabled={viewMode}
           />
           <Button

@@ -21,19 +21,6 @@ export const observationsFiltersRequest = createStandardAction(
   "OBSERVATIONS_FILTERS_REQUEST"
 )();
 
-export const setObservationVerificationStatus = createAsyncAction(
-  "SET_VERIFICATION_STATUS_REQUEST",
-  "SET_VERIFICATION_STATUS_SUCCESS",
-  "SET_VERIFICATION_STATUS_FAILURE"
-)<
-  {
-    id: string;
-    verificationStatus: VerificationStatus;
-  },
-  any,
-  string
->();
-
 export const observationGridActions = dataGridActions<ObservationFilters>(
   OBSERVATIONS_LIST_NAMESPACE
 );

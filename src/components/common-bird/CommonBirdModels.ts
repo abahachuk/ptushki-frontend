@@ -23,6 +23,8 @@ export interface FormValues {
   region: string;
   coordinates: string;
   date: any;
+  longitude: string;
+  latitude: string;
   accuracyOfDate: string;
   comment: string;
 }
@@ -39,6 +41,7 @@ export interface ICommonBird extends IBird {
   formValues?: FormValues;
   observationsLabels: FormLabels;
   circumstancesLabels: FormLabels;
+  photos?: Array<string>;
 }
 
 export interface IBlockHeader {

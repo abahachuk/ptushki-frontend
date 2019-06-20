@@ -1,0 +1,98 @@
+@import "../../../styles/variables";
+
+.about-us {
+  padding: 15px 15px 25px 15px;
+  background-color: $white;
+
+  &__content {
+    border-radius: 8px;
+  }
+
+  &__header {
+    height: 288px;
+    background: url("../../../assets/about-us-header.png");
+    background-size: cover;
+    display: flex;
+    align-items: center;
+  }
+
+  &__header-text {
+    margin-left: 76px;
+    font-size: 42px;
+    line-height: 50px;
+    width: 200px;
+    color: $white;
+  }
+
+  &__description-section {
+    padding: 0 76px 28px;
+  }
+
+  &__article {
+    margin-top: 50px;
+  }
+
+  &__article-heading {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 30px;
+  }
+
+  &__article-content {
+    margin-top: 20px;
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  &__subarticle-heading {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+  }
+
+  &__subarticle-content {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &__subarticles-list {
+    list-style-type: none;
+
+    & li {
+      position: relative;
+      margin-top: 34px;
+
+      & img {
+        position: absolute;
+        top: 0;
+        left: -44px;
+        height: 30px;
+      }
+    }
+
+  }
+
+  &__contact-information {
+    margin-top: 40px;
+    padding: 38px 76px 52px;
+    background: whitesmoke;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+
+  &__contacts-container {
+    display: flex;
+  }
+
+  &__contacts-column {
+    max-width: 400px;
+
+    &:not(:first-child) {
+      margin-left: 138px;
+    }
+  }
+
+  &__contacts-block {
+    margin-top: 34px;
+  }
+}
