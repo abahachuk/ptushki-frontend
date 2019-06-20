@@ -45,20 +45,29 @@
     width: 100%;
 
     .SingleDatePicker {
-      .DateInput__block {
-          padding-right: 42px;
-      }
-    
-      .SingleDatePickerInput_calendarIcon {
+      .SingleDatePickerInput {
+        border: 0;
+
+        .DateInput__block {
+          padding-right: 35px;
+          border-radius: 0.25rem;
+          color: $trout;
+          border: 1px solid $ghost;
+        }
+  
+        .SingleDatePickerInput_calendarIcon {
           position: absolute;
           right: 0;
           padding: 0 10px;
           line-height: 36px;
-      }
-      .DateInput_input {
-        font-weight: 400;
-        font-size: 1rem;
-        padding: 7px 11px 5px
+          margin: 0 1px 0 10px;
+        }
+        .DateInput_input {
+          font-weight: 400;
+          font-size: 1rem;
+          padding: 7px 11px 5px;
+          background-color: transparent;
+        }
       }
     }
   }
