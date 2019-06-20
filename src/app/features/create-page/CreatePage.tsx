@@ -77,8 +77,8 @@ export const CreatePage: FC<DispatchProp & CreatePageProps> = ({
   };
 
   const onChangeValue = useCallback(
-    ({ value, type }: IChangeValue) =>
-      dispatch(updateFn({ ...entity.value, [type]: value })),
+    ({ value, label, type }: IChangeValue) =>
+      dispatch(updateFn({ ...entity.value, [type]: { value, label } })),
     [dispatch, entity.value, updateFn]
   );
 

@@ -25,10 +25,13 @@ export interface CreatePageProps {
 
 export enum InitialData {
   age = "age",
+  ageMentioned = "ageMentioned",
   sex = "sex",
+  sexMentioned = "sexMentioned",
   status = "status",
   accuracyOfDate = "accuracyOfDate",
   species = "species",
+  speciesMentioned = "speciesMentioned",
   primaryIdentificationMethod = "primaryIdentificationMethod",
   placeCode = "placeCode"
 }
@@ -41,6 +44,7 @@ export interface IInitialDataDescriptor extends InitialDataDescriptorMap {
   value?: string;
   desc_eng: string;
   desc_rus?: string;
+  desc_byn?: string;
 }
 
 export interface IInitialData extends InitialDataMap {}

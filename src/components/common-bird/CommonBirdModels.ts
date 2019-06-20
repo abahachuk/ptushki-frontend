@@ -13,20 +13,27 @@ export interface PhotoItem {
   id: number;
 }
 
+export interface FormValueDescriptor {
+  value: string;
+  label: string;
+}
+
 export interface FormValues {
-  species?: string;
-  speciesMentioned?: string;
-  sexMentioned: string;
-  ageMentioned: string;
-  status: string;
-  country: string;
-  region: string;
-  coordinates: string;
+  euringCodeIdentifier: FormValueDescriptor;
+  species?: FormValueDescriptor;
+  speciesMentioned?: FormValueDescriptor;
+  sexMentioned: FormValueDescriptor;
+  ageMentioned: FormValueDescriptor;
+  status: FormValueDescriptor;
+  country: FormValueDescriptor;
+  region: FormValueDescriptor;
+  coordinates: FormValueDescriptor;
+  accuracyOfDate: FormValueDescriptor;
+  comment: FormValueDescriptor;
+  // TODO: integrate date picker
   date: any;
-  longitude: string;
-  latitude: string;
-  accuracyOfDate: string;
-  comment: string;
+  longitude: FormValueDescriptor;
+  latitude: FormValueDescriptor;
 }
 
 interface FormLabels {

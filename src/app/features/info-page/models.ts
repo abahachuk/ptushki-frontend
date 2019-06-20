@@ -1,8 +1,10 @@
 import { AnyAction } from "redux";
 import { ReactNode } from "react";
-import { FormValues } from "../../../components/common-bird/CommonBirdModels";
-import { Scope } from "../../../config/permissions";
-import { CreatePageProps } from "../create-page/models";
+import {
+  CreatePageProps,
+  IInitialDataDescriptor,
+  InitialData
+} from "../create-page/models";
 
 export interface IInfoScopeLabel {
   edit?: string;
@@ -16,6 +18,12 @@ export interface IInfoScopeLabel {
 }
 
 export interface InfoPageProps extends CreatePageProps {
-  removeFn: (form: FormValues) => AnyAction;
+  removeFn: (id: string) => AnyAction;
+  getFn: (id: string) => AnyAction;
+  flushFn: () => AnyAction;
   historyComponent?: ReactNode;
 }
+
+type FormDataMap = { [key in InitialData]: IInitialDataDescriptor };
+
+export interface FormData extends FormDataMap {}

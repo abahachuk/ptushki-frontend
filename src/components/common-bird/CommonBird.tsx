@@ -132,7 +132,9 @@ export const CommonBird: FC<ICommonBird> = ({
             collection={getCollection(InitialData.species)}
             onChangeValue={onChangeFormValue}
             type="speciesMentioned"
-            value={formValues.speciesMentioned}
+            value={
+              formValues.speciesMentioned && formValues.speciesMentioned.label
+            }
             disabled={viewMode}
           />
           <Field
@@ -143,7 +145,7 @@ export const CommonBird: FC<ICommonBird> = ({
             collection={getCollection(InitialData.sex)}
             onChangeValue={onChangeFormValue}
             type="sexMentioned"
-            value={formValues.sexMentioned}
+            value={formValues.sexMentioned && formValues.sexMentioned.label}
             disabled={viewMode}
           />
           <Field
@@ -154,7 +156,7 @@ export const CommonBird: FC<ICommonBird> = ({
             collection={getCollection(InitialData.age)}
             onChangeValue={onChangeFormValue}
             type="ageMentioned"
-            value={formValues.ageMentioned}
+            value={formValues.ageMentioned && formValues.ageMentioned.label}
             disabled={viewMode}
           />
           <Field
@@ -165,7 +167,7 @@ export const CommonBird: FC<ICommonBird> = ({
             collection={getCollection(InitialData.status)}
             onChangeValue={onChangeFormValue}
             type="status"
-            value={formValues.status}
+            value={formValues.status && formValues.status.label}
             disabled={viewMode}
           />
           <p className={`${blockName}__field-label`}>
@@ -187,7 +189,7 @@ export const CommonBird: FC<ICommonBird> = ({
               labels.addObservation.observationsFields.commentPlaceholder
             }
             onChange={onChangeComment}
-            value={formValues.comment}
+            value={formValues.comment && formValues.comment.label}
             disabled={viewMode}
           />
         </InfoContainer>
@@ -203,7 +205,7 @@ export const CommonBird: FC<ICommonBird> = ({
             collection={getCollection(InitialData.placeCode)}
             onChangeValue={onChangeFormValue}
             type="region"
-            value={formValues.region}
+            value={formValues.region && formValues.region.label}
             disabled={viewMode}
           />
           <Label for="coordinates" className={`${blockName}__field-label`}>
@@ -214,7 +216,7 @@ export const CommonBird: FC<ICommonBird> = ({
             id="latitude"
             placeholder={labels.addObservation.circumstancesFields.latitude}
             onChange={onChangeCoordinates}
-            value={formValues.latitude}
+            value={formValues.latitude && formValues.latitude.label}
             disabled={viewMode}
           />
           <Label for="coordinates" className={`${blockName}__field-label`}>
@@ -225,7 +227,7 @@ export const CommonBird: FC<ICommonBird> = ({
             id="longitude"
             placeholder={labels.addObservation.circumstancesFields.longitude}
             onChange={onChangeCoordinates}
-            value={formValues.longitude}
+            value={formValues.longitude && formValues.longitude.label}
             disabled={viewMode}
           />
           <Button
@@ -242,7 +244,9 @@ export const CommonBird: FC<ICommonBird> = ({
               {labels.addObservation.circumstancesFields.timeAndDate}
             </p>
             <SingleDatePicker
-              date={formValues.date}
+              // TODO: integrate date picker
+              // date={formValues.date && formValues.date.label}
+              date={null}
               onDateChange={onChangeDate}
               focused={calendarFocused}
               onFocusChange={({ focused }) => setCalendarFocused(focused)}
@@ -265,7 +269,7 @@ export const CommonBird: FC<ICommonBird> = ({
             collection={getCollection(InitialData.accuracyOfDate)}
             onChangeValue={onChangeFormValue}
             type="accuracyOfDate"
-            value={formValues.accuracyOfDate}
+            value={formValues.accuracyOfDate && formValues.accuracyOfDate.label}
             disabled={viewMode}
           />
         </InfoContainer>

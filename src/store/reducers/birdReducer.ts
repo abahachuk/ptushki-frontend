@@ -5,7 +5,13 @@ import {
   createAsyncStateReducer
 } from "../../utils/createAsyncStateReducer";
 import { FormValues } from "../../components/common-bird/CommonBirdModels";
-import { addBird, updateBird } from "../actions/birdActions";
+import {
+  addBird,
+  flushBird,
+  getBird,
+  putBird,
+  updateBird
+} from "../actions/birdActions";
 
 const initialState = {
   value: {},
@@ -18,11 +24,25 @@ export const birdReducer = reduceReducer(
 
   createAsyncStateReducer(initialState, addBird),
 
+  createAsyncStateReducer(initialState, getBird),
+
+  createAsyncStateReducer(initialState, putBird),
+
   handleAction(
     updateBird,
     (state, action) => ({
       ...state,
       value: action.payload
+    }),
+    initialState
+  ),
+
+  handleAction(
+    // @ts-ignore
+    flushBird,
+    (state, action) => ({
+      ...state,
+      value: {}
     }),
     initialState
   )

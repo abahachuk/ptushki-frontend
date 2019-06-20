@@ -1,10 +1,11 @@
 import React, { useState, useCallback, FC, Fragment } from "react";
 import useMount from "react-use/esm/useMount";
+import useUnmount from "react-use/esm/useUnmount";
 import { goBack } from "connected-react-router";
 import { DispatchProp } from "react-redux";
+import { RouteComponentProps } from "react-router";
 import { Button } from "reactstrap";
 import { birdData, formValues } from "../bird-info/test-data";
-import { FormValues } from "../../../components/common-bird/CommonBirdModels";
 
 import { labels } from "../../../config/i18n/labels";
 
@@ -17,6 +18,7 @@ import { IInfoScopeLabel, InfoPageProps } from "./models";
 import "./InfoPage.scss";
 import { UserAction } from "../../../config/permissions";
 import { CanConnected } from "../auth/CanConnected";
+import { FillLoader } from "../../../components/loader/FillLoader";
 
 const initialForm = {
   species: "",
@@ -32,18 +34,25 @@ const initialForm = {
 
 const blockName = "info-page";
 
-export const InfoPage: FC<DispatchProp & InfoPageProps> = ({
+export const InfoPage: FC<
+  DispatchProp & RouteComponentProps<{ id: string }> & InfoPageProps
+> = ({
   dispatch,
   removeFn,
   scope,
-  sendFn,
-  updateFn,
   entity,
-  historyComponent
+  match,
+  getFn,
+  flushFn,
+  sendFn,
+  historyComponent,
+  ...props
 }) => {
+  const { id } = match.params;
+  useMount(() => dispatch(getFn(id)));
+  useUnmount(() => dispatch(flushFn()));
   const [editMode, setEditMode] = useState(false);
-  const [form, setFormValues] = useState<FormValues>(formValues);
-  const [bird, setBird] = useState(birdData);
+  const [bird, setBird] = useState(birdData.params);
 
   // @ts-ignore
   const scopeLabels: IInfoScopeLabel = labels.infoPage[
@@ -60,9 +69,9 @@ export const InfoPage: FC<DispatchProp & InfoPageProps> = ({
 
   const onGoBack = useCallback(() => dispatch(goBack()), [dispatch]);
   const onClickEdit = useCallback(() => setEditMode(true), [setEditMode]);
-  const onClickDelete = useCallback(() => dispatch(removeFn(form)), [
+  const onClickDelete = useCallback(() => dispatch(removeFn(id)), [
     dispatch,
-    form,
+    id,
     removeFn
   ]);
 
@@ -79,7 +88,7 @@ export const InfoPage: FC<DispatchProp & InfoPageProps> = ({
       header={header}
       scope={scope}
       sendFn={sendFn}
-      updateFn={updateFn}
+      {...props}
     />
   ) : (
     <div className={blockName}>
@@ -112,17 +121,19 @@ export const InfoPage: FC<DispatchProp & InfoPageProps> = ({
           </CanConnected>
         </div>
       </div>
-      {birdData.euring && (
+      {entity.value.euringCodeIdentifier && (
         <Fragment>
           <p className={`${blockName}__euring-title`}>
             {labels.birdInfo.euring}
           </p>
-          <span className={`${blockName}__euring`}>{birdData.euring}</span>
+          <span className={`${blockName}__euring`}>
+            {entity.value.euringCodeIdentifier.label}
+          </span>
         </Fragment>
       )}
       <CommonBird
-        birdParams={bird.params}
-        formValues={form}
+        birdParams={bird}
+        formValues={entity.value}
         observationsLabels={observationsLabels}
         circumstancesLabels={circumstancesLabels}
         onChangeBirdValues={setBird}
@@ -144,6 +155,7 @@ export const InfoPage: FC<DispatchProp & InfoPageProps> = ({
           {scopeLabels.edit}
         </Button>
       </div>
+      {entity.isLoading && <FillLoader fullPage />}
     </div>
   );
 };
