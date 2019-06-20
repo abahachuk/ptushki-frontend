@@ -1,7 +1,7 @@
 import streamSaver from "streamsaver";
 import {
   OBSERVATIONS_DOWNLOAD_EXCEL_TEMPLATE,
-  OBSERVATIONS_IMPORT
+  OBSERVATIONS_VALIDATE_IMPORT
 } from "../../../config/endpoints";
 import { ajaxService } from "../../../services";
 
@@ -21,20 +21,39 @@ export const downloadTemplate = () => {
     });
 };
 
-export const uploadObservations = (file: any) => {
+interface ValidationError {
+  rowNumber: number;
+  status: {
+    error: string;
+    verifiedEuRingCodes: false;
+  };
+}
+
+interface InvalidDataFormatError {
+  rowNumber: number;
+  result: {
+    [key: string]: string[];
+  };
+}
+
+export interface ValidationResponse {
+  euRingErrors: Array<ValidationError>;
+  invalidDataFormat: Array<InvalidDataFormatError>;
+  possibleClones: number;
+  rowCount: number;
+  emptyRowCount: number;
+}
+
+export const uploadObservationsFile = (file: any) => {
   const formData = new FormData();
   formData.append("file", file.file);
 
-  ajaxService
-    .makeCall<Response>(OBSERVATIONS_IMPORT, formData, "POST", {
+  return ajaxService.makeCall<ValidationResponse>(
+    OBSERVATIONS_VALIDATE_IMPORT,
+    formData,
+    "POST",
+    {
       // "Content-Type": "multipart/form-data"
-    })
-    .then(r => {
-      const fileStream = streamSaver.createWriteStream(
-        "observations_spreadsheet_template.xlsx"
-      );
-
-      r.body.pipeTo(fileStream);
-      console.log(r);
-    });
+    }
+  );
 };

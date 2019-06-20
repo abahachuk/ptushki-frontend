@@ -12,7 +12,11 @@ import { dropZoneContent } from "./dropAreaMappings";
 import { ImportDragAndDrop } from "./import-drag-n-drop/ImportDragAndDrop";
 import "./ImportObservations.scss";
 import { DropAreaStates, LoadedFile } from "./models";
-import { downloadTemplate, uploadObservations } from "./service";
+import {
+  downloadTemplate,
+  uploadObservationsFile,
+  ValidationResponse
+} from "./service";
 
 export const blockName = "import-observations";
 
@@ -40,24 +44,32 @@ const ImportButton = ({
 export const ImportObservations: FC<DispatchProp> = ({ dispatch }) => {
   const [file, setFile] = useState(null);
   const [dragAreaState, setDragAreaState] = useState(DropAreaStates.Intact);
+  const [validationResponse, setValidationResponse] = useState<
+    ValidationResponse
+  >(null);
 
   useEffect(() => {
     if (file) {
-      uploadObservations(file);
-      // to upload file on backend and wait response
-      // if successed verified show according state of dropzone, otherwise to show fail dropzone state
-      // in success case there will be response with validating result:
-      // how many columns in table, which rows are empty etc.
-      const isSuccessfullyVerified = true;
-
-      if (isSuccessfullyVerified) {
-        setDragAreaState(DropAreaStates.Success);
-      } else {
-        setDragAreaState(DropAreaStates.Fail);
-        setFile(null);
-      }
+      uploadObservationsFile(file).then(setValidationResponse);
     }
   }, [file]);
+
+  useEffect(() => {
+    if (!validationResponse) {
+      return;
+    }
+
+    const isSuccessfullyVerified =
+      !validationResponse.euRingErrors.length &&
+      !validationResponse.invalidDataFormat.length;
+
+    if (isSuccessfullyVerified) {
+      setDragAreaState(DropAreaStates.Success);
+    } else {
+      setDragAreaState(DropAreaStates.Fail);
+      setFile(null);
+    }
+  }, [validationResponse]);
 
   const onFileLoaded = (loadedFile: LoadedFile) => {
     setFile(loadedFile);
@@ -121,6 +133,31 @@ export const ImportObservations: FC<DispatchProp> = ({ dispatch }) => {
             />
             <div className="mt-2">
               <FileInfoBlock />
+              {validationResponse && (
+                <div className="text-danger mb-3">
+                  <div className="my-2">
+                    <h5>Ошибки EURing:</h5>
+                    {validationResponse.euRingErrors.map(err => (
+                      <div className="ml-2">
+                        <span>Ряд {err.rowNumber}: </span>
+                        {err.status.error}
+                      </div>
+                    ))}
+                  </div>
+                  <h5>Ошибки формата записей:</h5>
+                  {validationResponse.invalidDataFormat.map(err => (
+                    <div className="ml-2">
+                      <span>Ряд {err.rowNumber}: </span>
+                      {Object.entries(err.result).map(([key, errors]) => (
+                        <div className="ml-2">
+                          <span className="font-weight-bold">{key}: </span>
+                          {errors.join("; ")}
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <ImportButton
               caption={labels.importObservations.addToDatabase}

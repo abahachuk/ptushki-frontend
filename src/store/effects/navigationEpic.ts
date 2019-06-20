@@ -1,6 +1,6 @@
 import { LOCATION_CHANGE } from "connected-react-router";
 import { Epic, ofType } from "redux-observable";
-import { EMPTY, of } from "rxjs";
+import { EMPTY, merge, of } from "rxjs";
 import { flatMap } from "rxjs/operators";
 import {
   ROUTE_BIRDS,
@@ -32,7 +32,10 @@ export const navigationEpic: Epic<any, any, RootState> = (action$, state$) =>
 
       if (from.includes(ROUTE_OBSERVATIONS.path)) {
         if (isNavigatingWithinSubRoute(from, to)) {
-          return of(observationsData.success([]));
+          return merge(
+            of(observationsData.success([])),
+            of(observationsData.success([]))
+          );
         }
         return of(observationsFlush());
       }
