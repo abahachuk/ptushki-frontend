@@ -1,42 +1,49 @@
 import { ArrowBack } from "@material-ui/icons";
 import sn from "classnames";
+import { push } from "connected-react-router";
 import React, { FC, useEffect, useState } from "react";
+import { connect, DispatchProp } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import { labels } from "../../../config/i18n/labels";
+import { RootState } from "../../../store";
 import { ROUTE_OBSERVATIONS } from "../routing/routes";
 import { dropZoneContent } from "./dropAreaMappings";
 import { ImportDragAndDrop } from "./import-drag-n-drop/ImportDragAndDrop";
 import "./ImportObservations.scss";
 import { DropAreaStates, LoadedFile } from "./models";
-import { downloadTemplate } from "./service";
+import { downloadTemplate, uploadObservations } from "./service";
 
 export const blockName = "import-observations";
 
 const ImportButton = ({
   caption,
-  isDisabled
+  isDisabled,
+  onClick
 }: {
   caption: string;
   isDisabled: boolean;
+  onClick?: any;
 }) => (
   <div className={`${blockName}__import-button-container`}>
     <Button
       color="orange"
       className={sn("mt-3", "button", `${blockName}__import-button`)}
       disabled={isDisabled}
+      onClick={onClick}
     >
       {caption}
     </Button>
   </div>
 );
 
-export const ImportObservations: FC = () => {
+export const ImportObservations: FC<DispatchProp> = ({ dispatch }) => {
   const [file, setFile] = useState(null);
   const [dragAreaState, setDragAreaState] = useState(DropAreaStates.Intact);
 
   useEffect(() => {
     if (file) {
+      uploadObservations(file);
       // to upload file on backend and wait response
       // if successed verified show according state of dropzone, otherwise to show fail dropzone state
       // in success case there will be response with validating result:
@@ -107,9 +114,9 @@ export const ImportObservations: FC = () => {
               title={title}
               subtitle={subtitle}
               FileActionButton={FileActionButton}
-              dropZoneProps={{
+              inputProps={{
                 accept:
-                  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
               }}
             />
             <div className="mt-2">
@@ -118,6 +125,7 @@ export const ImportObservations: FC = () => {
             <ImportButton
               caption={labels.importObservations.addToDatabase}
               isDisabled={isSubmitButtonDisabled}
+              onClick={() => dispatch(push(ROUTE_OBSERVATIONS.path))}
             />
           </div>
           <div className={`${blockName}__template-block`}>
@@ -164,3 +172,7 @@ export const ImportObservations: FC = () => {
     </div>
   );
 };
+
+export const ImportObservationsConnected = connect((state: RootState) => ({}))(
+  ImportObservations
+);

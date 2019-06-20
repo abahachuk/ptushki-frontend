@@ -1,10 +1,7 @@
 import React, { FC } from "react";
 import { RouteComponentProps, RouteProps } from "react-router";
-import { ROUTE_OBSERVATIONS } from "../routing/routes";
-import { ObservationsPage } from "./ObservationsPage";
-import { ComponentRoute } from "../routing/ComponentRoute";
-import { CreatePageConnected } from "../create-page/CreatePageConnected";
 import { Scope } from "../../../config/permissions";
+import { RootState } from "../../../store";
 import {
   addObservation,
   deleteObservation,
@@ -13,9 +10,12 @@ import {
   putObservation,
   updateObservation
 } from "../../../store/actions/observationActions";
+import { CreatePageConnected } from "../create-page/CreatePageConnected";
+import { ImportObservationsConnected } from "../import-observations/ImportObservations";
 import { InfoPageConnected } from "../info-page/InfoPageConnected";
-import { RootState } from "../../../store";
-import { ImportObservations } from "../import-observations/ImportObservations";
+import { ComponentRoute } from "../routing/ComponentRoute";
+import { ROUTE_OBSERVATIONS } from "../routing/routes";
+import { ObservationsPage } from "./ObservationsPage";
 
 const commonProps = {
   updateFn: updateObservation,
@@ -48,7 +48,7 @@ export const ObservationsRoute: FC<RouteProps> = () => {
       PageComponent={ObservationsPage}
       AddComponent={AddObservation}
       DetailComponent={InfoPage}
-      ImportComponent={ImportObservations}
+      ImportComponent={ImportObservationsConnected}
     />
   );
 };

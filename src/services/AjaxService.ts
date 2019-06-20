@@ -26,17 +26,22 @@ export default class AjaxService {
     token: string | null,
     data?: any,
     method?: string,
-    headers?: HeadersInit
+    headers?: any
   ): Promise<Response> {
     return fetch(url, {
       method: method || (data ? "POST" : "GET"),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: token,
-        ...headers
-      },
-      body: JSON.stringify(data)
+      headers: headers
+        ? {
+            ...headers,
+            Authorization: token
+          }
+        : {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: token
+          },
+      // TODO check for content type and refactor this assumption
+      body: !headers ? JSON.stringify(data) : data
     });
   }
 
@@ -91,7 +96,6 @@ export default class AjaxService {
       const message = await this.parseError(response);
       throw new Error(message);
     }
-    console.log(response.headers);
 
     const contentType = response.headers.get("content-type");
 

@@ -15,18 +15,23 @@ export const ImportDragAndDrop: FC<DropZoneProps> = ({
   Icon,
   title,
   subtitle,
-  dropZoneProps,
+  inputProps,
   FileActionButton
 }) => {
   const onDrop = useCallback(
     acceptedFiles => {
+      if (!acceptedFiles.length) {
+        return;
+      }
+
       const file = acceptedFiles[acceptedFiles.length - 1];
       const reader = new FileReader();
       reader.onload = () =>
         onFileLoaded({
           fileContent: reader.result,
           fileName: file.name,
-          fileSize: `${Math.round(file.size / 1000)} kb`
+          fileSize: `${Math.round(file.size / 1000)} kb`,
+          file
         });
       reader.readAsDataURL(file);
     },
@@ -34,8 +39,8 @@ export const ImportDragAndDrop: FC<DropZoneProps> = ({
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    ...dropZoneProps
+    onDrop
+    // ...dropZoneProps
   });
 
   const onCloseClick = (e: MouseEvent) => {
@@ -49,6 +54,7 @@ export const ImportDragAndDrop: FC<DropZoneProps> = ({
         {...(dragAreaState !== DropAreaStates.Success
           ? getInputProps()
           : { hidden: true })}
+        {...inputProps}
       />
       <div
         className={sn(
