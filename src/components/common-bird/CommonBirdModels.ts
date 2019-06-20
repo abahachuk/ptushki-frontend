@@ -21,7 +21,7 @@ export interface FormValues {
   country: string;
   region: string;
   coordinates: string;
-  date: string;
+  date: any;
   accuracyOfDate: string;
   comment: string;
 }

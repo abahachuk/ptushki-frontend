@@ -10,7 +10,6 @@ import {
 } from "reactstrap";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
-import moment from "moment";
 import sn from "classnames";
 import { SingleDatePicker } from "react-dates";
 import { Autosuggest } from "../autosuggest/Autosuggest";
@@ -242,7 +241,7 @@ export const CommonBird: FC<ICommonBird> = ({
               {labels.addObservation.circumstancesFields.timeAndDate}
             </p>
             <SingleDatePicker
-              date={moment(formValues.date)}
+              date={formValues.date}
               onDateChange={onChangeDate}
               focused={calendarFocused}
               onFocusChange={({ focused }) => setCalendarFocused(focused)}

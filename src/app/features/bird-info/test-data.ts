@@ -113,6 +113,7 @@ export const formValues = {
   country: "Беларусь",
   region: "Брестская",
   coordinates: "123.32 324.123",
+  date: "",
   accuracyOfDate: "5 минут",
   comment: "-"
 };
