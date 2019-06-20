@@ -1,5 +1,8 @@
 import * as React from "react";
-import { ObservationData } from "../../app/features/observations/models";
+import {
+  ObservationData,
+  VerificationStatus
+} from "../../app/features/observations/models";
 import { EuringAndDescriptionCell } from "../../components/grid/EuringAndDescriptionCell";
 import { DataGridCol } from "../../components/table/DataGrid";
 import { labels } from "../../config/i18n/labels";
@@ -91,10 +94,10 @@ export const COMMON_GRID_COLUMNS: {
     getCellValue: r => <VerificationCell observation={r} />,
     filter: {
       getLabel: ({ value }) => {
-        if (value === true) {
+        if (value === VerificationStatus.approved) {
           return labels.verification.verified;
         }
-        if (value === false) {
+        if (value === VerificationStatus.rejected) {
           return labels.verification.rejected;
         }
         return labels.verification.pending;
