@@ -68,7 +68,7 @@ export const App: FC<{
           {...ROUTE_RESET_PASSWORD}
           component={ResetPasswordFormConnected}
         />
-        <ProtectedRoute exact {...ROUTE_ABOUT_US} component={AboutUsPage} />
+        <Route exact {...ROUTE_ABOUT_US} component={AboutUsPage} />
 
         <BirdsRoute path={ROUTE_BIRDS.path} />
         <ObservationsRoute path={ROUTE_OBSERVATIONS.path} />

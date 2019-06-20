@@ -11,7 +11,7 @@ export const REFRESH_ENDPOINT = `${startURL}/${authRoute}/refresh`;
 /**
  * Initial data
  */
-export const INITIAL_DATA_ENDPOINT = "/initial-data";
+export const INITIAL_DATA_ENDPOINT = `${startURL}/initial-data`;
 
 /**
  * Observations
