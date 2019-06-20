@@ -1,4 +1,4 @@
-import React, { useState, useCallback, FC } from "react";
+import React, { useState, useCallback, FC, useEffect } from "react";
 import sn from "classnames";
 import { useDropzone } from "react-dropzone";
 
@@ -8,23 +8,30 @@ const blockName = "drag-and-drop";
 
 interface IDropZone {
   className?: string;
+  onDropFiles?: (files: Array<File>) => void;
+  photos?: Array<string>;
 }
 
-export const DropZone: FC<IDropZone> = ({ className }) => {
-  const [images, setImages] = useState([]);
+export const DropZone: FC<IDropZone> = ({ className, onDropFiles, photos }) => {
+  const [files, setFiles] = useState<Array<string>>(photos);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: "image/*",
+    onDrop: acceptedFiles => {
+      onDropFiles(acceptedFiles);
+      setFiles([
+        ...files,
+        ...acceptedFiles.map(file => URL.createObjectURL(file))
+      ]);
+    }
+  });
 
-  const onDrop = useCallback(
-    acceptedFiles => {
-      acceptedFiles.forEach((file: File) => {
-        const reader = new FileReader();
-        reader.onload = () => setImages([...images, reader.result]);
-        reader.readAsDataURL(file);
-      });
+  useEffect(
+    () => () => {
+      // Make sure to revoke the data uris to avoid memory leaks
+      files.forEach(file => URL.revokeObjectURL(file));
     },
-    [images]
+    [files]
   );
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
     <div
@@ -32,7 +39,7 @@ export const DropZone: FC<IDropZone> = ({ className }) => {
       className={sn(`${blockName}__container`, className)}
     >
       <input {...getInputProps()} />
-      {images.map((img: string, idx: number) => (
+      {files.map((img: string, idx: number) => (
         // eslint-disable-next-line
         <img key={idx} className={`${blockName}__img`} src={img} alt="" /> 
       ))}
@@ -43,4 +50,9 @@ export const DropZone: FC<IDropZone> = ({ className }) => {
       </div>
     </div>
   );
+};
+
+DropZone.defaultProps = {
+  onDropFiles: () => {},
+  photos: []
 };

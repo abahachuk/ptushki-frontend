@@ -131,6 +131,8 @@ export const labels = {
       regionPlaceholder: "Выбрать район",
       coordinates: "Координаты",
       coordinatesPlaceholder: "Координаты",
+      latitude: "Широта",
+      longitude: "Долгота",
       findOnMap: "Найти место на карте",
       timeAndDate: "Время/Дата",
       timeAndDatePlaceholder: "Время/Дата",
