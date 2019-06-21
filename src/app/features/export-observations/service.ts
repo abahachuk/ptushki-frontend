@@ -10,7 +10,7 @@ export const exportObservations = () => {
     })
     .then(r => {
       const fileStream = streamSaver.createWriteStream(
-        "observations_spreadsheet_template.xlsx"
+        "observations_export.xlsx"
       );
 
       r.body.pipeTo(fileStream);
