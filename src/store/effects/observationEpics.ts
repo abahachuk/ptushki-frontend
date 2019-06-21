@@ -2,15 +2,17 @@ import { combineEpics, Epic } from "redux-observable";
 import {
   catchError,
   filter,
+  flatMap,
   map,
   switchMap,
   withLatestFrom
 } from "rxjs/operators";
 import { isActionOf } from "typesafe-actions";
-import { from, of } from "rxjs";
+import { from, merge, of } from "rxjs";
+import { push } from "connected-react-router";
 import { RootState } from "../index";
 import { ajaxService } from "../../services";
-import { BIRDS_ENDPOINT, OBSERVATIONS_ENDPOINT } from "../../config/endpoints";
+import { OBSERVATIONS_ENDPOINT } from "../../config/endpoints";
 import { SecurityError } from "../../services/SecurutyService";
 import { signOut } from "../actions/authActions";
 import { FormValues } from "../../components/common-bird/CommonBirdModels";
@@ -20,7 +22,7 @@ import {
   getObservation,
   putObservation
 } from "../actions/observationActions";
-import { putBird } from "../actions/birdActions";
+import { ROUTE_OBSERVATIONS } from "../../app/features/routing/routes";
 
 export const getFormValues = (data: FormValues) =>
   Object.entries(data).reduce((acc: any, item: any) => {
@@ -38,8 +40,8 @@ export const transformToFormValues = (data: any) =>
         item[1] &&
         (isPrimitive
           ? item[1]
-          : item[1].desc_rus ||
-            item[1].desc_eng ||
+          : item[1].desc_eng ||
+            item[1].desc_rus ||
             item[1].desc_byn ||
             item[1][item[0]])
     };
@@ -60,7 +62,13 @@ export const addObservationEpic: Epic<any, any, RootState> = (
           getFormValues(action.payload)
         )
       ).pipe(
-        map(d => addObservation.success(transformToFormValues(d))),
+        flatMap(d =>
+          merge(
+            // @ts-ignore
+            of(push(`${ROUTE_OBSERVATIONS.path}/${d.id}`)),
+            of(addObservation.success(transformToFormValues(d)))
+          )
+        ),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
           return of(addObservation.failure(e));
@@ -85,7 +93,7 @@ export const getObservationEpic: Epic<any, any, RootState> = (
         map(d => getObservation.success(transformToFormValues(d))),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
-          return of(getObservation.failure(e));
+          return of(push(ROUTE_OBSERVATIONS.path));
         })
       );
     })
@@ -102,11 +110,11 @@ export const deleteObservationEpic: Epic<any, any, RootState> = (
       return from(
         ajaxService.makeCall<FormData>(
           `${OBSERVATIONS_ENDPOINT}/${action.payload}`,
-          null,
+          undefined,
           "delete"
         )
       ).pipe(
-        map(d => deleteObservation.success()),
+        map(d => push(ROUTE_OBSERVATIONS.path)),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
           return of(deleteObservation.failure(e));
@@ -131,7 +139,13 @@ export const putObservationEpic: Epic<any, any, RootState> = (
           "put"
         )
       ).pipe(
-        map(d => putObservation.success(transformToFormValues(d))),
+        flatMap(d =>
+          merge(
+            // @ts-ignore
+            of(push(`${ROUTE_OBSERVATIONS.path}/${d.id}`)),
+            of(putObservation.success(transformToFormValues(d)))
+          )
+        ),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
           return of(putObservation.failure(e));

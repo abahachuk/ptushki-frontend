@@ -6,6 +6,7 @@ import {
 } from "../../utils/createAsyncStateReducer";
 import {
   addObservation,
+  deleteObservation,
   flushObservation,
   getObservation,
   putObservation,
@@ -27,6 +28,8 @@ export const observationReducer = reduceReducer(
   createAsyncStateReducer(initialState, getObservation),
 
   createAsyncStateReducer(initialState, putObservation),
+
+  createAsyncStateReducer(initialState, deleteObservation),
 
   handleAction(
     updateObservation,

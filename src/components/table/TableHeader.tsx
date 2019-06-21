@@ -5,6 +5,7 @@ import { CanConnected } from "../../app/features/auth/CanConnected";
 import { RouteDescription } from "../../app/features/routing/routes";
 import { labels } from "../../config/i18n/labels";
 import { UserAction } from "../../config/permissions";
+import { exportObservations } from "../../app/features/export-observations/service";
 
 export const TableHeader: FC<{
   title: string;
@@ -40,11 +41,13 @@ export const TableHeader: FC<{
       </CanConnected>
       <div className="mr-auto" />
       <CanConnected I={UserAction.export} a={route.scope}>
-        <UncontrolledDropdown>
-          <DropdownToggle size="sm" caret className="primary-button ml-3 px-3">
-            {labels.exportData}
-          </DropdownToggle>
-        </UncontrolledDropdown>
+        <Button
+          size="sm"
+          className="primary-button ml-3 px-3"
+          onClick={exportObservations}
+        >
+          {labels.exportData}
+        </Button>
       </CanConnected>
     </div>
   );

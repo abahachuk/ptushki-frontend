@@ -17,7 +17,7 @@ export const deleteObservation = createAsyncAction(
   "DELETE_OBSERVATION_REQUEST",
   "DELETE_OBSERVATION_SUCCESS",
   "DELETE_OBSERVATION_FAILURE"
-)<string, void, string>();
+)<string, {}, string>();
 
 export const putObservation = createAsyncAction(
   "PUT_OBSERVATION_REQUEST",

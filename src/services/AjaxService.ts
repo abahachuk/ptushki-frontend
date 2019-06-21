@@ -91,7 +91,7 @@ export default class AjaxService {
 
     if (response.status === 401) {
       token = await this.refreshToken();
-      response = await this.makeFetch(url, token, data, undefined, headers);
+      response = await this.makeFetch(url, token, data, method, headers);
     } else if (!response.ok) {
       const message = await this.parseError(response);
       throw new Error(message);

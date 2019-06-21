@@ -1,9 +1,10 @@
 import qs from "qs";
 import { combineEpics, Epic } from "redux-observable";
-import { EMPTY, from, of } from "rxjs";
+import { EMPTY, from, merge, of } from "rxjs";
 import {
   catchError,
   filter,
+  flatMap,
   map,
   switchMap,
   withLatestFrom
@@ -53,7 +54,13 @@ const requestObservationsEpic: Epic<any, any, RootState> = (action$, state$) =>
           `${OBSERVATIONS_ENDPOINT}?${query}`
         )
       ).pipe(
-        map(d => observationsData.success(d.content)),
+        flatMap(d =>
+          merge(
+            // @ts-ignore
+            of(observationsData.success(d.content)),
+            of(observationGridActions.setTotalCount(d.totalElements))
+          )
+        ),
         catchError(e => {
           if (e instanceof SecurityError) return of(signOut());
           return of(observationsData.failure(e));
