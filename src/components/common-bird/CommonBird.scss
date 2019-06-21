@@ -47,14 +47,12 @@
     .SingleDatePicker {
       .SingleDatePickerInput {
         border: 0;
-
         .DateInput__block {
           padding-right: 35px;
           border-radius: 0.25rem;
           color: $trout;
           border: 1px solid $ghost;
         }
-  
         .SingleDatePickerInput_calendarIcon {
           position: absolute;
           right: 0;
@@ -67,6 +65,18 @@
           font-size: 1rem;
           padding: 7px 11px 5px;
           background-color: transparent;
+        }
+      }
+      .SingleDatePickerInput__disabled  {
+        .DateInput {
+          background-color: $white;
+          border: 0;
+          .DateInput_input {
+            padding-left: 0;
+          }
+        }
+        .SingleDatePickerInput_calendarIcon {
+          display: none;
         }
       }
     }
