@@ -129,7 +129,8 @@ export const InfoPage: FC<
             {labels.birdInfo.euring}
           </p>
           <span className={`${blockName}__euring`}>
-            {entity.value.euringCodeIdentifier.label}
+            {/* {entity.value.euringCodeIdentifier.label} */}
+            {birdData.euring}
           </span>
         </Fragment>
       )}
