@@ -12,6 +12,7 @@ export const addFilters = addFiltersCreator();
 export const setSorting = createStandardAction("SET_SORTING")<Sorting[]>();
 export const setSearch = createStandardAction("SET_SEARCH")<string>();
 export const setPage = createStandardAction("SET_PAGE")<number>();
+export const setTotalCount = createStandardAction("SET_TOTAL_COUNT")<number>();
 export const setPageSize = createStandardAction("SET_PAGE_SIZE")<number>();
 export const setSelection = createStandardAction("SET_SELECTION")<string[]>();
 export const setFilters = createStandardAction("SET_FILTERS")<
@@ -37,7 +38,8 @@ export const dataGridActions = <TFilters>(namespace: string) => ({
   setPage: prefixActionCreator(namespace, setPage),
   setPageSize: prefixActionCreator(namespace, setPageSize),
   setSelection: prefixActionCreator(namespace, setSelection),
-  setFilters: prefixActionCreator(namespace, setFilters)
+  setFilters: prefixActionCreator(namespace, setFilters),
+  setTotalCount: prefixActionCreator(namespace, setTotalCount)
 });
 
 // for getting those actions, after which we need to re-request the data

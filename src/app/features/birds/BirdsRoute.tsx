@@ -34,7 +34,9 @@ const InfoPage = (routeProps: RouteComponentProps<{ id: string }>) => (
     {...commonProps}
     {...routeProps}
     removeFn={deleteBird.request}
-    historyComponent={<BirdObservationsListConnected />}
+    historyComponent={
+      <BirdObservationsListConnected id={routeProps.match.params.id} />
+    }
     getFn={getBird.request}
     // @ts-ignore
     flushFn={flushBird}

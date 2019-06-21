@@ -58,5 +58,5 @@ export interface GridDataResponse<TItem> {
   content: TItem[];
   pageNumber: number;
   pageSize: number;
-  totalPages: number;
+  totalElements: number;
 }
