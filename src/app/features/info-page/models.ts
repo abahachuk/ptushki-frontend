@@ -1,5 +1,5 @@
-import { AnyAction } from "redux";
 import { ReactNode } from "react";
+import { PayloadAC } from "typesafe-actions";
 import {
   CreatePageProps,
   IInitialDataDescriptor,
@@ -18,9 +18,9 @@ export interface IInfoScopeLabel {
 }
 
 export interface InfoPageProps extends CreatePageProps {
-  removeFn: (id: string) => AnyAction;
-  getFn: (id: string) => AnyAction;
-  flushFn: () => AnyAction;
+  removeFn: PayloadAC<string, string>;
+  getFn: PayloadAC<string, string>;
+  flushFn: PayloadAC<string, void>;
   historyComponent?: ReactNode;
 }
 

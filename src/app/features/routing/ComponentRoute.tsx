@@ -7,13 +7,13 @@ import { RouteDescription } from "./routes";
 
 export const ComponentRoute: FC<{
   route: RouteDescription;
-  PageComponent: any;
-  AddComponent: any;
-  DetailComponent: any;
-  ImportComponent?: any;
+  GridComponent: FC;
+  AddComponent: FC;
+  DetailComponent: FC;
+  ImportComponent?: FC;
 }> = ({
   route,
-  PageComponent,
+  GridComponent,
   AddComponent,
   DetailComponent,
   ImportComponent
@@ -23,7 +23,7 @@ export const ComponentRoute: FC<{
       <Route
         path={route.path}
         exact
-        component={(p: any) => <PageComponent {...p} />}
+        component={(p: any) => <GridComponent {...p} />}
       />
       <ProtectedRoute
         path={`${route.path}/add`}

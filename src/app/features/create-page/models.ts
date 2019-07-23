@@ -4,6 +4,7 @@ import { Scope } from "../../../config/permissions";
 import { FormValues } from "../../../components/common-bird/CommonBirdModels";
 import { AsyncResource } from "../../../utils/createAsyncStateReducer";
 import { BirdParams } from "../../../components/bird/Bird";
+import { RootState } from "../../../store";
 
 export interface ICreateScopeLabel {
   send?: string;
@@ -18,9 +19,12 @@ export interface ICreateScopeLabel {
 export interface CreatePageProps {
   sendFn: (form: FormValues) => AnyAction;
   updateFn: (form: FormValues) => AnyAction;
-  initials: AsyncResource<IInitialData>;
+  stateSelector: (state: RootState) => AsyncResource<FormValues>;
+  // TODO: remove optional mark
+  initials?: AsyncResource<IInitialData>;
   scope: Scope;
-  entity: AsyncResource<FormValues>;
+  // TODO: remove optional mark
+  entity?: AsyncResource<FormValues>;
   header?: ReactNode;
   bird?: BirdParams;
 }

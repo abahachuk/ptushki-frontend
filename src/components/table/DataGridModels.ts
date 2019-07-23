@@ -1,3 +1,7 @@
+import { PayloadAC } from "typesafe-actions";
+import { AsyncActionBuilderConstructor } from "typesafe-actions/dist/create-async-action";
+import { AsyncResource } from "../../utils/createAsyncStateReducer";
+
 export interface Sorting {
   columnName: string;
   direction: "asc" | "desc";
@@ -28,7 +32,7 @@ export type DataGridFiltersObj<TData> = {
   [key in keyof TData]?: DataGridFilter[];
 };
 
-export interface DataGridState<TFilters = Object> {
+export interface DataGridState<TData = Object[], TFilters = Object> {
   fixedColumns: string[];
   hiddenColumns: string[];
   selection: string[];
@@ -38,8 +42,10 @@ export interface DataGridState<TFilters = Object> {
   filtering: FilteringRule[];
   sorting: Sorting[];
   search: string;
-  availableFilters: TFilters;
+  availableFilters: TFilters | {};
   fixedPartWidth: number;
+  isMounted: boolean;
+  data: AsyncResource<TData>;
 }
 
 export interface GridSearch {
@@ -48,6 +54,34 @@ export interface GridSearch {
   pageSize: number | undefined;
   sortingColumn: string | undefined;
   sortingDirection: "ASC" | "DESC";
+}
+
+export interface DataGridActions<TData, TFilters> {
+  getData: AsyncActionBuilderConstructor<
+    string,
+    string,
+    string,
+    FilteringRule[],
+    TData,
+    string
+  >;
+  getFilters: AsyncActionBuilderConstructor<
+    string,
+    string,
+    string,
+    void,
+    TFilters,
+    string
+  >;
+  flush: PayloadAC<string, void>;
+  setSorting: PayloadAC<string, Sorting[]>;
+  setSearch: PayloadAC<string, string>;
+  setPage: PayloadAC<string, number>;
+  setPageSize: PayloadAC<string, number>;
+  setSelection: PayloadAC<string, string[]>;
+  setFilters: PayloadAC<string, FilteringRule[]>;
+  setTotalCount: PayloadAC<string, number>;
+  setMounted: PayloadAC<string, boolean>;
 }
 
 export type GridFilteringQuery<TData> = { [key in keyof TData]?: string };

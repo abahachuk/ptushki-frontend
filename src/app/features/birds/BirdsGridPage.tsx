@@ -5,7 +5,7 @@ import { ROUTE_BIRDS } from "../routing/routes";
 import { BirdsListConnected } from "./BirdsList";
 import { TableHeader } from "../../../components/table/TableHeader";
 
-export const BirdsPage = () => {
+export const BirdsGridPage = () => {
   return (
     <div
       style={{

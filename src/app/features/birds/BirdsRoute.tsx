@@ -2,11 +2,11 @@ import React, { FC } from "react";
 import { RouteComponentProps, RouteProps } from "react-router";
 import { ROUTE_BIRDS } from "../routing/routes";
 import { ComponentRoute } from "../routing/ComponentRoute";
-import { BirdsPage } from "./BirdsPage";
+import { BirdsGridPage } from "./BirdsGridPage";
 import { CreatePageConnected } from "../create-page/CreatePageConnected";
 import { Scope } from "../../../config/permissions";
 import { InfoPageConnected } from "../info-page/InfoPageConnected";
-import { BirdObservationsListConnected } from "../bird-info/BirdObservationsList";
+import { BirdObservationsListConnected } from "./BirdObservationsList";
 import { RootState } from "../../../store";
 import {
   addBird,
@@ -24,12 +24,10 @@ const commonProps = {
 };
 
 const AddBird = () => (
-  // @ts-ignore
   <CreatePageConnected {...commonProps} sendFn={addBird.request} />
 );
 
-const InfoPage = (routeProps: RouteComponentProps<{ id: string }>) => (
-  // @ts-ignore
+const InfoPage: FC<RouteComponentProps<{ id: string }>> = routeProps => (
   <InfoPageConnected
     {...commonProps}
     {...routeProps}
@@ -38,7 +36,6 @@ const InfoPage = (routeProps: RouteComponentProps<{ id: string }>) => (
       <BirdObservationsListConnected id={routeProps.match.params.id} />
     }
     getFn={getBird.request}
-    // @ts-ignore
     flushFn={flushBird}
     sendFn={putBird.request}
   />
@@ -48,7 +45,7 @@ export const BirdsRoute: FC<RouteProps> = () => {
   return (
     <ComponentRoute
       route={ROUTE_BIRDS}
-      PageComponent={BirdsPage}
+      GridComponent={BirdsGridPage}
       AddComponent={AddBird}
       DetailComponent={InfoPage}
     />

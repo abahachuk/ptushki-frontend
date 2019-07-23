@@ -5,7 +5,7 @@ import { ROUTE_OBSERVATIONS } from "../routing/routes";
 import { ObservationListConnected } from "./ObservationList";
 import { TableHeader } from "../../../components/table/TableHeader";
 
-export const ObservationsPage = () => {
+export const ObservationsGridPage = () => {
   return (
     <div
       style={{

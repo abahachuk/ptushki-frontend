@@ -1,17 +1,16 @@
-import { DataGridState } from "../../components/table/DataGridModels";
+import { DataGridState } from "./DataGridModels";
 import {
   getColumnWidths,
   getFixedColumns,
   getFixedPartWidth
-} from "./columnsConfig";
-import { GridColumn } from "./GridColumn";
+} from "../../utils/grid/columnsConfig";
+import { GridColumn } from "../../utils/grid/GridColumn";
 
-export const defaultDataGridState: DataGridState<any> = {
-  fixedColumns: [],
+export const getDefaultDataGridState = <TData, TFilters>(
+  columnNames: GridColumn[]
+): DataGridState<TData, TFilters> => ({
   hiddenColumns: [],
   selection: [],
-  columnsOrder: [],
-  columnWidths: [],
   pagination: {
     currentPage: 0,
     pageSize: 15,
@@ -21,13 +20,12 @@ export const defaultDataGridState: DataGridState<any> = {
   search: undefined,
   sorting: [],
   availableFilters: {},
-  fixedPartWidth: 0
-};
-
-export const getDefaultDataGridState = <TFilters>(
-  columnNames: GridColumn[]
-): DataGridState<TFilters> => ({
-  ...defaultDataGridState,
+  isMounted: false,
+  data: {
+    isLoading: false,
+    value: null,
+    error: null
+  },
   fixedColumns: getFixedColumns(columnNames),
   columnsOrder: columnNames,
   columnWidths: getColumnWidths(columnNames),

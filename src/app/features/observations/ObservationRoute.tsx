@@ -15,7 +15,7 @@ import { ImportObservationsConnected } from "../import-observations/ImportObserv
 import { InfoPageConnected } from "../info-page/InfoPageConnected";
 import { ComponentRoute } from "../routing/ComponentRoute";
 import { ROUTE_OBSERVATIONS } from "../routing/routes";
-import { ObservationsPage } from "./ObservationsPage";
+import { ObservationsGridPage } from "./ObservationsGridPage";
 
 const commonProps = {
   updateFn: updateObservation,
@@ -24,18 +24,15 @@ const commonProps = {
 };
 
 const AddObservation = () => (
-  // @ts-ignore
   <CreatePageConnected {...commonProps} sendFn={addObservation.request} />
 );
 
-const InfoPage = (routeProps: RouteComponentProps<{ id: string }>) => (
-  // @ts-ignore
+const InfoPage: FC<RouteComponentProps<{ id: string }>> = routeProps => (
   <InfoPageConnected
     {...commonProps}
     {...routeProps}
     removeFn={deleteObservation.request}
     getFn={getObservation.request}
-    // @ts-ignore
     flushFn={flushObservation}
     sendFn={putObservation.request}
   />
@@ -45,10 +42,10 @@ export const ObservationsRoute: FC<RouteProps> = () => {
   return (
     <ComponentRoute
       route={ROUTE_OBSERVATIONS}
-      PageComponent={ObservationsPage}
+      GridComponent={ObservationsGridPage}
       AddComponent={AddObservation}
       DetailComponent={InfoPage}
-      ImportComponent={ImportObservationsConnected}
+      ImportComponent={() => <ImportObservationsConnected />}
     />
   );
 };

@@ -1,29 +1,56 @@
+import combineSectionReducers from "combine-section-reducers";
 import reduceReducer from "reduce-reducers";
 import { handleAction } from "redux-actions";
 import { namespaced } from "redux-subspace";
 import {
-  addFilters,
+  getFilters,
+  getData,
   setFilters,
   setFixedPartWidth,
+  setMounted,
   setPage,
   setPageSize,
   setSearch,
   setSelection,
   setSorting,
-  setTotalCount
+  setTotalCount,
+  flush
 } from "./dataGridActions";
+import { createAsyncStateReducer } from "../../utils/createAsyncStateReducer";
 import { DataGridState } from "./DataGridModels";
 
-export const createDataGridReducer = (
-  initialState: DataGridState,
+export const createDataGridReducer = <TData, TFilters>(
+  initialState: DataGridState<TData, TFilters>,
   namespace: string
 ) =>
   namespaced(namespace)(
     reduceReducer(
       initialState,
 
+      // @ts-ignore
+      combineSectionReducers({
+        data: createAsyncStateReducer(initialState.data, getData)
+      }),
+
       handleAction(
-        addFilters,
+        flush,
+        () => ({
+          ...initialState
+        }),
+        initialState
+      ),
+
+      handleAction(
+        getData.request,
+        (state, action) => ({
+          ...state,
+          filtering: state.filtering.concat(action.payload || [])
+        }),
+        initialState
+      ),
+
+      handleAction(
+        getFilters.success,
         (state, action) => ({
           ...state,
           availableFilters: action.payload
@@ -108,6 +135,15 @@ export const createDataGridReducer = (
         (state, action) => ({
           ...state,
           fixedPartWidth: action.payload
+        }),
+        initialState
+      ),
+
+      handleAction(
+        setMounted,
+        (state, action) => ({
+          ...state,
+          isMounted: action.payload
         }),
         initialState
       )

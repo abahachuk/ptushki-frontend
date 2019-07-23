@@ -216,6 +216,4 @@ export const ImportObservations: FC<DispatchProp> = ({ dispatch }) => {
   );
 };
 
-export const ImportObservationsConnected = connect((state: RootState) => ({}))(
-  ImportObservations
-);
+export const ImportObservationsConnected = connect()(ImportObservations);

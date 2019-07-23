@@ -44,6 +44,7 @@ export const LangSelector: FC<Props> = ({ dispatch, selectedLocale }) => (
               store.dispatch(selectLocale(locale));
             });
           }}
+          // onClick={() => {console.log(locale); return dispatch(selectLocale(locale))}}
         >
           {LOCALE_LABELS[locale]}
         </DropdownItem>

@@ -17,7 +17,6 @@ export const downloadTemplate = () => {
       );
 
       r.body.pipeTo(fileStream);
-      console.log(r);
     });
 };
 
