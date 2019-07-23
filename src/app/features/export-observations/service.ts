@@ -14,6 +14,5 @@ export const exportObservations = () => {
       );
 
       r.body.pipeTo(fileStream);
-      console.log(r);
     });
 };

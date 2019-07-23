@@ -41,11 +41,10 @@ export const observationReducer = reduceReducer(
   ),
 
   handleAction(
-    // @ts-ignore
     flushObservation,
     (state, action) => ({
       ...state,
-      value: {}
+      value: initialState.value
     }),
     initialState
   )

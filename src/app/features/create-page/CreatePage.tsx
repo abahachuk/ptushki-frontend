@@ -17,25 +17,7 @@ import { FillLoader } from "../../../components/loader/FillLoader";
 import "./CreatePage.scss";
 
 // TODO: remove
-import {
-  circumstancesConfig,
-  observationConfig,
-  birdConfig,
-  birdValues
-} from "./test.data";
-
-const initialForm = {
-  speciesMentioned: "",
-  sexMentioned: "",
-  ageMentioned: "",
-  status: "",
-  country: "",
-  region: "",
-  coordinates: "",
-  date: "",
-  accuracyOfDate: "",
-  comment: ""
-};
+import { birdValues } from "./test.data";
 
 const blockName = "create-page";
 

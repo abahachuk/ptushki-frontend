@@ -38,7 +38,7 @@ import {
   ColumnChooserItem
 } from "./customisations/toolbar/ColumnChooser";
 import { ToolbarConnected } from "./customisations/toolbar/ToolbarComponent";
-import { DataGridFilter, DataGridState } from "./DataGridModels";
+import { DataGridFilter, DataGridState, FilteringRule } from "./DataGridModels";
 
 export interface DataGridCol<TRow extends {}> extends Column {
   name: string;
@@ -58,6 +58,7 @@ export interface DataGridProps<TRow extends {}> extends GridProps {
 
   namespace: string;
   gridStateSelector: (s: unknown) => DataGridState;
+  initialFilters?: FilteringRule[];
 
   autoHeight?: boolean;
   isLoading?: boolean;
@@ -76,12 +77,19 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
     onRowClick,
     rows,
     autoHeight,
+    initialFilters,
     ...gridProps
   } = props;
 
   const TableComponent = useCallback(
-    (p: any) => <TableComponentConnected autoHeight={autoHeight} {...p} />,
-    [autoHeight]
+    (p: any) => (
+      <TableComponentConnected
+        autoHeight={autoHeight}
+        initialFilters={initialFilters}
+        {...p}
+      />
+    ),
+    [autoHeight, initialFilters]
   );
 
   const RowComponent = useCallback(
@@ -97,7 +105,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           rootComponent={RootComponent}
           columns={gridProps.columns.map(GridColumn)}
           getRowId={getRowId}
-          rows={rows}
+          rows={rows || []}
         >
           <SortingStateConnected />
           <PagingStateConnected />
@@ -138,7 +146,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           />
         </Grid>
         {isLoading && <FillLoader />}
-        {!isLoading && !rows.length && (
+        {!isLoading && (rows && !rows.length) && (
           <div className="data-grid-no-data">{labels.noData}</div>
         )}
       </div>

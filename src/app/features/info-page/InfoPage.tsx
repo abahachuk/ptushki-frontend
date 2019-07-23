@@ -5,7 +5,7 @@ import { goBack } from "connected-react-router";
 import { DispatchProp } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { Button } from "reactstrap";
-import { birdData } from "../bird-info/test-data";
+import { birdData } from "./test-data";
 
 import { labels } from "../../../config/i18n/labels";
 

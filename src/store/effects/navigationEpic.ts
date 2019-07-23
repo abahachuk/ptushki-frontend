@@ -6,9 +6,9 @@ import {
   ROUTE_BIRDS,
   ROUTE_OBSERVATIONS
 } from "../../app/features/routing/routes";
-import { birdsData, birdsFlush } from "../actions/birdsListActions";
+import { birdGridActions, birdsFlush } from "../actions/birdsListActions";
 import {
-  observationsData,
+  observationGridActions,
   observationsFlush
 } from "../actions/observationListActions";
 import { RootState } from "../index";
@@ -32,17 +32,14 @@ export const navigationEpic: Epic<any, any, RootState> = (action$, state$) =>
 
       if (from.includes(ROUTE_OBSERVATIONS.path)) {
         if (isNavigatingWithinSubRoute(from, to)) {
-          return merge(
-            of(observationsData.success([])),
-            of(observationsData.success([]))
-          );
+          return of(observationGridActions.getData.success([]));
         }
         return of(observationsFlush());
       }
 
       if (from.includes(ROUTE_BIRDS.path)) {
         if (isNavigatingWithinSubRoute(from, to)) {
-          return of(birdsData.success([]));
+          return of(birdGridActions.getData.success([]));
         }
         return of(birdsFlush());
       }
