@@ -6,11 +6,8 @@ import {
   ROUTE_BIRDS,
   ROUTE_OBSERVATIONS
 } from "../../app/features/routing/routes";
-import { birdGridActions, birdsFlush } from "../actions/birdsListActions";
-import {
-  observationGridActions,
-  observationsFlush
-} from "../actions/observationListActions";
+import { birdGridActions } from "../actions/birdsListActions";
+import { observationGridActions } from "../actions/observationListActions";
 import { RootState } from "../index";
 import { LocationChangeActionWithPrevPath } from "../prevRouterLocationMiddleware";
 
@@ -34,14 +31,14 @@ export const navigationEpic: Epic<any, any, RootState> = (action$, state$) =>
         if (isNavigatingWithinSubRoute(from, to)) {
           return of(observationGridActions.getData.success([]));
         }
-        return of(observationsFlush());
+        return of(observationGridActions.flush());
       }
 
       if (from.includes(ROUTE_BIRDS.path)) {
         if (isNavigatingWithinSubRoute(from, to)) {
           return of(birdGridActions.getData.success([]));
         }
-        return of(birdsFlush());
+        return of(birdGridActions.flush());
       }
 
       return EMPTY;
