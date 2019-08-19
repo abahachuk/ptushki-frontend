@@ -36,7 +36,8 @@ export const createAsyncStateReducer = <
       (state, action) => ({
         ...state,
         value: action.payload,
-        isLoading: false
+        isLoading: false,
+        error: null
       }),
       initState
     ),
