@@ -22,7 +22,7 @@ export const ToolbarComponent: FC<Props> = ({
 }) => (
   <div
     {...p}
-    className="grid-toolbar d-flex flex-wrap justify-content-end align-items-center my-2"
+    className="grid-toolbar d-flex flex-wrap justify-content-end align-items-center mb-3"
   >
     <GridSelectionInfoConnected />
 

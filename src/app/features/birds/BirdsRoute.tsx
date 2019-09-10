@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { RouteComponentProps, RouteProps } from "react-router";
 import { ROUTE_BIRDS } from "../routing/routes";
 import { ComponentRoute } from "../routing/ComponentRoute";
-import { BirdsGridPage } from "./BirdsGridPage";
 import { CreatePageConnected } from "../create-page/CreatePageConnected";
 import { Scope } from "../../../config/permissions";
 import { InfoPageConnected } from "../info-page/InfoPageConnected";
@@ -16,12 +15,20 @@ import {
   putBird,
   updateBird
 } from "../../../store/actions/birdActions";
+import { GridPage } from "../grid-page/GridPage";
+import { BirdsListConnected } from "./BirdsList";
 
 const commonProps = {
   updateFn: updateBird,
   scope: Scope.birds,
   stateSelector: (state: RootState) => state.bird
 };
+
+const BirdsGrid = () => (
+  <GridPage route={ROUTE_BIRDS}>
+    <BirdsListConnected />
+  </GridPage>
+);
 
 const AddBird = () => (
   <CreatePageConnected {...commonProps} sendFn={addBird.request} />
@@ -45,7 +52,7 @@ export const BirdsRoute: FC<RouteProps> = () => {
   return (
     <ComponentRoute
       route={ROUTE_BIRDS}
-      GridComponent={BirdsGridPage}
+      GridComponent={BirdsGrid}
       AddComponent={AddBird}
       DetailComponent={InfoPage}
     />
