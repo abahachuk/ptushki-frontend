@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import { Button, DropdownToggle, UncontrolledDropdown } from "reactstrap";
+import { Button } from "reactstrap";
 import { CanConnected } from "../../app/features/auth/CanConnected";
 import { RouteDescription } from "../../app/features/routing/routes";
 import { labels } from "../../config/i18n/labels";
@@ -8,10 +8,10 @@ import { UserAction } from "../../config/permissions";
 import { exportObservations } from "../../app/features/export-observations/service";
 
 export const TableHeader: FC<{
-  title: string;
-  addButtonTitle: string;
   route: RouteDescription;
-}> = ({ title, addButtonTitle, route }) => {
+}> = ({ route }) => {
+  // @ts-ignore
+  const { title, actionTitle } = labels.tableHeader[route.scope];
   return (
     <div className="d-flex align-items-center">
       {/* TODO refactor layouts, extract common class names */}
@@ -25,7 +25,7 @@ export const TableHeader: FC<{
           tag={Link}
           to={`${route.path}/add`}
         >
-          + {addButtonTitle}
+          + {actionTitle}
         </Button>
       </CanConnected>
       <CanConnected I={UserAction.import} a={route.scope}>

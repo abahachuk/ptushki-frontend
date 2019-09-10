@@ -311,6 +311,16 @@ export const labels = {
         "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определитель птиц беларуси на florafauna.by, чтобы узнать вид."
     }
   },
+  tableHeader: {
+    [Scope.observations]: {
+      title: "Наблюдения",
+      actionTitle: "Добавить птицу"
+    },
+    [Scope.birds]: {
+      title: "Птицы",
+      actionTitle: "Добавить наблюдение"
+    }
+  },
   infoPage: {
     [Scope.observations]: {
       edit: "Редактировать наблюдение",
