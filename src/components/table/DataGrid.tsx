@@ -10,6 +10,7 @@ import {
   Toolbar
 } from "@devexpress/dx-react-grid-bootstrap4";
 import React, { FC, useCallback } from "react";
+import { useSelector } from "react-redux";
 import { labels } from "../../config/i18n/labels";
 import { SubspaceProviderHacked } from "../../utils/subspace/SubspaceProviderHacked";
 import { FillLoader } from "../loader/FillLoader";
@@ -39,6 +40,7 @@ import {
 } from "./customisations/toolbar/ColumnChooser";
 import { ToolbarConnected } from "./customisations/toolbar/ToolbarComponent";
 import { DataGridFilter, DataGridState, FilteringRule } from "./DataGridModels";
+import { langSelector } from "../../store/selectors";
 
 export interface DataGridCol<TRow extends {}> extends Column {
   name: string;
@@ -81,6 +83,8 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
     ...gridProps
   } = props;
 
+  const currentLang = useSelector(langSelector);
+
   const TableComponent = useCallback(
     (p: any) => (
       <TableComponentConnected
@@ -95,6 +99,11 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
   const RowComponent = useCallback(
     p => <TableRowConnected {...p} onRowClick={onRowClick} />,
     [onRowClick]
+  );
+
+  const HeaderRowComponent = useCallback(
+    p => <TableHeaderRowContentConnected {...p} currentLang={currentLang} />,
+    [currentLang]
   );
 
   return (
@@ -126,7 +135,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
           <TableHeaderRow
             showSortingControls
             sortLabelComponent={SortingLabel}
-            contentComponent={TableHeaderRowContentConnected}
+            contentComponent={HeaderRowComponent}
           />
 
           <TableSelectionComponent />

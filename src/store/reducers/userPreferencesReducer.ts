@@ -6,9 +6,9 @@ import {
 } from "../actions/userPreferencesActions";
 
 export enum Locale {
-  ru = "ru",
-  en = "en",
-  by = "by"
+  ru = "rus",
+  en = "eng",
+  by = "byn"
 }
 
 export enum ViewMode {

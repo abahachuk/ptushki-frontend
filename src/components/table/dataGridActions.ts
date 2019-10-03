@@ -1,10 +1,9 @@
-import { Dictionary, pick } from "ramda";
+import { pick } from "ramda";
 import { ThunkAction } from "redux-thunk";
 import {
   ActionCreator,
   createAsyncAction,
-  createStandardAction,
-  PayloadAC
+  createStandardAction
 } from "typesafe-actions";
 import { AsyncActionBuilderConstructor } from "typesafe-actions/dist/create-async-action";
 import { getFixedPartWidth } from "../../utils/grid/columnsConfig";

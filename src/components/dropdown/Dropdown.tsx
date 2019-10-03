@@ -1,4 +1,4 @@
-import React, { useState, FC, Fragment, ReactElement, ReactNode } from "react";
+import React, { useState, FC, Fragment, ReactNode } from "react";
 import sn from "classnames";
 import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
 
