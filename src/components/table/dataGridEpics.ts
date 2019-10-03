@@ -10,12 +10,10 @@ import {
   withLatestFrom
 } from "rxjs/operators";
 import { ActionCreator, isActionOf } from "typesafe-actions";
-import { AsyncActionBuilderConstructor } from "typesafe-actions/dist/create-async-action";
 import qs from "qs";
 import { EMPTY, from, merge, of } from "rxjs";
 import {
   dataGridActionsRequiringRequest,
-  getData,
   setFilters,
   setPage,
   setPageSize,
@@ -30,11 +28,9 @@ import {
 } from "./DataGridModels";
 import { RootState } from "../../store";
 import { getGridQuery } from "../../utils/grid/getGridQuery";
-import { getLangQuery } from "../../utils/lang/getLangQuery";
 import { ajaxService } from "../../services";
 import { SecurityError } from "../../services/SecurutyService";
 import { signOut } from "../../store/actions/authActions";
-import { selectLocale } from "../../store/actions/userPreferencesActions";
 
 interface GridEpicsParams {
   gridStateSelector: (state: RootState) => DataGridState;
@@ -71,8 +67,7 @@ export const getRequestGridEpic = <TResponse extends GridDataResponse<any>>(
     withLatestFrom(state$),
     switchMap(([, state]) => {
       const query = qs.stringify({
-        ...getGridQuery(gridStateSelector(state)),
-        ...getLangQuery(state)
+        ...getGridQuery(gridStateSelector(state))
       });
 
       return from(ajaxService.makeCall<TResponse>(`${endpoint}?${query}`)).pipe(
@@ -118,7 +113,6 @@ export const getReRequestOnGridActionsEpic = (
     filter(
       isActionOf([
         ...dataGridActionsRequiringRequest(gridActions),
-        selectLocale,
         ...targetActions
       ])
     ),

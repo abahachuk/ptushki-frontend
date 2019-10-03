@@ -12,14 +12,11 @@ export enum VerificationStatus {
   rejected = "rejected"
 }
 
-// TODO when api is localised, change this
 export interface DescriptedField {
   id: string;
-  desc: string;
-
-  // a fallback for endpoints which are not supporting locale currently. TODO remove
-  // eslint-disable-next-line camelcase
   desc_rus: string;
+  desc_eng: string;
+  desc_byn: string;
 }
 
 export interface ObservationData {

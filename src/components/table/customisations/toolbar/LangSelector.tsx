@@ -17,9 +17,9 @@ interface Props extends DispatchProp {
 }
 
 const LOCALE_LABELS: { [key in Locale]: string } = {
-  en: labels.lang.eng,
-  ru: labels.lang.rus,
-  by: labels.lang.by
+  eng: labels.lang.eng,
+  rus: labels.lang.rus,
+  byn: labels.lang.by
 };
 
 export const LangSelector: FC<Props> = ({ dispatch, selectedLocale }) => (
@@ -32,19 +32,7 @@ export const LangSelector: FC<Props> = ({ dispatch, selectedLocale }) => (
         <DropdownItem
           key={key}
           active={selectedLocale === locale}
-          onClick={() => {
-            // actions emitted through dispatch provided by connect are not passed to redux-observable.
-            // probably a bug in redux-subspace observable.
-            // as a workaround, now we are using dispatch directly:
-            // import("../../../store").then(({ store }) => {
-            //   store.dispatch ...
-            // });
-            // TODO investigate the issue and replace with normal dispatch
-            import("../../../../store").then(({ store }) => {
-              store.dispatch(selectLocale(locale));
-            });
-          }}
-          // onClick={() => {console.log(locale); return dispatch(selectLocale(locale))}}
+          onClick={() => dispatch(selectLocale(locale))}
         >
           {LOCALE_LABELS[locale]}
         </DropdownItem>
