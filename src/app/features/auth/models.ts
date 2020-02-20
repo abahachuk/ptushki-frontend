@@ -34,6 +34,16 @@ export interface UserInfo {
   id: string;
 }
 
+export interface PersonInfo {
+  id: string;
+  email?: string;
+  name: string;
+  phone?: string;
+  altPhone?: string;
+  address?: string;
+  code?: string;
+}
+
 export interface IAuthInfo {
   user: UserInfo;
   permissions: Ability;

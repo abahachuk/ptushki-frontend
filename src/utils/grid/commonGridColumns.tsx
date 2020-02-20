@@ -10,6 +10,26 @@ import { IndexCell } from "./cellRenderers/IndexCell";
 import { VerificationCell } from "./cellRenderers/VerificationCell";
 import { GridColumn } from "./GridColumn";
 
+const finderHelper = ({
+  finder,
+  offlineFinder,
+  offlineFinderNote
+}: ObservationData): string => {
+  if (finder) {
+    return (
+      [finder.firstName || "", finder.lastName || ""].join(" ").trim() ||
+      "Uknown"
+    );
+  }
+  if (offlineFinder) {
+    return offlineFinder.name || "";
+  }
+  if (offlineFinderNote) {
+    return `${offlineFinderNote}` || "";
+  }
+  return "";
+};
+
 export const COMMON_GRID_COLUMNS: {
   [key in GridColumn]: DataGridCol<ObservationData>;
 } = {
@@ -173,11 +193,7 @@ export const COMMON_GRID_COLUMNS: {
   finder: {
     name: GridColumn.finder,
     title: labels.finder,
-    getCellValue: r => (
-      <>
-        {r.finder.firstName} {r.finder.lastName}
-      </>
-    ),
+    getCellValue: r => <>{finderHelper(r)}</>,
     filter: {
       // TODO type DataGridFilter to allow any or generic value as it actually does, instead of restricting it
       getLabel: ({ value }: any) =>

@@ -4,7 +4,7 @@ import {
   GridDataResponse,
   GridQuery
 } from "../../../components/table/DataGridModels";
-import { UserInfo } from "../auth/models";
+import { UserInfo, PersonInfo } from "../auth/models";
 
 export enum VerificationStatus {
   pending = "pending",
@@ -30,7 +30,9 @@ export interface ObservationData {
   date: string;
   direction: number; // deg
   distance: number; // km
-  finder: UserInfo;
+  finder: UserInfo | null;
+  offlineFinder: PersonInfo | null;
+  offlineFinderNote: string | null;
   elapsedTime: number; // days
   remarks: string;
   sexMentioned: DescriptedField;
