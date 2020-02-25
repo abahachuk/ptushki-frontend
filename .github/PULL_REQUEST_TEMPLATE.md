@@ -20,7 +20,7 @@
 - https://github.com/abahachuk/ptushki-frontend/pull/XXX
 - https://github.com/abahachuk/ptushki-mobile/pull/XXX
 
-#### Type of change
+### Type of change
 
 `What types of changes does your code introduce? Put an 'x' in all the boxes that apply:`
 
