@@ -10,10 +10,22 @@ module.exports = {
       },
     },
     {
+      files: ['*.ts'],
+      options: {
+        parser: 'typescript',
+      },
+    },
+    {
       files: '*.md',
       options: {
         parser: 'markdown',
       },
     },
-  ],
+    {
+      files: '*.ya?ml',
+      options: {
+        parser: 'yaml',
+      },
+    },
+  ]
 };
