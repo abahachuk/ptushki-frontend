@@ -11,9 +11,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        keys:
-          - dependency-cache-{{ checksum "package-lock.json" }}
-          - dependency-cache-
+          keys:
+            - dependency-cache-{{ checksum "package-lock.json" }}
+            - dependency-cache-
       - run:
           name: install-dependencies
           command: npm install
