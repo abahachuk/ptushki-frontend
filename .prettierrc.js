@@ -1,4 +1,5 @@
 module.exports = {
+  endOfLine: 'lf',
   overrides: [
     {
       files: ['*.json', '.eslintrc'],
