@@ -1,5 +1,5 @@
 {
-  "name": "ptushki-frontend-test",
+  "name": "ptushki-frontend",
   "proxy": "http://localhost:3001",
   "version": "0.0.1",
   "private": true,
