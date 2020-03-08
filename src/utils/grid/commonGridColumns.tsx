@@ -15,19 +15,17 @@ const finderHelper = ({
   offlineFinder,
   offlineFinderNote
 }: ObservationData): string => {
+  let value;
   if (finder) {
-    return (
-      [finder.firstName || "", finder.lastName || ""].join(" ").trim() ||
-      "Uknown"
-    );
+    value = [finder.firstName, finder.lastName].join(" ").trim();
   }
   if (offlineFinder) {
-    return offlineFinder.name || "";
+    value = offlineFinder.name;
   }
   if (offlineFinderNote) {
-    return `${offlineFinderNote}` || "";
+    value = offlineFinderNote;
   }
-  return "";
+  return value || "Uknown";
 };
 
 export const COMMON_GRID_COLUMNS: {
