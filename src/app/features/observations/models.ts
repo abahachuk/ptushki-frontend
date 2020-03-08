@@ -4,7 +4,8 @@ import {
   GridDataResponse,
   GridQuery
 } from "../../../components/table/DataGridModels";
-import { UserInfo, PersonInfo } from "../auth/models";
+import { UserInfo } from "../auth/models";
+import { PersonInfo } from "../common/models";
 
 export enum VerificationStatus {
   pending = "pending",
