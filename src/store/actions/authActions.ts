@@ -51,7 +51,7 @@ export const signOut = (): ThunkAction<
   const refreshToken = securityService.getRefreshToken();
   const authInfo = securityService.reset();
   dispatch(logout(authInfo));
-  ajaxService.makeRefreshTokenFetch(refreshToken);
+  ajaxService.makeLogoutCall(refreshToken);
 };
 
 export const getUser = (): ThunkAction<

@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { securityService } from ".";
 import { AuthData, UserInfo } from "../app/features/auth/models";
-import { REFRESH_ENDPOINT } from "../config/endpoints";
+import { REFRESH_ENDPOINT, LOGOUT_ENDPOINT } from "../config/endpoints";
 import { SecurityError } from "./SecurutyService";
 
 export default class AjaxService {
@@ -45,12 +45,6 @@ export default class AjaxService {
     });
   }
 
-  makeRefreshTokenFetch(refresh: string) {
-    return this.makeFetch(REFRESH_ENDPOINT, null, {
-      refreshToken: refresh
-    });
-  }
-
   private async refreshToken(): Promise<string> {
     if (!this.refreshingCall) {
       const refresh = securityService.getRefreshToken();
@@ -59,7 +53,9 @@ export default class AjaxService {
         throw new SecurityError("No refresh token provided");
       }
 
-      this.refreshingCall = this.makeRefreshTokenFetch(refresh);
+      this.refreshingCall = this.makeFetch(REFRESH_ENDPOINT, null, {
+        refreshToken: refresh
+      });
     } else {
       await new Promise(resolve => {
         this.pendingRequests.push(resolve);
@@ -122,5 +118,9 @@ export default class AjaxService {
     const permissions = securityService.saveUserInfo(user);
 
     return { ...user, permissions };
+  }
+
+  makeLogoutCall(refreshToken: string): void {
+    this.makeFetch(LOGOUT_ENDPOINT, null, { refreshToken });
   }
 }
