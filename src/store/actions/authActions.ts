@@ -48,8 +48,10 @@ export const signOut = (): ThunkAction<
   undefined,
   any
 > => dispatch => {
+  const refreshToken = securityService.getRefreshToken();
   const authInfo = securityService.reset();
   dispatch(logout(authInfo));
+  ajaxService.makeRefreshTokenFetch(refreshToken);
 };
 
 export const getUser = (): ThunkAction<

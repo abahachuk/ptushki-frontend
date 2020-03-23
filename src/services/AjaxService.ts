@@ -45,6 +45,12 @@ export default class AjaxService {
     });
   }
 
+  makeRefreshTokenFetch(refresh: string) {
+    return this.makeFetch(REFRESH_ENDPOINT, null, {
+      refreshToken: refresh
+    });
+  }
+
   private async refreshToken(): Promise<string> {
     if (!this.refreshingCall) {
       const refresh = securityService.getRefreshToken();
@@ -53,9 +59,7 @@ export default class AjaxService {
         throw new SecurityError("No refresh token provided");
       }
 
-      this.refreshingCall = this.makeFetch(REFRESH_ENDPOINT, null, {
-        refreshToken: refresh
-      });
+      this.refreshingCall = this.makeRefreshTokenFetch(refresh);
     } else {
       await new Promise(resolve => {
         this.pendingRequests.push(resolve);
