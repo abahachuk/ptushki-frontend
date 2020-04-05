@@ -8,6 +8,7 @@ export const SING_UP_ENDPOINT = `${authEndpoint}/signup`;
 export const SING_IN_ENDPOINT = `${authEndpoint}/login`;
 export const RESTORE_PASSWORD_ENDPOINT = `${authEndpoint}/resetpassword`;
 export const REFRESH_ENDPOINT = `${authEndpoint}/refresh`;
+export const LOGOUT_ENDPOINT = `${authEndpoint}/logout`;
 
 /**
  * Initial data

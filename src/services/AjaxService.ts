@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { securityService } from ".";
 import { AuthData, UserInfo } from "../app/features/auth/models";
-import { REFRESH_ENDPOINT } from "../config/endpoints";
+import { REFRESH_ENDPOINT, LOGOUT_ENDPOINT } from "../config/endpoints";
 import { SecurityError } from "./SecurutyService";
 
 export default class AjaxService {
@@ -118,5 +118,9 @@ export default class AjaxService {
     const permissions = securityService.saveUserInfo(user);
 
     return { ...user, permissions };
+  }
+
+  makeLogoutCall(refreshToken: string): void {
+    this.makeFetch(LOGOUT_ENDPOINT, null, { refreshToken });
   }
 }
