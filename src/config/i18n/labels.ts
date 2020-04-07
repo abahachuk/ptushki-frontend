@@ -162,7 +162,6 @@ export const labels = {
     chooseAnotherFile: "Выберите другой файл",
     cancel: "Отменить",
     supportedFormats: "Поддерживаемые форматы: .xls",
-    addToDatabase: "Добавить в базу",
     insertEuring: "Вставить коды EURING",
     insertCodesHere: "Вставьте коды сюда",
     loadToDatabase: "Загрузить в базу",

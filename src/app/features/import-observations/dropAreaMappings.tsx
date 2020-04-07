@@ -7,10 +7,7 @@ import { blockName } from "./ImportObservations";
 import { DropAreaStates, LoadedFile, VaryingContent } from "./models";
 
 export const dropZoneContent: {
-  [id: string]: (
-    fileInfo?: LoadedFile,
-    onButtonClick?: MouseEventHandler
-  ) => VaryingContent;
+  [id: string]: (fileInfo?: LoadedFile) => VaryingContent;
 } = {
   [DropAreaStates.Intact]: () => ({
     Icon: () => <CloudUpload fontSize="large" />,
@@ -28,28 +25,16 @@ export const dropZoneContent: {
       <div className={`${blockName}__supported-formats`}>
         {labels.importObservations.supportedFormats}
       </div>
-    ),
-    isSubmitButtonDisabled: true
+    )
   }),
-  [DropAreaStates.Success]: (
-    fileInfo: LoadedFile,
-    onButtonClick: MouseEventHandler
-  ) => ({
+  [DropAreaStates.Success]: (fileInfo: LoadedFile) => ({
     Icon: () => <CloudDone fontSize="large" />,
     title: labels.importObservations.fileUploaded,
     subtitle: `${fileInfo.fileName} — ${fileInfo.fileSize}`,
-    FileActionButton: () => (
-      <Button
-        className={sn("mt-3", `${blockName}__import-button-success`)}
-        onClick={onButtonClick}
-      >
-        {labels.importObservations.cancel}
-      </Button>
-    ),
+    FileActionButton: () => <></>,
     FileInfoBlock: () => (
       <div>{/* here will be file analysis result once implemented */}</div>
-    ),
-    isSubmitButtonDisabled: false
+    )
   }),
   [DropAreaStates.Fail]: () => ({
     Icon: () => <CloudOff fontSize="large" />,
@@ -67,7 +52,6 @@ export const dropZoneContent: {
       <div className={`${blockName}__supported-formats`}>
         {labels.importObservations.supportedFormats}
       </div>
-    ),
-    isSubmitButtonDisabled: true
+    )
   })
 };

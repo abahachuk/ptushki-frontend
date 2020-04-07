@@ -23,7 +23,6 @@ export interface VaryingContent {
   subtitle: string;
   FileActionButton: Function;
   FileInfoBlock: Function;
-  isSubmitButtonDisabled: boolean;
 }
 
 export interface LoadedFile {
