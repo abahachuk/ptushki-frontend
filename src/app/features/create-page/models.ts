@@ -39,7 +39,12 @@ export enum InitialData {
   species = "species",
   speciesMentioned = "speciesMentioned",
   primaryIdentificationMethod = "primaryIdentificationMethod",
-  placeCode = "placeCode"
+  placeCode = "placeCode",
+  verificationOfTheMetalRing = "verificationOfTheMetalRing",
+  ringingSchemePlaceholder = "ringingSchemePlaceholder",
+  ringingScheme = "ringingScheme",
+  metalRingInformation = "metalRingInformation",
+  otherMarksInformation = "otherMarksInformation"
 }
 
 type InitialDataDescriptorMap = { [key in InitialData]?: string };

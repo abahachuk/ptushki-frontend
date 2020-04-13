@@ -3,8 +3,14 @@
 .common-bird {
   &__info-blocks-container {
     display: flex;
+    flex-flow: column;
+  }
+
+  &__info-block-body {
+    display: flex;
+    flex-flow: column wrap;
     align-items: center;
-    justify-content: center;
+    height: 250px;
   }
 
   &__info-block {
@@ -40,9 +46,37 @@
     line-height: 18px;
   }
 
+  &__row,
+  &__field-container {
+    width: 48%;
+  }
+
+  &__row {
+    display: flex;
+    flex-flow: row;
+
+    &-part {
+      display: flex;
+      flex-flow: column;
+      margin-right: 25px;
+    }
+
+    .common-bird__field-container {
+      width: 200px;
+      min-width: 200px;
+    }
+  }
+
+  &__input-container {
+    display: flex;
+
+    & > input:first-child {
+      margin-right: 15px;
+    }
+  }
+
   &__field-container {
     padding-bottom: 15px;
-    width: 100%;
 
     .SingleDatePicker {
       .SingleDatePickerInput {

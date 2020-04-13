@@ -87,6 +87,28 @@ export const labels = {
     circumstancesSubtitle:
       "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить."
   },
+  markInfo: {
+    title: "Информация о метке",
+    markInfoFields: {
+      primaryIdentificationMethod: "Первичный метод определения",
+      primaryIdentificationMethodPlaceholder: "Выберите вид кольца",
+      ringNumber: "Номер кольца",
+      numberPlaceholder: "Номер",
+      ringSeriesPlaceholder: "Серия",
+      numberInBase: "Номер в базе",
+      verificationOfTheMetalRing: "Верификация кольца",
+      verificationOfTheMetalRingPlaceholder: "Подтвердите",
+      ringingScheme: "Схема кольцевания",
+      ringingSchemePlaceholder: "Выберите схему кольцевания",
+      metalRingInformation: "Информация о кольце",
+      metalRingInformationPlaceholder: "Выберите информацию о кольце",
+      leg: "Нога",
+      right: "Правая",
+      left: "Левая",
+      otherMarksInformation: "Информация о других метках",
+      otherMarksInformationPlaceholder: "Выберите информацию о других метках"
+    }
+  },
   observationInfo: {
     title: "Информация о наблюдении",
     subtitle:

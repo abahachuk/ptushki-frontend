@@ -71,6 +71,11 @@ export const CommonBird: FC<ICommonBird> = ({
     [onChangeFormValue]
   );
 
+  const onChangeIdentification = useCallback(
+    e => onChangeFormValue({ value: e.target.value, type: "identification" }),
+    [onChangeFormValue]
+  );
+
   const onChangeComment = useCallback(
     e => onChangeFormValue({ value: e.target.value, type: "comment" }),
     [onChangeFormValue]
@@ -122,6 +127,138 @@ export const CommonBird: FC<ICommonBird> = ({
         collection={collection}
       />
       <div className={`${blockName}__info-blocks-container`}>
+        <InfoContainer
+          className={`${blockName}__info-block`}
+          renderHeader={<BlockHeader title={labels.markInfo.title} />}
+        >
+          <div className={`${blockName}__info-block-body`}>
+            <Field
+              label={labels.markInfo.markInfoFields.primaryIdentificationMethod}
+              placeholder={
+                labels.markInfo.markInfoFields
+                  .primaryIdentificationMethodPlaceholder
+              }
+              collection={getCollection(
+                InitialData.primaryIdentificationMethod
+              )}
+              onChangeValue={onChangeFormValue}
+              type="primaryIdentificationMethod"
+              value={
+                formValues.primaryIdentificationMethod &&
+                formValues.primaryIdentificationMethod.label
+              }
+              disabled={viewMode}
+            />
+            <div className={`${blockName}__row`}>
+              <div className={`${blockName}__row-part`}>
+                <Label
+                  for="identification"
+                  className={`${blockName}__field-label`}
+                >
+                  {labels.markInfo.markInfoFields.ringNumber}
+                </Label>
+                <div className={`${blockName}__input-container`}>
+                  <Input
+                    className={`${blockName}__input`}
+                    id="ringSeria"
+                    placeholder={
+                      labels.markInfo.markInfoFields.ringSeriesPlaceholder
+                    }
+                    onChange={onChangeIdentification}
+                    value={formValues.ringSeria && formValues.ringSeria.label}
+                    disabled={viewMode}
+                  />
+                  <Input
+                    className={`${blockName}__input`}
+                    id="ringNumber"
+                    placeholder={
+                      labels.markInfo.markInfoFields.numberPlaceholder
+                    }
+                    onChange={onChangeIdentification}
+                    value={formValues.ringNumber && formValues.ringNumber.label}
+                    disabled={viewMode}
+                  />
+                </div>
+              </div>
+              <div className={`${blockName}__row-part`}>
+                <Label
+                  for="identification"
+                  className={`${blockName}__field-label`}
+                >
+                  {labels.markInfo.markInfoFields.numberInBase}
+                </Label>
+                <Input
+                  className={`${blockName}__input`}
+                  id="numberInBase"
+                  placeholder={labels.markInfo.markInfoFields.numberPlaceholder}
+                  onChange={onChangeIdentification}
+                  value={
+                    formValues.numberInBase && formValues.numberInBase.label
+                  }
+                  disabled={viewMode}
+                />
+              </div>
+              <Field
+                label={
+                  labels.markInfo.markInfoFields.verificationOfTheMetalRing
+                }
+                placeholder={
+                  labels.markInfo.markInfoFields
+                    .primaryIdentificationMethodPlaceholder
+                }
+                collection={getCollection(
+                  InitialData.verificationOfTheMetalRing
+                )}
+                onChangeValue={onChangeFormValue}
+                type="verificationOfTheMetalRing"
+                value={
+                  formValues.verificationOfTheMetalRing &&
+                  formValues.verificationOfTheMetalRing.label
+                }
+                disabled={viewMode}
+              />
+            </div>
+            <Field
+              label={labels.markInfo.markInfoFields.ringingScheme}
+              placeholder={
+                labels.markInfo.markInfoFields.ringingSchemePlaceholder
+              }
+              collection={getCollection(InitialData.ringingScheme)}
+              onChangeValue={onChangeFormValue}
+              type="ringingScheme"
+              value={formValues.ringingScheme && formValues.ringingScheme.label}
+              disabled={viewMode}
+            />
+            <Field
+              label={labels.markInfo.markInfoFields.metalRingInformation}
+              placeholder={
+                labels.markInfo.markInfoFields.metalRingInformationPlaceholder
+              }
+              collection={getCollection(InitialData.metalRingInformation)}
+              onChangeValue={onChangeFormValue}
+              type="metalRingInformation"
+              value={
+                formValues.metalRingInformation &&
+                formValues.metalRingInformation.label
+              }
+              disabled={viewMode}
+            />
+            <Field
+              label={labels.markInfo.markInfoFields.otherMarksInformation}
+              placeholder={
+                labels.markInfo.markInfoFields.otherMarksInformationPlaceholder
+              }
+              collection={getCollection(InitialData.otherMarksInformation)}
+              onChangeValue={onChangeFormValue}
+              type="otherMarksInformation"
+              value={
+                formValues.otherMarksInformation &&
+                formValues.otherMarksInformation.label
+              }
+              disabled={viewMode}
+            />
+          </div>
+        </InfoContainer>
         <InfoContainer
           className={`${blockName}__info-block`}
           renderHeader={<BlockHeader {...observationsLabels} />}
