@@ -1,6 +1,23 @@
 @import "../../styles/variables";
 
 .common-bird {
+  &__fields-container,
+  &__fields-group {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+
+  &__fields-container {
+    .common-bird__field-container {
+        width: 49%;
+      }
+  }
+
+  &__fields-group {
+    width: 49%;
+  }
+
   &__info-blocks-container {
     display: flex;
     align-items: center;
@@ -9,7 +26,7 @@
 
   &__info-block {
     margin-right: 33px;
-    height: 738px;
+    // height: 738px;
     flex: 1;
 
     &:last-child {

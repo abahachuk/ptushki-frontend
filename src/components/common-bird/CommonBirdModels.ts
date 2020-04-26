@@ -34,6 +34,9 @@ export interface FormValues {
   longitude: FormValueDescriptor;
   latitude: FormValueDescriptor;
   verified: FormValueDescriptor;
+  broodSizeMentioned: FormValueDescriptor;
+  pullusAge: FormValueDescriptor;
+  accuracyOfPullusAge: FormValueDescriptor;
 }
 
 interface FormLabels {
@@ -58,4 +61,5 @@ export interface IBlockHeader {
 
 export interface IField extends IAutosuggest {
   label: string;
+  classModifier?: string;
 }

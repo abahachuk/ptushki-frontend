@@ -40,9 +40,10 @@ const BlockHeader = function({ title, subtitle }: IBlockHeader) {
   );
 };
 
-const Field = function({ label, ...props }: IField) {
+const Field = function({ label, classModifier = "", ...props }: IField) {
+  const postfix: string = classModifier && `--${classModifier}`;
   return (
-    <div className={`${blockName}__field-container`}>
+    <div className={`${blockName}__field-container${postfix}`}>
       <p className={`${blockName}__field-label`}>{label}</p>
       <Autosuggest {...props} />
     </div>
@@ -121,6 +122,94 @@ export const CommonBird: FC<ICommonBird> = ({
         viewMode={viewMode}
         collection={collection}
       />
+      <div className={`${blockName}__info-blocks-container`}>
+        <InfoContainer
+          className={`${blockName}__info-block`}
+          renderHeader={<BlockHeader title={labels.birdInfo.title} />}
+        >
+          <div className={`${blockName}__fields-container`}>
+            <Field
+              label={labels.birdInfo.birdInfoFields.birdSpecies}
+              placeholder={
+                labels.birdInfo.birdInfoFields.birdSpeciesPlaceholder
+              }
+              collection={getCollection(InitialData.species)}
+              onChangeValue={onChangeFormValue}
+              type="speciesMentioned"
+              value={
+                formValues.speciesMentioned && formValues.speciesMentioned.label
+              }
+              disabled={viewMode}
+            />
+            <Field
+              label={labels.birdInfo.birdInfoFields.sex}
+              placeholder={labels.birdInfo.birdInfoFields.sexPlaceholder}
+              collection={getCollection(InitialData.sex)}
+              onChangeValue={onChangeFormValue}
+              type="sexMentioned"
+              value={formValues.sexMentioned && formValues.sexMentioned.label}
+              disabled={viewMode}
+            />
+            <Field
+              label={labels.birdInfo.birdInfoFields.age}
+              placeholder={labels.birdInfo.birdInfoFields.agePlaceholder}
+              collection={getCollection(InitialData.age)}
+              onChangeValue={onChangeFormValue}
+              type="ageMentioned"
+              value={formValues.ageMentioned && formValues.ageMentioned.label}
+              disabled={viewMode}
+            />
+            <Field
+              label={labels.birdInfo.birdInfoFields.birdState}
+              placeholder={labels.birdInfo.birdInfoFields.birdStatePlaceholder}
+              collection={getCollection(InitialData.status)}
+              onChangeValue={onChangeFormValue}
+              type="status"
+              value={formValues.status && formValues.status.label}
+              disabled={viewMode}
+            />
+            <div className={`${blockName}__fields-group`}>
+              <Field
+                label={labels.birdInfo.birdInfoFields.pullusAge}
+                placeholder={
+                  labels.birdInfo.birdInfoFields.pullusAgePlaceholder
+                }
+                collection={getCollection(InitialData.pullusAge)}
+                onChangeValue={onChangeFormValue}
+                type="pullusAge"
+                value={formValues.pullusAge && formValues.pullusAge.label}
+                disabled={viewMode}
+              />
+              <Field
+                label={labels.birdInfo.birdInfoFields.accuracyOfPullusAge}
+                placeholder={
+                  labels.birdInfo.birdInfoFields.accuracyOfPullusAgePlaceholder
+                }
+                collection={getCollection(InitialData.accuracyOfPullusAge)}
+                onChangeValue={onChangeFormValue}
+                type="accuracyOfPullusAge"
+                value={
+                  formValues.accuracyOfPullusAge &&
+                  formValues.accuracyOfPullusAge.label
+                }
+                disabled={viewMode}
+              />
+            </div>
+            <Field
+              label={labels.birdInfo.birdInfoFields.broodSize}
+              placeholder={labels.birdInfo.birdInfoFields.broodSizePlaceholder}
+              collection={getCollection(InitialData.broodSize)}
+              onChangeValue={onChangeFormValue}
+              type="broodSizeMentioned"
+              value={
+                formValues.broodSizeMentioned &&
+                formValues.broodSizeMentioned.label
+              }
+              disabled={viewMode}
+            />
+          </div>
+        </InfoContainer>
+      </div>
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
           className={`${blockName}__info-block`}
