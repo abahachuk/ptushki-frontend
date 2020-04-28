@@ -34,6 +34,9 @@ export interface FormValues {
   longitude: FormValueDescriptor;
   latitude: FormValueDescriptor;
   verified: FormValueDescriptor;
+  observer: FormValueDescriptor;
+  eMail: FormValueDescriptor;
+  observationPlace: FormValueDescriptor;
 }
 
 interface FormLabels {

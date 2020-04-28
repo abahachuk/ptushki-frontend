@@ -98,6 +98,19 @@ export const labels = {
     observations: "Наблюдения",
     circumstances: "Обстоятельства"
   },
+  otherObservationInfo: {
+    title: "Другие данные наблюдения",
+    otherObservationFields: {
+      observer: "Наблюдатель",
+      observerPlaceholder: "Введите имя наблюдателя",
+      eMail: "Адрес электронной почты",
+      eMailPlaceholder: "Введите адрес электронной почты",
+      observationPlace: "Место наблюдения",
+      observationPlacePlaceholder: "Введите место наблюдения",
+      note: "Примечание",
+      notePlaceholder: "Введите примечание"
+    }
+  },
   addObservation: {
     title: "Добавление наблюдения",
     actionTitle: "Добавить наблюдение",

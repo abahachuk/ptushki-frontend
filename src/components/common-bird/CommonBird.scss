@@ -1,6 +1,28 @@
 @import "../../styles/variables";
 
 .common-bird {
+  &__fields-container {
+    display: flex;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    &:nth-child(odd) {
+      padding-right: 10px;
+    }
+
+    &:nth-child(even) {
+      padding-left: 10px;
+    }
+
+    .common-bird__input {
+      height: 100%;
+    }
+  }
+
   &__info-blocks-container {
     display: flex;
     align-items: center;
@@ -9,7 +31,7 @@
 
   &__info-block {
     margin-right: 33px;
-    height: 738px;
+    // height: 738px;
     flex: 1;
 
     &:last-child {
