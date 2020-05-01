@@ -40,9 +40,9 @@ const BlockHeader = function({ title, subtitle }: IBlockHeader) {
   );
 };
 
-const Field = function({ label, ...props }: IField) {
+const Field = function({ label, sizeName = "", ...props }: IField) {
   return (
-    <div className={`${blockName}__field-container`}>
+    <div className={`${blockName}__field-container ${sizeName}`}>
       <p className={`${blockName}__field-label`}>{label}</p>
       <Autosuggest {...props} />
     </div>
@@ -121,6 +121,203 @@ export const CommonBird: FC<ICommonBird> = ({
         viewMode={viewMode}
         collection={collection}
       />
+      <div className={`${blockName}__info-blocks-container`}>
+        <InfoContainer
+          className={`${blockName}__info-block`}
+          renderHeader={
+            <BlockHeader title={labels.circumstancesAndPlace.title} />
+          }
+        >
+          <div className={`${blockName}__fields-container`}>
+            <div className={`${blockName}__column`}>
+              <div className={`${blockName}__inputs-container w-350`}>
+                <Label for="dateTime" className={`${blockName}__field-label`}>
+                  {
+                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                      .observationDateAndTime
+                  }
+                </Label>
+                <Input
+                  className={`${blockName}__input-date-time`}
+                  id="day"
+                  placeholder={
+                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                      .dayPlaceholder
+                  }
+                  onChange={onChangeCoordinates}
+                  value={formValues.day && formValues.day.label}
+                  disabled={viewMode}
+                />
+                <Input
+                  className={`${blockName}__input-date-time`}
+                  id="month"
+                  placeholder={
+                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                      .monthPlaceholder
+                  }
+                  onChange={onChangeCoordinates}
+                  value={formValues.month && formValues.month.label}
+                  disabled={viewMode}
+                />
+                <Input
+                  className={`${blockName}__input-date-time--year`}
+                  id="year"
+                  placeholder={
+                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                      .yearPlaceholder
+                  }
+                  onChange={onChangeCoordinates}
+                  value={formValues.month && formValues.month.label}
+                  disabled={viewMode}
+                />
+                <Input
+                  className={`${blockName}__input-date-time`}
+                  id="hour"
+                  placeholder={
+                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                      .hourPlaceholder
+                  }
+                  onChange={onChangeCoordinates}
+                  value={formValues.hour && formValues.hour.label}
+                  disabled={viewMode}
+                />
+                <Input
+                  className={`${blockName}__input-date-time`}
+                  id="minute"
+                  placeholder={
+                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                      .minutePlaceholder
+                  }
+                  onChange={onChangeCoordinates}
+                  value={formValues.minute && formValues.minute.label}
+                  disabled={viewMode}
+                />
+              </div>
+              <Field
+                label={
+                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    .accuracyOfDate
+                }
+                sizeName="w-235"
+                placeholder={
+                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    .accuracyOfDatePlaceholder
+                }
+                collection={getCollection(InitialData.accuracyOfDate)}
+                onChangeValue={onChangeFormValue}
+                type="accuracyOfDate"
+                value={
+                  formValues.accuracyOfDate && formValues.accuracyOfDate.label
+                }
+                disabled={viewMode}
+              />
+              <Field
+                label={
+                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    .placeCode
+                }
+                placeholder={
+                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    .placeCodePlaceholder
+                }
+                collection={getCollection(InitialData.placeCode)}
+                onChangeValue={onChangeFormValue}
+                type="placeCode"
+                value={formValues.placeCode && formValues.placeCode.label}
+                disabled={viewMode}
+              />
+              <div className={`${blockName}__inputs-container w-250`}>
+                <Label
+                  for="coordinates"
+                  className={`${blockName}__field-label`}
+                >
+                  {
+                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                      .coordinates
+                  }
+                </Label>
+                <Input
+                  className={`${blockName}__input-coords`}
+                  id="latitude"
+                  placeholder={
+                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                      .latitude
+                  }
+                  onChange={onChangeCoordinates}
+                  value={formValues.latitude && formValues.latitude.label}
+                  disabled={viewMode}
+                />
+                <Input
+                  className={`${blockName}__input-coords`}
+                  id="longitude"
+                  placeholder={
+                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                      .longitude
+                  }
+                  onChange={onChangeCoordinates}
+                  value={formValues.longitude && formValues.longitude.label}
+                  disabled={viewMode}
+                />
+              </div>
+              <Field
+                label={
+                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    .accuracyOfCoordinates
+                }
+                sizeName="w-335"
+                placeholder={
+                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    .accuracyOfCoordinatesPlaceholder
+                }
+                collection={getCollection(InitialData.accuracyOfCoordinates)}
+                onChangeValue={onChangeFormValue}
+                type="accuracyOfCoordinates"
+                value={
+                  formValues.accuracyOfCoordinates &&
+                  formValues.accuracyOfCoordinates.label
+                }
+                disabled={viewMode}
+              />
+              <Field
+                label={
+                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    .circumstances
+                }
+                placeholder={
+                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    .circumstancesPlaceholder
+                }
+                collection={getCollection(InitialData.circumstances)}
+                onChangeValue={onChangeFormValue}
+                type="circumstances"
+                value={
+                  formValues.circumstances && formValues.circumstances.label
+                }
+                disabled={viewMode}
+              />
+              <Field
+                label={
+                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    .circumstancesPresumed
+                }
+                placeholder={
+                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    .circumstancesPresumedPlaceholder
+                }
+                collection={getCollection(InitialData.circumstancesPresumed)}
+                onChangeValue={onChangeFormValue}
+                type="circumstances"
+                value={
+                  formValues.circumstances &&
+                  formValues.circumstancesPresumed.label
+                }
+                disabled={viewMode}
+              />
+            </div>
+            <div className={`${blockName}__column`}></div>
+          </div>
+        </InfoContainer>
+      </div>
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
           className={`${blockName}__info-block`}

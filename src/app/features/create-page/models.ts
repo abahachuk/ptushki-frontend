@@ -39,7 +39,10 @@ export enum InitialData {
   species = "species",
   speciesMentioned = "speciesMentioned",
   primaryIdentificationMethod = "primaryIdentificationMethod",
-  placeCode = "placeCode"
+  placeCode = "placeCode",
+  accuracyOfCoordinates = "accuracyOfCoordinates",
+  circumstances = "circumstances",
+  circumstancesPresumed = "circumstancesPresumed"
 }
 
 type InitialDataDescriptorMap = { [key in InitialData]?: string };

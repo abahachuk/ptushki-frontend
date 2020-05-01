@@ -98,6 +98,31 @@ export const labels = {
     observations: "Наблюдения",
     circumstances: "Обстоятельства"
   },
+  circumstancesAndPlace: {
+    title: "Обстоятельства и место",
+    circumstancesAndPlaceFields: {
+      observationDateAndTime: "Дата и время наблюдения",
+      dayPlaceholder: "ДД",
+      monthPlaceholder: "ММ",
+      yearPlaceholder: "ГГГГ",
+      hourPlaceholder: "ЧЧ",
+      minutePlaceholder: "ММ",
+      placeCode: "Код места",
+      placeCodePlaceholder: "Выберите место кольцевания из списка",
+      accuracyOfDate: "Точность даты",
+      accuracyOfDatePlaceholder: "Выберите точность даты",
+      coordinates: "Координаты",
+      latitude: "Широта",
+      longitude: "Долгота",
+      accuracyOfCoordinates: "Точность координат",
+      accuracyOfCoordinatesPlaceholder: "Выберите точность координат",
+      circumstances: "Обстоятельства",
+      circumstancesPlaceholder: "Выберите обстоятельства",
+      circumstancesPresumed: "Достоверность обстоятельств",
+      circumstancesPresumedPlaceholder:
+        "Выберите степень достоверности обстоятельств"
+    }
+  },
   addObservation: {
     title: "Добавление наблюдения",
     actionTitle: "Добавить наблюдение",
