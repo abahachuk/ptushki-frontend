@@ -1,6 +1,7 @@
 import React, { FC, Fragment, useCallback, useState } from "react";
 import {
   Button,
+  ButtonGroup,
   Input,
   Label,
   Modal,
@@ -63,6 +64,7 @@ export const CommonBird: FC<ICommonBird> = ({
 }) => {
   const [isOpened, setIsOpen] = useState(false);
   const [calendarFocused, setCalendarFocused] = useState(false);
+  const [birdLeg, setBirdLeg] = useState(null);
 
   const toggleModal = useCallback(() => setIsOpen(!isOpened), [isOpened]);
 
@@ -91,7 +93,7 @@ export const CommonBird: FC<ICommonBird> = ({
       initialValues
         ? initialValues[key].map((item: IInitialDataDescriptor) => ({
             // TODO: use logic from localize service
-            label: item.desc_rus || item.desc_eng || item[key],
+            label: item.desc_rus || item.desc_eng || item[key] || item.country,
             value: item.value || item.id,
             id: item.id
           }))
@@ -131,35 +133,34 @@ export const CommonBird: FC<ICommonBird> = ({
           className={`${blockName}__info-block`}
           renderHeader={<BlockHeader title={labels.markInfo.title} />}
         >
-          <div className={`${blockName}__info-block-body`}>
-            <Field
-              label={labels.markInfo.markInfoFields.primaryIdentificationMethod}
-              placeholder={
-                labels.markInfo.markInfoFields
-                  .primaryIdentificationMethodPlaceholder
-              }
-              collection={getCollection(
-                InitialData.primaryIdentificationMethod
-              )}
-              onChangeValue={onChangeFormValue}
-              type="primaryIdentificationMethod"
-              value={
-                formValues.primaryIdentificationMethod &&
-                formValues.primaryIdentificationMethod.label
-              }
-              disabled={viewMode}
-            />
-            <div className={`${blockName}__row`}>
-              <div className={`${blockName}__row-part`}>
-                <Label
-                  for="identification"
-                  className={`${blockName}__field-label`}
-                >
-                  {labels.markInfo.markInfoFields.ringNumber}
-                </Label>
-                <div className={`${blockName}__input-container`}>
+          <div className={`${blockName}__fields-container`}>
+            <div className={`${blockName}__column`}>
+              <Field
+                label={
+                  labels.markInfo.markInfoFields.primaryIdentificationMethod
+                }
+                placeholder={
+                  labels.markInfo.markInfoFields
+                    .primaryIdentificationMethodPlaceholder
+                }
+                collection={getCollection(
+                  InitialData.primaryIdentificationMethod
+                )}
+                onChangeValue={onChangeFormValue}
+                type="primaryIdentificationMethod"
+                value={
+                  formValues.primaryIdentificationMethod &&
+                  formValues.primaryIdentificationMethod.label
+                }
+                disabled={viewMode}
+              />
+              <div className={`${blockName}__row`}>
+                <div className={`${blockName}__field-container--group`}>
+                  <Label className={`${blockName}__field-label`}>
+                    {labels.markInfo.markInfoFields.ringNumber}
+                  </Label>
                   <Input
-                    className={`${blockName}__input`}
+                    className={`${blockName}__input--ring-number`}
                     id="ringSeria"
                     placeholder={
                       labels.markInfo.markInfoFields.ringSeriesPlaceholder
@@ -169,7 +170,7 @@ export const CommonBird: FC<ICommonBird> = ({
                     disabled={viewMode}
                   />
                   <Input
-                    className={`${blockName}__input`}
+                    className={`${blockName}__input--ring-number`}
                     id="ringNumber"
                     placeholder={
                       labels.markInfo.markInfoFields.numberPlaceholder
@@ -179,86 +180,119 @@ export const CommonBird: FC<ICommonBird> = ({
                     disabled={viewMode}
                   />
                 </div>
-              </div>
-              <div className={`${blockName}__row-part`}>
-                <Label
-                  for="identification"
-                  className={`${blockName}__field-label`}
-                >
-                  {labels.markInfo.markInfoFields.numberInBase}
-                </Label>
-                <Input
-                  className={`${blockName}__input`}
-                  id="numberInBase"
-                  placeholder={labels.markInfo.markInfoFields.numberPlaceholder}
-                  onChange={onChangeIdentification}
+                <div className={`${blockName}__field-container--simple`}>
+                  <Label
+                    for="identification"
+                    className={`${blockName}__field-label`}
+                  >
+                    {labels.markInfo.markInfoFields.numberInBase}
+                  </Label>
+                  <Input
+                    className={`${blockName}__input`}
+                    id="numberInBase"
+                    placeholder={
+                      labels.markInfo.markInfoFields.numberPlaceholder
+                    }
+                    onChange={onChangeIdentification}
+                    value={
+                      formValues.numberInBase && formValues.numberInBase.label
+                    }
+                    disabled={viewMode}
+                  />
+                </div>
+                <Field
+                  label={
+                    labels.markInfo.markInfoFields.verificationOfTheMetalRing
+                  }
+                  placeholder={
+                    labels.markInfo.markInfoFields
+                      .primaryIdentificationMethodPlaceholder
+                  }
+                  collection={getCollection(
+                    InitialData.verificationOfTheMetalRing
+                  )}
+                  onChangeValue={onChangeFormValue}
+                  type="verificationOfTheMetalRing"
                   value={
-                    formValues.numberInBase && formValues.numberInBase.label
+                    formValues.verificationOfTheMetalRing &&
+                    formValues.verificationOfTheMetalRing.label
                   }
                   disabled={viewMode}
                 />
               </div>
               <Field
-                label={
-                  labels.markInfo.markInfoFields.verificationOfTheMetalRing
-                }
+                label={labels.markInfo.markInfoFields.ringingScheme}
                 placeholder={
-                  labels.markInfo.markInfoFields
-                    .primaryIdentificationMethodPlaceholder
+                  labels.markInfo.markInfoFields.ringingSchemePlaceholder
                 }
-                collection={getCollection(
-                  InitialData.verificationOfTheMetalRing
-                )}
+                collection={getCollection(InitialData.ringingScheme)}
                 onChangeValue={onChangeFormValue}
-                type="verificationOfTheMetalRing"
+                type="ringingScheme"
                 value={
-                  formValues.verificationOfTheMetalRing &&
-                  formValues.verificationOfTheMetalRing.label
+                  formValues.ringingScheme && formValues.ringingScheme.label
                 }
                 disabled={viewMode}
               />
             </div>
-            <Field
-              label={labels.markInfo.markInfoFields.ringingScheme}
-              placeholder={
-                labels.markInfo.markInfoFields.ringingSchemePlaceholder
-              }
-              collection={getCollection(InitialData.ringingScheme)}
-              onChangeValue={onChangeFormValue}
-              type="ringingScheme"
-              value={formValues.ringingScheme && formValues.ringingScheme.label}
-              disabled={viewMode}
-            />
-            <Field
-              label={labels.markInfo.markInfoFields.metalRingInformation}
-              placeholder={
-                labels.markInfo.markInfoFields.metalRingInformationPlaceholder
-              }
-              collection={getCollection(InitialData.metalRingInformation)}
-              onChangeValue={onChangeFormValue}
-              type="metalRingInformation"
-              value={
-                formValues.metalRingInformation &&
-                formValues.metalRingInformation.label
-              }
-              disabled={viewMode}
-            />
-            <Field
-              label={labels.markInfo.markInfoFields.otherMarksInformation}
-              placeholder={
-                labels.markInfo.markInfoFields.otherMarksInformationPlaceholder
-              }
-              collection={getCollection(InitialData.otherMarksInformation)}
-              onChangeValue={onChangeFormValue}
-              type="otherMarksInformation"
-              value={
-                formValues.otherMarksInformation &&
-                formValues.otherMarksInformation.label
-              }
-              disabled={viewMode}
-            />
+            <div className={`${blockName}__column`}>
+              <div className={`${blockName}__row`}>
+                <Field
+                  label={labels.markInfo.markInfoFields.metalRingInformation}
+                  placeholder={
+                    labels.markInfo.markInfoFields
+                      .metalRingInformationPlaceholder
+                  }
+                  collection={getCollection(InitialData.metalRingInformation)}
+                  onChangeValue={onChangeFormValue}
+                  type="metalRingInformation"
+                  value={
+                    formValues.metalRingInformation &&
+                    formValues.metalRingInformation.label
+                  }
+                  disabled={viewMode}
+                />
+                <div
+                  className={`${blockName}__field-container--group button-group`}
+                >
+                  <p className={`${blockName}__field-label`}>
+                    {labels.markInfo.leg}
+                  </p>
+                  <ButtonGroup>
+                    <Button
+                      outline
+                      onClick={() => setBirdLeg(labels.markInfo.left)}
+                    >
+                      {labels.markInfo.left}
+                    </Button>
+                    <Button
+                      outline
+                      onClick={() => setBirdLeg(labels.markInfo.right)}
+                    >
+                      {labels.markInfo.right}
+                    </Button>
+                  </ButtonGroup>
+                </div>
+              </div>
+              <Field
+                label={labels.markInfo.markInfoFields.otherMarksInformation}
+                placeholder={
+                  labels.markInfo.markInfoFields
+                    .otherMarksInformationPlaceholder
+                }
+                collection={getCollection(InitialData.otherMarksInformation)}
+                onChangeValue={onChangeFormValue}
+                type="otherMarksInformation"
+                value={
+                  formValues.otherMarksInformation &&
+                  formValues.otherMarksInformation.label
+                }
+                disabled={viewMode}
+              />
+            </div>
           </div>
         </InfoContainer>
+      </div>
+      <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
           className={`${blockName}__info-block`}
           renderHeader={<BlockHeader {...observationsLabels} />}

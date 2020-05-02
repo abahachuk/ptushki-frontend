@@ -89,6 +89,9 @@ export const labels = {
   },
   markInfo: {
     title: "Информация о метке",
+    leg: "Нога",
+    right: "Правая",
+    left: "Левая",
     markInfoFields: {
       primaryIdentificationMethod: "Первичный метод определения",
       primaryIdentificationMethodPlaceholder: "Выберите вид кольца",

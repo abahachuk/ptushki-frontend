@@ -1,6 +1,70 @@
 @import "../../styles/variables";
 
 .common-bird {
+  &__fields-container {
+    display: flex;
+    align-items: baseline;
+  }
+
+  &__input--ring-number {
+    width: 80px;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    &:nth-child(odd) {
+      padding-right: 10px;
+    }
+
+    &:nth-child(even) {
+      padding-left: 10px;
+    }
+
+    .common-bird {
+      &__field-container,
+      &__row {
+        width: 100%;
+      }
+
+      &__field-container--group,
+      &__row {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+      }
+
+      &__field-container {
+        flex: 1;
+      }
+
+      &__field-container--simple {
+        display: flex;
+        flex-flow: column;
+        width: 150px;
+        margin: 0 25px;
+      }
+
+      &__field-container--group {
+        width: 170px;
+
+        &.button-group {
+          margin-left: 25px;
+        }
+      }
+
+      &__field-container--group {
+        padding-bottom: 15px;
+
+        .common-bird__field-label {
+          flex: 0 0 100%;
+        }
+      }
+    }
+  }
+
   &__info-blocks-container {
     display: flex;
     flex-flow: column;
