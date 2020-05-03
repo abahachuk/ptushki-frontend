@@ -122,16 +122,18 @@ export const CommonBird: FC<ICommonBird> = ({
         viewMode={viewMode}
         collection={collection}
       />
-      <div className={`${blockName}__info-blocks-container`}>
+      <div className={`${blockName}__info-blocks-container--column`}>
         <InfoContainer
           className={`${blockName}__info-block`}
-          renderHeader={<BlockHeader title={labels.birdInfo.title} />}
+          renderHeader={
+            <BlockHeader title={labels.addObservation.birdInfoTitle} />
+          }
         >
           <div className={`${blockName}__fields-container`}>
             <Field
-              label={labels.birdInfo.birdInfoFields.birdSpecies}
+              label={labels.addObservation.birdInfoFields.birdSpecies}
               placeholder={
-                labels.birdInfo.birdInfoFields.birdSpeciesPlaceholder
+                labels.addObservation.birdInfoFields.birdSpeciesPlaceholder
               }
               collection={getCollection(InitialData.species)}
               onChangeValue={onChangeFormValue}
@@ -142,8 +144,8 @@ export const CommonBird: FC<ICommonBird> = ({
               disabled={viewMode}
             />
             <Field
-              label={labels.birdInfo.birdInfoFields.sex}
-              placeholder={labels.birdInfo.birdInfoFields.sexPlaceholder}
+              label={labels.addObservation.birdInfoFields.sex}
+              placeholder={labels.addObservation.birdInfoFields.sexPlaceholder}
               collection={getCollection(InitialData.sex)}
               onChangeValue={onChangeFormValue}
               type="sexMentioned"
@@ -151,8 +153,8 @@ export const CommonBird: FC<ICommonBird> = ({
               disabled={viewMode}
             />
             <Field
-              label={labels.birdInfo.birdInfoFields.age}
-              placeholder={labels.birdInfo.birdInfoFields.agePlaceholder}
+              label={labels.addObservation.birdInfoFields.age}
+              placeholder={labels.addObservation.birdInfoFields.agePlaceholder}
               collection={getCollection(InitialData.age)}
               onChangeValue={onChangeFormValue}
               type="ageMentioned"
@@ -160,19 +162,21 @@ export const CommonBird: FC<ICommonBird> = ({
               disabled={viewMode}
             />
             <Field
-              label={labels.birdInfo.birdInfoFields.birdState}
-              placeholder={labels.birdInfo.birdInfoFields.birdStatePlaceholder}
+              label={labels.addObservation.birdInfoFields.birdState}
+              placeholder={
+                labels.addObservation.birdInfoFields.birdStatePlaceholder
+              }
               collection={getCollection(InitialData.status)}
               onChangeValue={onChangeFormValue}
               type="status"
               value={formValues.status && formValues.status.label}
               disabled={viewMode}
             />
-            <div className={`${blockName}__fields-group`}>
+            <div className={`${blockName}__row`}>
               <Field
-                label={labels.birdInfo.birdInfoFields.pullusAge}
+                label={labels.addObservation.birdInfoFields.pullusAge}
                 placeholder={
-                  labels.birdInfo.birdInfoFields.pullusAgePlaceholder
+                  labels.addObservation.birdInfoFields.pullusAgePlaceholder
                 }
                 collection={getCollection(InitialData.pullusAge)}
                 onChangeValue={onChangeFormValue}
@@ -181,9 +185,10 @@ export const CommonBird: FC<ICommonBird> = ({
                 disabled={viewMode}
               />
               <Field
-                label={labels.birdInfo.birdInfoFields.accuracyOfPullusAge}
+                label={labels.addObservation.birdInfoFields.accuracyOfPullusAge}
                 placeholder={
-                  labels.birdInfo.birdInfoFields.accuracyOfPullusAgePlaceholder
+                  labels.addObservation.birdInfoFields
+                    .accuracyOfPullusAgePlaceholder
                 }
                 collection={getCollection(InitialData.accuracyOfPullusAge)}
                 onChangeValue={onChangeFormValue}
@@ -196,8 +201,10 @@ export const CommonBird: FC<ICommonBird> = ({
               />
             </div>
             <Field
-              label={labels.birdInfo.birdInfoFields.broodSize}
-              placeholder={labels.birdInfo.birdInfoFields.broodSizePlaceholder}
+              label={labels.addObservation.birdInfoFields.broodSize}
+              placeholder={
+                labels.addObservation.birdInfoFields.broodSizePlaceholder
+              }
               collection={getCollection(InitialData.broodSize)}
               onChangeValue={onChangeFormValue}
               type="broodSizeMentioned"
