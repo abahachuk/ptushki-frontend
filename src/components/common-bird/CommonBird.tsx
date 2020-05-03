@@ -83,6 +83,16 @@ export const CommonBird: FC<ICommonBird> = ({
     [onChangeFormValue]
   );
 
+  const onChangeRingInfo = useCallback(
+    e => onChangeFormValue({ value: e.target.value, type: "ringInfo" }),
+    [onChangeFormValue]
+  );
+
+  const onChangeNumberInBase = useCallback(
+    e => onChangeFormValue({ value: e.target.value, type: "numberInBase" }),
+    [onChangeFormValue]
+  );
+
   const onChangeDate = useCallback(
     date => onChangeFormValue({ value: date, type: "date" }),
     [onChangeFormValue]
@@ -131,16 +141,19 @@ export const CommonBird: FC<ICommonBird> = ({
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
           className={`${blockName}__info-block`}
-          renderHeader={<BlockHeader title={labels.markInfo.title} />}
+          renderHeader={
+            <BlockHeader title={labels.addObservation.markInfoTitle} />
+          }
         >
           <div className={`${blockName}__fields-container`}>
             <div className={`${blockName}__column`}>
               <Field
                 label={
-                  labels.markInfo.markInfoFields.primaryIdentificationMethod
+                  labels.addObservation.markInfoFields
+                    .primaryIdentificationMethod
                 }
                 placeholder={
-                  labels.markInfo.markInfoFields
+                  labels.addObservation.markInfoFields
                     .primaryIdentificationMethodPlaceholder
                 }
                 collection={getCollection(
@@ -156,16 +169,16 @@ export const CommonBird: FC<ICommonBird> = ({
               />
               <div className={`${blockName}__row`}>
                 <div className={`${blockName}__field-container--group`}>
-                  <Label className={`${blockName}__field-label`}>
-                    {labels.markInfo.markInfoFields.ringNumber}
+                  <Label for="ringInfo" className={`${blockName}__field-label`}>
+                    {labels.addObservation.markInfoFields.ringNumber}
                   </Label>
                   <Input
                     className={`${blockName}__input--ring-number`}
                     id="ringSeria"
                     placeholder={
-                      labels.markInfo.markInfoFields.ringSeriesPlaceholder
+                      labels.addObservation.markInfoFields.ringSeriesPlaceholder
                     }
-                    onChange={onChangeIdentification}
+                    onChange={onChangeRingInfo}
                     value={formValues.ringSeria && formValues.ringSeria.label}
                     disabled={viewMode}
                   />
@@ -173,27 +186,27 @@ export const CommonBird: FC<ICommonBird> = ({
                     className={`${blockName}__input--ring-number`}
                     id="ringNumber"
                     placeholder={
-                      labels.markInfo.markInfoFields.numberPlaceholder
+                      labels.addObservation.markInfoFields.numberPlaceholder
                     }
-                    onChange={onChangeIdentification}
+                    onChange={onChangeRingInfo}
                     value={formValues.ringNumber && formValues.ringNumber.label}
                     disabled={viewMode}
                   />
                 </div>
                 <div className={`${blockName}__field-container--simple`}>
                   <Label
-                    for="identification"
+                    for="numberInBase"
                     className={`${blockName}__field-label`}
                   >
-                    {labels.markInfo.markInfoFields.numberInBase}
+                    {labels.addObservation.markInfoFields.numberInBase}
                   </Label>
                   <Input
                     className={`${blockName}__input`}
                     id="numberInBase"
                     placeholder={
-                      labels.markInfo.markInfoFields.numberPlaceholder
+                      labels.addObservation.markInfoFields.numberPlaceholder
                     }
-                    onChange={onChangeIdentification}
+                    onChange={onChangeNumberInBase}
                     value={
                       formValues.numberInBase && formValues.numberInBase.label
                     }
@@ -202,11 +215,12 @@ export const CommonBird: FC<ICommonBird> = ({
                 </div>
                 <Field
                   label={
-                    labels.markInfo.markInfoFields.verificationOfTheMetalRing
+                    labels.addObservation.markInfoFields
+                      .verificationOfTheMetalRing
                   }
                   placeholder={
-                    labels.markInfo.markInfoFields
-                      .primaryIdentificationMethodPlaceholder
+                    labels.addObservation.markInfoFields
+                      .verificationOfTheMetalRingPlaceholder
                   }
                   collection={getCollection(
                     InitialData.verificationOfTheMetalRing
@@ -221,9 +235,9 @@ export const CommonBird: FC<ICommonBird> = ({
                 />
               </div>
               <Field
-                label={labels.markInfo.markInfoFields.ringingScheme}
+                label={labels.addObservation.markInfoFields.ringingScheme}
                 placeholder={
-                  labels.markInfo.markInfoFields.ringingSchemePlaceholder
+                  labels.addObservation.markInfoFields.ringingSchemePlaceholder
                 }
                 collection={getCollection(InitialData.ringingScheme)}
                 onChangeValue={onChangeFormValue}
@@ -237,9 +251,11 @@ export const CommonBird: FC<ICommonBird> = ({
             <div className={`${blockName}__column`}>
               <div className={`${blockName}__row`}>
                 <Field
-                  label={labels.markInfo.markInfoFields.metalRingInformation}
+                  label={
+                    labels.addObservation.markInfoFields.metalRingInformation
+                  }
                   placeholder={
-                    labels.markInfo.markInfoFields
+                    labels.addObservation.markInfoFields
                       .metalRingInformationPlaceholder
                   }
                   collection={getCollection(InitialData.metalRingInformation)}
@@ -251,32 +267,36 @@ export const CommonBird: FC<ICommonBird> = ({
                   }
                   disabled={viewMode}
                 />
-                <div
-                  className={`${blockName}__field-container--group button-group`}
-                >
+                <div className={`${blockName}__button-group`}>
                   <p className={`${blockName}__field-label`}>
-                    {labels.markInfo.leg}
+                    {labels.addObservation.markInfoFields.leg}
                   </p>
                   <ButtonGroup>
                     <Button
                       outline
-                      onClick={() => setBirdLeg(labels.markInfo.left)}
+                      onClick={() =>
+                        setBirdLeg(labels.addObservation.markInfoFields.left)
+                      }
                     >
-                      {labels.markInfo.left}
+                      {labels.addObservation.markInfoFields.left}
                     </Button>
                     <Button
                       outline
-                      onClick={() => setBirdLeg(labels.markInfo.right)}
+                      onClick={() =>
+                        setBirdLeg(labels.addObservation.markInfoFields.right)
+                      }
                     >
-                      {labels.markInfo.right}
+                      {labels.addObservation.markInfoFields.right}
                     </Button>
                   </ButtonGroup>
                 </div>
               </div>
               <Field
-                label={labels.markInfo.markInfoFields.otherMarksInformation}
+                label={
+                  labels.addObservation.markInfoFields.otherMarksInformation
+                }
                 placeholder={
-                  labels.markInfo.markInfoFields
+                  labels.addObservation.markInfoFields
                     .otherMarksInformationPlaceholder
                 }
                 collection={getCollection(InitialData.otherMarksInformation)}

@@ -29,6 +29,10 @@
         width: 100%;
       }
 
+      &__button-group {
+        margin-left: 25px;
+      }
+
       &__field-container--group,
       &__row {
         display: flex;
@@ -49,10 +53,6 @@
 
       &__field-container--group {
         width: 170px;
-
-        &.button-group {
-          margin-left: 25px;
-        }
       }
 
       &__field-container--group {
