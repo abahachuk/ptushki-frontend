@@ -71,6 +71,11 @@ export const CommonBird: FC<ICommonBird> = ({
     [onChangeFormValue]
   );
 
+  const onChangeDateTime = useCallback(
+    e => onChangeFormValue({ value: e.target.value, type: "dateTime" }),
+    [onChangeFormValue]
+  );
+
   const onChangeComment = useCallback(
     e => onChangeFormValue({ value: e.target.value, type: "comment" }),
     [onChangeFormValue]
@@ -121,19 +126,24 @@ export const CommonBird: FC<ICommonBird> = ({
         viewMode={viewMode}
         collection={collection}
       />
-      <div className={`${blockName}__info-blocks-container`}>
-        <InfoContainer
-          className={`${blockName}__info-block`}
-          renderHeader={
-            <BlockHeader title={labels.circumstancesAndPlace.title} />
-          }
-        >
-          <div className={`${blockName}__fields-container`}>
-            <div className={`${blockName}__column`}>
-              <div className={`${blockName}__inputs-container w-350`}>
-                <Label for="dateTime" className={`${blockName}__field-label`}>
+      <div className={`${blockName}__info-blocks-container--circumstances`}>
+        <div className={`${blockName}__column`}>
+          <InfoContainer
+            className={`${blockName}__info-block`}
+            renderHeader={
+              <BlockHeader
+                title={labels.addObservation.circumstancesAndPlaceTitle}
+              />
+            }
+          >
+            <div className={`${blockName}__row`}>
+              <div className={`${blockName}__inputs-container`}>
+                <Label
+                  for="dateTime"
+                  className={`${blockName}__field-label--input`}
+                >
                   {
-                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    labels.addObservation.circumstancesAndPlaceFields
                       .observationDateAndTime
                   }
                 </Label>
@@ -141,10 +151,10 @@ export const CommonBird: FC<ICommonBird> = ({
                   className={`${blockName}__input-date-time`}
                   id="day"
                   placeholder={
-                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    labels.addObservation.circumstancesAndPlaceFields
                       .dayPlaceholder
                   }
-                  onChange={onChangeCoordinates}
+                  onChange={onChangeDateTime}
                   value={formValues.day && formValues.day.label}
                   disabled={viewMode}
                 />
@@ -152,10 +162,10 @@ export const CommonBird: FC<ICommonBird> = ({
                   className={`${blockName}__input-date-time`}
                   id="month"
                   placeholder={
-                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    labels.addObservation.circumstancesAndPlaceFields
                       .monthPlaceholder
                   }
-                  onChange={onChangeCoordinates}
+                  onChange={onChangeDateTime}
                   value={formValues.month && formValues.month.label}
                   disabled={viewMode}
                 />
@@ -163,10 +173,10 @@ export const CommonBird: FC<ICommonBird> = ({
                   className={`${blockName}__input-date-time--year`}
                   id="year"
                   placeholder={
-                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    labels.addObservation.circumstancesAndPlaceFields
                       .yearPlaceholder
                   }
-                  onChange={onChangeCoordinates}
+                  onChange={onChangeDateTime}
                   value={formValues.month && formValues.month.label}
                   disabled={viewMode}
                 />
@@ -174,10 +184,10 @@ export const CommonBird: FC<ICommonBird> = ({
                   className={`${blockName}__input-date-time`}
                   id="hour"
                   placeholder={
-                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    labels.addObservation.circumstancesAndPlaceFields
                       .hourPlaceholder
                   }
-                  onChange={onChangeCoordinates}
+                  onChange={onChangeDateTime}
                   value={formValues.hour && formValues.hour.label}
                   disabled={viewMode}
                 />
@@ -185,22 +195,21 @@ export const CommonBird: FC<ICommonBird> = ({
                   className={`${blockName}__input-date-time`}
                   id="minute"
                   placeholder={
-                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    labels.addObservation.circumstancesAndPlaceFields
                       .minutePlaceholder
                   }
-                  onChange={onChangeCoordinates}
+                  onChange={onChangeDateTime}
                   value={formValues.minute && formValues.minute.label}
                   disabled={viewMode}
                 />
               </div>
               <Field
                 label={
-                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                  labels.addObservation.circumstancesAndPlaceFields
                     .accuracyOfDate
                 }
-                sizeName="w-235"
                 placeholder={
-                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                  labels.addObservation.circumstancesAndPlaceFields
                     .accuracyOfDatePlaceholder
                 }
                 collection={getCollection(InitialData.accuracyOfDate)}
@@ -211,28 +220,29 @@ export const CommonBird: FC<ICommonBird> = ({
                 }
                 disabled={viewMode}
               />
-              <Field
-                label={
-                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
-                    .placeCode
-                }
-                placeholder={
-                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
-                    .placeCodePlaceholder
-                }
-                collection={getCollection(InitialData.placeCode)}
-                onChangeValue={onChangeFormValue}
-                type="placeCode"
-                value={formValues.placeCode && formValues.placeCode.label}
-                disabled={viewMode}
-              />
-              <div className={`${blockName}__inputs-container w-250`}>
+            </div>
+            <Field
+              label={
+                labels.addObservation.circumstancesAndPlaceFields.placeCode
+              }
+              placeholder={
+                labels.addObservation.circumstancesAndPlaceFields
+                  .placeCodePlaceholder
+              }
+              collection={getCollection(InitialData.placeCode)}
+              onChangeValue={onChangeFormValue}
+              type="placeCode"
+              value={formValues.placeCode && formValues.placeCode.label}
+              disabled={viewMode}
+            />
+            <div className={`${blockName}__row`}>
+              <div className={`${blockName}__inputs-container`}>
                 <Label
                   for="coordinates"
-                  className={`${blockName}__field-label`}
+                  className={`${blockName}__field-label--input`}
                 >
                   {
-                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                    labels.addObservation.circumstancesAndPlaceFields
                       .coordinates
                   }
                 </Label>
@@ -240,8 +250,7 @@ export const CommonBird: FC<ICommonBird> = ({
                   className={`${blockName}__input-coords`}
                   id="latitude"
                   placeholder={
-                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
-                      .latitude
+                    labels.addObservation.circumstancesAndPlaceFields.latitude
                   }
                   onChange={onChangeCoordinates}
                   value={formValues.latitude && formValues.latitude.label}
@@ -251,8 +260,7 @@ export const CommonBird: FC<ICommonBird> = ({
                   className={`${blockName}__input-coords`}
                   id="longitude"
                   placeholder={
-                    labels.circumstancesAndPlace.circumstancesAndPlaceFields
-                      .longitude
+                    labels.addObservation.circumstancesAndPlaceFields.longitude
                   }
                   onChange={onChangeCoordinates}
                   value={formValues.longitude && formValues.longitude.label}
@@ -261,12 +269,11 @@ export const CommonBird: FC<ICommonBird> = ({
               </div>
               <Field
                 label={
-                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                  labels.addObservation.circumstancesAndPlaceFields
                     .accuracyOfCoordinates
                 }
-                sizeName="w-335"
                 placeholder={
-                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
+                  labels.addObservation.circumstancesAndPlaceFields
                     .accuracyOfCoordinatesPlaceholder
                 }
                 collection={getCollection(InitialData.accuracyOfCoordinates)}
@@ -278,45 +285,50 @@ export const CommonBird: FC<ICommonBird> = ({
                 }
                 disabled={viewMode}
               />
-              <Field
-                label={
-                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
-                    .circumstances
-                }
-                placeholder={
-                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
-                    .circumstancesPlaceholder
-                }
-                collection={getCollection(InitialData.circumstances)}
-                onChangeValue={onChangeFormValue}
-                type="circumstances"
-                value={
-                  formValues.circumstances && formValues.circumstances.label
-                }
-                disabled={viewMode}
-              />
-              <Field
-                label={
-                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
-                    .circumstancesPresumed
-                }
-                placeholder={
-                  labels.circumstancesAndPlace.circumstancesAndPlaceFields
-                    .circumstancesPresumedPlaceholder
-                }
-                collection={getCollection(InitialData.circumstancesPresumed)}
-                onChangeValue={onChangeFormValue}
-                type="circumstances"
-                value={
-                  formValues.circumstances &&
-                  formValues.circumstancesPresumed.label
-                }
-                disabled={viewMode}
-              />
             </div>
-            <div className={`${blockName}__column`}></div>
-          </div>
-        </InfoContainer>
+            <Field
+              label={
+                labels.addObservation.circumstancesAndPlaceFields.circumstances
+              }
+              placeholder={
+                labels.addObservation.circumstancesAndPlaceFields
+                  .circumstancesPlaceholder
+              }
+              collection={getCollection(InitialData.circumstances)}
+              onChangeValue={onChangeFormValue}
+              type="circumstances"
+              value={formValues.circumstances && formValues.circumstances.label}
+              disabled={viewMode}
+            />
+            <Field
+              label={
+                labels.addObservation.circumstancesAndPlaceFields
+                  .circumstancesPresumed
+              }
+              placeholder={
+                labels.addObservation.circumstancesAndPlaceFields
+                  .circumstancesPresumedPlaceholder
+              }
+              collection={getCollection(InitialData.circumstancesPresumed)}
+              onChangeValue={onChangeFormValue}
+              type="circumstances"
+              value={
+                formValues.circumstances &&
+                formValues.circumstancesPresumed.label
+              }
+              disabled={viewMode}
+            />
+          </InfoContainer>
+        </div>
+        <div className={`${blockName}__column`}>
+          <Map
+            isMarkerShown
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `100%` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+          />
+        </div>
       </div>
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
@@ -412,7 +424,7 @@ export const CommonBird: FC<ICommonBird> = ({
           </Label>
           <Input
             className={`${blockName}__input`}
-            id="latitude"
+            id="latitude1"
             placeholder={labels.addObservation.circumstancesFields.latitude}
             onChange={onChangeCoordinates}
             value={formValues.latitude && formValues.latitude.label}
@@ -423,7 +435,7 @@ export const CommonBird: FC<ICommonBird> = ({
           </Label>
           <Input
             className={`${blockName}__input`}
-            id="longitude"
+            id="longitude1"
             placeholder={labels.addObservation.circumstancesFields.longitude}
             onChange={onChangeCoordinates}
             value={formValues.longitude && formValues.longitude.label}
