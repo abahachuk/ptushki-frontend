@@ -125,19 +125,21 @@ export const CommonBird: FC<ICommonBird> = ({
         <InfoContainer
           className={`${blockName}__info-block`}
           renderHeader={
-            <BlockHeader title={labels.otherObservationInfo.title} />
+            <BlockHeader
+              title={labels.addObservation.otherObservationInfoTitle}
+            />
           }
         >
-          <div className={`${blockName}__fields-container`}>
+          <div className={`${blockName}__fields-container--column`}>
             <div className={`${blockName}__column`}>
               <Label for="observer" className={`${blockName}__field-label`}>
-                {labels.otherObservationInfo.otherObservationFields.observer}
+                {labels.addObservation.otherObservationFields.observer}
               </Label>
               <Input
                 className={`${blockName}__input`}
                 id="observer"
                 placeholder={
-                  labels.otherObservationInfo.otherObservationFields
+                  labels.addObservation.otherObservationFields
                     .observerPlaceholder
                 }
                 onChange={onChangeCoordinates}
@@ -145,14 +147,13 @@ export const CommonBird: FC<ICommonBird> = ({
                 disabled={viewMode}
               />
               <Label for="eMail" className={`${blockName}__field-label`}>
-                {labels.otherObservationInfo.otherObservationFields.eMail}
+                {labels.addObservation.otherObservationFields.eMail}
               </Label>
               <Input
                 className={`${blockName}__input`}
                 id="eMail"
                 placeholder={
-                  labels.otherObservationInfo.otherObservationFields
-                    .eMailPlaceholder
+                  labels.addObservation.otherObservationFields.eMailPlaceholder
                 }
                 onChange={onChangeCoordinates}
                 value={formValues.eMail && formValues.eMail.label}
@@ -162,16 +163,13 @@ export const CommonBird: FC<ICommonBird> = ({
                 for="observationPlace"
                 className={`${blockName}__field-label`}
               >
-                {
-                  labels.otherObservationInfo.otherObservationFields
-                    .observationPlace
-                }
+                {labels.addObservation.otherObservationFields.observationPlace}
               </Label>
               <Input
                 className={`${blockName}__input`}
                 id="observationPlace"
                 placeholder={
-                  labels.otherObservationInfo.otherObservationFields
+                  labels.addObservation.otherObservationFields
                     .observationPlacePlaceholder
                 }
                 onChange={onChangeCoordinates}
