@@ -98,19 +98,6 @@ export const labels = {
     observations: "Наблюдения",
     circumstances: "Обстоятельства"
   },
-  manipulationAndCatch: {
-    title: "Манипуляции и отлов",
-    manipulationAndCatchFields: {
-      manipulated: "Проводились ли манипуляции с птицей?",
-      manipulatedPlaceholder: "Выберите манипуляции с птицей",
-      catchingMethod: "Методы отлова",
-      catchingMethodPlaceholder: "Выберите метод отлова",
-      movedBeforeTheCapture: "Проводилось ли перемещение с птицей?",
-      movedBeforeTheCapturePlaceholder: "Выберите тип перемещения с птицей",
-      catchingLures: "Приманки для отлова",
-      catchingLuresPlaceholder: "Выберите приманки для отлова"
-    }
-  },
   addObservation: {
     title: "Добавление наблюдения",
     actionTitle: "Добавить наблюдение",
@@ -124,6 +111,7 @@ export const labels = {
     circumstancesTitle: "Обстоятельства",
     circumstancesSubtitle:
       "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
+    manipulationAndCatchTitle: "Манипуляции и отлов",
     observationsFields: {
       birdSpecies: "Вид птицы",
       birdSpeciesPlaceholder: "Выберите вид",
@@ -151,6 +139,16 @@ export const labels = {
       timeAndDatePlaceholder: "Введите примерное время и дату",
       timeDelta: "Погрешность времени",
       timeDeltaPlaceholder: "Погрешность времени"
+    },
+    manipulationAndCatchFields: {
+      manipulated: "Проводились ли манипуляции с птицей?",
+      manipulatedPlaceholder: "Выберите манипуляции с птицей",
+      catchingMethod: "Методы отлова",
+      catchingMethodPlaceholder: "Выберите метод отлова",
+      movedBeforeTheCapture: "Проводилось ли перемещение с птицей?",
+      movedBeforeTheCapturePlaceholder: "Выберите тип перемещения с птицей",
+      catchingLures: "Приманки для отлова",
+      catchingLuresPlaceholder: "Выберите приманки для отлова"
     },
     back: "Назад",
     sendObservation: "Отправить наблюдение",
