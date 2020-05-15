@@ -1,7 +1,7 @@
 import { Column } from "@devexpress/dx-react-grid";
 import { TableHeaderRow } from "@devexpress/dx-react-grid-bootstrap4";
 import React, { FC, useCallback } from "react";
-import { connect, DispatchProp, useSelector } from "react-redux";
+import { connect, DispatchProp } from "react-redux";
 import { Autosuggest, IChangeValue } from "../../autosuggest/Autosuggest";
 import { DataGridCol } from "../DataGrid";
 import { setFilters } from "../dataGridActions";
@@ -11,7 +11,6 @@ import {
   DataGridState
 } from "../DataGridModels";
 import { ColumnFilterToggleButton } from "./ColumnFilterToggleButton";
-import { localizeService } from "../../../services";
 import { Locale } from "../../../store/reducers/userPreferencesReducer";
 
 export const TableHeaderRowContent: FC<
@@ -34,11 +33,11 @@ export const TableHeaderRowContent: FC<
       const label =
         column.filter && column.filter.getLabel
           ? column.filter.getLabel(filter)
-          : localizeService.getFieldDescription(currentLang, filter.value);
+          : filter.value.desc;
       const value =
         column.filter && column.filter.getValue
           ? column.filter.getValue(filter)
-          : localizeService.getFieldDescription(currentLang, filter.value);
+          : filter.value.desc;
 
       return {
         id: i,
@@ -47,7 +46,7 @@ export const TableHeaderRowContent: FC<
         label
       };
     },
-    [column.filter, currentLang, filterValue]
+    [column.filter, filterValue]
   );
 
   return (
