@@ -105,6 +105,7 @@ export const labels = {
       "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
     labelType: "Тип метки",
     number: "Номер",
+    markInfoTitle: "Информация о метке",
     observationsTitle: "Наблюдения",
     observationsSubtitle:
       "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определить вид на florafauna.by",
@@ -138,6 +139,25 @@ export const labels = {
       timeAndDatePlaceholder: "Введите примерное время и дату",
       timeDelta: "Погрешность времени",
       timeDeltaPlaceholder: "Погрешность времени"
+    },
+    markInfoFields: {
+      leg: "Нога",
+      left: "Левая",
+      metalRingInformation: "Информация о кольце",
+      metalRingInformationPlaceholder: "Выберите информацию о кольце",
+      numberInBase: "Номер в базе",
+      numberPlaceholder: "Номер",
+      otherMarksInformation: "Информация о других метках",
+      otherMarksInformationPlaceholder: "Выберите информацию о других метках",
+      primaryIdentificationMethod: "Первичный метод определения",
+      primaryIdentificationMethodPlaceholder: "Выберите вид кольца",
+      right: "Правая",
+      ringingScheme: "Схема кольцевания",
+      ringingSchemePlaceholder: "Выберите схему кольцевания",
+      ringNumber: "Номер кольца",
+      ringSeriesPlaceholder: "Серия",
+      verificationOfTheMetalRing: "Верификация кольца",
+      verificationOfTheMetalRingPlaceholder: "Подтвердите"
     },
     back: "Назад",
     sendObservation: "Отправить наблюдение",

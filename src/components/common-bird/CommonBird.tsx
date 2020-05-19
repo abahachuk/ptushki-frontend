@@ -1,6 +1,7 @@
 import React, { FC, Fragment, useCallback, useState } from "react";
 import {
   Button,
+  ButtonGroup,
   Input,
   Label,
   Modal,
@@ -63,6 +64,7 @@ export const CommonBird: FC<ICommonBird> = ({
 }) => {
   const [isOpened, setIsOpen] = useState(false);
   const [calendarFocused, setCalendarFocused] = useState(false);
+  const [birdLeg, setBirdLeg] = useState(null);
 
   const toggleModal = useCallback(() => setIsOpen(!isOpened), [isOpened]);
 
@@ -71,8 +73,23 @@ export const CommonBird: FC<ICommonBird> = ({
     [onChangeFormValue]
   );
 
+  const onChangeIdentification = useCallback(
+    e => onChangeFormValue({ value: e.target.value, type: "identification" }),
+    [onChangeFormValue]
+  );
+
   const onChangeComment = useCallback(
     e => onChangeFormValue({ value: e.target.value, type: "comment" }),
+    [onChangeFormValue]
+  );
+
+  const onChangeRingInfo = useCallback(
+    e => onChangeFormValue({ value: e.target.value, type: "ringInfo" }),
+    [onChangeFormValue]
+  );
+
+  const onChangeNumberInBase = useCallback(
+    e => onChangeFormValue({ value: e.target.value, type: "numberInBase" }),
     [onChangeFormValue]
   );
 
@@ -86,7 +103,7 @@ export const CommonBird: FC<ICommonBird> = ({
       initialValues
         ? initialValues[key].map((item: IInitialDataDescriptor) => ({
             // TODO: use logic from localize service
-            label: item.desc_rus || item.desc_eng || item[key],
+            label: item.desc_rus || item.desc_eng || item[key] || item.country,
             value: item.value || item.id,
             id: item.id
           }))
@@ -121,6 +138,180 @@ export const CommonBird: FC<ICommonBird> = ({
         viewMode={viewMode}
         collection={collection}
       />
+      <div className={`${blockName}__info-blocks-container`}>
+        <InfoContainer
+          className={`${blockName}__info-block`}
+          renderHeader={
+            <BlockHeader title={labels.addObservation.markInfoTitle} />
+          }
+        >
+          <div className={`${blockName}__fields-container`}>
+            <div className={`${blockName}__column`}>
+              <Field
+                label={
+                  labels.addObservation.markInfoFields
+                    .primaryIdentificationMethod
+                }
+                placeholder={
+                  labels.addObservation.markInfoFields
+                    .primaryIdentificationMethodPlaceholder
+                }
+                collection={getCollection(
+                  InitialData.primaryIdentificationMethod
+                )}
+                onChangeValue={onChangeFormValue}
+                type="primaryIdentificationMethod"
+                value={
+                  formValues.primaryIdentificationMethod &&
+                  formValues.primaryIdentificationMethod.label
+                }
+                disabled={viewMode}
+              />
+              <div className={`${blockName}__row`}>
+                <div className={`${blockName}__field-container--group`}>
+                  <Label for="ringInfo" className={`${blockName}__field-label`}>
+                    {labels.addObservation.markInfoFields.ringNumber}
+                  </Label>
+                  <Input
+                    className={`${blockName}__input--ring-number`}
+                    id="ringSeria"
+                    placeholder={
+                      labels.addObservation.markInfoFields.ringSeriesPlaceholder
+                    }
+                    onChange={onChangeRingInfo}
+                    value={formValues.ringSeria && formValues.ringSeria.label}
+                    disabled={viewMode}
+                  />
+                  <Input
+                    className={`${blockName}__input--ring-number`}
+                    id="ringNumber"
+                    placeholder={
+                      labels.addObservation.markInfoFields.numberPlaceholder
+                    }
+                    onChange={onChangeRingInfo}
+                    value={formValues.ringNumber && formValues.ringNumber.label}
+                    disabled={viewMode}
+                  />
+                </div>
+                <div className={`${blockName}__field-container--simple`}>
+                  <Label
+                    for="numberInBase"
+                    className={`${blockName}__field-label`}
+                  >
+                    {labels.addObservation.markInfoFields.numberInBase}
+                  </Label>
+                  <Input
+                    className={`${blockName}__input`}
+                    id="numberInBase"
+                    placeholder={
+                      labels.addObservation.markInfoFields.numberPlaceholder
+                    }
+                    onChange={onChangeNumberInBase}
+                    value={
+                      formValues.numberInBase && formValues.numberInBase.label
+                    }
+                    disabled={viewMode}
+                  />
+                </div>
+                <Field
+                  label={
+                    labels.addObservation.markInfoFields
+                      .verificationOfTheMetalRing
+                  }
+                  placeholder={
+                    labels.addObservation.markInfoFields
+                      .verificationOfTheMetalRingPlaceholder
+                  }
+                  collection={getCollection(
+                    InitialData.verificationOfTheMetalRing
+                  )}
+                  onChangeValue={onChangeFormValue}
+                  type="verificationOfTheMetalRing"
+                  value={
+                    formValues.verificationOfTheMetalRing &&
+                    formValues.verificationOfTheMetalRing.label
+                  }
+                  disabled={viewMode}
+                />
+              </div>
+              <Field
+                label={labels.addObservation.markInfoFields.ringingScheme}
+                placeholder={
+                  labels.addObservation.markInfoFields.ringingSchemePlaceholder
+                }
+                collection={getCollection(InitialData.ringingScheme)}
+                onChangeValue={onChangeFormValue}
+                type="ringingScheme"
+                value={
+                  formValues.ringingScheme && formValues.ringingScheme.label
+                }
+                disabled={viewMode}
+              />
+            </div>
+            <div className={`${blockName}__column`}>
+              <div className={`${blockName}__row`}>
+                <Field
+                  label={
+                    labels.addObservation.markInfoFields.metalRingInformation
+                  }
+                  placeholder={
+                    labels.addObservation.markInfoFields
+                      .metalRingInformationPlaceholder
+                  }
+                  collection={getCollection(InitialData.metalRingInformation)}
+                  onChangeValue={onChangeFormValue}
+                  type="metalRingInformation"
+                  value={
+                    formValues.metalRingInformation &&
+                    formValues.metalRingInformation.label
+                  }
+                  disabled={viewMode}
+                />
+                <div className={`${blockName}__button-group`}>
+                  <p className={`${blockName}__field-label`}>
+                    {labels.addObservation.markInfoFields.leg}
+                  </p>
+                  <ButtonGroup>
+                    <Button
+                      outline
+                      onClick={() =>
+                        setBirdLeg(labels.addObservation.markInfoFields.left)
+                      }
+                    >
+                      {labels.addObservation.markInfoFields.left}
+                    </Button>
+                    <Button
+                      outline
+                      onClick={() =>
+                        setBirdLeg(labels.addObservation.markInfoFields.right)
+                      }
+                    >
+                      {labels.addObservation.markInfoFields.right}
+                    </Button>
+                  </ButtonGroup>
+                </div>
+              </div>
+              <Field
+                label={
+                  labels.addObservation.markInfoFields.otherMarksInformation
+                }
+                placeholder={
+                  labels.addObservation.markInfoFields
+                    .otherMarksInformationPlaceholder
+                }
+                collection={getCollection(InitialData.otherMarksInformation)}
+                onChangeValue={onChangeFormValue}
+                type="otherMarksInformation"
+                value={
+                  formValues.otherMarksInformation &&
+                  formValues.otherMarksInformation.label
+                }
+                disabled={viewMode}
+              />
+            </div>
+          </div>
+        </InfoContainer>
+      </div>
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
           className={`${blockName}__info-block`}

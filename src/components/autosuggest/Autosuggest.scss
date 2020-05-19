@@ -22,7 +22,7 @@
   }
 
   &__item {
-    font-size: 12px;
+    font-size: 14px;
     color: $mineShaft;
     padding: 0.25rem 0.5rem;
     white-space: nowrap;
@@ -30,8 +30,26 @@
     text-overflow: ellipsis;
 
     &:hover {
-      background-color: $dark-blue;
+      background-color: $sanMarino;
       color: $white;
+
+      .autosuggest__item-id {
+        color: $white;
+      }
     }
+
+    &:focus {
+      background-color: $wildSand;
+      color: $mineShaft;
+
+      .autosuggest__item-id {
+        color: $dustyGray;
+      }
+    }
+  }
+
+  &__item-id {
+    color: $dustyGray;
+    margin-right: 10px;
   }
 }
