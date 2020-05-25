@@ -37,6 +37,30 @@ export interface FormValues {
   broodSizeMentioned: FormValueDescriptor;
   pullusAge: FormValueDescriptor;
   accuracyOfPullusAge: FormValueDescriptor;
+  catchingMethod: FormValueDescriptor;
+  catchingLures: FormValueDescriptor;
+  manipulated: FormValueDescriptor;
+  movedBeforeTheCapture: FormValueDescriptor;
+  observer: FormValueDescriptor;
+  eMail: FormValueDescriptor;
+  observationPlace: FormValueDescriptor;
+  day: FormValueDescriptor;
+  month: FormValueDescriptor;
+  year: FormValueDescriptor;
+  hour: FormValueDescriptor;
+  minute: FormValueDescriptor;
+  сodeOfPlace: FormValueDescriptor;
+  accuracyOfCoordinates: FormValueDescriptor;
+  circumstances: FormValueDescriptor;
+  circumstancesPresumed: FormValueDescriptor;
+  primaryIdentificationMethod: FormValueDescriptor;
+  ringNumber: FormValueDescriptor;
+  ringSeria: FormValueDescriptor;
+  numberInBase: FormValueDescriptor;
+  verificationOfTheMetalRing: FormValueDescriptor;
+  ringingScheme: FormValueDescriptor;
+  metalRingInformation: FormValueDescriptor;
+  otherMarksInformation: FormValueDescriptor;
 }
 
 interface FormLabels {
