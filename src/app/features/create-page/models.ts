@@ -43,7 +43,15 @@ export enum InitialData {
   catchingMethod = "catchingMethod",
   catchingLures = "catchingMethod",
   manipulated = "manipulated",
-  movedBeforeTheCapture = "movedBeforeTheCapture"
+  movedBeforeTheCapture = "movedBeforeTheCapture",
+  accuracyOfCoordinates = "accuracyOfCoordinates",
+  circumstances = "circumstances",
+  circumstancesPresumed = "circumstancesPresumed",
+  verificationOfTheMetalRing = "verificationOfTheMetalRing",
+  ringingSchemePlaceholder = "ringingSchemePlaceholder",
+  ringingScheme = "ringingScheme",
+  metalRingInformation = "metalRingInformation",
+  otherMarksInformation = "otherMarksInformation"
 }
 
 type InitialDataDescriptorMap = { [key in InitialData]?: string };
@@ -52,6 +60,7 @@ type InitialDataMap = { [key in InitialData]: IInitialDataDescriptor[] };
 export interface IInitialDataDescriptor extends InitialDataDescriptorMap {
   id: string;
   value?: string;
+  country?: string;
   desc_eng: string;
   desc_rus?: string;
   desc_byn?: string;

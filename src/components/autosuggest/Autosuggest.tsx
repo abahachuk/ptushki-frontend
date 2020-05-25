@@ -117,6 +117,7 @@ export const Autosuggest: FC<IAutosuggest> = ({
           className={`${blockName}__item`}
           {...commonProps}
         >
+          <span className={`${blockName}__item-id`}>{item.id}</span>{" "}
           {item.label}
         </DropdownItem>
       );
