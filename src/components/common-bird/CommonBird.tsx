@@ -511,7 +511,7 @@ export const CommonBird: FC<ICommonBird> = ({
             />
           }
         >
-          <div className={`${blockName}__fields-container--column`}>
+          <div className={`${blockName}__fields-container`}>
             <div className={`${blockName}__column`}>
               <Label for="observer" className={`${blockName}__field-label`}>
                 {labels.addObservation.otherObservationFields.observer}
