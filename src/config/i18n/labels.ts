@@ -112,6 +112,7 @@ export const labels = {
     circumstancesTitle: "Обстоятельства",
     circumstancesSubtitle:
       "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
+    otherObservationInfoTitle: "Другие данные наблюдения",
     circumstancesAndPlaceTitle: "Обстоятельства и место",
     observationsFields: {
       birdSpecies: "Вид птицы",
@@ -140,6 +141,16 @@ export const labels = {
       timeAndDatePlaceholder: "Введите примерное время и дату",
       timeDelta: "Погрешность времени",
       timeDeltaPlaceholder: "Погрешность времени"
+    },
+    otherObservationFields: {
+      observer: "Наблюдатель",
+      observerPlaceholder: "Введите имя наблюдателя",
+      eMail: "Адрес электронной почты",
+      eMailPlaceholder: "Введите адрес электронной почты",
+      observationPlace: "Место наблюдения",
+      observationPlacePlaceholder: "Введите место наблюдения",
+      note: "Примечание",
+      notePlaceholder: "Введите примечание"
     },
     circumstancesAndPlaceFields: {
       observationDateAndTime: "Дата и время наблюдения",

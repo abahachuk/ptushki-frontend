@@ -34,6 +34,9 @@ export interface FormValues {
   longitude: FormValueDescriptor;
   latitude: FormValueDescriptor;
   verified: FormValueDescriptor;
+  observer: FormValueDescriptor;
+  eMail: FormValueDescriptor;
+  observationPlace: FormValueDescriptor;
   day: FormValueDescriptor;
   month: FormValueDescriptor;
   year: FormValueDescriptor;
@@ -75,5 +78,4 @@ export interface IBlockHeader {
 
 export interface IField extends IAutosuggest {
   label: string;
-  // sizeName?: string;
 }

@@ -505,6 +505,88 @@ export const CommonBird: FC<ICommonBird> = ({
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
           className={`${blockName}__info-block`}
+          renderHeader={
+            <BlockHeader
+              title={labels.addObservation.otherObservationInfoTitle}
+            />
+          }
+        >
+          <div className={`${blockName}__fields-container`}>
+            <div className={`${blockName}__column`}>
+              <Label for="observer" className={`${blockName}__field-label`}>
+                {labels.addObservation.otherObservationFields.observer}
+              </Label>
+              <Input
+                className={`${blockName}__input`}
+                id="observer"
+                placeholder={
+                  labels.addObservation.otherObservationFields
+                    .observerPlaceholder
+                }
+                onChange={onChangeCoordinates}
+                value={formValues.observer && formValues.observer.label}
+                disabled={viewMode}
+              />
+              <Label for="eMail" className={`${blockName}__field-label`}>
+                {labels.addObservation.otherObservationFields.eMail}
+              </Label>
+              <Input
+                className={`${blockName}__input`}
+                id="eMail"
+                placeholder={
+                  labels.addObservation.otherObservationFields.eMailPlaceholder
+                }
+                onChange={onChangeCoordinates}
+                value={formValues.eMail && formValues.eMail.label}
+                disabled={viewMode}
+              />
+              <Label
+                for="observationPlace"
+                className={`${blockName}__field-label`}
+              >
+                {labels.addObservation.otherObservationFields.observationPlace}
+              </Label>
+              <Input
+                className={`${blockName}__input`}
+                id="observationPlace"
+                placeholder={
+                  labels.addObservation.otherObservationFields
+                    .observationPlacePlaceholder
+                }
+                onChange={onChangeCoordinates}
+                value={
+                  formValues.observationPlace &&
+                  formValues.observationPlace.label
+                }
+                disabled={viewMode}
+              />
+            </div>
+            <div className={`${blockName}__column`}>
+              <Label for="comment" className={`${blockName}__field-label`}>
+                {labels.addObservation.observationsFields.comment}
+              </Label>
+              <Input
+                className={sn(
+                  `${blockName}__input`,
+                  `${blockName}__input--area`
+                )}
+                id="comment"
+                type="textarea"
+                rows={3}
+                placeholder={
+                  labels.addObservation.observationsFields.commentPlaceholder
+                }
+                onChange={onChangeComment}
+                value={formValues.comment && formValues.comment.label}
+                disabled={viewMode}
+              />
+            </div>
+          </div>
+        </InfoContainer>
+      </div>
+      <div className={`${blockName}__info-blocks-container`}>
+        <InfoContainer
+          className={`${blockName}__info-block`}
           renderHeader={<BlockHeader {...observationsLabels} />}
         >
           <Field

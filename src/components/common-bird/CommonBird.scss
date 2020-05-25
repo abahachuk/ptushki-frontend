@@ -13,24 +13,31 @@
     border-radius: 3px;
   }
 
-  &__input--ring-number,
-  &__input-date-time,
-  &__input-date-time--year,
-  &__input-coords {
-    margin-right: 15px;
-  }
+  &__input {
+    &--ring-number,
+    &-date-time,
+    &-date-time--year,
+    &-coords {
+      margin-right: 15px;
+    }
 
-  &__input--ring-number {
-    width: 80px;
-  }
+    &--ring-number {
+      width: 80px;
+    }
 
-  &__input-date-time,
-  &__input-date-time--year {
-    width: 65px;
-  }
+    &-date-time,
+    &-date-time--year {
+      width: 65px;
+    }
 
-  &__input-coords {
-    width: 100px;
+    &-coords {
+      width: 100px;
+    }
+
+    &#{&}--area {
+      height: 100%;
+      resize: none;
+    }
   }
 
   &__column, 
@@ -38,11 +45,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-
-    &--indent {
-      padding-left: 24px;
-    }
-
+    
     &:nth-child(odd) {
       padding-right: 10px;
     }
@@ -93,9 +96,14 @@
     }
   }
 
+  &__column--indent {
+    padding-left: 24px;
+  }
+
   &__info-blocks-container {
     display: flex;
     flex-flow: column;
+    margin: 12px 0;
   }
 
   &__info-block-body {
@@ -107,7 +115,6 @@
 
   &__info-block {
     margin-right: 33px;
-    height: 738px;
     flex: 1;
 
     &:last-child {
@@ -240,10 +247,6 @@
       background: transparent;
       border: none;
       padding-left: 0;
-    }
-
-    &--area {
-      resize: none;
     }
   }
 }
