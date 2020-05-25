@@ -1,6 +1,35 @@
 @import "../../styles/variables";
 
 .common-bird {
+  &__info-blocks-container--column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .common-bird {
+      &__field-container {
+        width: 100% !important;
+        padding: 0 12px 15px;
+      }
+
+      &__info-block {
+        padding: 30px 12px 35px;
+      }
+
+      &__block-header-container {
+        margin-left: 12px;
+      }
+
+      &__fields-container {
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: flex-start;
+        width: 50%;
+        height: 390px;
+      }
+    }
+  }
+
   &__fields-container,
   &__fields-container--white {
     display: flex;
@@ -147,7 +176,7 @@
 
   &__row,
   &__field-container {
-    width: 48%;
+    width: 100%;
   }
 
   &__row {

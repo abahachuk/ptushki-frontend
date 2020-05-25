@@ -50,6 +50,7 @@ export const labels = {
     alreadyHavePassword: "У вас уже есть пароль?"
   },
   birdInfo: {
+    title: "Информация о птице",
     euring: "Euring",
     addRing: "Добавить кольцо",
     photos: "Фотографии",
@@ -72,6 +73,22 @@ export const labels = {
       rightAboveKnee: "Справа над коленом",
       leftBelowKnee: "Слева под коленом",
       rightBelowKnee: "Справа под коленом"
+    },
+    birdInfoFields: {
+      birdSpecies: "Вид птицы",
+      birdSpeciesPlaceholder: "Выберите вид",
+      sex: "Пол",
+      sexPlaceholder: "Выберите пол",
+      age: "Возраст",
+      agePlaceholder: "Возраст",
+      broodSize: "Размер кладки",
+      broodSizePlaceholder: "Выберите размер кладки",
+      pullusAge: "Возраст птенца",
+      pullusAgePlaceholder: "Выберите возраст птенца",
+      accuracyOfPullusAge: "Точность возраста птенца",
+      accuracyOfPullusAgePlaceholder: "Выберите точность возраста птенца",
+      birdState: "Статус птицы",
+      birdStatePlaceholder: "Выберите статус птицы"
     }
   },
   createBird: {
@@ -109,6 +126,7 @@ export const labels = {
     observationsTitle: "Наблюдения",
     observationsSubtitle:
       "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определить вид на florafauna.by",
+    birdInfoTitle: "Информация о птице",
     circumstancesTitle: "Обстоятельства",
     circumstancesSubtitle:
       "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
@@ -142,6 +160,22 @@ export const labels = {
       timeAndDatePlaceholder: "Введите примерное время и дату",
       timeDelta: "Погрешность времени",
       timeDeltaPlaceholder: "Погрешность времени"
+    },
+    birdInfoFields: {
+      birdSpecies: "Вид птицы",
+      birdSpeciesPlaceholder: "Выберите вид",
+      sex: "Пол",
+      sexPlaceholder: "Выберите пол",
+      age: "Возраст",
+      agePlaceholder: "Возраст",
+      broodSize: "Размер кладки",
+      broodSizePlaceholder: "Выберите размер кладки",
+      pullusAge: "Возраст птенца",
+      pullusAgePlaceholder: "Выберите возраст птенца",
+      accuracyOfPullusAge: "Точность возраста птенца",
+      accuracyOfPullusAgePlaceholder: "Выберите точность возраста птенца",
+      birdState: "Статус птицы",
+      birdStatePlaceholder: "Выберите статус птицы"
     },
     manipulationAndCatchFields: {
       manipulated: "Проводились ли манипуляции с птицей?",
