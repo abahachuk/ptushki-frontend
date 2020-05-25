@@ -587,6 +587,88 @@ export const CommonBird: FC<ICommonBird> = ({
       <div className={`${blockName}__info-blocks-container`}>
         <InfoContainer
           className={`${blockName}__info-block`}
+          renderHeader={
+            <BlockHeader
+              title={labels.addObservation.manipulationAndCatchTitle}
+            />
+          }
+        >
+          <div className={`${blockName}__fields-container`}>
+            <div className={`${blockName}__column`}>
+              <Field
+                label={
+                  labels.addObservation.manipulationAndCatchFields.manipulated
+                }
+                placeholder={
+                  labels.addObservation.manipulationAndCatchFields
+                    .manipulatedPlaceholder
+                }
+                collection={getCollection(InitialData.manipulated)}
+                onChangeValue={onChangeFormValue}
+                type="manipulated"
+                value={formValues.manipulated && formValues.manipulated.label}
+                disabled={viewMode}
+              />
+              <Field
+                label={
+                  labels.addObservation.manipulationAndCatchFields
+                    .movedBeforeTheCapture
+                }
+                placeholder={
+                  labels.addObservation.manipulationAndCatchFields
+                    .movedBeforeTheCapturePlaceholder
+                }
+                collection={getCollection(InitialData.movedBeforeTheCapture)}
+                onChangeValue={onChangeFormValue}
+                type="movedBeforeTheCapture"
+                value={
+                  formValues.movedBeforeTheCapture &&
+                  formValues.movedBeforeTheCapture.label
+                }
+                disabled={viewMode}
+              />
+            </div>
+            <div className={`${blockName}__column`}>
+              <Field
+                label={
+                  labels.addObservation.manipulationAndCatchFields
+                    .catchingMethod
+                }
+                placeholder={
+                  labels.addObservation.manipulationAndCatchFields
+                    .catchingMethodPlaceholder
+                }
+                collection={getCollection(InitialData.catchingMethod)}
+                onChangeValue={onChangeFormValue}
+                type="catchingMethod"
+                value={
+                  formValues.catchingMethod && formValues.catchingMethod.label
+                }
+                disabled={viewMode}
+              />
+              <Field
+                label={
+                  labels.addObservation.manipulationAndCatchFields.catchingLures
+                }
+                placeholder={
+                  labels.addObservation.manipulationAndCatchFields
+                    .catchingLuresPlaceholder
+                }
+                collection={getCollection(InitialData.catchingLures)}
+                onChangeValue={onChangeFormValue}
+                type="catchingLures"
+                value={
+                  formValues.catchingLures && formValues.catchingLures.label
+                }
+                disabled={viewMode}
+              />
+            </div>
+          </div>
+        </InfoContainer>
+      </div>
+      <div className={`${blockName}__info-blocks-container`}>
+        <InfoContainer
+          className={`${blockName}__info-block`}
           renderHeader={<BlockHeader {...observationsLabels} />}
         >
           <Field

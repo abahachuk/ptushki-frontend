@@ -112,6 +112,7 @@ export const labels = {
     circumstancesTitle: "Обстоятельства",
     circumstancesSubtitle:
       "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
+    manipulationAndCatchTitle: "Манипуляции и отлов",
     otherObservationInfoTitle: "Другие данные наблюдения",
     circumstancesAndPlaceTitle: "Обстоятельства и место",
     observationsFields: {
@@ -141,6 +142,16 @@ export const labels = {
       timeAndDatePlaceholder: "Введите примерное время и дату",
       timeDelta: "Погрешность времени",
       timeDeltaPlaceholder: "Погрешность времени"
+    },
+    manipulationAndCatchFields: {
+      manipulated: "Проводились ли манипуляции с птицей?",
+      manipulatedPlaceholder: "Выберите манипуляции с птицей",
+      catchingMethod: "Методы отлова",
+      catchingMethodPlaceholder: "Выберите метод отлова",
+      movedBeforeTheCapture: "Проводилось ли перемещение с птицей?",
+      movedBeforeTheCapturePlaceholder: "Выберите тип перемещения с птицей",
+      catchingLures: "Приманки для отлова",
+      catchingLuresPlaceholder: "Выберите приманки для отлова"
     },
     otherObservationFields: {
       observer: "Наблюдатель",

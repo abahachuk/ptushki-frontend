@@ -34,6 +34,10 @@ export interface FormValues {
   longitude: FormValueDescriptor;
   latitude: FormValueDescriptor;
   verified: FormValueDescriptor;
+  catchingMethod: FormValueDescriptor;
+  catchingLures: FormValueDescriptor;
+  manipulated: FormValueDescriptor;
+  movedBeforeTheCapture: FormValueDescriptor;
   observer: FormValueDescriptor;
   eMail: FormValueDescriptor;
   observationPlace: FormValueDescriptor;
