@@ -1,8 +1,16 @@
 @import "../../styles/variables";
 
 .common-bird {
-  &__fields-container {
+  &__fields-container,
+  &__fields-container--white {
     display: flex;
+    margin: 12px 0;
+  }
+
+  &__fields-container--white {
+    background-color: $white;
+    box-shadow: 0 1px 24px 0 #f2f3f7;
+    border-radius: 3px;
   }
 
   &__input--ring-number,
@@ -25,10 +33,15 @@
     width: 100px;
   }
 
-  &__column {
+  &__column, 
+  &__column--indent {
     display: flex;
     flex-direction: column;
     flex: 1;
+
+    &--indent {
+      padding-left: 24px;
+    }
 
     &:nth-child(odd) {
       padding-right: 10px;

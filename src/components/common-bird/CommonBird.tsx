@@ -41,9 +41,8 @@ const BlockHeader = function({ title, subtitle }: IBlockHeader) {
   );
 };
 
-const Field = function({ label, /* sizeName = "", */ ...props }: IField) {
+const Field = function({ label, ...props }: IField) {
   return (
-    // <div className={`${blockName}__field-container ${sizeName}`}>
     <div className={`${blockName}__field-container`}>
       <p className={`${blockName}__field-label`}>{label}</p>
       <Autosuggest {...props} />
@@ -144,8 +143,11 @@ export const CommonBird: FC<ICommonBird> = ({
         viewMode={viewMode}
         collection={collection}
       />
-      <div className={`${blockName}__fields-container`}>
-        <div className={`${blockName}__column`}>
+      <div className={`${blockName}__fields-container--white`}>
+        <div className={`${blockName}__column--indent`}>
+          <BlockHeader
+            title={labels.addObservation.circumstancesAndPlaceTitle}
+          />
           <div className={`${blockName}__row`}>
             <div className={`${blockName}__field-container--group`}>
               <Label for="dateTime" className={`${blockName}__field-label`}>
