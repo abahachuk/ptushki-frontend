@@ -1,19 +1,47 @@
 @import "../../styles/variables";
 
 .common-bird {
-  &__fields-container {
+  &__fields-container,
+  &__fields-container--white {
     display: flex;
-    align-items: baseline;
+    margin: 12px 0;
+  }
+
+  &__fields-container--white {
+    background-color: $white;
+    box-shadow: 0 1px 24px 0 #f2f3f7;
+    border-radius: 3px;
+  }
+
+  &__input--ring-number,
+  &__input-date-time,
+  &__input-date-time--year,
+  &__input-coords {
+    margin-right: 15px;
   }
 
   &__input--ring-number {
     width: 80px;
   }
 
-  &__column {
+  &__input-date-time,
+  &__input-date-time--year {
+    width: 65px;
+  }
+
+  &__input-coords {
+    width: 100px;
+  }
+
+  &__column, 
+  &__column--indent {
     display: flex;
     flex-direction: column;
     flex: 1;
+
+    &--indent {
+      padding-left: 24px;
+    }
 
     &:nth-child(odd) {
       padding-right: 10px;
@@ -37,29 +65,29 @@
       &__row {
         display: flex;
         flex-flow: row wrap;
+      }
+
+      &__row {
         justify-content: space-between;
       }
 
       &__field-container {
         flex: 1;
-      }
 
-      &__field-container--simple {
-        display: flex;
-        flex-flow: column;
-        width: 150px;
-        margin: 0 25px;
-      }
+        &--group {
+          padding-bottom: 15px;
 
-      &__field-container--group {
-        width: 170px;
-      }
+          .common-bird__field-label {
+            width: 0;
+            flex: 0 0 100%;
+          }
+        }
 
-      &__field-container--group {
-        padding-bottom: 15px;
-
-        .common-bird__field-label {
-          flex: 0 0 100%;
+        &--simple {
+          display: flex;
+          flex-flow: column;
+          width: 150px;
+          margin: 0 25px;
         }
       }
     }

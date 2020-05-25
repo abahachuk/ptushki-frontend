@@ -34,6 +34,15 @@ export interface FormValues {
   longitude: FormValueDescriptor;
   latitude: FormValueDescriptor;
   verified: FormValueDescriptor;
+  day: FormValueDescriptor;
+  month: FormValueDescriptor;
+  year: FormValueDescriptor;
+  hour: FormValueDescriptor;
+  minute: FormValueDescriptor;
+  сodeOfPlace: FormValueDescriptor;
+  accuracyOfCoordinates: FormValueDescriptor;
+  circumstances: FormValueDescriptor;
+  circumstancesPresumed: FormValueDescriptor;
   primaryIdentificationMethod: FormValueDescriptor;
   ringNumber: FormValueDescriptor;
   ringSeria: FormValueDescriptor;
@@ -66,4 +75,5 @@ export interface IBlockHeader {
 
 export interface IField extends IAutosuggest {
   label: string;
+  // sizeName?: string;
 }
