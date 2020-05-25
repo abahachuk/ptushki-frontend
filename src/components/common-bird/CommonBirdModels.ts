@@ -75,5 +75,5 @@ export interface IBlockHeader {
 
 export interface IField extends IAutosuggest {
   label: string;
-  sizeName?: string;
+  // sizeName?: string;
 }

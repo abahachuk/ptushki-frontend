@@ -162,6 +162,7 @@ export const labels = {
       circumstancesPresumed: "Достоверность обстоятельств",
       circumstancesPresumedPlaceholder:
         "Выберите степень достоверности обстоятельств"
+    },
     markInfoFields: {
       leg: "Нога",
       left: "Левая",

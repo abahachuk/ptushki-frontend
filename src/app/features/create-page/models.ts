@@ -42,7 +42,7 @@ export enum InitialData {
   placeCode = "placeCode",
   accuracyOfCoordinates = "accuracyOfCoordinates",
   circumstances = "circumstances",
-  circumstancesPresumed = "circumstancesPresumed"
+  circumstancesPresumed = "circumstancesPresumed",
   verificationOfTheMetalRing = "verificationOfTheMetalRing",
   ringingSchemePlaceholder = "ringingSchemePlaceholder",
   ringingScheme = "ringingScheme",

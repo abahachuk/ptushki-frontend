@@ -1,67 +1,34 @@
 @import "../../styles/variables";
 
 .common-bird {
-  &__info-blocks-container--circumstances {
-    display: flex;
-  }
-  
   &__fields-container {
     display: flex;
-    align-items: baseline;
+  }
+
+  &__input--ring-number,
+  &__input-date-time,
+  &__input-date-time--year,
+  &__input-coords {
+    margin-right: 15px;
   }
 
   &__input--ring-number {
     width: 80px;
   }
 
+  &__input-date-time,
+  &__input-date-time--year {
+    width: 65px;
+  }
+
+  &__input-coords {
+    width: 100px;
+  }
+
   &__column {
     display: flex;
     flex-direction: column;
     flex: 1;
-  }
-
-  &__row,
-  &__inputs-container {
-    display: flex;
-    flex-flow: row wrap;
-
-    .common-bird__field-label--input {
-      flex: 0 0 100%;
-      width: 0;
-    }
-  }
-
-  &__row {
-    .common-bird__field-container {
-      flex: 1;
-    }
-  }
-
-  &__inputs-container {
-    padding-bottom: 15px;
-    margin-right: 20px;
-  }
-
-  &__input-date-time,
-  &__input-date-time--year {
-    width: 60px;
-  }
-
-  &__input-date-time--year {
-    margin-right: 20px;
-  }
-
-  &__input-date-time,
-  &__input-coords {
-    margin-right: 10px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-
-  &__input-coords {
-    width: 120px;
 
     &:nth-child(odd) {
       padding-right: 10px;
@@ -85,29 +52,29 @@
       &__row {
         display: flex;
         flex-flow: row wrap;
+      }
+
+      &__row {
         justify-content: space-between;
       }
 
       &__field-container {
         flex: 1;
-      }
 
-      &__field-container--simple {
-        display: flex;
-        flex-flow: column;
-        width: 150px;
-        margin: 0 25px;
-      }
+        &--group {
+          padding-bottom: 15px;
 
-      &__field-container--group {
-        width: 170px;
-      }
+          .common-bird__field-label {
+            width: 0;
+            flex: 0 0 100%;
+          }
+        }
 
-      &__field-container--group {
-        padding-bottom: 15px;
-
-        .common-bird__field-label {
-          flex: 0 0 100%;
+        &--simple {
+          display: flex;
+          flex-flow: column;
+          width: 150px;
+          margin: 0 25px;
         }
       }
     }
@@ -127,7 +94,7 @@
 
   &__info-block {
     margin-right: 33px;
-    // height: 738px;
+    height: 738px;
     flex: 1;
 
     &:last-child {
@@ -228,8 +195,7 @@
     }
   }
 
-  &__field-label,
-  &__field-label--input {
+  &__field-label {
     color: $tundora;
     font-weight: bold;
     font-family: "Open Sans";
