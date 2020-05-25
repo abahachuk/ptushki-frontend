@@ -27,11 +27,6 @@
         width: 50%;
         height: 390px;
       }
-
-      &__row {
-        display: flex;
-        flex-flow: row;
-      }
     }
   }
 
@@ -181,7 +176,7 @@
 
   &__row,
   &__field-container {
-    width: 48%;
+    width: 100%;
   }
 
   &__row {

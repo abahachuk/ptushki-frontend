@@ -119,31 +119,180 @@ export const CommonBird: FC<ICommonBird> = ({
 
   return (
     <Fragment>
-      <Modal isOpen={isOpened} toggle={toggleModal}>
-        <ModalHeader toggle={toggleModal}>
-          {labels.addObservation.selectOnMap}
-        </ModalHeader>
-        <ModalBody>
-          <Map
-            isMarkerShown
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `400px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-          />
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={toggleModal}>
-            {labels.addObservation.setPlace}
-          </Button>
-        </ModalFooter>
-      </Modal>
-      <Bird
-        birdParams={birdParams}
-        onChangeBirdValues={onChangeBirdValues}
-        viewMode={viewMode}
-        collection={collection}
-      />
+      <div className={`${blockName}__info-blocks-container`}>
+        <InfoContainer
+          className={`${blockName}__info-block`}
+          renderHeader={
+            <BlockHeader title={labels.addObservation.markInfoTitle} />
+          }
+        >
+          <div className={`${blockName}__fields-container`}>
+            <div className={`${blockName}__column`}>
+              <Field
+                label={
+                  labels.addObservation.markInfoFields
+                    .primaryIdentificationMethod
+                }
+                placeholder={
+                  labels.addObservation.markInfoFields
+                    .primaryIdentificationMethodPlaceholder
+                }
+                collection={getCollection(
+                  InitialData.primaryIdentificationMethod
+                )}
+                onChangeValue={onChangeFormValue}
+                type="primaryIdentificationMethod"
+                value={
+                  formValues.primaryIdentificationMethod &&
+                  formValues.primaryIdentificationMethod.label
+                }
+                disabled={viewMode}
+              />
+              <div className={`${blockName}__row`}>
+                <div className={`${blockName}__field-container--group`}>
+                  <Label for="ringInfo" className={`${blockName}__field-label`}>
+                    {labels.addObservation.markInfoFields.ringNumber}
+                  </Label>
+                  <Input
+                    className={`${blockName}__input--ring-number`}
+                    id="ringSeria"
+                    placeholder={
+                      labels.addObservation.markInfoFields.ringSeriesPlaceholder
+                    }
+                    onChange={onChangeRingInfo}
+                    value={formValues.ringSeria && formValues.ringSeria.label}
+                    disabled={viewMode}
+                  />
+                  <Input
+                    className={`${blockName}__input--ring-number`}
+                    id="ringNumber"
+                    placeholder={
+                      labels.addObservation.markInfoFields.numberPlaceholder
+                    }
+                    onChange={onChangeRingInfo}
+                    value={formValues.ringNumber && formValues.ringNumber.label}
+                    disabled={viewMode}
+                  />
+                </div>
+                <div className={`${blockName}__field-container--simple`}>
+                  <Label
+                    for="numberInBase"
+                    className={`${blockName}__field-label`}
+                  >
+                    {labels.addObservation.markInfoFields.numberInBase}
+                  </Label>
+                  <Input
+                    className={`${blockName}__input`}
+                    id="numberInBase"
+                    placeholder={
+                      labels.addObservation.markInfoFields.numberPlaceholder
+                    }
+                    onChange={onChangeNumberInBase}
+                    value={
+                      formValues.numberInBase && formValues.numberInBase.label
+                    }
+                    disabled={viewMode}
+                  />
+                </div>
+                <Field
+                  label={
+                    labels.addObservation.markInfoFields
+                      .verificationOfTheMetalRing
+                  }
+                  placeholder={
+                    labels.addObservation.markInfoFields
+                      .verificationOfTheMetalRingPlaceholder
+                  }
+                  collection={getCollection(
+                    InitialData.verificationOfTheMetalRing
+                  )}
+                  onChangeValue={onChangeFormValue}
+                  type="verificationOfTheMetalRing"
+                  value={
+                    formValues.verificationOfTheMetalRing &&
+                    formValues.verificationOfTheMetalRing.label
+                  }
+                  disabled={viewMode}
+                />
+              </div>
+              <Field
+                label={labels.addObservation.markInfoFields.ringingScheme}
+                placeholder={
+                  labels.addObservation.markInfoFields.ringingSchemePlaceholder
+                }
+                collection={getCollection(InitialData.ringingScheme)}
+                onChangeValue={onChangeFormValue}
+                type="ringingScheme"
+                value={
+                  formValues.ringingScheme && formValues.ringingScheme.label
+                }
+                disabled={viewMode}
+              />
+            </div>
+            <div className={`${blockName}__column`}>
+              <div className={`${blockName}__row`}>
+                <Field
+                  label={
+                    labels.addObservation.markInfoFields.metalRingInformation
+                  }
+                  placeholder={
+                    labels.addObservation.markInfoFields
+                      .metalRingInformationPlaceholder
+                  }
+                  collection={getCollection(InitialData.metalRingInformation)}
+                  onChangeValue={onChangeFormValue}
+                  type="metalRingInformation"
+                  value={
+                    formValues.metalRingInformation &&
+                    formValues.metalRingInformation.label
+                  }
+                  disabled={viewMode}
+                />
+                <div className={`${blockName}__button-group`}>
+                  <p className={`${blockName}__field-label`}>
+                    {labels.addObservation.markInfoFields.leg}
+                  </p>
+                  <ButtonGroup>
+                    <Button
+                      outline
+                      onClick={() =>
+                        setBirdLeg(labels.addObservation.markInfoFields.left)
+                      }
+                    >
+                      {labels.addObservation.markInfoFields.left}
+                    </Button>
+                    <Button
+                      outline
+                      onClick={() =>
+                        setBirdLeg(labels.addObservation.markInfoFields.right)
+                      }
+                    >
+                      {labels.addObservation.markInfoFields.right}
+                    </Button>
+                  </ButtonGroup>
+                </div>
+              </div>
+              <Field
+                label={
+                  labels.addObservation.markInfoFields.otherMarksInformation
+                }
+                placeholder={
+                  labels.addObservation.markInfoFields
+                    .otherMarksInformationPlaceholder
+                }
+                collection={getCollection(InitialData.otherMarksInformation)}
+                onChangeValue={onChangeFormValue}
+                type="otherMarksInformation"
+                value={
+                  formValues.otherMarksInformation &&
+                  formValues.otherMarksInformation.label
+                }
+                disabled={viewMode}
+              />
+            </div>
+          </div>
+        </InfoContainer>
+      </div>
       <div className={`${blockName}__info-blocks-container--column`}>
         <InfoContainer
           className={`${blockName}__info-block`}
@@ -237,6 +386,7 @@ export const CommonBird: FC<ICommonBird> = ({
               />
             </div>
           </div>
+        </InfoContainer>
       </div>
       <div className={`${blockName}__fields-container--white`}>
         <div className={`${blockName}__column--indent`}>
@@ -427,169 +577,77 @@ export const CommonBird: FC<ICommonBird> = ({
         <InfoContainer
           className={`${blockName}__info-block`}
           renderHeader={
-            <BlockHeader title={labels.addObservation.markInfoTitle} />
+            <BlockHeader
+              title={labels.addObservation.manipulationAndCatchTitle}
+            />
           }
         >
           <div className={`${blockName}__fields-container`}>
             <div className={`${blockName}__column`}>
               <Field
                 label={
-                  labels.addObservation.markInfoFields
-                    .primaryIdentificationMethod
+                  labels.addObservation.manipulationAndCatchFields.manipulated
                 }
                 placeholder={
-                  labels.addObservation.markInfoFields
-                    .primaryIdentificationMethodPlaceholder
+                  labels.addObservation.manipulationAndCatchFields
+                    .manipulatedPlaceholder
                 }
-                collection={getCollection(
-                  InitialData.primaryIdentificationMethod
-                )}
+                collection={getCollection(InitialData.manipulated)}
                 onChangeValue={onChangeFormValue}
-                type="primaryIdentificationMethod"
-                value={
-                  formValues.primaryIdentificationMethod &&
-                  formValues.primaryIdentificationMethod.label
-                }
+                type="manipulated"
+                value={formValues.manipulated && formValues.manipulated.label}
                 disabled={viewMode}
               />
-              <div className={`${blockName}__row`}>
-                <div className={`${blockName}__field-container--group`}>
-                  <Label for="ringInfo" className={`${blockName}__field-label`}>
-                    {labels.addObservation.markInfoFields.ringNumber}
-                  </Label>
-                  <Input
-                    className={`${blockName}__input--ring-number`}
-                    id="ringSeria"
-                    placeholder={
-                      labels.addObservation.markInfoFields.ringSeriesPlaceholder
-                    }
-                    onChange={onChangeRingInfo}
-                    value={formValues.ringSeria && formValues.ringSeria.label}
-                    disabled={viewMode}
-                  />
-                  <Input
-                    className={`${blockName}__input--ring-number`}
-                    id="ringNumber"
-                    placeholder={
-                      labels.addObservation.markInfoFields.numberPlaceholder
-                    }
-                    onChange={onChangeRingInfo}
-                    value={formValues.ringNumber && formValues.ringNumber.label}
-                    disabled={viewMode}
-                  />
-                </div>
-                <div className={`${blockName}__field-container--simple`}>
-                  <Label
-                    for="numberInBase"
-                    className={`${blockName}__field-label`}
-                  >
-                    {labels.addObservation.markInfoFields.numberInBase}
-                  </Label>
-                  <Input
-                    className={`${blockName}__input`}
-                    id="numberInBase"
-                    placeholder={
-                      labels.addObservation.markInfoFields.numberPlaceholder
-                    }
-                    onChange={onChangeNumberInBase}
-                    value={
-                      formValues.numberInBase && formValues.numberInBase.label
-                    }
-                    disabled={viewMode}
-                  />
-                </div>
-                <Field
-                  label={
-                    labels.addObservation.markInfoFields
-                      .verificationOfTheMetalRing
-                  }
-                  placeholder={
-                    labels.addObservation.markInfoFields
-                      .verificationOfTheMetalRingPlaceholder
-                  }
-                  collection={getCollection(
-                    InitialData.verificationOfTheMetalRing
-                  )}
-                  onChangeValue={onChangeFormValue}
-                  type="verificationOfTheMetalRing"
-                  value={
-                    formValues.verificationOfTheMetalRing &&
-                    formValues.verificationOfTheMetalRing.label
-                  }
-                  disabled={viewMode}
-                />
-              </div>
               <Field
-                label={labels.addObservation.markInfoFields.ringingScheme}
-                placeholder={
-                  labels.addObservation.markInfoFields.ringingSchemePlaceholder
+                label={
+                  labels.addObservation.manipulationAndCatchFields
+                    .movedBeforeTheCapture
                 }
-                collection={getCollection(InitialData.ringingScheme)}
+                placeholder={
+                  labels.addObservation.manipulationAndCatchFields
+                    .movedBeforeTheCapturePlaceholder
+                }
+                collection={getCollection(InitialData.movedBeforeTheCapture)}
                 onChangeValue={onChangeFormValue}
-                type="ringingScheme"
+                type="movedBeforeTheCapture"
                 value={
-                  formValues.ringingScheme && formValues.ringingScheme.label
+                  formValues.movedBeforeTheCapture &&
+                  formValues.movedBeforeTheCapture.label
                 }
                 disabled={viewMode}
               />
             </div>
             <div className={`${blockName}__column`}>
-              <div className={`${blockName}__row`}>
-                <Field
-                  label={
-                    labels.addObservation.markInfoFields.metalRingInformation
-                  }
-                  placeholder={
-                    labels.addObservation.markInfoFields
-                      .metalRingInformationPlaceholder
-                  }
-                  collection={getCollection(InitialData.metalRingInformation)}
-                  onChangeValue={onChangeFormValue}
-                  type="metalRingInformation"
-                  value={
-                    formValues.metalRingInformation &&
-                    formValues.metalRingInformation.label
-                  }
-                  disabled={viewMode}
-                />
-                <div className={`${blockName}__button-group`}>
-                  <p className={`${blockName}__field-label`}>
-                    {labels.addObservation.markInfoFields.leg}
-                  </p>
-                  <ButtonGroup>
-                    <Button
-                      outline
-                      onClick={() =>
-                        setBirdLeg(labels.addObservation.markInfoFields.left)
-                      }
-                    >
-                      {labels.addObservation.markInfoFields.left}
-                    </Button>
-                    <Button
-                      outline
-                      onClick={() =>
-                        setBirdLeg(labels.addObservation.markInfoFields.right)
-                      }
-                    >
-                      {labels.addObservation.markInfoFields.right}
-                    </Button>
-                  </ButtonGroup>
-                </div>
-              </div>
               <Field
                 label={
-                  labels.addObservation.markInfoFields.otherMarksInformation
+                  labels.addObservation.manipulationAndCatchFields
+                    .catchingMethod
                 }
                 placeholder={
-                  labels.addObservation.markInfoFields
-                    .otherMarksInformationPlaceholder
+                  labels.addObservation.manipulationAndCatchFields
+                    .catchingMethodPlaceholder
                 }
-                collection={getCollection(InitialData.otherMarksInformation)}
+                collection={getCollection(InitialData.catchingMethod)}
                 onChangeValue={onChangeFormValue}
-                type="otherMarksInformation"
+                type="catchingMethod"
                 value={
-                  formValues.otherMarksInformation &&
-                  formValues.otherMarksInformation.label
+                  formValues.catchingMethod && formValues.catchingMethod.label
+                }
+                disabled={viewMode}
+              />
+              <Field
+                label={
+                  labels.addObservation.manipulationAndCatchFields.catchingLures
+                }
+                placeholder={
+                  labels.addObservation.manipulationAndCatchFields
+                    .catchingLuresPlaceholder
+                }
+                collection={getCollection(InitialData.catchingLures)}
+                onChangeValue={onChangeFormValue}
+                type="catchingLures"
+                value={
+                  formValues.catchingLures && formValues.catchingLures.label
                 }
                 disabled={viewMode}
               />
@@ -677,244 +735,6 @@ export const CommonBird: FC<ICommonBird> = ({
               />
             </div>
           </div>
-        </InfoContainer>
-      </div>
-      <div className={`${blockName}__info-blocks-container`}>
-        <InfoContainer
-          className={`${blockName}__info-block`}
-          renderHeader={
-            <BlockHeader
-              title={labels.addObservation.manipulationAndCatchTitle}
-            />
-          }
-        >
-          <div className={`${blockName}__fields-container`}>
-            <div className={`${blockName}__column`}>
-              <Field
-                label={
-                  labels.addObservation.manipulationAndCatchFields.manipulated
-                }
-                placeholder={
-                  labels.addObservation.manipulationAndCatchFields
-                    .manipulatedPlaceholder
-                }
-                collection={getCollection(InitialData.manipulated)}
-                onChangeValue={onChangeFormValue}
-                type="manipulated"
-                value={formValues.manipulated && formValues.manipulated.label}
-                disabled={viewMode}
-              />
-              <Field
-                label={
-                  labels.addObservation.manipulationAndCatchFields
-                    .movedBeforeTheCapture
-                }
-                placeholder={
-                  labels.addObservation.manipulationAndCatchFields
-                    .movedBeforeTheCapturePlaceholder
-                }
-                collection={getCollection(InitialData.movedBeforeTheCapture)}
-                onChangeValue={onChangeFormValue}
-                type="movedBeforeTheCapture"
-                value={
-                  formValues.movedBeforeTheCapture &&
-                  formValues.movedBeforeTheCapture.label
-                }
-                disabled={viewMode}
-              />
-            </div>
-            <div className={`${blockName}__column`}>
-              <Field
-                label={
-                  labels.addObservation.manipulationAndCatchFields
-                    .catchingMethod
-                }
-                placeholder={
-                  labels.addObservation.manipulationAndCatchFields
-                    .catchingMethodPlaceholder
-                }
-                collection={getCollection(InitialData.catchingMethod)}
-                onChangeValue={onChangeFormValue}
-                type="catchingMethod"
-                value={
-                  formValues.catchingMethod && formValues.catchingMethod.label
-                }
-                disabled={viewMode}
-              />
-              <Field
-                label={
-                  labels.addObservation.manipulationAndCatchFields.catchingLures
-                }
-                placeholder={
-                  labels.addObservation.manipulationAndCatchFields
-                    .catchingLuresPlaceholder
-                }
-                collection={getCollection(InitialData.catchingLures)}
-                onChangeValue={onChangeFormValue}
-                type="catchingLures"
-                value={
-                  formValues.catchingLures && formValues.catchingLures.label
-                }
-                disabled={viewMode}
-              />
-            </div>
-          </div>
-        </InfoContainer>
-      </div>
-      <div className={`${blockName}__info-blocks-container`}>
-        <InfoContainer
-          className={`${blockName}__info-block`}
-          renderHeader={<BlockHeader {...observationsLabels} />}
-        >
-          <Field
-            label={labels.addObservation.observationsFields.birdSpecies}
-            placeholder={
-              labels.addObservation.observationsFields.birdSpeciesPlaceholder
-            }
-            collection={getCollection(InitialData.species)}
-            onChangeValue={onChangeFormValue}
-            type="speciesMentioned"
-            value={
-              formValues.speciesMentioned && formValues.speciesMentioned.label
-            }
-            disabled={viewMode}
-          />
-          <Field
-            label={labels.addObservation.observationsFields.sex}
-            placeholder={
-              labels.addObservation.observationsFields.sexPlaceholder
-            }
-            collection={getCollection(InitialData.sex)}
-            onChangeValue={onChangeFormValue}
-            type="sexMentioned"
-            value={formValues.sexMentioned && formValues.sexMentioned.label}
-            disabled={viewMode}
-          />
-          <Field
-            label={labels.addObservation.observationsFields.age}
-            placeholder={
-              labels.addObservation.observationsFields.agePlaceholder
-            }
-            collection={getCollection(InitialData.age)}
-            onChangeValue={onChangeFormValue}
-            type="ageMentioned"
-            value={formValues.ageMentioned && formValues.ageMentioned.label}
-            disabled={viewMode}
-          />
-          <Field
-            label={labels.addObservation.observationsFields.birdState}
-            placeholder={
-              labels.addObservation.observationsFields.birdStatePlaceholder
-            }
-            collection={getCollection(InitialData.status)}
-            onChangeValue={onChangeFormValue}
-            type="status"
-            value={formValues.status && formValues.status.label}
-            disabled={viewMode}
-          />
-          <p className={`${blockName}__field-label`}>
-            {labels.addObservation.observationsFields.photos}
-          </p>
-          <DropZone
-            className={`${blockName}__field-container`}
-            photos={photos}
-          />
-          <Label for="comment" className={`${blockName}__field-label`}>
-            {labels.addObservation.observationsFields.comment}
-          </Label>
-          <Input
-            className={sn(`${blockName}__input`, `${blockName}__input--area`)}
-            id="comment"
-            type="textarea"
-            rows={3}
-            placeholder={
-              labels.addObservation.observationsFields.commentPlaceholder
-            }
-            onChange={onChangeComment}
-            value={formValues.comment && formValues.comment.label}
-            disabled={viewMode}
-          />
-        </InfoContainer>
-        <InfoContainer
-          className={`${blockName}__info-block`}
-          renderHeader={<BlockHeader {...circumstancesLabels} />}
-        >
-          <Field
-            label={labels.addObservation.circumstancesFields.region}
-            placeholder={
-              labels.addObservation.circumstancesFields.regionPlaceholder
-            }
-            collection={getCollection(InitialData.placeCode)}
-            onChangeValue={onChangeFormValue}
-            type="placeCode"
-            value={formValues.placeCode && formValues.placeCode.label}
-            disabled={viewMode}
-          />
-          <Label for="coordinates" className={`${blockName}__field-label`}>
-            {labels.addObservation.circumstancesFields.latitude}
-          </Label>
-          <Input
-            className={`${blockName}__input`}
-            id="latitude1"
-            placeholder={labels.addObservation.circumstancesFields.latitude}
-            onChange={onChangeCoordinates}
-            value={formValues.latitude && formValues.latitude.label}
-            disabled={viewMode}
-          />
-          <Label for="coordinates" className={`${blockName}__field-label`}>
-            {labels.addObservation.circumstancesFields.longitude}
-          </Label>
-          <Input
-            className={`${blockName}__input`}
-            id="longitude1"
-            placeholder={labels.addObservation.circumstancesFields.longitude}
-            onChange={onChangeCoordinates}
-            value={formValues.longitude && formValues.longitude.label}
-            disabled={viewMode}
-          />
-          <Button
-            outline
-            color="primary"
-            className={`${blockName}__find-btn`}
-            onClick={toggleModal}
-          >
-            {labels.addObservation.circumstancesFields.findOnMap}
-          </Button>
-          <div className={`${blockName}__separator`} />
-          <div className={`${blockName}__field-container`}>
-            <p className={`${blockName}__field-label`}>
-              {labels.addObservation.circumstancesFields.timeAndDate}
-            </p>
-            <SingleDatePicker
-              {...(formValues.date
-                ? { date: moment(formValues.date && formValues.date.value) }
-                : { date: formValues.date })}
-              onDateChange={onChangeDate}
-              focused={calendarFocused}
-              onFocusChange={({ focused }) => setCalendarFocused(focused)}
-              placeholder={
-                labels.addObservation.circumstancesFields.timeAndDatePlaceholder
-              }
-              id="date"
-              numberOfMonths={1}
-              block
-              showDefaultInputIcon
-              inputIconPosition="after"
-              isOutsideRange={() => false}
-              {...(viewMode ? { disabled: true } : {})}
-            />
-          </div>
-          <Field
-            label={labels.addObservation.circumstancesFields.timeDelta}
-            placeholder={
-              labels.addObservation.circumstancesFields.timeDeltaPlaceholder
-            }
-            collection={getCollection(InitialData.accuracyOfDate)}
-            onChangeValue={onChangeFormValue}
-            type="accuracyOfDate"
-            value={formValues.accuracyOfDate && formValues.accuracyOfDate.label}
-            disabled={viewMode}
-          />
         </InfoContainer>
       </div>
     </Fragment>
