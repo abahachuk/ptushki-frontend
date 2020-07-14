@@ -15,7 +15,9 @@ export enum VerificationStatus {
 
 export interface DescriptedField {
   id: string;
-  desc: string;
+  desc_rus: string;
+  desc_eng: string;
+  desc_byn: string;
 }
 
 export interface ObservationData {

@@ -85,7 +85,8 @@ export const CommonBird: FC<ICommonBird> = ({
     (key: InitialData) =>
       initialValues
         ? initialValues[key].map((item: IInitialDataDescriptor) => ({
-            label: item.desc || item[key],
+            // TODO: use logic from localize service
+            label: item.desc_rus || item.desc_eng || item[key],
             value: item.value || item.id,
             id: item.id
           }))

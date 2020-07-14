@@ -48,7 +48,9 @@ type InitialDataMap = { [key in InitialData]: IInitialDataDescriptor[] };
 export interface IInitialDataDescriptor extends InitialDataDescriptorMap {
   id: string;
   value?: string;
-  desc: string;
+  desc_eng: string;
+  desc_rus?: string;
+  desc_byn?: string;
 }
 
 export interface IInitialData extends InitialDataMap {}

@@ -37,7 +37,13 @@ export const transformToFormValues = (data: any) =>
     acc[item[0]] = {
       value: item[1] && (isPrimitive ? item[1] : item[1].id),
       label:
-        item[1] && (isPrimitive ? item[1] : item[1].desc || item[1][item[0]])
+        item[1] &&
+        (isPrimitive
+          ? item[1]
+          : item[1].desc_eng ||
+            item[1].desc_rus ||
+            item[1].desc_byn ||
+            item[1][item[0]])
     };
     return acc;
   }, {});
