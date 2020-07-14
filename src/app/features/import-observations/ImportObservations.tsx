@@ -80,16 +80,9 @@ export const ImportObservations: FC<DispatchProp> = ({ dispatch }) => {
     setFile(null);
   };
 
-  const {
-    FileInfoBlock,
-    isSubmitButtonDisabled,
-    Icon,
-    title,
-    subtitle,
-    FileActionButton
-  } =
+  const { FileInfoBlock, Icon, title, subtitle, FileActionButton } =
     dragAreaState === DropAreaStates.Success
-      ? dropZoneContent[dragAreaState](file, revertDragAreaToIntact)
+      ? dropZoneContent[dragAreaState](file)
       : dropZoneContent[dragAreaState]();
 
   return (
@@ -165,11 +158,6 @@ export const ImportObservations: FC<DispatchProp> = ({ dispatch }) => {
                 </div>
               )}
             </div>
-            <ImportButton
-              caption={labels.importObservations.addToDatabase}
-              isDisabled={isSubmitButtonDisabled}
-              onClick={() => dispatch(push(ROUTE_OBSERVATIONS.path))}
-            />
           </div>
           <div className={`${blockName}__template-block`}>
             <div className={`${blockName}__template-block-title`}>

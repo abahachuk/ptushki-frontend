@@ -1,7 +1,7 @@
 import streamSaver from "streamsaver";
 import {
   OBSERVATIONS_DOWNLOAD_EXCEL_TEMPLATE,
-  OBSERVATIONS_VALIDATE_IMPORT
+  OBSERVATIONS_IMPORT
 } from "../../../config/endpoints";
 import { ajaxService } from "../../../services";
 
@@ -45,10 +45,10 @@ export interface ValidationResponse {
 
 export const uploadObservationsFile = (file: any) => {
   const formData = new FormData();
-  formData.append("file", file.file);
+  formData.append("files", file.file);
 
   return ajaxService.makeCall<ValidationResponse>(
-    OBSERVATIONS_VALIDATE_IMPORT,
+    OBSERVATIONS_IMPORT,
     formData,
     "POST",
     {
