@@ -195,9 +195,7 @@ export const COMMON_GRID_COLUMNS: {
     filter: {
       // TODO type DataGridFilter to allow any or generic value as it actually does, instead of restricting it
       getLabel: ({ value }: any) =>
-        `${value.firstName || ""}${
-          value.firstName ? " " : ""
-        }${value.lastName || ""}`,
+        [value.firstName, value.lastName].join(" ").trim(),
       getValue: ({ value }: any) => value.id
     }
   },
