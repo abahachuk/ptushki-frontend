@@ -1,7 +1,7 @@
 /**
  * Authorization/authentication
  */
-const startURL = process.env.NODE_ENV === "production" ? "/api" : "";
+const startURL = process.env.REACT_APP_API_DOMAIN || "http://localhost:3001";
 const authRoute = "auth";
 const authEndpoint = `${startURL}/${authRoute}`;
 export const SING_UP_ENDPOINT = `${authEndpoint}/signup`;
