@@ -1,0 +1,14 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.table-header {
+  border-bottom: 8px solid #e8e8e8;
+}
+
+.btn-action-add {
+  @include secondary-button
+}
+
+.btn-action {
+  @include primary-button;
+}

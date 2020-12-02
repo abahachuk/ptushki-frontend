@@ -3,13 +3,10 @@ import React, { FC } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { Button } from "reactstrap";
 import { labels } from "../../../../config/i18n/labels";
-import { BreakOutOfSubspace } from "../../../../utils/subspace/SubspaceProviderHacked";
 import { setFilters } from "../../dataGridActions";
 import { DataGridState } from "../../DataGridModels";
 import { GridSelectionInfoConnected } from "../GridSelectionInfo";
-import { LangSelectorConnected } from "./LangSelector";
 import "./ToolbarComponent.scss";
-import { ViewModeSelectorConnected } from "./ViewModeSelector";
 
 interface Props extends Toolbar.RootProps, DispatchProp {
   enabledFilters: any[];
@@ -18,10 +15,11 @@ interface Props extends Toolbar.RootProps, DispatchProp {
 export const ToolbarComponent: FC<Props> = ({
   enabledFilters,
   dispatch,
-  ...p
+  children,
+  ...props
 }) => (
   <div
-    {...p}
+    {...props}
     className="grid-toolbar d-flex flex-wrap justify-content-end align-items-center mb-3"
   >
     <GridSelectionInfoConnected />
@@ -37,12 +35,7 @@ export const ToolbarComponent: FC<Props> = ({
       </Button>
     )}
     {/* behaviors provided by grid component */}
-    {p.children}
-    {/* custom behaviors provided by us */}
-    <BreakOutOfSubspace>
-      <ViewModeSelectorConnected />
-      <LangSelectorConnected />
-    </BreakOutOfSubspace>
+    {children}
   </div>
 );
 

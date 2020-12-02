@@ -24,5 +24,27 @@
   box-shadow: 0 0 6px rgba($black, 0.2);
 }
 
+@mixin primary-button {
+  color: $primary;
+  border-color: $primary-active;
+  background-color: $white;
+
+  &:hover {
+    color: $white;
+    background-color: $primary-active;
+  }
+}
+
+@mixin secondary-button {
+  color: $white;
+  border-color: $interactive;
+  background-color: $interactive;
+
+  &:hover {
+    border-color: $primary-active;
+    background-color: $primary-active;
+  }
+}
+
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";

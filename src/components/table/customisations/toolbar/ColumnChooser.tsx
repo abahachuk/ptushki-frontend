@@ -8,17 +8,22 @@ import { CustomScrollContainer } from "../../../scrollbars/CustomScrollContainer
 export const ColumnChooserContainer: FC<
   ColumnChooserBase.ContainerProps
 > = p => (
-  <CustomScrollContainer autoHeight autoHeightMax={400}>
+  <CustomScrollContainer autoHeight autoHeightMax={150}>
     {p.children}
   </CustomScrollContainer>
 );
 
 export const ColumnChooserButton: FC<ColumnChooserBase.ToggleButtonProps> = ({
   onToggle,
-  buttonRef
+  buttonRef,
+  active
 }) => (
   <div className="dropdown">
-    <GridSettingsDropdownButton onClick={onToggle} innerRef={buttonRef}>
+    <GridSettingsDropdownButton
+      onClick={onToggle}
+      active={active}
+      innerRef={buttonRef}
+    >
       <span>{labels.columns}</span>
     </GridSettingsDropdownButton>
   </div>

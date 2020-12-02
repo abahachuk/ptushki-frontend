@@ -41,6 +41,7 @@ export const LangSelector: FC<Props> = ({ dispatch, selectedLocale }) => (
   </UncontrolledDropdown>
 );
 
+// This component not used now. Can be deleted.
 export const LangSelectorConnected = connect(
   (state: RootState) => state.userPreferences
 )(LangSelector);

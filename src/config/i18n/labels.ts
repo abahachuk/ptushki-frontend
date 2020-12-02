@@ -258,7 +258,7 @@ export const labels = {
   no: "Нет",
   add: "Добавить",
   noData: "Нет данных",
-  copyright: "© 2019 Ptushki. Все права защищены.",
+  copyright: `© ${new Date().getFullYear()} Ptushki. Все права защищены.`,
   filter: "Фильтр",
   clearFilters: "Сбросить все фильтры",
   clear: "Сбросить",
@@ -267,11 +267,11 @@ export const labels = {
   show: "Показать",
   selected: "Выбрано",
   ofBirds: "птиц",
-  columns: "Колонки",
+  columns: "Отображать столбцы",
   import: "Импорт",
-  importData: "Загрузить данные",
+  importData: "Массовая загрузка",
   export: "Экспорт",
-  exportData: "Экспортировать данные",
+  exportData: "Экспортировать базу данных",
   logout: "Выйти",
   manipulated: "Манипуляции",
   movedBeforeTheCapture: "Передвижение до отлова",
@@ -312,12 +312,12 @@ export const labels = {
   },
   tableHeader: {
     [Scope.observations]: {
-      title: "Наблюдения",
-      actionTitle: "Добавить птицу"
+      title: "База наблюдений",
+      actionTitle: "Новое наблюдение"
     },
     [Scope.birds]: {
-      title: "Птицы",
-      actionTitle: "Добавить наблюдение"
+      title: "База птиц",
+      actionTitle: "Новое кольцевание"
     }
   },
   infoPage: {

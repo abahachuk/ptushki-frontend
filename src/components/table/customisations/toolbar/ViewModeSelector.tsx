@@ -39,6 +39,7 @@ export const ViewModeSelector: FC<Props> = ({ dispatch, selectedViewMode }) => (
   </UncontrolledDropdown>
 );
 
+// This component not used now. Can be deleted.
 export const ViewModeSelectorConnected = connect(
   (state: RootState) => state.userPreferences
 )(ViewModeSelector);

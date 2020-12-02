@@ -15,7 +15,6 @@ export const GridPage: FC<{ route: RouteDescription }> = ({
         flexDirection: "column",
         justifyContent: "stretch"
       }}
-      className="py-2 px-3"
     >
       <TableHeader route={route} />
       {children}

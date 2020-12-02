@@ -42,11 +42,11 @@
       }
 
       &.active {
-        color: $orange;
+        color: $white;
         background-color: $root-nav-link-active-bg;
 
         &:after {
-          border-bottom: 3px solid $orange;
+          border-bottom: 3px solid $interactive;
           bottom: 0;
           content: " ";
           left: 0;

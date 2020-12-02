@@ -1,4 +1,5 @@
-$primary: #546e7a;
+$primary: #0a3651;
+$primary-active: #214b6a;
 $secondary: #546e7a;
 $white: #ffffff;
 $black: #000000;
@@ -19,6 +20,7 @@ $orange: #f9b166;
 $charade: #2c2f3c;
 $tundora: #4d4d4d;
 $blueBayox: #556d7a;
+$interactive: #00d175;
 
 $border-color: #c0c3ce;
 
@@ -33,8 +35,8 @@ $pagination-focus-box-shadow: $orange;
 $pagination-hover-color: $orange;
 
 $root-nav-height: 58px;
-$root-nav-bg: #455a64;
-$root-nav-link-active-bg: #546e7a;
+$root-nav-bg: $primary;
+$root-nav-link-active-bg: $primary-active;
 
 $grid-toolbar-font-size: 12px;
 

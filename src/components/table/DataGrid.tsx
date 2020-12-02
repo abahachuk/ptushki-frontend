@@ -108,7 +108,7 @@ export const DataGrid = <TRow extends {}>(props: DataGridProps<TRow>) => {
 
   return (
     <SubspaceProviderHacked namespace={namespace} mapState={gridStateSelector}>
-      <div className="data-grid-wrapper">
+      <div className="data-grid-wrapper px-3 py-3">
         <Grid
           {...gridProps}
           rootComponent={RootComponent}
