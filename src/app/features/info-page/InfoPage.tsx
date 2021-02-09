@@ -55,6 +55,18 @@ export const InfoPage: FC<
     title: scopeLabels.observationsTitle,
     subtitle: scopeLabels.observationsSubtitle
   };
+  const marksLabels = {
+    title: scopeLabels.marksTitle,
+    subtitle: scopeLabels.marksSubtitle
+  };
+  const manipulationsLabels = {
+    title: scopeLabels.manipulationsTitle,
+    subtitle: scopeLabels.manipulationsSubtitle
+  };
+  const ringsLabels = {
+    title: scopeLabels.ringsTitle,
+    subtitle: scopeLabels.ringsSubtitle
+  };
 
   const onGoBack = useCallback(() => dispatch(goBack()), [dispatch]);
   const onClickEdit = useCallback(() => setEditMode(true), [setEditMode]);
@@ -139,6 +151,9 @@ export const InfoPage: FC<
         formValues={entity.value}
         observationsLabels={observationsLabels}
         circumstancesLabels={circumstancesLabels}
+        manipulationsLabels={manipulationsLabels}
+        marksLabels={marksLabels}
+        ringsLabels={ringsLabels}
         onChangeBirdValues={setBird}
         viewMode
       />

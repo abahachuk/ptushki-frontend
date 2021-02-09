@@ -12,6 +12,12 @@ export interface IInfoScopeLabel {
   subTitle?: string;
   circumstancesTitle?: string;
   circumstancesSubtitle?: string;
+  marksTitle?: string;
+  marksSubtitle?: string;
+  manipulationsTitle?: string;
+  manipulationsSubtitle?: string;
+  ringsTitle?: string;
+  ringsSubtitle?: string;
   observationsTitle?: string;
   observationsSubtitle?: string;
   history?: string;

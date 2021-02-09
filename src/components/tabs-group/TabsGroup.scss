@@ -1,0 +1,17 @@
+@import "../../styles/variables";
+
+.tabs-group {
+    box-shadow: $shadow-default;
+    border-radius: 10px;
+    height: 38px;
+
+    .btn {
+        background-color: $white;
+        color: $silver;
+        border-color: transparent;
+
+        &.active {
+            background-color: $primary !important;
+        }
+    }
+}

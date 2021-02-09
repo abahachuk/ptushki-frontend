@@ -22,6 +22,13 @@ export const InfoContainer: FC<{
       {renderHeader}
       {renderButton}
     </div>
-    {children}
+    <div
+      className={sn(
+        `${blockName}__content-container`,
+        className && `${className}-content-container`
+      )}
+    >
+      {children}
+    </div>
   </div>
 );

@@ -109,8 +109,36 @@ export const labels = {
     observationsSubtitle:
       "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определить вид на florafauna.by",
     circumstancesTitle: "Обстоятельства",
-    circumstancesSubtitle:
-      "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
+    circumstancesSubtitle: "Где и когда вы увидели птицу?",
+    marksField: {
+      ringId: "Номер кольца",
+      ringSeriesPlaceholder: "Серия",
+      ringNumberPlaceholder: "Номер",
+      verificationOfTheMetalRing: "Верификация кольца",
+      ringingScheme: "Схема кольцевания",
+      statusOfRing: "Статус кольца",
+      ringInfo: "Информация о кольце",
+      otherMarksInfo: "Информация о других метках",
+      primaryMethod: "Первичный метод определения",
+      leg: "Нога",
+      legLeft: "Левая",
+      legRight: "Правая"
+    },
+    manilupationsField: {
+      manipulated: "Проводились ли манипуляции с птицей?",
+      movedBeforeTheCapture: "Проводилось ли перемещение птицы?",
+      catchingMethod: "Метод отлова",
+      catchingLures: "Приманки для отлова",
+      chooseValue: "Выберите значение"
+    },
+    bandingField: {
+      bander: "Кольцеватель",
+      banderPlaceholder: "Выберите кольцевателя",
+      email: "Адрес электронной почты",
+      bandingPlace: "Место кольцевания",
+      comment: "Примечание",
+      commentPlaceholder: "Введите примечание"
+    },
     observationsFields: {
       birdSpecies: "Вид птицы",
       birdSpeciesPlaceholder: "Выберите вид",
@@ -119,25 +147,34 @@ export const labels = {
       age: "Возраст",
       agePlaceholder: "Возраст",
       birdState: "Состояние птицы",
-      birdStatePlaceholder: "Птица была",
+      birdStatus: "Статус птицы",
+      birdStatePlaceholder: "Выберите состояние",
+      birdStatusPlaceholder: "Выберите статус",
       photos: "Фотографии",
       comment: "Комментарий",
-      commentPlaceholder: "Ввести комментарий"
+      commentPlaceholder: "Ввести комментарий",
+      broodSize: "Размер кладки",
+      broodAge: "Возраст птенцов",
+      broodAgeAccuracy: "Точность возраста птенцов"
     },
     circumstancesFields: {
-      country: "Страна",
-      countryPlaceholder: "Выбрать страну",
-      region: "Регион",
-      regionPlaceholder: "Выбрать район",
+      dateTime: "Дата и время наблюдения",
+      dayPlaceholder: "ДД",
+      monthPlaceholder: "ММ",
+      yearPlaceholder: "ГГГГ",
+      hoursPlaceholder: "ЧЧ",
+      minutesPlaceholder: "ММ",
+      placeCode: "Код места",
+      placeCodePlaceholder: "Выберите код места кольцевания из списка",
+      coordinatesDelta: "Точность координат",
+      coordinatesDeltaPlaceholder: "Точность координат",
+      accuracyOfCircumstances: "Достоверность обстоятельств",
       coordinates: "Координаты",
       coordinatesPlaceholder: "Координаты",
       latitude: "Широта",
       longitude: "Долгота",
-      findOnMap: "Найти место на карте",
-      timeAndDate: "Время/Дата",
-      timeAndDatePlaceholder: "Введите примерное время и дату",
-      timeDelta: "Погрешность времени",
-      timeDeltaPlaceholder: "Погрешность времени"
+      dateDelta: "Точность даты",
+      dateDeltaPlaceholder: "Точность даты"
     },
     back: "Назад",
     sendObservation: "Отправить наблюдение",
@@ -284,18 +321,17 @@ export const labels = {
   km: "км",
   days: "д",
   actionButtonTitle: "Невозможно изменить наблюдение, принятое модератором",
+  simpleForm: "Простая форма",
+  extendedForm: "Расширенная форма",
   createPage: {
     [Scope.observations]: {
-      send: "Отправить наблюдение",
-      title: "Добавление наблюдения",
-      subTitle:
-        "Нажмите на “+” для того, чтобы добавить кольцо или другую замеченную на птице метку.",
-      circumstancesTitle: "Обстоятельства",
-      circumstancesSubtitle:
-        "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
-      observationsTitle: "Наблюдения",
-      observationsSubtitle:
-        "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определить вид на florafauna.by"
+      send: "Сохранить запись",
+      title: "Новая запись о кольцевании",
+      circumstancesTitle: "Обстоятельства и место",
+      observationsTitle: "Информация о птице",
+      manipulationsTitle: "Манипуляции о отлов",
+      marksTitle: "Информация о метке",
+      ringsTitle: "Кольцевание"
     },
     [Scope.birds]: {
       send: "Сохранить птицу",
@@ -329,7 +365,8 @@ export const labels = {
         "Где и когда вы увидели птицу? Оставьте коментарий, если хотите что-то добавить.",
       observationsTitle: "Наблюдения",
       observationsSubtitle:
-        "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определить вид на florafauna.by"
+        "Опишите птицу и условия, в которых вы её увидели. Вы можете скачать определить вид на florafauna.by",
+      marksTitle: "Информация о метке"
     },
     [Scope.birds]: {
       edit: "Редактировать птицу",
