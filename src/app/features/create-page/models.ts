@@ -14,6 +14,13 @@ export interface ICreateScopeLabel {
   circumstancesSubtitle?: string;
   observationsTitle?: string;
   observationsSubtitle?: string;
+  marksTitle?: string;
+  marksSubtitle?: string;
+  manipulationsTitle?: string;
+  manipulationsSubtitle?: string;
+  ringsTitle?: string;
+  ringsSubtitle?: string;
+  statusOfRing?: string;
 }
 
 export interface CreatePageProps {
@@ -36,10 +43,21 @@ export enum InitialData {
   sexMentioned = "sexMentioned",
   status = "status",
   accuracyOfDate = "accuracyOfDate",
+  accuracyOfCoordinates = "accuracyOfCoordinates",
   species = "species",
   speciesMentioned = "speciesMentioned",
   primaryIdentificationMethod = "primaryIdentificationMethod",
-  placeCode = "placeCode"
+  placeCode = "placeCode",
+  circumstances = "circumstances",
+  manipulated = "manipulated",
+  movedBeforeTheCapture = "movedBeforeTheCapture",
+  catchingMethod = "catchingMethod",
+  catchingLures = "catchingMethod",
+  verificationOfTheMetalRing = "verificationOfTheMetalRing",
+  ringingScheme = "ringingScheme",
+  statusOfRing = "statusOfRing",
+  otherMarksInformation = "otherMarksInformation",
+  broodSize = "broodSize"
 }
 
 type InitialDataDescriptorMap = { [key in InitialData]?: string };

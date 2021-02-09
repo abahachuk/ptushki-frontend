@@ -1,8 +1,9 @@
-import React, { useState, useCallback, FC, ReactNode } from "react";
+import React, { useState, useCallback, FC } from "react";
 import useMount from "react-use/esm/useMount";
 import { goBack } from "connected-react-router";
 import { DispatchProp } from "react-redux";
 import { Button } from "reactstrap";
+import sn from "classnames";
 
 import { IChangeValue } from "../../../components/autosuggest/Autosuggest";
 import { ICreateScopeLabel, CreatePageProps } from "./models";
@@ -14,6 +15,7 @@ import { CommonBird } from "../../../components/common-bird/CommonBird";
 import { PageHeader } from "../../../components/page-header/PageHeader";
 import { BackButton } from "../../../components/back-button/BackButton";
 import { FillLoader } from "../../../components/loader/FillLoader";
+import { TabsGroup } from "../../../components/tabs-group/TabsGroup";
 import "./CreatePage.scss";
 
 // TODO: remove
@@ -35,18 +37,7 @@ export const CreatePage: FC<DispatchProp & CreatePageProps> = ({
     dispatch(initialData.request());
   });
 
-  const [birdState, setBird] = useState(
-    bird || {
-      saddle: [],
-      neck: [],
-      leftWing: [],
-      rightWing: [],
-      leftBobbin: [],
-      rightBobbin: [],
-      leftLeg: [],
-      rightLeg: []
-    }
-  );
+  const [isExtendedForm, setExtendedForm] = useState(false);
 
   // @ts-ignore
   const scopeLabels: ICreateScopeLabel = labels.createPage[
@@ -59,6 +50,18 @@ export const CreatePage: FC<DispatchProp & CreatePageProps> = ({
   const observationsLabels = {
     title: scopeLabels.observationsTitle,
     subtitle: scopeLabels.observationsSubtitle
+  };
+  const marksLabels = {
+    title: scopeLabels.marksTitle,
+    subtitle: scopeLabels.marksSubtitle
+  };
+  const manipulationsLabels = {
+    title: scopeLabels.manipulationsTitle,
+    subtitle: scopeLabels.manipulationsSubtitle
+  };
+  const ringsLabels = {
+    title: scopeLabels.ringsTitle,
+    subtitle: scopeLabels.ringsSubtitle
   };
 
   const onChangeValue = useCallback(
@@ -74,6 +77,10 @@ export const CreatePage: FC<DispatchProp & CreatePageProps> = ({
     entity,
     sendFn
   ]);
+
+  const onClickToggler = useCallback((isExtended: boolean) => {
+    setExtendedForm(isExtended);
+  }, []);
 
   return (
     <div className={blockName}>
@@ -93,16 +100,30 @@ export const CreatePage: FC<DispatchProp & CreatePageProps> = ({
           {scopeLabels.send}
         </Button>
       </div>
+      <TabsGroup className={`${blockName}__tabs-group`}>
+        <Button
+          className={sn(!isExtendedForm && "active")}
+          onClick={() => onClickToggler(false)}
+        >
+          {labels.simpleForm}
+        </Button>
+        <Button
+          className={sn(isExtendedForm && "active")}
+          onClick={() => onClickToggler(true)}
+        >
+          {labels.extendedForm}
+        </Button>
+      </TabsGroup>
       <CommonBird
-        onChangeBirdValues={setBird}
-        birdParams={birdState}
         onChangeFormValue={onChangeValue}
         formValues={entity.value}
         observationsLabels={observationsLabels}
         circumstancesLabels={circumstancesLabels}
+        manipulationsLabels={manipulationsLabels}
+        marksLabels={marksLabels}
+        ringsLabels={ringsLabels}
         initialValues={initials.value}
-        // TODO: remove mock data
-        collection={birdValues}
+        isExtendedForm={isExtendedForm}
       />
       <div className={`${blockName}__buttons`}>
         <Button className={`${blockName}__back-btn`} onClick={onGoBack}>

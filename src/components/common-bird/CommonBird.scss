@@ -3,18 +3,65 @@
 .common-bird {
   &__info-blocks-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
   &__info-block {
-    margin-right: 33px;
-    height: 738px;
+    position: relative;
+    width: 100%;
+    margin-bottom: 13px;
     flex: 1;
+    box-shadow: $shadow-default;
 
     &:last-child {
       margin-right: 0;
     }
+
+    &-map {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 50%;
+      padding-left: 20px;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      overflow: hidden;
+    }
+
+    &-content-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-content {
+      width: 100%;
+
+      &-container & + & {
+        margin-left: 20px;
+      }
+    }
+
+    &-content-row {
+      display: flex;
+      justify-content: space-between;
+
+      div + div {
+        margin-left: 15px;
+        width: 40%;
+      }
+    }
+  }
+
+  &__tabs-group {
+    width: 100%;
+  }
+
+  &__spacer {
+    width: 15px;
+    display: inline-block;
   }
 
   &__observations-column {
@@ -41,7 +88,7 @@
   }
 
   &__field-container {
-    padding-bottom: 15px;
+    padding-bottom: 22px;
     width: 100%;
 
     .SingleDatePicker {
@@ -83,6 +130,7 @@
   }
 
   &__field-label {
+    display: block;
     color: $tundora;
     font-weight: bold;
     font-family: "Open Sans";
@@ -109,6 +157,20 @@
 
   &__input {
     margin-bottom: 15px;
+
+    &_narrow {
+      margin-bottom: 15px;
+      margin-right: 5px;
+      max-width: 62px;
+      display: inline-block;
+    }
+
+    &_medium {
+      margin-bottom: 15px;
+      margin-right: 5px;
+      max-width: 120px;
+      display: inline-block;
+    }
 
     &:disabled {
       background: transparent;

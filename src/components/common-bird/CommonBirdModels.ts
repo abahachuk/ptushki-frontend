@@ -25,6 +25,29 @@ export interface FormValues {
   sexMentioned: FormValueDescriptor;
   ageMentioned: FormValueDescriptor;
   status: FormValueDescriptor;
+  ringingScheme: FormValueDescriptor;
+  ringInfo: FormValueDescriptor;
+  verificationOfTheMetalRing: FormValueDescriptor;
+  primaryMethod: FormValueDescriptor;
+  statusOfRing: FormValueDescriptor;
+  broodAge: FormValueDescriptor;
+  broodAgeAccuracy: FormValueDescriptor;
+  otherMarksInformation: FormValueDescriptor;
+  manipulated: FormValueDescriptor;
+  movedBeforeTheCapture: FormValueDescriptor;
+  catchingMethod: FormValueDescriptor;
+  catchingLures: FormValueDescriptor;
+  bander: FormValueDescriptor;
+  email: FormValueDescriptor;
+  bandingPlace: FormValueDescriptor;
+  day: FormValueDescriptor;
+  month: FormValueDescriptor;
+  year: FormValueDescriptor;
+  hours: FormValueDescriptor;
+  minutes: FormValueDescriptor;
+  accuracyOfCoordinates: FormValueDescriptor;
+  circumstances: FormValueDescriptor;
+  accuracyOfCircumstances: FormValueDescriptor;
   placeCode: FormValueDescriptor;
   coordinates: FormValueDescriptor;
   accuracyOfDate: FormValueDescriptor;
@@ -43,12 +66,14 @@ interface FormLabels {
 
 export interface ICommonBird extends IBird {
   initialValues?: IInitialData;
-  onChangeBirdValues?: (birdParams: any) => void;
   onChangeFormValue?: ({ value, type }: IChangeValue) => void;
   formValues?: FormValues;
   observationsLabels: FormLabels;
   circumstancesLabels: FormLabels;
-  photos?: Array<string>;
+  manipulationsLabels: FormLabels;
+  marksLabels: FormLabels;
+  ringsLabels: FormLabels;
+  isExtendedForm?: Boolean;
 }
 
 export interface IBlockHeader {
